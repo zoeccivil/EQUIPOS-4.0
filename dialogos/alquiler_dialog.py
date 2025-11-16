@@ -1,18 +1,22 @@
 """
 DialogoAlquiler - Diálogo para crear/editar alquileres en EQUIPOS 4.0
 Adaptado para usar Firebase en lugar de SQLite
+Incluye funcionalidad de adjuntar conduces con Firebase Storage
 """
 import logging
+import os
 from typing import Optional, Dict, Any
 from datetime import datetime
 
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
-    QComboBox, QMessageBox, QDateEdit, QDoubleSpinBox, QCheckBox, QFormLayout
+    QComboBox, QMessageBox, QDateEdit, QDoubleSpinBox, QCheckBox, QFormLayout,
+    QFileDialog, QGroupBox
 )
 from PyQt6.QtCore import QDate
 
 from firebase_manager import FirebaseManager
+from storage_manager import StorageManager
 
 logger = logging.getLogger(__name__)
 
@@ -21,11 +25,13 @@ class AlquilerDialog(QDialog):
     """
     Diálogo para crear o editar un alquiler.
     Adaptado para Firebase (sin proyecto_id, sin cuentas/categorías/subcategorías).
+    Incluye adjuntar conduces mediante Firebase Storage.
     """
     
     def __init__(
         self,
         firebase_manager: FirebaseManager,
+        storage_manager: Optional[StorageManager],
         equipos_mapa: Dict[str, str],
         clientes_mapa: Dict[str, str],
         operadores_mapa: Dict[str, str],
@@ -35,14 +41,20 @@ class AlquilerDialog(QDialog):
         super().__init__(parent)
         
         self.fm = firebase_manager
+        self.sm = storage_manager  # Puede ser None si Storage no está configurado
         self.equipos_mapa = equipos_mapa  # {id: nombre}
         self.clientes_mapa = clientes_mapa  # {id: nombre}
         self.operadores_mapa = operadores_mapa  # {id: nombre}
         self.alquiler_data = alquiler_data
         self.alquiler_id = alquiler_data.get('id') if alquiler_data else None
         
+        # Variables para manejo de conduce
+        self.conduce_archivo_seleccionado = None
+        self.conduce_url = None
+        self.conduce_storage_path = None
+        
         self.setWindowTitle("Nuevo Alquiler" if not self.alquiler_id else "Editar Alquiler")
-        self.setMinimumWidth(500)
+        self.setMinimumWidth(600)
         
         self._init_ui()
         self._cargar_combos()
@@ -112,7 +124,39 @@ class AlquilerDialog(QDialog):
         
         layout.addLayout(form_layout)
         
-        # Botones
+        # Sección de conduce (si Storage está disponible)
+        if self.sm:
+            conduce_group = QGroupBox("Conduce")
+            conduce_layout = QVBoxLayout()
+            
+            # Label de estado
+            self.lbl_conduce_estado = QLabel("Sin archivo adjunto")
+            conduce_layout.addWidget(self.lbl_conduce_estado)
+            
+            # Botones
+            btns_conduce_layout = QHBoxLayout()
+            
+            self.btn_seleccionar_conduce = QPushButton("Seleccionar Archivo")
+            self.btn_seleccionar_conduce.clicked.connect(self._seleccionar_conduce)
+            btns_conduce_layout.addWidget(self.btn_seleccionar_conduce)
+            
+            self.btn_ver_conduce = QPushButton("Ver Conduce")
+            self.btn_ver_conduce.clicked.connect(self._ver_conduce)
+            self.btn_ver_conduce.setEnabled(False)
+            btns_conduce_layout.addWidget(self.btn_ver_conduce)
+            
+            self.btn_eliminar_conduce = QPushButton("Eliminar")
+            self.btn_eliminar_conduce.clicked.connect(self._eliminar_conduce)
+            self.btn_eliminar_conduce.setEnabled(False)
+            btns_conduce_layout.addWidget(self.btn_eliminar_conduce)
+            
+            btns_conduce_layout.addStretch()
+            conduce_layout.addLayout(btns_conduce_layout)
+            
+            conduce_group.setLayout(conduce_layout)
+            layout.addWidget(conduce_group)
+        
+        # Botones principales
         botones_layout = QHBoxLayout()
         
         self.btn_guardar = QPushButton("Guardar")
@@ -186,6 +230,15 @@ class AlquilerDialog(QDialog):
             pagado = datos.get('pagado', False)
             self.chk_pagado.setChecked(pagado)
             
+            # Conduce (Storage)
+            if self.sm:
+                self.conduce_url = datos.get('conduce_url')
+                self.conduce_storage_path = datos.get('conduce_storage_path')
+                if self.conduce_url:
+                    self.lbl_conduce_estado.setText(f"Archivo adjunto: {os.path.basename(self.conduce_storage_path or 'conduce')}")
+                    self.btn_ver_conduce.setEnabled(True)
+                    self.btn_eliminar_conduce.setEnabled(True)
+            
             # Calcular monto
             self._calcular_monto()
             
@@ -258,6 +311,12 @@ class AlquilerDialog(QDialog):
             'pagado': self.chk_pagado.isChecked()
         }
         
+        # Agregar datos del conduce si existen
+        if self.conduce_url:
+            datos['conduce_url'] = self.conduce_url
+        if self.conduce_storage_path:
+            datos['conduce_storage_path'] = self.conduce_storage_path
+        
         return datos
     
     def _guardar(self):
@@ -267,6 +326,29 @@ class AlquilerDialog(QDialog):
         
         try:
             datos = self._obtener_datos()
+            
+            # Subir conduce si hay uno seleccionado
+            if self.conduce_archivo_seleccionado and self.sm:
+                # Preparar datos temporales para el storage
+                temp_alquiler = {
+                    'fecha': datos['fecha'],
+                    'conduce': datos['conduce'],
+                    'id': self.alquiler_id or 'temp'
+                }
+                
+                exito, url, storage_path = self.sm.guardar_conduce(
+                    self.conduce_archivo_seleccionado,
+                    temp_alquiler,
+                    procesar_imagen=True
+                )
+                
+                if exito:
+                    datos['conduce_url'] = url
+                    datos['conduce_storage_path'] = storage_path
+                    logger.info(f"Conduce subido: {storage_path}")
+                else:
+                    QMessageBox.warning(self, "Advertencia", 
+                                      "No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto.")
             
             # Modo creación
             if not self.alquiler_id:
@@ -290,3 +372,57 @@ class AlquilerDialog(QDialog):
         except Exception as e:
             logger.error(f"Error al guardar alquiler: {e}", exc_info=True)
             QMessageBox.critical(self, "Error", f"Error al guardar el alquiler:\n{e}")
+    
+    def _seleccionar_conduce(self):
+        """Permite seleccionar un archivo de conduce."""
+        if not self.sm:
+            QMessageBox.warning(self, "No disponible", "Firebase Storage no está configurado.")
+            return
+        
+        archivo, _ = QFileDialog.getOpenFileName(
+            self,
+            "Seleccionar Conduce",
+            "",
+            "Imágenes y PDFs (*.jpg *.jpeg *.png *.pdf);;Todos los archivos (*)"
+        )
+        
+        if archivo:
+            self.conduce_archivo_seleccionado = archivo
+            nombre_archivo = os.path.basename(archivo)
+            self.lbl_conduce_estado.setText(f"Seleccionado: {nombre_archivo}")
+            logger.info(f"Conduce seleccionado: {archivo}")
+    
+    def _ver_conduce(self):
+        """Abre el conduce adjunto."""
+        if not self.conduce_url:
+            QMessageBox.information(self, "Info", "No hay conduce adjunto.")
+            return
+        
+        # Abrir URL en navegador
+        import webbrowser
+        webbrowser.open(self.conduce_url)
+        logger.info(f"Abriendo conduce: {self.conduce_url}")
+    
+    def _eliminar_conduce(self):
+        """Elimina el conduce adjunto."""
+        if not self.conduce_storage_path or not self.sm:
+            return
+        
+        respuesta = QMessageBox.question(
+            self,
+            "Confirmar eliminación",
+            "¿Está seguro de eliminar el conduce adjunto?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+        
+        if respuesta == QMessageBox.StandardButton.Yes:
+            if self.sm.eliminar_conduce(self.conduce_storage_path):
+                self.conduce_url = None
+                self.conduce_storage_path = None
+                self.lbl_conduce_estado.setText("Sin archivo adjunto")
+                self.btn_ver_conduce.setEnabled(False)
+                self.btn_eliminar_conduce.setEnabled(False)
+                QMessageBox.information(self, "Éxito", "Conduce eliminado correctamente.")
+                logger.info(f"Conduce eliminado: {self.conduce_storage_path}")
+            else:
+                QMessageBox.critical(self, "Error", "No se pudo eliminar el conduce.")
