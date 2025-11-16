@@ -2,9 +2,11 @@
 DialogoAlquiler - Diálogo para crear/editar alquileres en EQUIPOS 4.0
 Adaptado para usar Firebase en lugar de SQLite
 Incluye funcionalidad de adjuntar conduces con Firebase Storage
+Integra MiniEditorImagen para editar conduces antes de subir
 """
 import logging
 import os
+import uuid
 from typing import Optional, Dict, Any
 from datetime import datetime
 
@@ -17,6 +19,7 @@ from PyQt6.QtCore import QDate
 
 from firebase_manager import FirebaseManager
 from storage_manager import StorageManager
+from mini_editor_imagen import MiniEditorImagen
 
 logger = logging.getLogger(__name__)
 
@@ -374,7 +377,7 @@ class AlquilerDialog(QDialog):
             QMessageBox.critical(self, "Error", f"Error al guardar el alquiler:\n{e}")
     
     def _seleccionar_conduce(self):
-        """Permite seleccionar un archivo de conduce."""
+        """Permite seleccionar un archivo de conduce y editarlo."""
         if not self.sm:
             QMessageBox.warning(self, "No disponible", "Firebase Storage no está configurado.")
             return
@@ -386,11 +389,46 @@ class AlquilerDialog(QDialog):
             "Imágenes y PDFs (*.jpg *.jpeg *.png *.pdf);;Todos los archivos (*)"
         )
         
-        if archivo:
+        if not archivo:
+            return
+        
+        nombre_archivo = os.path.basename(archivo)
+        
+        # Si es imagen, abrir editor
+        if archivo.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp', '.gif')):
+            try:
+                logger.info(f"Abriendo editor de imagen para: {archivo}")
+                editor = MiniEditorImagen(archivo, width=1200, height=800, parent=self)
+                
+                if editor.exec() != QDialog.DialogCode.Accepted:
+                    logger.info("Usuario canceló el editor de imagen")
+                    return
+                
+                # Obtener imagen editada
+                img_editada = editor.get_final_image()
+                
+                # Guardar imagen editada en archivo temporal
+                temp_path = f"/tmp/conduce_editado_{uuid.uuid4().hex}.jpeg"
+                img_editada.save(temp_path, "JPEG", quality=85)
+                
+                self.conduce_archivo_seleccionado = temp_path
+                self.lbl_conduce_estado.setText(f"Seleccionado y editado: {nombre_archivo}")
+                logger.info(f"Imagen editada y guardada en: {temp_path}")
+                
+            except Exception as e:
+                logger.error(f"Error al editar imagen: {e}", exc_info=True)
+                QMessageBox.warning(
+                    self,
+                    "Error",
+                    f"No se pudo abrir el editor de imagen: {e}\n\nSe usará el archivo original."
+                )
+                self.conduce_archivo_seleccionado = archivo
+                self.lbl_conduce_estado.setText(f"Seleccionado: {nombre_archivo}")
+        else:
+            # PDFs u otros archivos: usar directamente
             self.conduce_archivo_seleccionado = archivo
-            nombre_archivo = os.path.basename(archivo)
             self.lbl_conduce_estado.setText(f"Seleccionado: {nombre_archivo}")
-            logger.info(f"Conduce seleccionado: {archivo}")
+            logger.info(f"Archivo seleccionado (sin edición): {archivo}")
     
     def _ver_conduce(self):
         """Abre el conduce adjunto."""
