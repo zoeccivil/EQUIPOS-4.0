@@ -180,10 +180,43 @@ class TabPagosOperadores(QWidget):
             self.combo_operador_pagos.addItem("Todos", None)
             for op_id, nombre in sorted(self.operadores_mapa.items(), key=lambda item: item[1]):
                 self.combo_operador_pagos.addItem(nombre, op_id)
+            
+            # Establecer rango de fechas inicial y cargar datos
+            self._establecer_rango_fechas_inicial()
 
         except Exception as e:
             logger.error(f"Error al poblar filtros de pagos: {e}", exc_info=True)
             QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros de pagos: {e}")
+    
+    def _establecer_rango_fechas_inicial(self):
+        """Establece el rango de fechas desde la primera transacción hasta hoy."""
+        try:
+            # Intentar obtener la fecha más antigua
+            query = self.fm.db.collection('pagos_operadores').order_by('fecha').limit(1)
+            docs = list(query.stream())
+            
+            if docs:
+                primera_fecha_str = docs[0].to_dict().get('fecha')
+                if primera_fecha_str:
+                    self.date_desde_pagos.setDate(QDate.fromString(primera_fecha_str, "yyyy-MM-dd"))
+                    logger.info(f"Fecha inicial de pagos establecida a: {primera_fecha_str}")
+                else:
+                    self.date_desde_pagos.setDate(QDate.currentDate().addYears(-1))
+            else:
+                logger.info("No hay pagos, estableciendo fecha hace 1 año")
+                self.date_desde_pagos.setDate(QDate.currentDate().addYears(-1))
+            
+            # Fecha fin: hoy
+            self.date_hasta_pagos.setDate(QDate.currentDate())
+            
+            # Cargar datos automáticamente
+            logger.info("Cargando pagos automáticamente con rango inicial")
+            self._cargar_pagos()
+            
+        except Exception as e:
+            logger.warning(f"Error estableciendo rango de fechas inicial para pagos: {e}")
+            self.date_desde_pagos.setDate(QDate.currentDate().addMonths(-1))
+            self.date_hasta_pagos.setDate(QDate.currentDate())
 
     def _cargar_pagos(self):
         """Carga los pagos desde Firebase usando los filtros seleccionados."""
@@ -198,11 +231,14 @@ class TabPagosOperadores(QWidget):
         filtros['fecha_inicio'] = self.date_desde_pagos.date().toString("yyyy-MM-dd")
         filtros['fecha_fin'] = self.date_hasta_pagos.date().toString("yyyy-MM-dd")
 
-        # Recolectar filtros de combos
-        if self.combo_equipo_pagos.currentData():
-            filtros['equipo_id'] = self.combo_equipo_pagos.currentData()
-        if self.combo_operador_pagos.currentData():
-            filtros['operador_id'] = self.combo_operador_pagos.currentData()
+        # Recolectar filtros de combos - CONVERTIR A STRING
+        equipo_id = self.combo_equipo_pagos.currentData()
+        if equipo_id:
+            filtros['equipo_id'] = str(equipo_id)
+        
+        operador_id = self.combo_operador_pagos.currentData()
+        if operador_id:
+            filtros['operador_id'] = str(operador_id)
             
         try:
             logger.info(f"Cargando pagos a operadores con filtros: {filtros}")

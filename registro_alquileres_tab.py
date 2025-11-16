@@ -208,10 +208,46 @@ class RegistroAlquileresTab(QWidget):
             self.combo_pagado.addItem("Todos", None)
             self.combo_pagado.addItem("Pendientes", False)
             self.combo_pagado.addItem("Pagados", True)
+            
+            # Establecer rango de fechas inicial y cargar datos
+            self._establecer_rango_fechas_inicial()
 
         except Exception as e:
             logger.error(f"Error al poblar filtros de alquileres: {e}", exc_info=True)
             QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros: {e}")
+    
+    def _establecer_rango_fechas_inicial(self):
+        """Establece el rango de fechas desde la primera transacción hasta hoy."""
+        try:
+            # Intentar obtener la fecha más antigua
+            query = self.fm.db.collection('alquileres').order_by('fecha').limit(1)
+            docs = list(query.stream())
+            
+            if docs:
+                primera_fecha_str = docs[0].to_dict().get('fecha')
+                if primera_fecha_str:
+                    self.date_desde.setDate(QDate.fromString(primera_fecha_str, "yyyy-MM-dd"))
+                    logger.info(f"Fecha inicial establecida a primera transacción: {primera_fecha_str}")
+                else:
+                    # Sin fecha válida: hace 1 año
+                    self.date_desde.setDate(QDate.currentDate().addYears(-1))
+            else:
+                # Sin datos: hace 1 año
+                logger.info("No hay alquileres, estableciendo fecha hace 1 año")
+                self.date_desde.setDate(QDate.currentDate().addYears(-1))
+            
+            # Fecha fin: hoy
+            self.date_hasta.setDate(QDate.currentDate())
+            
+            # Cargar datos automáticamente
+            logger.info("Cargando alquileres automáticamente con rango inicial")
+            self._cargar_alquileres()
+            
+        except Exception as e:
+            logger.warning(f"Error estableciendo rango de fechas inicial: {e}")
+            # Fallback: último mes
+            self.date_desde.setDate(QDate.currentDate().addMonths(-1))
+            self.date_hasta.setDate(QDate.currentDate())
 
     def _cargar_alquileres(self):
         """Carga los alquileres desde Firebase usando los filtros seleccionados."""
@@ -226,13 +262,19 @@ class RegistroAlquileresTab(QWidget):
         filtros['fecha_inicio'] = self.date_desde.date().toString("yyyy-MM-dd")
         filtros['fecha_fin'] = self.date_hasta.date().toString("yyyy-MM-dd")
         
-        # Recolectar filtros de combos
-        if self.combo_equipo.currentData():
-            filtros['equipo_id'] = self.combo_equipo.currentData()
-        if self.combo_cliente.currentData():
-            filtros['cliente_id'] = self.combo_cliente.currentData()
-        if self.combo_operador.currentData():
-            filtros['operador_id'] = self.combo_operador.currentData()
+        # Recolectar filtros de combos - CONVERTIR A STRING
+        equipo_id = self.combo_equipo.currentData()
+        if equipo_id:
+            filtros['equipo_id'] = str(equipo_id)
+        
+        cliente_id = self.combo_cliente.currentData()
+        if cliente_id:
+            filtros['cliente_id'] = str(cliente_id)
+        
+        operador_id = self.combo_operador.currentData()
+        if operador_id:
+            filtros['operador_id'] = str(operador_id)
+        
         if self.combo_pagado.currentData() is not None:
             filtros['pagado'] = self.combo_pagado.currentData()
             
