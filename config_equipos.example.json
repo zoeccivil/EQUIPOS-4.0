@@ -1,7 +1,8 @@
 {
   "firebase": {
     "credentials_path": "firebase_credentials.json",
-    "project_id": "equipos-zoec"
+    "project_id": "equipos-zoec",
+    "storage_bucket": "equipos-zoec.appspot.com"
   },
   "backup": {
     "ruta_backup_sqlite": "./backups/equipos_backup.db",

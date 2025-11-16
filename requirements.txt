@@ -6,4 +6,5 @@ google-cloud-firestore==2.14.0
 openpyxl==3.1.2
 reportlab==4.0.7
 Pillow
+pandas
 python-dateutil==2.8.2

@@ -32,10 +32,11 @@ class RegistroAlquileresTab(QWidget):
     
     recargar_dashboard = pyqtSignal()
     
-    def __init__(self, firebase_manager: FirebaseManager):
+    def __init__(self, firebase_manager: FirebaseManager, storage_manager=None):
         super().__init__()
         
         self.fm = firebase_manager
+        self.sm = storage_manager
         self.alquileres_cargados = [] # Caché de los alquileres
         
         # Mapas de nombres (se llenarán desde app_gui)
@@ -344,6 +345,7 @@ class RegistroAlquileresTab(QWidget):
                 equipos_mapa=self.equipos_mapa,
                 clientes_mapa=self.clientes_mapa,
                 operadores_mapa=self.operadores_mapa,
+                storage_manager=self.sm,
                 alquiler_data=alquiler_data,
                 parent=self
             )

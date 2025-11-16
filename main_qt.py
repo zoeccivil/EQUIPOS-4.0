@@ -12,6 +12,7 @@ from PyQt6.QtCore import QTimer
 
 from firebase_manager import FirebaseManager
 from backup_manager import BackupManager
+from storage_manager import StorageManager
 from config_manager import cargar_configuracion, guardar_configuracion
 from app_gui_qt import AppGUI
 from theme_manager import ThemeManager
@@ -131,9 +132,26 @@ def main():
         logger.warning(f"No se pudo inicializar Backup Manager: {e}")
         backup_manager = None
 
+    # Inicializar Storage Manager (opcional - si está configurado)
+    storage_manager = None
+    storage_bucket = config.get('firebase', {}).get('storage_bucket')
+    if storage_bucket:
+        try:
+            storage_manager = StorageManager(
+                credentials_path=config['firebase']['credentials_path'],
+                project_id=config['firebase']['project_id'],
+                bucket_name=storage_bucket
+            )
+            logger.info(f"Storage Manager inicializado correctamente con bucket: {storage_bucket}")
+        except Exception as e:
+            logger.warning(f"No se pudo inicializar Storage Manager: {e}")
+            logger.warning("La funcionalidad de conduces estará deshabilitada")
+    else:
+        logger.info("Storage bucket no configurado - funcionalidad de conduces deshabilitada")
+
     # Iniciar la ventana principal
     try:
-        window = AppGUI(firebase_manager, backup_manager, config)
+        window = AppGUI(firebase_manager, backup_manager, storage_manager, config)
         window.show()
         logger.info("Ventana principal creada y mostrada")
     except Exception as e:

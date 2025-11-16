@@ -17,6 +17,7 @@ import logging
 
 from firebase_manager import FirebaseManager
 from backup_manager import BackupManager
+from storage_manager import StorageManager
 from config_manager import cargar_configuracion, guardar_configuracion
 from theme_manager import ThemeManager
 
@@ -25,6 +26,7 @@ from dashboard_tab import DashboardTab
 from registro_alquileres_tab import RegistroAlquileresTab
 from gastos_equipos_tab import TabGastosEquipos
 from pagos_operadores_tab import TabPagosOperadores
+from reportes_tab import ReportesTab
 
 logger = logging.getLogger(__name__)
 
@@ -34,10 +36,12 @@ class AppGUI(QMainWindow):
     Gestiona tabs, menús y configuración general.
     """
     
-    def __init__(self, firebase_manager: FirebaseManager, backup_manager: BackupManager = None, config: dict = None):
+    def __init__(self, firebase_manager: FirebaseManager, backup_manager: BackupManager = None, 
+                 storage_manager: StorageManager = None, config: dict = None):
         super().__init__()
         self.fm = firebase_manager
         self.bm = backup_manager
+        self.sm = storage_manager
         self.config = config or {}
         
         # Atributos de estado (Mapas de Nombres)
@@ -69,7 +73,7 @@ class AppGUI(QMainWindow):
         self.tabs.addTab(self.dashboard_tab, "Dashboard")
         
         # Tab de Registro de Alquileres
-        self.registro_tab = RegistroAlquileresTab(self.fm)
+        self.registro_tab = RegistroAlquileresTab(self.fm, storage_manager=self.sm)
         self.tabs.addTab(self.registro_tab, "Registro de Alquileres")
         
         # Tab de Gastos de Equipos
@@ -79,6 +83,9 @@ class AppGUI(QMainWindow):
         # Tab de Pagos a Operadores
         self.pagos_tab = TabPagosOperadores(self.fm)
         self.tabs.addTab(self.pagos_tab, "Pagos a Operadores")
+        
+        # Tab de Reportes (se creará después de cargar datos)
+        self.reportes_tab = None
         
         # Establecer tab inicial
         self.tabs.setCurrentIndex(1)  # Abrir en Registro de Alquileres por defecto
@@ -219,6 +226,17 @@ class AppGUI(QMainWindow):
             self.registro_tab.actualizar_mapas(mapas_completos)
             self.gastos_tab.actualizar_mapas(mapas_completos)
             self.pagos_tab.actualizar_mapas(mapas_completos)
+            
+            # Crear tab de reportes ahora que tenemos los mapas
+            if not self.reportes_tab:
+                self.reportes_tab = ReportesTab(
+                    self.fm,
+                    storage_manager=self.sm,
+                    clientes_mapa=self.clientes_mapa,
+                    operadores_mapa=self.operadores_mapa,
+                    equipos_mapa=self.equipos_mapa
+                )
+                self.tabs.addTab(self.reportes_tab, "Reportes")
             
             # Ahora, refrescar los datos
             self.dashboard_tab.refrescar_datos()
