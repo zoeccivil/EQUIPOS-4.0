@@ -19,8 +19,8 @@ from backup_manager import BackupManager
 from config_manager import cargar_configuracion, guardar_configuracion
 from theme_manager import ThemeManager
 
-# Importar tabs (se crearán después)
-# from dashboard_tab import DashboardTab
+# Importar tabs
+from dashboard_tab import DashboardTab
 # from registro_alquileres_tab import RegistroAlquileresTab
 # from gastos_equipos_tab import TabGastosEquipos
 # from pagos_operadores_tab import TabPagosOperadores
@@ -59,11 +59,11 @@ class AppGUI(QMainWindow):
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
         
-        # Tab de Dashboard (placeholder por ahora)
-        self.dashboard_tab = self._crear_dashboard_placeholder()
+        # Tab de Dashboard (funcional con Firebase)
+        self.dashboard_tab = DashboardTab(self.fm)
         self.tabs.addTab(self.dashboard_tab, "Dashboard")
         
-        # Tab de Registro de Alquileres (placeholder)
+        # Tab de Registro de Alquileres (placeholder por ahora)
         self.registro_tab = self._crear_registro_placeholder()
         self.tabs.addTab(self.registro_tab, "Registro de Alquileres")
         
@@ -78,25 +78,7 @@ class AppGUI(QMainWindow):
         # Establecer tab inicial
         self.tabs.setCurrentIndex(0)
     
-    def _crear_dashboard_placeholder(self):
-        """Crea un placeholder para el tab de dashboard"""
-        widget = QWidget()
-        layout = QVBoxLayout()
-        
-        label = QLabel("Dashboard")
-        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        label.setStyleSheet("font-size: 24px; font-weight: bold; padding: 20px;")
-        
-        info_label = QLabel("Aquí se mostrarán las estadísticas y KPIs de los equipos")
-        info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        info_label.setStyleSheet("font-size: 14px; color: gray;")
-        
-        layout.addWidget(label)
-        layout.addWidget(info_label)
-        layout.addStretch()
-        
-        widget.setLayout(layout)
-        return widget
+
     
     def _crear_registro_placeholder(self):
         """Crea un placeholder para el tab de registro de alquileres"""
@@ -222,6 +204,9 @@ class AppGUI(QMainWindow):
             
             # Actualizar título con contador de equipos
             self.setWindowTitle(f"EQUIPOS 4.0 - {len(equipos)} Equipos Activos")
+            
+            # Configurar filtros del dashboard
+            self.dashboard_tab.configurar_filtros()
             
         except Exception as e:
             QMessageBox.warning(self, "Advertencia",
