@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuración local (credenciales de Firebase, etc.)
+firebase_credentials.json
+config_equipos.json
+
+# Backups
+backups/
+*.backup
+
+# Archivos temporales
+temp/
+tmp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reportes y exports
+reportes/
+exports/
+*.xlsx
+*.pdf
+!docs/*.pdf
+
+# Archivos adjuntos de usuarios
+adjuntos/
+conduce_adjuntos/
