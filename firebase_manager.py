@@ -21,19 +21,7 @@ class FirebaseManager:
     """
     
     def __init__(self, credentials_path: str, project_id: str):
-        """
-        Inicializa la conexión con Firebase.
-        
-        Args:
-            credentials_path: Ruta al archivo JSON de credenciales de Firebase
-            project_id: ID del proyecto de Firebase
-            
-        Raises:
-            FileNotFoundError: Si no se encuentra el archivo de credenciales
-            Exception: Si hay error al inicializar Firebase
-        """
         try:
-            # Verificar si Firebase ya está inicializado
             if not firebase_admin._apps:
                 cred = credentials.Certificate(credentials_path)
                 firebase_admin.initialize_app(cred, {
@@ -53,50 +41,70 @@ class FirebaseManager:
             logger.error(f"Error al inicializar Firebase: {e}")
             raise
     
+    def _agregar_fecha_ano_mes(self, datos: Dict[str, Any]) -> Dict[str, Any]:
+        """Añade campos 'ano' y 'mes' a un diccionario de datos si tiene 'fecha'."""
+        if 'fecha' in datos:
+            try:
+                # Aceptar tanto objeto datetime como string
+                if isinstance(datos['fecha'], str):
+                    fecha_obj = datetime.strptime(str(datos['fecha']), "%Y-%m-%d")
+                else:
+                    fecha_obj = datos['fecha']
+                    
+                datos['ano'] = fecha_obj.year
+                datos['mes'] = fecha_obj.month
+                # Convertir a string para Firestore (si es objeto)
+                datos['fecha'] = fecha_obj.strftime("%Y-%m-%d")
+            except Exception:
+                pass # Ignorar si la fecha es inválida o no existe
+        return datos
+
+    # ==================== MAPAS GLOBALES ====================
+    
+    def obtener_mapa_global(self, coleccion_nombre: str) -> Dict[str, str]:
+        """
+        Obtiene un mapa simple (ID -> nombre) de una colección global.
+        Usado para Cuentas, Categorías, Subcategorías.
+        ¡MODIFICADO! Ahora propaga errores de índice.
+        """
+        try:
+            mapa = {}
+            docs = self.db.collection(coleccion_nombre).stream()
+            for doc in docs:
+                datos = doc.to_dict()
+                mapa[doc.id] = datos.get('nombre', f"ID: {doc.id}")
+            logger.info(f"Obtenido mapa para [{coleccion_nombre}]. Total: {len(mapa)} entradas.")
+            return mapa
+        except Exception as e:
+            logger.error(f"Error al obtener mapa para [{coleccion_nombre}]: {e}", exc_info=True)
+            raise e # Propagar el error
+
     # ==================== EQUIPOS ====================
     
     def obtener_equipos(self, activo: Optional[bool] = True) -> List[Dict[str, Any]]:
         """
         Obtiene la lista de equipos.
-        
-        Args:
-            activo: Si es True, solo equipos activos. Si es None, todos los equipos.
-            
-        Returns:
-            Lista de diccionarios con los datos de los equipos
+        ¡MODIFICADO! Ahora propaga errores de índice.
         """
         try:
             equipos_ref = self.db.collection('equipos')
-            
             if activo is not None:
                 query = equipos_ref.where(filter=FieldFilter('activo', '==', activo))
             else:
                 query = equipos_ref
-            
-            docs = query.stream()
+            docs = query.order_by('nombre').stream() # Requiere índice (activo Asc, nombre Asc)
             equipos = []
             for doc in docs:
                 equipo = doc.to_dict()
                 equipo['id'] = doc.id
                 equipos.append(equipo)
-            
             logger.info(f"Obtenidos {len(equipos)} equipos")
             return equipos
-            
         except Exception as e:
-            logger.error(f"Error al obtener equipos: {e}")
-            return []
+            logger.error(f"Error al obtener equipos: {e}", exc_info=True)
+            raise e # Propagar el error
     
     def obtener_equipo_por_id(self, equipo_id: str) -> Optional[Dict[str, Any]]:
-        """
-        Obtiene un equipo por su ID.
-        
-        Args:
-            equipo_id: ID del equipo
-            
-        Returns:
-            Diccionario con los datos del equipo o None si no existe
-        """
         try:
             doc = self.db.collection('equipos').document(equipo_id).get()
             if doc.exists:
@@ -109,68 +117,30 @@ class FirebaseManager:
             return None
     
     def agregar_equipo(self, datos: Dict[str, Any]) -> Optional[str]:
-        """
-        Agrega un nuevo equipo.
-        
-        Args:
-            datos: Diccionario con los datos del equipo
-                Campos: nombre, marca, modelo, categoria, placa, ficha, activo, etc.
-                
-        Returns:
-            ID del equipo creado o None si hay error
-        """
         try:
-            # Agregar timestamp de creación
             datos['fecha_creacion'] = datetime.now()
             datos['fecha_modificacion'] = datetime.now()
-            
-            # Si no tiene el campo activo, establecerlo en True
             if 'activo' not in datos:
                 datos['activo'] = True
-            
             doc_ref = self.db.collection('equipos').add(datos)
             equipo_id = doc_ref[1].id
             logger.info(f"Equipo creado con ID: {equipo_id}")
             return equipo_id
-            
         except Exception as e:
             logger.error(f"Error al agregar equipo: {e}")
             return None
     
     def editar_equipo(self, equipo_id: str, datos: Dict[str, Any]) -> bool:
-        """
-        Edita un equipo existente.
-        
-        Args:
-            equipo_id: ID del equipo a editar
-            datos: Diccionario con los datos a actualizar
-            
-        Returns:
-            True si se actualizó correctamente, False en caso contrario
-        """
         try:
-            # Agregar timestamp de modificación
             datos['fecha_modificacion'] = datetime.now()
-            
             self.db.collection('equipos').document(equipo_id).update(datos)
             logger.info(f"Equipo {equipo_id} actualizado")
             return True
-            
         except Exception as e:
             logger.error(f"Error al editar equipo {equipo_id}: {e}")
             return False
     
     def eliminar_equipo(self, equipo_id: str, eliminar_fisicamente: bool = False) -> bool:
-        """
-        Elimina o desactiva un equipo.
-        
-        Args:
-            equipo_id: ID del equipo a eliminar
-            eliminar_fisicamente: Si es True, elimina el documento. Si es False, solo lo marca como inactivo.
-            
-        Returns:
-            True si se eliminó/desactivó correctamente, False en caso contrario
-        """
         try:
             if eliminar_fisicamente:
                 self.db.collection('equipos').document(equipo_id).delete()
@@ -179,36 +149,25 @@ class FirebaseManager:
                 self.db.collection('equipos').document(equipo_id).update({'activo': False})
                 logger.info(f"Equipo {equipo_id} marcado como inactivo")
             return True
-            
         except Exception as e:
             logger.error(f"Error al eliminar equipo {equipo_id}: {e}")
             return False
+
+    # ==================== ALQUILERES ====================
     
-    # ==================== TRANSACCIONES (ALQUILERES) ====================
-    
-    def obtener_transacciones(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    def obtener_alquileres(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """
-        Obtiene transacciones con filtros opcionales.
-        
-        Args:
-            filtros: Diccionario con filtros opcionales:
-                - tipo: 'Ingreso' o 'Gasto'
-                - equipo_id: ID del equipo
-                - cliente_id: ID del cliente
-                - operador_id: ID del operador
-                - fecha_inicio: fecha mínima
-                - fecha_fin: fecha máxima
-                - pagado: bool
-                
-        Returns:
-            Lista de diccionarios con las transacciones
+        Obtiene alquileres con filtros opcionales.
+        ¡MODIFICADO! Filtra por fecha_inicio/fin, no ano/mes. Propaga errores.
         """
         try:
-            query = self.db.collection('transacciones')
+            query = self.db.collection('alquileres')
             
             if filtros:
-                if 'tipo' in filtros:
-                    query = query.where(filter=FieldFilter('tipo', '==', filtros['tipo']))
+                if 'fecha_inicio' in filtros:
+                    query = query.where(filter=FieldFilter('fecha', '>=', filtros['fecha_inicio']))
+                if 'fecha_fin' in filtros:
+                    query = query.where(filter=FieldFilter('fecha', '<=', filtros['fecha_fin']))
                 if 'equipo_id' in filtros:
                     query = query.where(filter=FieldFilter('equipo_id', '==', filtros['equipo_id']))
                 if 'cliente_id' in filtros:
@@ -217,155 +176,171 @@ class FirebaseManager:
                     query = query.where(filter=FieldFilter('operador_id', '==', filtros['operador_id']))
                 if 'pagado' in filtros:
                     query = query.where(filter=FieldFilter('pagado', '==', filtros['pagado']))
+            
+            query = query.order_by('fecha', direction=firestore.Query.DESCENDING)
+            docs = query.stream()
+            
+            alquileres = []
+            for doc in docs:
+                alquiler = doc.to_dict()
+                alquiler['id'] = doc.id
+                alquileres.append(alquiler)
+            
+            logger.info(f"Obtenidos {len(alquileres)} alquileres con filtros: {filtros}")
+            return alquileres
+            
+        except Exception as e:
+            logger.error(f"Error al obtener alquileres: {e}", exc_info=True)
+            raise e # Propagar el error
+
+    def registrar_alquiler(self, datos: Dict[str, Any]) -> Optional[str]:
+        """Registra un nuevo alquiler."""
+        try:
+            datos['fecha_creacion'] = datetime.now()
+            datos['fecha_modificacion'] = datetime.now()
+            if 'pagado' not in datos:
+                datos['pagado'] = False
+            
+            datos = self._agregar_fecha_ano_mes(datos)
+            
+            if 'transaccion_id' not in datos:
+                 datos['transaccion_id'] = str(uuid.uuid4())
+
+            doc_id = datos['transaccion_id']
+            self.db.collection('alquileres').document(doc_id).set(datos)
+            logger.info(f"Alquiler registrado con ID: {doc_id}")
+            return doc_id
+        except Exception as e:
+            logger.error(f"Error al registrar alquiler: {e}")
+            return None
+
+    def editar_alquiler(self, alquiler_id: str, datos: Dict[str, Any]) -> bool:
+        """Edita un alquiler existente."""
+        try:
+            datos['fecha_modificacion'] = datetime.now()
+            datos = self._agregar_fecha_ano_mes(datos)
+            self.db.collection('alquileres').document(alquiler_id).update(datos)
+            logger.info(f"Alquiler {alquiler_id} actualizado")
+            return True
+        except Exception as e:
+            logger.error(f"Error al editar alquiler {alquiler_id}: {e}")
+            return False
+
+    def eliminar_alquiler(self, alquiler_id: str) -> bool:
+        """Elimina un alquiler."""
+        try:
+            self.db.collection('alquileres').document(alquiler_id).delete()
+            logger.info(f"Alquiler {alquiler_id} eliminado")
+            return True
+        except Exception as e:
+            logger.error(f"Error al eliminar alquiler {alquiler_id}: {e}")
+            return False
+
+    # ==================== GASTOS ====================
+
+    def obtener_gastos(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """
+        Obtiene gastos con filtros opcionales.
+        ¡MODIFICADO! Filtra por fecha_inicio/fin, no ano/mes. Propaga errores.
+        """
+        try:
+            query = self.db.collection('gastos')
+            
+            if filtros:
                 if 'fecha_inicio' in filtros:
                     query = query.where(filter=FieldFilter('fecha', '>=', filtros['fecha_inicio']))
                 if 'fecha_fin' in filtros:
                     query = query.where(filter=FieldFilter('fecha', '<=', filtros['fecha_fin']))
+                if 'equipo_id' in filtros:
+                    query = query.where(filter=FieldFilter('equipo_id', '==', filtros['equipo_id']))
+                if 'cuenta_id' in filtros:
+                    query = query.where(filter=FieldFilter('cuenta_id', '==', filtros['cuenta_id']))
+                if 'categoria_id' in filtros:
+                    query = query.where(filter=FieldFilter('categoria_id', '==', filtros['categoria_id']))
             
-            # Ordenar por fecha descendente
             query = query.order_by('fecha', direction=firestore.Query.DESCENDING)
-            
             docs = query.stream()
-            transacciones = []
+            
+            gastos = []
             for doc in docs:
-                transaccion = doc.to_dict()
-                transaccion['id'] = doc.id
-                transacciones.append(transaccion)
+                gasto = doc.to_dict()
+                gasto['id'] = doc.id
+                gastos.append(gasto)
             
-            logger.info(f"Obtenidas {len(transacciones)} transacciones")
-            return transacciones
-            
-        except Exception as e:
-            logger.error(f"Error al obtener transacciones: {e}")
-            return []
-    
-    def obtener_transaccion_por_id(self, transaccion_id: str) -> Optional[Dict[str, Any]]:
-        """Obtiene una transacción por su ID."""
-        try:
-            doc = self.db.collection('transacciones').document(transaccion_id).get()
-            if doc.exists:
-                transaccion = doc.to_dict()
-                transaccion['id'] = doc.id
-                return transaccion
-            return None
-        except Exception as e:
-            logger.error(f"Error al obtener transacción {transaccion_id}: {e}")
-            return None
-    
-    def registrar_alquiler(self, datos: Dict[str, Any]) -> Optional[str]:
-        """
-        Registra un nuevo alquiler (transacción de ingreso).
-        
-        Args:
-            datos: Diccionario con los datos del alquiler
-                Campos requeridos: equipo_id, cliente_id, fecha, monto
-                Campos opcionales: operador_id, descripcion, horas, precio_por_hora,
-                                   conduce, ubicacion, pagado, comentario
-                
-        Returns:
-            ID de la transacción creada o None si hay error
-        """
-        try:
-            # Establecer valores por defecto
-            datos['tipo'] = 'Ingreso'
-            datos['fecha_creacion'] = datetime.now()
-            datos['fecha_modificacion'] = datetime.now()
-            
-            if 'pagado' not in datos:
-                datos['pagado'] = False
-            
-            doc_ref = self.db.collection('transacciones').add(datos)
-            transaccion_id = doc_ref[1].id
-            logger.info(f"Alquiler registrado con ID: {transaccion_id}")
-            return transaccion_id
+            logger.info(f"Obtenidos {len(gastos)} gastos con filtros: {filtros}")
+            return gastos
             
         except Exception as e:
-            logger.error(f"Error al registrar alquiler: {e}")
-            return None
-    
+            logger.error(f"Error al obtener gastos: {e}", exc_info=True)
+            raise e # Propagar el error
+
     def registrar_gasto_equipo(self, datos: Dict[str, Any]) -> Optional[str]:
-        """
-        Registra un gasto asociado a un equipo.
-        
-        Args:
-            datos: Diccionario con los datos del gasto
-                Campos: equipo_id, fecha, monto, descripcion, categoria, subcategoria, etc.
-                
-        Returns:
-            ID de la transacción creada o None si hay error
-        """
+        """Registra un gasto asociado a un equipo."""
         try:
-            datos['tipo'] = 'Gasto'
+            datos['tipo'] = 'Gasto' # Aseguramos el tipo
             datos['fecha_creacion'] = datetime.now()
             datos['fecha_modificacion'] = datetime.now()
+            datos = self._agregar_fecha_ano_mes(datos)
             
-            doc_ref = self.db.collection('transacciones').add(datos)
-            transaccion_id = doc_ref[1].id
-            logger.info(f"Gasto registrado con ID: {transaccion_id}")
-            return transaccion_id
+            if 'id' not in datos:
+                datos['id'] = str(uuid.uuid4())
             
+            doc_id = datos['id']
+            self.db.collection('gastos').document(doc_id).set(datos)
+            logger.info(f"Gasto registrado con ID: {doc_id}")
+            return doc_id
         except Exception as e:
             logger.error(f"Error al registrar gasto: {e}")
             return None
-    
-    def editar_transaccion(self, transaccion_id: str, datos: Dict[str, Any]) -> bool:
-        """Edita una transacción existente."""
+
+    def editar_gasto(self, gasto_id: str, datos: Dict[str, Any]) -> bool:
+        """Edita un gasto existente."""
         try:
             datos['fecha_modificacion'] = datetime.now()
-            self.db.collection('transacciones').document(transaccion_id).update(datos)
-            logger.info(f"Transacción {transaccion_id} actualizada")
+            datos = self._agregar_fecha_ano_mes(datos)
+            self.db.collection('gastos').document(gasto_id).update(datos)
+            logger.info(f"Gasto {gasto_id} actualizado")
             return True
         except Exception as e:
-            logger.error(f"Error al editar transacción {transaccion_id}: {e}")
+            logger.error(f"Error al editar gasto {gasto_id}: {e}")
             return False
-    
-    def eliminar_transaccion(self, transaccion_id: str) -> bool:
-        """Elimina una transacción."""
+
+    def eliminar_gasto(self, gasto_id: str) -> bool:
+        """Elimina un gasto."""
         try:
-            self.db.collection('transacciones').document(transaccion_id).delete()
-            logger.info(f"Transacción {transaccion_id} eliminada")
+            self.db.collection('gastos').document(gasto_id).delete()
+            logger.info(f"Gasto {gasto_id} eliminado")
             return True
         except Exception as e:
-            logger.error(f"Error al eliminar transacción {transaccion_id}: {e}")
+            logger.error(f"Error al eliminar gasto {gasto_id}: {e}")
             return False
-    
+
     # ==================== ENTIDADES (CLIENTES Y OPERADORES) ====================
     
     def obtener_entidades(self, tipo: Optional[str] = None, activo: Optional[bool] = True) -> List[Dict[str, Any]]:
         """
         Obtiene entidades (clientes u operadores).
-        
-        Args:
-            tipo: 'Cliente' u 'Operador'. Si es None, obtiene ambos.
-            activo: Si es True, solo activos. Si es None, todos.
-            
-        Returns:
-            Lista de entidades
+        ¡MODIFICADO! Ahora propaga errores de índice.
         """
         try:
             query = self.db.collection('entidades')
-            
             if tipo:
                 query = query.where(filter=FieldFilter('tipo', '==', tipo))
             if activo is not None:
                 query = query.where(filter=FieldFilter('activo', '==', activo))
-            
-            docs = query.order_by('nombre').stream()
+            docs = query.order_by('nombre').stream() # Requiere índice (activo Asc, tipo Asc, nombre Asc)
             entidades = []
             for doc in docs:
                 entidad = doc.to_dict()
                 entidad['id'] = doc.id
                 entidades.append(entidad)
-            
             logger.info(f"Obtenidas {len(entidades)} entidades (tipo={tipo})")
             return entidades
-            
         except Exception as e:
-            logger.error(f"Error al obtener entidades: {e}")
-            return []
+            logger.error(f"Error al obtener entidades: {e}", exc_info=True)
+            raise e # Propagar el error
     
     def obtener_entidad_por_id(self, entidad_id: str) -> Optional[Dict[str, Any]]:
-        """Obtiene una entidad por su ID."""
         try:
             doc = self.db.collection('entidades').document(entidad_id).get()
             if doc.exists:
@@ -378,31 +353,20 @@ class FirebaseManager:
             return None
     
     def agregar_entidad(self, datos: Dict[str, Any]) -> Optional[str]:
-        """
-        Agrega una nueva entidad (cliente u operador).
-        
-        Args:
-            datos: Diccionario con los datos
-                Campos: nombre, tipo ('Cliente' o 'Operador'), telefono, cedula, activo
-        """
         try:
             datos['fecha_creacion'] = datetime.now()
             datos['fecha_modificacion'] = datetime.now()
-            
             if 'activo' not in datos:
                 datos['activo'] = True
-            
             doc_ref = self.db.collection('entidades').add(datos)
             entidad_id = doc_ref[1].id
             logger.info(f"Entidad creada con ID: {entidad_id}")
             return entidad_id
-            
         except Exception as e:
             logger.error(f"Error al agregar entidad: {e}")
             return None
     
     def editar_entidad(self, entidad_id: str, datos: Dict[str, Any]) -> bool:
-        """Edita una entidad existente."""
         try:
             datos['fecha_modificacion'] = datetime.now()
             self.db.collection('entidades').document(entidad_id).update(datos)
@@ -413,7 +377,6 @@ class FirebaseManager:
             return False
     
     def eliminar_entidad(self, entidad_id: str, eliminar_fisicamente: bool = False) -> bool:
-        """Elimina o desactiva una entidad."""
         try:
             if eliminar_fisicamente:
                 self.db.collection('entidades').document(entidad_id).delete()
@@ -425,43 +388,32 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al eliminar entidad {entidad_id}: {e}")
             return False
-    
+
     # ==================== MANTENIMIENTOS ====================
     
     def obtener_mantenimientos(self, equipo_id: Optional[str] = None) -> List[Dict[str, Any]]:
         """
         Obtiene mantenimientos, opcionalmente filtrados por equipo.
-        
-        Args:
-            equipo_id: ID del equipo. Si es None, obtiene todos los mantenimientos.
-            
-        Returns:
-            Lista de mantenimientos
+        ¡MODIFICADO! Propaga errores.
         """
         try:
             query = self.db.collection('mantenimientos')
-            
             if equipo_id:
                 query = query.where(filter=FieldFilter('equipo_id', '==', equipo_id))
-            
             query = query.order_by('fecha', direction=firestore.Query.DESCENDING)
-            
             docs = query.stream()
             mantenimientos = []
             for doc in docs:
                 mant = doc.to_dict()
                 mant['id'] = doc.id
                 mantenimientos.append(mant)
-            
             logger.info(f"Obtenidos {len(mantenimientos)} mantenimientos")
             return mantenimientos
-            
         except Exception as e:
-            logger.error(f"Error al obtener mantenimientos: {e}")
-            return []
-    
+            logger.error(f"Error al obtener mantenimientos: {e}", exc_info=True)
+            raise e # Propagar el error
+            
     def obtener_mantenimiento_por_id(self, mantenimiento_id: str) -> Optional[Dict[str, Any]]:
-        """Obtiene un mantenimiento por su ID."""
         try:
             doc = self.db.collection('mantenimientos').document(mantenimiento_id).get()
             if doc.exists:
@@ -472,31 +424,20 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al obtener mantenimiento {mantenimiento_id}: {e}")
             return None
-    
+
     def registrar_mantenimiento(self, datos: Dict[str, Any]) -> Optional[str]:
-        """
-        Registra un nuevo mantenimiento.
-        
-        Args:
-            datos: Diccionario con los datos del mantenimiento
-                Campos: equipo_id, fecha, descripcion, tipo, costo, odometro_horas,
-                        odometro_km, notas, proximo_tipo, proximo_valor, proximo_fecha
-        """
         try:
             datos['fecha_creacion'] = datetime.now()
             datos['fecha_modificacion'] = datetime.now()
-            
             doc_ref = self.db.collection('mantenimientos').add(datos)
             mant_id = doc_ref[1].id
             logger.info(f"Mantenimiento registrado con ID: {mant_id}")
             return mant_id
-            
         except Exception as e:
             logger.error(f"Error al registrar mantenimiento: {e}")
             return None
-    
+
     def editar_mantenimiento(self, mantenimiento_id: str, datos: Dict[str, Any]) -> bool:
-        """Edita un mantenimiento existente."""
         try:
             datos['fecha_modificacion'] = datetime.now()
             self.db.collection('mantenimientos').document(mantenimiento_id).update(datos)
@@ -505,9 +446,8 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al editar mantenimiento {mantenimiento_id}: {e}")
             return False
-    
+
     def eliminar_mantenimiento(self, mantenimiento_id: str) -> bool:
-        """Elimina un mantenimiento."""
         try:
             self.db.collection('mantenimientos').document(mantenimiento_id).delete()
             logger.info(f"Mantenimiento {mantenimiento_id} eliminado")
@@ -515,25 +455,16 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al eliminar mantenimiento {mantenimiento_id}: {e}")
             return False
-    
+
     # ==================== PAGOS A OPERADORES ====================
     
     def obtener_pagos_operadores(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """
         Obtiene pagos a operadores con filtros opcionales.
-        
-        Args:
-            filtros: Diccionario con filtros:
-                - operador_id: ID del operador
-                - equipo_id: ID del equipo
-                - fecha_inicio, fecha_fin
-                
-        Returns:
-            Lista de pagos
+        ¡MODIFICADO! Filtra por fecha_inicio/fin, no ano/mes. Propaga errores.
         """
         try:
             query = self.db.collection('pagos_operadores')
-            
             if filtros:
                 if 'operador_id' in filtros:
                     query = query.where(filter=FieldFilter('operador_id', '==', filtros['operador_id']))
@@ -543,48 +474,39 @@ class FirebaseManager:
                     query = query.where(filter=FieldFilter('fecha', '>=', filtros['fecha_inicio']))
                 if 'fecha_fin' in filtros:
                     query = query.where(filter=FieldFilter('fecha', '<=', filtros['fecha_fin']))
-            
+
             query = query.order_by('fecha', direction=firestore.Query.DESCENDING)
-            
             docs = query.stream()
             pagos = []
             for doc in docs:
                 pago = doc.to_dict()
                 pago['id'] = doc.id
                 pagos.append(pago)
-            
             logger.info(f"Obtenidos {len(pagos)} pagos a operadores")
             return pagos
-            
         except Exception as e:
-            logger.error(f"Error al obtener pagos a operadores: {e}")
-            return []
+            logger.error(f"Error al obtener pagos a operadores: {e}", exc_info=True)
+            raise e # Propagar el error
     
     def registrar_pago_operador(self, datos: Dict[str, Any]) -> Optional[str]:
-        """
-        Registra un pago a un operador.
-        
-        Args:
-            datos: Diccionario con los datos del pago
-                Campos: operador_id, fecha, monto, horas, equipo_id, descripcion, comentario
-        """
         try:
             datos['fecha_creacion'] = datetime.now()
             datos['fecha_modificacion'] = datetime.now()
-            
-            doc_ref = self.db.collection('pagos_operadores').add(datos)
-            pago_id = doc_ref[1].id
-            logger.info(f"Pago a operador registrado con ID: {pago_id}")
-            return pago_id
-            
+            datos = self._agregar_fecha_ano_mes(datos)
+            if 'id' not in datos:
+                datos['id'] = str(uuid.uuid4())
+            doc_id = datos['id']
+            self.db.collection('pagos_operadores').document(doc_id).set(datos)
+            logger.info(f"Pago a operador registrado con ID: {doc_id}")
+            return doc_id
         except Exception as e:
             logger.error(f"Error al registrar pago a operador: {e}")
             return None
     
     def editar_pago_operador(self, pago_id: str, datos: Dict[str, Any]) -> bool:
-        """Edita un pago a operador existente."""
         try:
             datos['fecha_modificacion'] = datetime.now()
+            datos = self._agregar_fecha_ano_mes(datos)
             self.db.collection('pagos_operadores').document(pago_id).update(datos)
             logger.info(f"Pago a operador {pago_id} actualizado")
             return True
@@ -593,7 +515,6 @@ class FirebaseManager:
             return False
     
     def eliminar_pago_operador(self, pago_id: str) -> bool:
-        """Elimina un pago a operador."""
         try:
             self.db.collection('pagos_operadores').document(pago_id).delete()
             logger.info(f"Pago a operador {pago_id} eliminado")
@@ -601,63 +522,61 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al eliminar pago a operador {pago_id}: {e}")
             return False
+            
+    # ==================== UTILIDADES (DASHBOARD) ====================
     
-    # ==================== UTILIDADES ====================
-    
-    def obtener_estadisticas_dashboard(self, fecha_inicio: str, fecha_fin: str) -> Dict[str, Any]:
+    def obtener_estadisticas_dashboard(self, filtros: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Obtiene estadísticas para el dashboard.
-        
-        Args:
-            fecha_inicio: Fecha de inicio en formato ISO
-            fecha_fin: Fecha de fin en formato ISO
-            
-        Returns:
-            Diccionario con estadísticas
+        ¡MODIFICADO! Lee de 'alquileres' y 'gastos'.
         """
         try:
-            # Obtener ingresos
-            ingresos_query = self.db.collection('transacciones')\
-                .where(filter=FieldFilter('tipo', '==', 'Ingreso'))\
-                .where(filter=FieldFilter('fecha', '>=', fecha_inicio))\
-                .where(filter=FieldFilter('fecha', '<=', fecha_fin))\
-                .stream()
+            query_ingresos = self.db.collection('alquileres')
+            query_gastos = self.db.collection('gastos')
             
-            total_ingresos = sum(doc.to_dict().get('monto', 0) for doc in ingresos_query)
+            # Filtros para Ingresos/Gastos del periodo
+            filtros_periodo = {}
             
-            # Obtener gastos
-            gastos_query = self.db.collection('transacciones')\
-                .where(filter=FieldFilter('tipo', '==', 'Gasto'))\
-                .where(filter=FieldFilter('fecha', '>=', fecha_inicio))\
-                .where(filter=FieldFilter('fecha', '<=', fecha_fin))\
-                .stream()
+            if filtros:
+                if 'ano' in filtros:
+                    query_ingresos = query_ingresos.where(filter=FieldFilter('ano', '==', filtros['ano']))
+                    query_gastos = query_gastos.where(filter=FieldFilter('ano', '==', filtros['ano']))
+                    filtros_periodo['ano'] = filtros['ano']
+                if 'mes' in filtros:
+                    query_ingresos = query_ingresos.where(filter=FieldFilter('mes', '==', filtros['mes']))
+                    query_gastos = query_gastos.where(filter=FieldFilter('mes', '==', filtros['mes']))
+                    filtros_periodo['mes'] = filtros['mes']
+                if 'equipo_id' in filtros:
+                    query_ingresos = query_ingresos.where(filter=FieldFilter('equipo_id', '==', filtros['equipo_id']))
+                    query_gastos = query_gastos.where(filter=FieldFilter('equipo_id', '==', filtros['equipo_id']))
             
-            total_gastos = sum(doc.to_dict().get('monto', 0) for doc in gastos_query)
+            ingresos = list(query_ingresos.stream())
+            gastos = list(query_gastos.stream())
             
-            # Calcular utilidad
+            total_ingresos = sum(doc.to_dict().get('monto', 0) for doc in ingresos)
+            total_gastos = sum(doc.to_dict().get('monto', 0) for doc in gastos)
+            
             utilidad = total_ingresos - total_gastos
             
+            # Saldo pendiente (Total, sin filtro de fecha)
+            pendientes = self.db.collection('alquileres').where(filter=FieldFilter('pagado', '==', False)).stream()
+            saldo_pendiente = sum(doc.to_dict().get('monto', 0) for doc in pendientes)
+
             # Contar equipos activos
             equipos_activos = len(self.obtener_equipos(activo=True))
             
             return {
-                'ingresos': total_ingresos,
-                'gastos': total_gastos,
+                'ingresos_mes': total_ingresos,
+                'gastos_mes': total_gastos,
                 'utilidad': utilidad,
-                'equipos_activos': equipos_activos
+                'equipos_activos': equipos_activos,
+                'saldo_pendiente': saldo_pendiente,
+                'ingresos_data': [doc.to_dict() for doc in ingresos] # Pasa los datos para tops
             }
-            
         except Exception as e:
-            logger.error(f"Error al obtener estadísticas: {e}")
-            return {
-                'ingresos': 0,
-                'gastos': 0,
-                'utilidad': 0,
-                'equipos_activos': 0
-            }
-
+            logger.error(f"Error al obtener estadísticas: {e}", exc_info=True)
+            raise e # Propagar el error
 
 if __name__ == "__main__":
-    # Pruebas básicas
     logging.basicConfig(level=logging.INFO)
     print("FirebaseManager - Módulo de gestión de Firestore para EQUIPOS 4.0")

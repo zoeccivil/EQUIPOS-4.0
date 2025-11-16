@@ -1,315 +1,359 @@
 """
-Registro de Alquileres Tab para EQUIPOS 4.0
-Adaptado para trabajar con Firebase en lugar de SQLite
+Tab de Registro de Alquileres para EQUIPOS 4.0
+¡MODIFICADO (V7.1)!
+- Corregido typo en import (PyQt6t)
+- Corregida la conversión de tipo de ID (float a str)
+- Filtros por rango de fecha (QDateEdit)
+- Layout de filtros y botones horizontal
+- Sin columna de "Acciones"
+- Lógica de carga de mapas actualizada
 """
-
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QLabel, QComboBox, QDateEdit,
-    QPushButton, QTableWidget, QTableWidgetItem, QMessageBox, QHeaderView
+    QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QComboBox, QLineEdit,
+    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
+    QMessageBox, QLabel, QDateEdit, QSpacerItem, QSizePolicy
 )
-from PyQt6.QtCore import QDate, Qt
-from datetime import datetime, date
-from firebase_manager import FirebaseManager
+# --- ¡LÍNEA CORREGIDA! ---
+from PyQt6.QtCore import Qt, pyqtSignal, QDate
+# --- ---
+from PyQt6.QtGui import QIcon, QColor
+from datetime import datetime
+import logging
 
+from firebase_manager import FirebaseManager
+# (Asumimos que los diálogos de edición/nuevo están en otros archivos)
+# from dialogs.alquiler_dialog import AlquilerDialog 
+
+logger = logging.getLogger(__name__)
 
 class RegistroAlquileresTab(QWidget):
-    def __init__(self, firebase_manager: FirebaseManager, parent=None):
-        super().__init__(parent)
+    """
+    Tab para gestionar el registro de alquileres (transacciones de ingreso).
+    """
+    
+    recargar_dashboard = pyqtSignal()
+    
+    def __init__(self, firebase_manager: FirebaseManager):
+        super().__init__()
+        
         self.fm = firebase_manager
-
-        self.cliente_filtro = "Todos"
-        self.equipo_filtro = "Todos"
-        self.operador_filtro = "Todos"
-        self.clientes_mapa = {}
+        self.alquileres_cargados = [] # Caché de los alquileres
+        
+        # Mapas de nombres (se llenarán desde app_gui)
         self.equipos_mapa = {}
+        self.clientes_mapa = {}
         self.operadores_mapa = {}
-        self.transacciones_actuales = []
 
-        self._setup_ui()
-        self.poblar_filtros()
-        self.refrescar_tabla()
-
-    def _setup_ui(self):
+        self._init_ui()
+        
+    def _init_ui(self):
+        """Inicializa la interfaz de usuario del tab."""
         main_layout = QVBoxLayout(self)
+        
+        # 1. Filtros y Acciones
+        controles_layout = QVBoxLayout()
+        self._crear_filtros(controles_layout)
+        self._crear_botones_acciones(controles_layout)
+        main_layout.addLayout(controles_layout)
+        
+        # 2. Tabla de Alquileres
+        self._crear_tabla_alquileres()
+        main_layout.addWidget(self.tabla_alquileres)
+        
+        # 3. Totales
+        totales_layout = QHBoxLayout()
+        self._crear_totales(totales_layout)
+        main_layout.addLayout(totales_layout)
+        
+        self.setLayout(main_layout)
+        
+        # Conectar señales
+        self.btn_buscar.clicked.connect(self._cargar_alquileres)
+        self.btn_nuevo.clicked.connect(self.abrir_dialogo_alquiler)
+        self.btn_editar.clicked.connect(self.editar_alquiler_seleccionado)
+        self.btn_eliminar.clicked.connect(self.eliminar_alquiler_seleccionado)
+        
+        # Conectar doble clic en tabla para editar
+        self.tabla_alquileres.itemDoubleClicked.connect(self.editar_alquiler_seleccionado)
 
-        # === Filtros ===
-        filtros_group = QGroupBox("Filtros")
+    def _crear_filtros(self, layout: QVBoxLayout):
+        """Crea los widgets de filtro en layout horizontal."""
         filtros_layout = QHBoxLayout()
-        filtros_group.setLayout(filtros_layout)
-
-        self.combo_operador = QComboBox()
-        self.combo_operador.addItem("Todos")
-        filtros_layout.addWidget(QLabel("Operador:"))
-        filtros_layout.addWidget(self.combo_operador)
-
-        self.fecha_inicio = QDateEdit()
-        self.fecha_inicio.setCalendarPopup(True)
-        self.fecha_inicio.setDate(QDate.currentDate().addMonths(-1))
+        
+        # Controles de Fecha
         filtros_layout.addWidget(QLabel("Desde:"))
-        filtros_layout.addWidget(self.fecha_inicio)
-
-        self.fecha_fin = QDateEdit()
-        self.fecha_fin.setCalendarPopup(True)
-        self.fecha_fin.setDate(QDate.currentDate())
+        self.date_desde = QDateEdit(calendarPopup=True)
+        self.date_desde.setDisplayFormat("yyyy-MM-dd")
+        self.date_desde.setDate(datetime.now().replace(day=1))
+        filtros_layout.addWidget(self.date_desde)
+        
         filtros_layout.addWidget(QLabel("Hasta:"))
-        filtros_layout.addWidget(self.fecha_fin)
+        self.date_hasta = QDateEdit(calendarPopup=True)
+        self.date_hasta.setDisplayFormat("yyyy-MM-dd")
+        self.date_hasta.setDate(datetime.now())
+        filtros_layout.addWidget(self.date_hasta)
+        
+        filtros_layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
 
-        self.combo_cliente = QComboBox()
-        self.combo_cliente.addItem("Todos")
-        filtros_layout.addWidget(QLabel("Cliente:"))
-        filtros_layout.addWidget(self.combo_cliente)
-
-        self.combo_equipo = QComboBox()
-        self.combo_equipo.addItem("Todos")
+        # Combos
         filtros_layout.addWidget(QLabel("Equipo:"))
+        self.combo_equipo = QComboBox()
+        self.combo_equipo.setMinimumWidth(150)
         filtros_layout.addWidget(self.combo_equipo)
+        
+        filtros_layout.addWidget(QLabel("Cliente:"))
+        self.combo_cliente = QComboBox()
+        self.combo_cliente.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_cliente)
+        
+        filtros_layout.addWidget(QLabel("Operador:"))
+        self.combo_operador = QComboBox()
+        self.combo_operador.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_operador)
+        
+        filtros_layout.addWidget(QLabel("Estado Pago:"))
+        self.combo_pagado = QComboBox()
+        filtros_layout.addWidget(self.combo_pagado)
+        
+        filtros_layout.addStretch()
+        layout.addLayout(filtros_layout)
+    
+    def _crear_botones_acciones(self, layout: QVBoxLayout):
+        """Crea los botones de acción en layout horizontal."""
+        acciones_layout = QHBoxLayout()
+        
+        self.btn_buscar = QPushButton("Buscar")
+        acciones_layout.addWidget(self.btn_buscar)
+        
+        self.btn_nuevo = QPushButton("Registrar Nuevo Alquiler")
+        acciones_layout.addWidget(self.btn_nuevo)
+        
+        self.btn_editar = QPushButton("Editar Seleccionado")
+        acciones_layout.addWidget(self.btn_editar)
+        
+        self.btn_eliminar = QPushButton("Eliminar Seleccionado")
+        acciones_layout.addWidget(self.btn_eliminar)
+        
+        acciones_layout.addStretch()
+        layout.addLayout(acciones_layout)
+        
+    def _crear_tabla_alquileres(self):
+        """Crea la tabla de alquileres (sin columna 'Acciones')."""
+        self.tabla_alquileres = QTableWidget()
+        
+        self.tabla_alquileres.setColumnCount(10)
+        
+        HEADERS = [
+            "Fecha", "Equipo", "Cliente", "Operador", "Conduce", 
+            "Horas", "Precio", "Monto", "Ubicación", "Pagado"
+        ]
+        self.tabla_alquileres.setHorizontalHeaderLabels(HEADERS)
+        
+        self.tabla_alquileres.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tabla_alquileres.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabla_alquileres.setAlternatingRowColors(True)
+        self.tabla_alquileres.setSortingEnabled(True) # Habilitar orden
+        
+        header = self.tabla_alquileres.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents) # Fecha
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)          # Equipo
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)          # Cliente
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)          # Operador
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents) # Conduce
+        header.setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents) # Horas
+        header.setSectionResizeMode(6, QHeaderView.ResizeMode.ResizeToContents) # Precio
+        header.setSectionResizeMode(7, QHeaderView.ResizeMode.ResizeToContents) # Monto
+        header.setSectionResizeMode(8, QHeaderView.ResizeMode.Stretch)          # Ubicación
+        header.setSectionResizeMode(9, QHeaderView.ResizeMode.ResizeToContents) # Pagado
 
-        main_layout.addWidget(filtros_group)
+    def _crear_totales(self, layout: QHBoxLayout):
+        """Crea los labels de totales."""
+        self.lbl_total_alquileres = QLabel("Total Alquileres: 0")
+        self.lbl_total_monto = QLabel("Monto Total: 0.00")
+        
+        layout.addStretch()
+        layout.addWidget(self.lbl_total_alquileres)
+        layout.addSpacing(20)
+        layout.addWidget(self.lbl_total_monto)
 
-        # === Botones de acción ===
-        btn_layout = QHBoxLayout()
-        self.btn_registrar = QPushButton("Registrar Alquiler")
-        self.btn_editar = QPushButton("Editar Alquiler")
-        self.btn_eliminar = QPushButton("Eliminar Alquiler")
-        self.btn_marcar_pagado = QPushButton("Marcar como Pagado")
-        btn_layout.addWidget(self.btn_registrar)
-        btn_layout.addWidget(self.btn_editar)
-        btn_layout.addWidget(self.btn_eliminar)
-        btn_layout.addWidget(self.btn_marcar_pagado)
-        btn_layout.addStretch(1)
-        main_layout.addLayout(btn_layout)
-
-        # Conexiones de botones
-        self.btn_registrar.clicked.connect(self.registrar_alquiler)
-        self.btn_editar.clicked.connect(self.editar_alquiler)
-        self.btn_eliminar.clicked.connect(self.eliminar_alquiler)
-        self.btn_marcar_pagado.clicked.connect(self.marcar_pagado)
-
-        # === Tabla principal ===
-        self.table = QTableWidget(0, 9)
-        self.table.setHorizontalHeaderLabels([
-            'Fecha', 'Cliente', 'Operador', 'Equipo', 'Ubicación',
-            'Horas', 'Precio/hora', 'Monto', 'Estado'
-        ])
-
-        header = self.table.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        main_layout.addWidget(self.table)
-
-        # === Indicadores inferiores ===
-        indicadores_layout = QHBoxLayout()
-        self.lbl_total_facturado = QLabel("Facturado: RD$ 0.00")
-        self.lbl_total_abonado = QLabel("Pagado: RD$ 0.00")
-        self.lbl_total_pendiente = QLabel("Pendiente: RD$ 0.00")
-        self.lbl_total_horas = QLabel("Horas Totales: 0.00")
-        indicadores_layout.addWidget(self.lbl_total_facturado)
-        indicadores_layout.addWidget(self.lbl_total_abonado)
-        indicadores_layout.addWidget(self.lbl_total_pendiente)
-        indicadores_layout.addWidget(self.lbl_total_horas)
-        main_layout.addLayout(indicadores_layout)
-
-        # === Señales para refrescar los datos al cambiar filtros ===
-        self.combo_cliente.currentIndexChanged.connect(self.refrescar_tabla)
-        self.combo_operador.currentIndexChanged.connect(self.refrescar_tabla)
-        self.combo_equipo.currentIndexChanged.connect(self.refrescar_tabla)
-        self.fecha_inicio.dateChanged.connect(self.refrescar_tabla)
-        self.fecha_fin.dateChanged.connect(self.refrescar_tabla)
-
-    def refrescar_tabla(self):
-        """Recarga la tabla con los filtros actuales"""
-        self.table.setRowCount(0)
-        filtros = self.get_current_filters()
+    def actualizar_mapas(self, mapas: dict):
+        """Recibe los mapas desde la ventana principal y puebla los filtros."""
+        self.equipos_mapa = mapas.get("equipos", {})
+        self.clientes_mapa = mapas.get("clientes", {})
+        self.operadores_mapa = mapas.get("operadores", {})
+        
+        logger.info("RegistroAlquileres: Mapas recibidos. Poblando filtros...")
         
         try:
-            # Obtener transacciones desde Firebase
-            self.transacciones_actuales = self.fm.obtener_transacciones(filtros)
-            
-            total_facturado = 0
-            total_abonado = 0
-            total_horas = 0.0
-            
-            for row, trans in enumerate(self.transacciones_actuales):
-                self.table.insertRow(row)
-                
-                # Guardar ID en la primera celda
-                item_fecha = QTableWidgetItem(str(trans.get('fecha', '')))
-                item_fecha.setData(Qt.ItemDataRole.UserRole, trans.get('id'))
-                self.table.setItem(row, 0, item_fecha)
-                
-                # Cliente
-                cliente_id = trans.get('cliente_id')
-                cliente_nombre = self._get_nombre_entidad(cliente_id) if cliente_id else ''
-                self.table.setItem(row, 1, QTableWidgetItem(cliente_nombre))
-                
-                # Operador
-                operador_id = trans.get('operador_id')
-                operador_nombre = self._get_nombre_entidad(operador_id) if operador_id else ''
-                self.table.setItem(row, 2, QTableWidgetItem(operador_nombre))
-                
-                # Equipo
-                equipo_id = trans.get('equipo_id')
-                equipo_nombre = self._get_nombre_equipo(equipo_id) if equipo_id else ''
-                self.table.setItem(row, 3, QTableWidgetItem(equipo_nombre))
-                
-                # Otros campos
-                self.table.setItem(row, 4, QTableWidgetItem(str(trans.get('ubicacion', ''))))
-                self.table.setItem(row, 5, QTableWidgetItem(str(trans.get('horas', ''))))
-                self.table.setItem(row, 6, QTableWidgetItem(f"RD$ {trans.get('precio_por_hora', 0):,.2f}"))
-                
-                monto = trans.get('monto', 0)
-                self.table.setItem(row, 7, QTableWidgetItem(f"RD$ {monto:,.2f}"))
-                
-                pagado = trans.get('pagado', False)
-                estado = "Pagado" if pagado else "Pendiente"
-                self.table.setItem(row, 8, QTableWidgetItem(estado))
-                
-                # Acumular totales
-                total_facturado += monto
-                total_horas += trans.get('horas', 0)
-                if pagado:
-                    total_abonado += monto
-            
-            # Actualizar indicadores
-            self.lbl_total_facturado.setText(f"Facturado: RD$ {total_facturado:,.2f}")
-            self.lbl_total_abonado.setText(f"Pagado: RD$ {total_abonado:,.2f}")
-            self.lbl_total_pendiente.setText(f"Pendiente: RD$ {total_facturado-total_abonado:,.2f}")
-            self.lbl_total_horas.setText(f"Horas Totales: {total_horas:.2f}")
-            
-        except Exception as e:
-            QMessageBox.warning(self, "Error", f"Error cargando transacciones: {e}")
-
-    def get_current_filters(self):
-        """Obtiene los filtros actuales de la UI"""
-        filtros = {
-            'tipo': 'Ingreso',  # Solo alquileres (ingresos)
-            'fecha_inicio': self.fecha_inicio.date().toString("yyyy-MM-dd"),
-            'fecha_fin': self.fecha_fin.date().toString("yyyy-MM-dd")
-        }
-        
-        cliente = self.combo_cliente.currentText()
-        if cliente != "Todos" and cliente in self.clientes_mapa:
-            filtros['cliente_id'] = self.clientes_mapa[cliente]
-        
-        operador = self.combo_operador.currentText()
-        if operador != "Todos" and operador in self.operadores_mapa:
-            filtros['operador_id'] = self.operadores_mapa[operador]
-        
-        equipo = self.combo_equipo.currentText()
-        if equipo != "Todos" and equipo in self.equipos_mapa:
-            filtros['equipo_id'] = self.equipos_mapa[equipo]
-        
-        return filtros
-
-    def registrar_alquiler(self):
-        """Abre diálogo para registrar un nuevo alquiler (simplificado)"""
-        QMessageBox.information(self, "Info", 
-                               "Función de registro completa pendiente de implementar.\n"
-                               "Use la consola de Firebase temporalmente.")
-
-    def editar_alquiler(self):
-        """Edita el alquiler seleccionado"""
-        selected = self.table.currentRow()
-        if selected == -1:
-            QMessageBox.warning(self, "Advertencia", "Selecciona una fila para editar.")
-            return
-        
-        QMessageBox.information(self, "Info", 
-                               "Función de edición completa pendiente de implementar.\n"
-                               "Use la consola de Firebase temporalmente.")
-
-    def eliminar_alquiler(self):
-        """Elimina el alquiler seleccionado"""
-        selected = self.table.currentRow()
-        if selected == -1:
-            QMessageBox.warning(self, "Advertencia", "Selecciona una fila para eliminar.")
-            return
-        
-        item = self.table.item(selected, 0)
-        alquiler_id = item.data(Qt.ItemDataRole.UserRole)
-        if not alquiler_id:
-            QMessageBox.warning(self, "Error", "No se pudo encontrar el ID del alquiler.")
-            return
-        
-        confirm = QMessageBox.question(
-            self, "Confirmar", "¿Eliminar el alquiler seleccionado?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
-        
-        if confirm == QMessageBox.StandardButton.Yes:
-            try:
-                self.fm.eliminar_transaccion(alquiler_id)
-                QMessageBox.information(self, "Éxito", "Alquiler eliminado.")
-                self.refrescar_tabla()
-            except Exception as e:
-                QMessageBox.warning(self, "Error", f"No se pudo eliminar: {e}")
-
-    def marcar_pagado(self):
-        """Marca el alquiler seleccionado como pagado"""
-        selected = self.table.currentRow()
-        if selected == -1:
-            QMessageBox.warning(self, "Advertencia", "Selecciona una fila.")
-            return
-        
-        item = self.table.item(selected, 0)
-        alquiler_id = item.data(Qt.ItemDataRole.UserRole)
-        if not alquiler_id:
-            return
-        
-        try:
-            self.fm.editar_transaccion(alquiler_id, {'pagado': True})
-            QMessageBox.information(self, "Éxito", "Marcado como pagado.")
-            self.refrescar_tabla()
-        except Exception as e:
-            QMessageBox.warning(self, "Error", f"Error: {e}")
-
-    def poblar_filtros(self):
-        """Pobla los combos de filtros con datos de Firebase"""
-        try:
-            # Cargar clientes
-            clientes = self.fm.obtener_entidades(tipo='Cliente', activo=True) or []
-            self.clientes_mapa = {c['nombre']: c['id'] for c in clientes}
-            self.combo_cliente.blockSignals(True)
-            self.combo_cliente.clear()
-            self.combo_cliente.addItem("Todos")
-            self.combo_cliente.addItems(sorted([c['nombre'] for c in clientes]))
-            self.combo_cliente.blockSignals(False)
-            
-            # Cargar operadores
-            operadores = self.fm.obtener_entidades(tipo='Operador', activo=True) or []
-            self.operadores_mapa = {o['nombre']: o['id'] for o in operadores}
-            self.combo_operador.blockSignals(True)
-            self.combo_operador.clear()
-            self.combo_operador.addItem("Todos")
-            self.combo_operador.addItems(sorted([o['nombre'] for o in operadores]))
-            self.combo_operador.blockSignals(False)
-            
-            # Cargar equipos
-            equipos = self.fm.obtener_equipos(activo=True) or []
-            self.equipos_mapa = {e['nombre']: e['id'] for e in equipos}
-            self.combo_equipo.blockSignals(True)
+            # --- Poblar Equipos ---
             self.combo_equipo.clear()
-            self.combo_equipo.addItem("Todos")
-            self.combo_equipo.addItems(sorted([e['nombre'] for e in equipos]))
-            self.combo_equipo.blockSignals(False)
-            
+            self.combo_equipo.addItem("Todos", None)
+            for eq_id, nombre in sorted(self.equipos_mapa.items(), key=lambda item: item[1]):
+                self.combo_equipo.addItem(nombre, eq_id)
+                
+            # --- Poblar Clientes ---
+            self.combo_cliente.clear()
+            self.combo_cliente.addItem("Todos", None)
+            for cl_id, nombre in sorted(self.clientes_mapa.items(), key=lambda item: item[1]):
+                self.combo_cliente.addItem(nombre, cl_id)
+                
+            # --- Poblar Operadores ---
+            self.combo_operador.clear()
+            self.combo_operador.addItem("Todos", None)
+            for op_id, nombre in sorted(self.operadores_mapa.items(), key=lambda item: item[1]):
+                self.combo_operador.addItem(nombre, op_id)
+
+            # --- Poblar Estado de Pago ---
+            self.combo_pagado.clear()
+            self.combo_pagado.addItem("Todos", None)
+            self.combo_pagado.addItem("Pendientes", False)
+            self.combo_pagado.addItem("Pagados", True)
+
         except Exception as e:
-            print(f"Error poblando filtros: {e}")
+            logger.error(f"Error al poblar filtros de alquileres: {e}", exc_info=True)
+            QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros: {e}")
 
-    def _get_nombre_entidad(self, entidad_id):
-        """Obtiene el nombre de una entidad por ID (con caché)"""
-        # Buscar en clientes
-        for nombre, id_val in self.clientes_mapa.items():
-            if id_val == entidad_id:
-                return nombre
-        # Buscar en operadores
-        for nombre, id_val in self.operadores_mapa.items():
-            if id_val == entidad_id:
-                return nombre
-        return ''
+    def _cargar_alquileres(self):
+        """Carga los alquileres desde Firebase usando los filtros seleccionados."""
+        # No cargar si los mapas no están listos
+        if not self.equipos_mapa:
+            logger.warning("RegistroAlquileres: Mapas no listos, saltando carga.")
+            return
 
-    def _get_nombre_equipo(self, equipo_id):
-        """Obtiene el nombre de un equipo por ID (con caché)"""
-        for nombre, id_val in self.equipos_mapa.items():
-            if id_val == equipo_id:
-                return nombre
-        return ''
+        filtros = {}
+        
+        # Recolectar filtros de fecha
+        filtros['fecha_inicio'] = self.date_desde.date().toString("yyyy-MM-dd")
+        filtros['fecha_fin'] = self.date_hasta.date().toString("yyyy-MM-dd")
+        
+        # Recolectar filtros de combos
+        if self.combo_equipo.currentData():
+            filtros['equipo_id'] = self.combo_equipo.currentData()
+        if self.combo_cliente.currentData():
+            filtros['cliente_id'] = self.combo_cliente.currentData()
+        if self.combo_operador.currentData():
+            filtros['operador_id'] = self.combo_operador.currentData()
+        if self.combo_pagado.currentData() is not None:
+            filtros['pagado'] = self.combo_pagado.currentData()
+            
+        try:
+            logger.info(f"Cargando alquileres con filtros: {filtros}")
+            self.alquileres_cargados = self.fm.obtener_alquileres(filtros)
+            
+            self.tabla_alquileres.setSortingEnabled(False) # Deshabilitar orden mientras se puebla
+            self.tabla_alquileres.setRowCount(0) # Limpiar tabla
+            if not self.alquileres_cargados:
+                logger.warning("No se encontraron alquileres con esos filtros.")
+                self.lbl_total_alquileres.setText("Total Alquileres: 0")
+                self.lbl_total_monto.setText("Monto Total: 0.00")
+                return
+
+            self.tabla_alquileres.setRowCount(len(self.alquileres_cargados))
+            total_monto = 0.0
+            
+            for row, alquiler in enumerate(self.alquileres_cargados):
+                # --- ¡INICIO DE CORRECCIÓN (V7)! ---
+                # Forzar la conversión a int y luego a str para llaves de mapa
+                try:
+                    equipo_id = str(int(alquiler.get('equipo_id', 0)))
+                except (ValueError, TypeError):
+                    equipo_id = "0"
+                
+                try:
+                    cliente_id = str(int(alquiler.get('cliente_id', 0)))
+                except (ValueError, TypeError):
+                    cliente_id = "0"
+                
+                try:
+                    operador_id = str(int(alquiler.get('operador_id', 0)))
+                except (ValueError, TypeError):
+                    operador_id = "0"
+                # --- FIN DE CORRECCIÓN (V7)! ---
+
+                equipo_nombre = self.equipos_mapa.get(equipo_id, f"ID: {equipo_id}")
+                cliente_nombre = self.clientes_mapa.get(cliente_id, f"ID: {cliente_id}")
+                operador_nombre = self.operadores_mapa.get(operador_id, f"ID: {operador_id}")
+                
+                # --- Poblar la tabla ---
+                item_fecha = QTableWidgetItem(alquiler.get('fecha', ''))
+                # Guardar el ID del documento en la fila (oculto en el item 0)
+                item_fecha.setData(Qt.ItemDataRole.UserRole, alquiler['id']) 
+                self.tabla_alquileres.setItem(row, 0, item_fecha)
+
+                self.tabla_alquileres.setItem(row, 1, QTableWidgetItem(equipo_nombre))
+                self.tabla_alquileres.setItem(row, 2, QTableWidgetItem(cliente_nombre))
+                self.tabla_alquileres.setItem(row, 3, QTableWidgetItem(operador_nombre))
+                self.tabla_alquileres.setItem(row, 4, QTableWidgetItem(alquiler.get('conduce', '')))
+                
+                horas = alquiler.get('horas', 0)
+                precio = alquiler.get('precio_por_hora', 0)
+                monto = alquiler.get('monto', 0)
+                total_monto += float(monto)
+                
+                self.tabla_alquileres.setItem(row, 5, QTableWidgetItem(f"{float(horas):,.2f}"))
+                self.tabla_alquileres.setItem(row, 6, QTableWidgetItem(f"{float(precio):,.2f}"))
+                self.tabla_alquileres.setItem(row, 7, QTableWidgetItem(f"{float(monto):,.2f}"))
+                
+                self.tabla_alquileres.setItem(row, 8, QTableWidgetItem(alquiler.get('ubicacion', '')))
+                
+                pagado = alquiler.get('pagado', False)
+                item_pagado = QTableWidgetItem("Sí" if pagado else "No")
+                item_pagado.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                item_pagado.setForeground(QColor('green') if pagado else QColor('red'))
+                self.tabla_alquileres.setItem(row, 9, item_pagado)
+
+
+            # Actualizar totales
+            self.lbl_total_alquileres.setText(f"Total Alquileres: {len(self.alquileres_cargados)}")
+            self.lbl_total_monto.setText(f"Monto Total: {total_monto:,.2f}")
+            self.tabla_alquileres.setSortingEnabled(True) # Habilitar orden
+
+        except Exception as e:
+            logger.error(f"Error al cargar alquileres: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"No se pudieron cargar los alquileres (¿Falta un índice en Firebase?):\n\n{e}")
+
+    def _obtener_id_seleccionado(self):
+        """Obtiene el ID de Firestore del item seleccionado en la tabla."""
+        selected_items = self.tabla_alquileres.selectedItems()
+        if not selected_items:
+            QMessageBox.warning(self, "Sin Selección", "Por favor, seleccione un alquiler de la tabla.")
+            return None
+        
+        selected_row = selected_items[0].row()
+        item_con_id = self.tabla_alquileres.item(selected_row, 0) # El ID está en la primera columna
+        alquiler_id = item_con_id.data(Qt.ItemDataRole.UserRole)
+        return alquiler_id
+
+    def abrir_dialogo_alquiler(self, alquiler_id: str = None):
+        """Abre el diálogo para crear o editar un alquiler."""
+        if alquiler_id is False: # Señal de "Nuevo"
+            alquiler_id = None
+            
+        QMessageBox.information(self, "En desarrollo", f"Aquí se abriría el diálogo para el ID: {alquiler_id if alquiler_id else 'Nuevo'}")
+        
+    def editar_alquiler_seleccionado(self):
+        """Abre el diálogo de edición para el alquiler seleccionado."""
+        alquiler_id = self._obtener_id_seleccionado()
+        if alquiler_id:
+            self.abrir_dialogo_alquiler(alquiler_id)
+
+    def eliminar_alquiler_seleccionado(self):
+        """Elimina el alquiler seleccionado tras confirmación."""
+        alquiler_id = self._obtener_id_seleccionado()
+        if alquiler_id:
+            reply = QMessageBox.question(self, "Confirmar Eliminación",
+                                         f"¿Está seguro de que desea eliminar este registro (ID: {alquiler_id})?",
+                                         QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                         QMessageBox.StandardButton.No)
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                try:
+                    if self.fm.eliminar_alquiler(alquiler_id):
+                        QMessageBox.information(self, "Éxito", "Alquiler eliminado correctamente.")
+                        self._cargar_alquileres()
+                        self.recargar_dashboard.emit()
+                    else:
+                        QMessageBox.warning(self, "Error", "No se pudo eliminar el alquiler.")
+                except Exception as e:
+                    logger.error(f"Error al eliminar alquiler {alquiler_id}: {e}")
+                    QMessageBox.critical(self, "Error", f"Error al eliminar:\n{e}")

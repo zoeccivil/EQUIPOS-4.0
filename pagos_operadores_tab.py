@@ -1,257 +1,301 @@
 """
-Pagos a Operadores Tab para EQUIPOS 4.0
-Adaptado para trabajar con Firebase en lugar de SQLite
+Tab de Pagos a Operadores para EQUIPOS 4.0
+¡MODIFICADO (V6)!
+- Filtros por rango de fecha (QDateEdit)
+- Layout de filtros y botones horizontal
+- Sin columna de "Acciones"
+- Lógica de carga de mapas actualizada
 """
-
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QTableWidget, QTableWidgetItem,
-    QLineEdit, QDateEdit, QPushButton, QMessageBox, QHeaderView
+    QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QComboBox, QLineEdit,
+    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
+    QMessageBox, QLabel, QDateEdit, QSpacerItem, QSizePolicy
 )
-from PyQt6.QtCore import QDate, Qt
-from firebase_manager import FirebaseManager
+from PyQt6.QtCore import Qt, pyqtSignal, QDate
+from datetime import datetime
+import logging
 
+from firebase_manager import FirebaseManager
+# from dialogs.pago_operador_dialog import PagoOperadorDialog # Futuro
+
+logger = logging.getLogger(__name__)
 
 class TabPagosOperadores(QWidget):
-    def __init__(self, firebase_manager: FirebaseManager, parent=None):
-        super().__init__(parent)
+    """
+    Tab para gestionar los pagos a operadores.
+    """
+    
+    recargar_dashboard = pyqtSignal()
+
+    def __init__(self, firebase_manager: FirebaseManager):
+        super().__init__()
+        
         self.fm = firebase_manager
-        self._pagos_actuales = []
+        self.pagos_cargados = [] # Caché de los pagos
+        
+        # Mapas (se cargarán desde el padre)
+        self.equipos_mapa = {}
+        self.operadores_mapa = {}
+        self.cuentas_mapa = {}
+        
+        self._init_ui()
+        
+    def _init_ui(self):
+        """Inicializa la interfaz de usuario del tab."""
+        main_layout = QVBoxLayout(self)
+        
+        # 1. Filtros y Acciones
+        controles_layout = QVBoxLayout()
+        self._crear_filtros(controles_layout)
+        self._crear_botones_acciones(controles_layout)
+        main_layout.addLayout(controles_layout)
+        
+        # 2. Tabla de Pagos
+        self._crear_tabla_pagos()
+        main_layout.addWidget(self.tabla_pagos)
+        
+        # 3. Totales
+        totales_layout = QHBoxLayout()
+        self._crear_totales(totales_layout)
+        main_layout.addLayout(totales_layout)
+        
+        self.setLayout(main_layout)
+        
+        # Conectar señales
+        self.btn_buscar_pagos.clicked.connect(self._cargar_pagos)
+        self.btn_nuevo_pago.clicked.connect(self.abrir_dialogo_pago)
+        self.btn_editar_pago.clicked.connect(self.editar_pago_seleccionado)
+        self.btn_eliminar_pago.clicked.connect(self.eliminar_pago_seleccionado)
+        
+        # Conectar doble clic en tabla para editar
+        self.tabla_pagos.itemDoubleClicked.connect(self.editar_pago_seleccionado)
 
-        self._build_ui()
-        self._cargar_filtros()
-        self._cargar_pagos()
-
-    def _build_ui(self):
-        layout = QVBoxLayout(self)
-
-        # Filtros arriba
+    def _crear_filtros(self, layout: QVBoxLayout):
+        """Crea los widgets de filtro en layout horizontal."""
         filtros_layout = QHBoxLayout()
-        self.operador_cb = QComboBox()
-        self.equipo_cb = QComboBox()
-        self.fecha_desde = QDateEdit()
-        self.fecha_hasta = QDateEdit()
-        self.buscar_edit = QLineEdit()
         
-        filtros_layout.addWidget(QLabel("Operador:"))
-        filtros_layout.addWidget(self.operador_cb)
-        filtros_layout.addWidget(QLabel("Equipo:"))
-        filtros_layout.addWidget(self.equipo_cb)
+        # Controles de Fecha
         filtros_layout.addWidget(QLabel("Desde:"))
-        filtros_layout.addWidget(self.fecha_desde)
-        filtros_layout.addWidget(QLabel("Hasta:"))
-        filtros_layout.addWidget(self.fecha_hasta)
-        filtros_layout.addWidget(QLabel("Buscar:"))
-        filtros_layout.addWidget(self.buscar_edit)
-        layout.addLayout(filtros_layout)
-
-        # Botones
-        btn_layout = QHBoxLayout()
-        self.btn_aniadir = QPushButton("Añadir Pago")
-        self.btn_editar = QPushButton("Editar Seleccionado")
-        self.btn_eliminar = QPushButton("Eliminar Seleccionado")
-        btn_layout.addWidget(self.btn_aniadir)
-        btn_layout.addWidget(self.btn_editar)
-        btn_layout.addWidget(self.btn_eliminar)
-        btn_layout.addStretch(1)
-        layout.addLayout(btn_layout)
-
-        # Tabla
-        self.tabla = QTableWidget()
-        self.tabla.setColumnCount(6)
-        self.tabla.setHorizontalHeaderLabels([
-            "Fecha", "Operador", "Equipo", "Horas", "Monto", "Descripción"
-        ])
-        self.tabla.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.tabla.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
-
-        header = self.tabla.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
-        header.setStretchLastSection(True)
-        self.tabla.setColumnWidth(0, 90)   # Fecha
-        self.tabla.setColumnWidth(1, 140)  # Operador
-        self.tabla.setColumnWidth(2, 130)  # Equipo
-        self.tabla.setColumnWidth(3, 60)   # Horas
-        self.tabla.setColumnWidth(4, 100)  # Monto
-
-        self.tabla.verticalHeader().setDefaultSectionSize(26)
-
-        layout.addWidget(self.tabla)
-
-        # Resumen abajo
-        self.lbl_resumen = QLabel("Total Pagado: RD$ 0.00 | Total Horas: 0.00")
-        layout.addWidget(self.lbl_resumen)
-
-        # CONEXIONES DE BOTONES
-        self.btn_aniadir.clicked.connect(self._nuevo_pago)
-        self.btn_editar.clicked.connect(self._editar_pago)
-        self.btn_eliminar.clicked.connect(self._eliminar_pago)
+        self.date_desde_pagos = QDateEdit(calendarPopup=True)
+        self.date_desde_pagos.setDisplayFormat("yyyy-MM-dd")
+        self.date_desde_pagos.setDate(datetime.now().replace(day=1))
+        filtros_layout.addWidget(self.date_desde_pagos)
         
-        # Conexiones de filtros
-        self.operador_cb.currentIndexChanged.connect(self._cargar_pagos)
-        self.equipo_cb.currentIndexChanged.connect(self._cargar_pagos)
-        self.fecha_desde.dateChanged.connect(self._cargar_pagos)
-        self.fecha_hasta.dateChanged.connect(self._cargar_pagos)
-        self.buscar_edit.textChanged.connect(self._cargar_pagos)
+        filtros_layout.addWidget(QLabel("Hasta:"))
+        self.date_hasta_pagos = QDateEdit(calendarPopup=True)
+        self.date_hasta_pagos.setDisplayFormat("yyyy-MM-dd")
+        self.date_hasta_pagos.setDate(datetime.now())
+        filtros_layout.addWidget(self.date_hasta_pagos)
+        
+        filtros_layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
 
-        self.setLayout(layout)
+        # Combos
+        filtros_layout.addWidget(QLabel("Operador:"))
+        self.combo_operador_pagos = QComboBox()
+        self.combo_operador_pagos.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_operador_pagos)
 
-    def _cargar_filtros(self):
-        """Carga los filtros iniciales"""
-        # Establecer fechas
-        self.fecha_desde.setDate(QDate.currentDate().addMonths(-1))
-        self.fecha_desde.setCalendarPopup(True)
-        self.fecha_hasta.setDate(QDate.currentDate())
-        self.fecha_hasta.setCalendarPopup(True)
+        filtros_layout.addWidget(QLabel("Equipo:"))
+        self.combo_equipo_pagos = QComboBox()
+        self.combo_equipo_pagos.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_equipo_pagos)
+        
+        filtros_layout.addStretch()
+        layout.addLayout(filtros_layout)
+        
+    def _crear_botones_acciones(self, layout: QVBoxLayout):
+        """Crea los botones de acción en layout horizontal."""
+        acciones_layout = QHBoxLayout()
+        
+        self.btn_buscar_pagos = QPushButton("Buscar Pagos")
+        acciones_layout.addWidget(self.btn_buscar_pagos)
+        
+        self.btn_nuevo_pago = QPushButton("Registrar Nuevo Pago")
+        acciones_layout.addWidget(self.btn_nuevo_pago)
+        
+        self.btn_editar_pago = QPushButton("Editar Seleccionado")
+        acciones_layout.addWidget(self.btn_editar_pago)
+        
+        self.btn_eliminar_pago = QPushButton("Eliminar Seleccionado")
+        acciones_layout.addWidget(self.btn_eliminar_pago)
+        
+        acciones_layout.addStretch()
+        layout.addLayout(acciones_layout)
 
-        # Cargar operadores
-        self.operador_cb.clear()
-        self.operador_cb.addItem("Todos", None)
+    def _crear_tabla_pagos(self):
+        """Crea la tabla de pagos (sin columna 'Acciones')."""
+        self.tabla_pagos = QTableWidget()
+        
+        self.tabla_pagos.setColumnCount(8)
+        
+        HEADERS = [
+            "Fecha", "Operador", "Equipo", "Cuenta",
+            "Descripción", "Horas", "Monto", "Comentario"
+        ]
+        self.tabla_pagos.setHorizontalHeaderLabels(HEADERS)
+        
+        self.tabla_pagos.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tabla_pagos.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabla_pagos.setAlternatingRowColors(True)
+        self.tabla_pagos.setSortingEnabled(True) # Habilitar orden
+        
+        header = self.tabla_pagos.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents) # Fecha
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)          # Operador
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)          # Equipo
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents) # Cuenta
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)          # Descripción
+        header.setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents) # Horas
+        header.setSectionResizeMode(6, QHeaderView.ResizeMode.ResizeToContents) # Monto
+        header.setSectionResizeMode(7, QHeaderView.ResizeMode.Stretch)          # Comentario
+
+    def _crear_totales(self, layout: QHBoxLayout):
+        """Crea los labels de totales."""
+        self.lbl_total_pagos = QLabel("Total Pagos: 0")
+        self.lbl_monto_total_pagos = QLabel("Monto Total: 0.00")
+        
+        layout.addStretch()
+        layout.addWidget(self.lbl_total_pagos)
+        layout.addSpacing(20)
+        layout.addWidget(self.lbl_monto_total_pagos)
+
+    def actualizar_mapas(self, mapas: dict):
+        """Recibe los mapas desde la ventana principal y puebla los filtros."""
+        self.equipos_mapa = mapas.get("equipos", {})
+        self.operadores_mapa = mapas.get("operadores", {})
+        self.cuentas_mapa = mapas.get("cuentas", {})
+        
+        logger.info("PagosOperadores: Mapas recibidos. Poblando filtros...")
+
         try:
-            operadores = self.fm.obtener_entidades(tipo='Operador') or []
-            for o in operadores:
-                self.operador_cb.addItem(o.get("nombre", ""), o.get("id"))
-        except Exception as e:
-            print(f"Error cargando operadores: {e}")
+            # --- Poblar Equipos ---
+            self.combo_equipo_pagos.clear()
+            self.combo_equipo_pagos.addItem("Todos", None)
+            for eq_id, nombre in sorted(self.equipos_mapa.items(), key=lambda item: item[1]):
+                self.combo_equipo_pagos.addItem(nombre, eq_id)
+                
+            # --- Poblar Operadores ---
+            self.combo_operador_pagos.clear()
+            self.combo_operador_pagos.addItem("Todos", None)
+            for op_id, nombre in sorted(self.operadores_mapa.items(), key=lambda item: item[1]):
+                self.combo_operador_pagos.addItem(nombre, op_id)
 
-        # Cargar equipos
-        self.equipo_cb.clear()
-        self.equipo_cb.addItem("Todos", None)
-        try:
-            equipos = self.fm.obtener_equipos() or []
-            for e in equipos:
-                self.equipo_cb.addItem(e.get("nombre", ""), e.get("id"))
         except Exception as e:
-            print(f"Error cargando equipos: {e}")
+            logger.error(f"Error al poblar filtros de pagos: {e}", exc_info=True)
+            QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros de pagos: {e}")
 
     def _cargar_pagos(self):
-        """Carga los pagos según los filtros actuales"""
-        filtros = {
-            'fecha_inicio': self.fecha_desde.date().toString("yyyy-MM-dd"),
-            'fecha_fin': self.fecha_hasta.date().toString("yyyy-MM-dd"),
-        }
+        """Carga los pagos desde Firebase usando los filtros seleccionados."""
+        # No cargar si los mapas no están listos
+        if not self.operadores_mapa:
+            logger.warning("PagosOperadores: Mapas no listos, saltando carga.")
+            return
+
+        filtros = {}
         
-        operador_id = self.operador_cb.currentData()
-        if operador_id:
-            filtros['operador_id'] = operador_id
-        
-        equipo_id = self.equipo_cb.currentData()
-        if equipo_id:
-            filtros['equipo_id'] = equipo_id
-        
-        texto_busqueda = self.buscar_edit.text().strip()
-        
+        # Recolectar filtros de fecha
+        filtros['fecha_inicio'] = self.date_desde_pagos.date().toString("yyyy-MM-dd")
+        filtros['fecha_fin'] = self.date_hasta_pagos.date().toString("yyyy-MM-dd")
+
+        # Recolectar filtros de combos
+        if self.combo_equipo_pagos.currentData():
+            filtros['equipo_id'] = self.combo_equipo_pagos.currentData()
+        if self.combo_operador_pagos.currentData():
+            filtros['operador_id'] = self.combo_operador_pagos.currentData()
+            
         try:
-            self._pagos_actuales = self.fm.obtener_pagos_operadores(filtros) or []
+            logger.info(f"Cargando pagos a operadores con filtros: {filtros}")
+            self.pagos_cargados = self.fm.obtener_pagos_operadores(filtros)
             
-            # Filtro de texto en memoria
-            if texto_busqueda:
-                texto_lower = texto_busqueda.lower()
-                self._pagos_actuales = [
-                    p for p in self._pagos_actuales
-                    if texto_lower in p.get('descripcion', '').lower()
-                ]
+            self.tabla_pagos.setSortingEnabled(False) # Deshabilitar orden
+            self.tabla_pagos.setRowCount(0) # Limpiar tabla
+            if not self.pagos_cargados:
+                logger.warning("No se encontraron pagos con esos filtros.")
+                self.lbl_total_pagos.setText("Total Pagos: 0")
+                self.lbl_monto_total_pagos.setText("Monto Total: 0.00")
+                return
+
+            self.tabla_pagos.setRowCount(len(self.pagos_cargados))
+            total_monto_pagos = 0.0
             
-            self.tabla.setRowCount(0)
-            total_monto = 0.0
-            total_horas = 0.0
-            
-            for row in self._pagos_actuales:
-                idx = self.tabla.rowCount()
-                self.tabla.insertRow(idx)
+            for row, pago in enumerate(self.pagos_cargados):
+                # --- Traducción de IDs a Nombres ---
+                equipo_id = str(pago.get('equipo_id', ''))
+                operador_id = str(pago.get('operador_id', ''))
+                cuenta_id = str(pago.get('cuenta_id', ''))
                 
-                # Guardar ID en primera celda
-                item_fecha = QTableWidgetItem(str(row.get("fecha", "")))
-                item_fecha.setData(Qt.ItemDataRole.UserRole, row.get("id"))
-                self.tabla.setItem(idx, 0, item_fecha)
+                equipo_nombre = self.equipos_mapa.get(equipo_id, f"ID: {equipo_id}")
+                operador_nombre = self.operadores_mapa.get(operador_id, f"ID: {operador_id}")
+                cuenta_nombre = self.cuentas_mapa.get(cuenta_id, "")
                 
-                # Operador
-                operador_nombre = self._get_nombre_entidad(row.get("operador_id"))
-                self.tabla.setItem(idx, 1, QTableWidgetItem(operador_nombre))
+                # --- Poblar la tabla ---
+                item_fecha = QTableWidgetItem(pago.get('fecha', ''))
+                item_fecha.setData(Qt.ItemDataRole.UserRole, pago['id'])
+                self.tabla_pagos.setItem(row, 0, item_fecha)
                 
-                # Equipo
-                equipo_nombre = self._get_nombre_equipo(row.get("equipo_id"))
-                self.tabla.setItem(idx, 2, QTableWidgetItem(equipo_nombre))
+                self.tabla_pagos.setItem(row, 1, QTableWidgetItem(operador_nombre))
+                self.tabla_pagos.setItem(row, 2, QTableWidgetItem(equipo_nombre))
+                self.tabla_pagos.setItem(row, 3, QTableWidgetItem(cuenta_nombre))
+                self.tabla_pagos.setItem(row, 4, QTableWidgetItem(pago.get('descripcion', '')))
                 
-                # Horas
-                horas = row.get("horas", 0)
-                try:
-                    horas_float = float(horas) if horas is not None else 0.0
-                except:
-                    horas_float = 0.0
-                self.tabla.setItem(idx, 3, QTableWidgetItem(f"{horas_float:.2f}"))
+                horas = pago.get('horas', 0)
+                monto = pago.get('monto', 0)
+                total_monto_pagos += float(monto)
                 
-                # Monto
-                monto = row.get("monto", 0)
-                self.tabla.setItem(idx, 4, QTableWidgetItem(f"RD$ {monto:,.2f}"))
+                self.tabla_pagos.setItem(row, 5, QTableWidgetItem(f"{float(horas):,.2f}"))
+                self.tabla_pagos.setItem(row, 6, QTableWidgetItem(f"{float(monto):,.2f}"))
+                self.tabla_pagos.setItem(row, 7, QTableWidgetItem(pago.get('comentario', '')))
                 
-                # Descripción
-                self.tabla.setItem(idx, 5, QTableWidgetItem(str(row.get("descripcion", ""))))
-                
-                total_monto += monto
-                total_horas += horas_float
-            
-            self.lbl_resumen.setText(f"Total Pagado: RD$ {total_monto:,.2f} | Total Horas: {total_horas:.2f}")
-            self.tabla.resizeRowsToContents()
-            
+            # Actualizar totales
+            self.lbl_total_pagos.setText(f"Total Pagos: {len(self.pagos_cargados)}")
+            self.lbl_monto_total_pagos.setText(f"Monto Total: {total_monto_pagos:,.2f}")
+            self.tabla_pagos.setSortingEnabled(True) # Habilitar orden
+
         except Exception as e:
-            QMessageBox.warning(self, "Error", f"Error cargando pagos: {e}")
+            logger.error(f"Error al cargar pagos a operadores: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"No se pudieron cargar los pagos (¿Falta un índice en Firebase?):\n\n{e}")
 
-    def _nuevo_pago(self):
-        """Añade un nuevo pago (simplificado)"""
-        QMessageBox.information(self, "Info", 
-                               "Función de registro completa pendiente de implementar.\n"
-                               "Use la consola de Firebase temporalmente.")
-
-    def _editar_pago(self):
-        """Edita el pago seleccionado"""
-        fila = self.tabla.currentRow()
-        if fila < 0 or fila >= len(self._pagos_actuales):
-            QMessageBox.warning(self, "Edición", "Selecciona un pago para editar.")
-            return
+    def _obtener_id_seleccionado_pago(self):
+        """Obtiene el ID de Firestore del item seleccionado en la tabla."""
+        selected_items = self.tabla_pagos.selectedItems()
+        if not selected_items:
+            QMessageBox.warning(self, "Sin Selección", "Por favor, seleccione un pago de la tabla.")
+            return None
         
-        QMessageBox.information(self, "Info", 
-                               "Función de edición completa pendiente de implementar.\n"
-                               "Use la consola de Firebase temporalmente.")
+        selected_row = selected_items[0].row()
+        item_con_id = self.tabla_pagos.item(selected_row, 0) # El ID está en la primera columna
+        pago_id = item_con_id.data(Qt.ItemDataRole.UserRole)
+        return pago_id
 
-    def _eliminar_pago(self):
-        """Elimina el pago seleccionado"""
-        fila = self.tabla.currentRow()
-        if fila < 0 or fila >= len(self._pagos_actuales):
-            QMessageBox.warning(self, "Eliminación", "Selecciona un pago para eliminar.")
-            return
+    def abrir_dialogo_pago(self, pago_id: str = None):
+        """Abre el diálogo para crear o editar un pago."""
+        if pago_id is False: # Señal de "Nuevo"
+            pago_id = None
+        QMessageBox.information(self, "En desarrollo", f"Aquí se abriría el diálogo para el ID: {pago_id if pago_id else 'Nuevo'}")
         
-        pago = self._pagos_actuales[fila]
-        reply = QMessageBox.question(
-            self, "Eliminar Pago",
-            f"¿Seguro que deseas eliminar el pago?\n\n{pago.get('descripcion', '')}\nMonto: RD$ {pago.get('monto', 0):,.2f}",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
-        
-        if reply == QMessageBox.StandardButton.Yes:
-            try:
-                self.fm.eliminar_pago_operador(pago['id'])
-                self._cargar_pagos()
-                QMessageBox.information(self, "Eliminado", "Pago eliminado correctamente.")
-            except Exception as e:
-                QMessageBox.warning(self, "Error", f"No se pudo eliminar el pago: {e}")
+    def editar_pago_seleccionado(self):
+        """Abre el diálogo de edición para el pago seleccionado."""
+        pago_id = self._obtener_id_seleccionado_pago()
+        if pago_id:
+            self.abrir_dialogo_pago(pago_id)
 
-    def _get_nombre_entidad(self, entidad_id):
-        """Obtiene el nombre de una entidad por ID"""
-        if not entidad_id:
-            return ""
-        try:
-            entidad = self.fm.obtener_entidad(entidad_id)
-            return entidad.get('nombre', '') if entidad else ''
-        except:
-            return ""
-
-    def _get_nombre_equipo(self, equipo_id):
-        """Obtiene el nombre de un equipo por ID"""
-        if not equipo_id:
-            return ""
-        try:
-            equipo = self.fm.obtener_equipo(equipo_id)
-            return equipo.get('nombre', '') if equipo else ''
-        except:
-            return ""
+    def eliminar_pago_seleccionado(self):
+        """Elimina el pago seleccionado tras confirmación."""
+        pago_id = self._obtener_id_seleccionado_pago()
+        if pago_id:
+            reply = QMessageBox.question(self, "Confirmar Eliminación",
+                                         f"¿Está seguro de que desea eliminar este pago (ID: {pago_id})?",
+                                         QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                         QMessageBox.StandardButton.No)
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                try:
+                    if self.fm.eliminar_pago_operador(pago_id):
+                        QMessageBox.information(self, "Éxito", "Pago eliminado correctamente.")
+                        self._cargar_pagos()
+                        self.recargar_dashboard.emit()
+                    else:
+                        QMessageBox.warning(self, "Error", "No se pudo eliminar el pago.")
+                except Exception as e:
+                    logger.error(f"Error al eliminar pago {pago_id}: {e}")
+                    QMessageBox.critical(self, "Error", f"Error al eliminar:\n{e}")

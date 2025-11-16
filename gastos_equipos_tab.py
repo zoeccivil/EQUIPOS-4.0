@@ -1,218 +1,340 @@
 """
-Gastos de Equipos Tab para EQUIPOS 4.0
-Adaptado para trabajar con Firebase en lugar de SQLite
+Tab de Gastos de Equipos para EQUIPOS 4.0
+¡MODIFICADO (V7)!
+- Corregida la conversión de tipo de ID (float a str)
+- Filtros por rango de fecha (QDateEdit)
+- Layout de filtros y botones horizontal
+- Sin columna de "Acciones"
+- Lógica de carga de mapas actualizada
 """
-
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QTableWidget, QTableWidgetItem,
-    QLineEdit, QDateEdit, QPushButton, QMessageBox, QHeaderView
+    QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QComboBox, QLineEdit,
+    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
+    QMessageBox, QLabel, QDateEdit, QSpacerItem, QSizePolicy
 )
-from PyQt6.QtCore import QDate, Qt
-from firebase_manager import FirebaseManager
+from PyQt6.QtCore import Qt, pyqtSignal, QDate
+from datetime import datetime
+import logging
 
+from firebase_manager import FirebaseManager
+# from dialogs.gasto_dialog import GastoDialog # Futuro
+
+logger = logging.getLogger(__name__)
 
 class TabGastosEquipos(QWidget):
-    def __init__(self, firebase_manager: FirebaseManager, parent=None):
-        super().__init__(parent)
+    """
+    Tab para gestionar los gastos asociados a los equipos.
+    """
+    
+    recargar_dashboard = pyqtSignal()
+
+    def __init__(self, firebase_manager: FirebaseManager):
+        super().__init__()
+        
         self.fm = firebase_manager
-        self._gastos_actuales = []
+        self.gastos_cargados = [] # Caché de los gastos
+        
+        # Mapas (se cargarán desde el padre)
+        self.equipos_mapa = {}
+        self.cuentas_mapa = {}
+        self.categorias_mapa = {}
+        self.subcategorias_mapa = {}
+        
+        self._init_ui()
+        
+    def _init_ui(self):
+        """Inicializa la interfaz de usuario del tab."""
+        main_layout = QVBoxLayout(self)
+        
+        # 1. Filtros y Acciones
+        controles_layout = QVBoxLayout()
+        self._crear_filtros(controles_layout)
+        self._crear_botones_acciones(controles_layout)
+        main_layout.addLayout(controles_layout)
+        
+        # 2. Tabla de Gastos
+        self._crear_tabla_gastos()
+        main_layout.addWidget(self.tabla_gastos)
+        
+        # 3. Totales
+        totales_layout = QHBoxLayout()
+        self._crear_totales(totales_layout)
+        main_layout.addLayout(totales_layout)
+        
+        self.setLayout(main_layout)
+        
+        # Conectar señales
+        self.btn_buscar_gastos.clicked.connect(self._cargar_gastos)
+        self.btn_nuevo_gasto.clicked.connect(self.abrir_dialogo_gasto)
+        self.btn_editar_gasto.clicked.connect(self.editar_gasto_seleccionado)
+        self.btn_eliminar_gasto.clicked.connect(self.eliminar_gasto_seleccionado)
+        
+        # Conectar doble clic en tabla para editar
+        self.tabla_gastos.itemDoubleClicked.connect(self.editar_gasto_seleccionado)
 
-        self._build_ui()
-        self._cargar_filtros()
-        self._cargar_gastos()
-
-    def _build_ui(self):
-        layout = QVBoxLayout(self)
-
-        # Filtros arriba
+    def _crear_filtros(self, layout: QVBoxLayout):
+        """Crea los widgets de filtro en layout horizontal."""
         filtros_layout = QHBoxLayout()
         
-        self.equipo_cb = QComboBox()
-        self.fecha_desde = QDateEdit()
-        self.fecha_hasta = QDateEdit()
-        self.buscar_edit = QLineEdit()
-        
-        filtros_layout.addWidget(QLabel("Equipo:"))
-        filtros_layout.addWidget(self.equipo_cb)
+        # Controles de Fecha
         filtros_layout.addWidget(QLabel("Desde:"))
-        filtros_layout.addWidget(self.fecha_desde)
+        self.date_desde_gastos = QDateEdit(calendarPopup=True)
+        self.date_desde_gastos.setDisplayFormat("yyyy-MM-dd")
+        self.date_desde_gastos.setDate(datetime.now().replace(day=1))
+        filtros_layout.addWidget(self.date_desde_gastos)
+        
         filtros_layout.addWidget(QLabel("Hasta:"))
-        filtros_layout.addWidget(self.fecha_hasta)
-        filtros_layout.addWidget(QLabel("Buscar:"))
-        filtros_layout.addWidget(self.buscar_edit)
+        self.date_hasta_gastos = QDateEdit(calendarPopup=True)
+        self.date_hasta_gastos.setDisplayFormat("yyyy-MM-dd")
+        self.date_hasta_gastos.setDate(datetime.now())
+        filtros_layout.addWidget(self.date_hasta_gastos)
+        
+        filtros_layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
+
+        # Combos
+        filtros_layout.addWidget(QLabel("Equipo:"))
+        self.combo_equipo_gastos = QComboBox()
+        self.combo_equipo_gastos.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_equipo_gastos)
+
+        filtros_layout.addWidget(QLabel("Cuenta:"))
+        self.combo_cuenta_gastos = QComboBox()
+        self.combo_cuenta_gastos.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_cuenta_gastos)
+        
+        filtros_layout.addWidget(QLabel("Categoría:"))
+        self.combo_categoria_gastos = QComboBox()
+        self.combo_categoria_gastos.setMinimumWidth(150)
+        filtros_layout.addWidget(self.combo_categoria_gastos)
+        
+        filtros_layout.addStretch()
         layout.addLayout(filtros_layout)
-
-        # Botones
-        btn_layout = QHBoxLayout()
-        self.btn_aniadir = QPushButton("Añadir Gasto")
-        self.btn_editar = QPushButton("Editar Seleccionado")
-        self.btn_eliminar = QPushButton("Eliminar Seleccionado")
-        btn_layout.addWidget(self.btn_aniadir)
-        btn_layout.addWidget(self.btn_editar)
-        btn_layout.addWidget(self.btn_eliminar)
-        btn_layout.addStretch(1)
-        layout.addLayout(btn_layout)
-
-        # Tabla (simplificada sin cuentas/categorías)
-        self.tabla = QTableWidget()
-        self.tabla.setColumnCount(5)
-        self.tabla.setHorizontalHeaderLabels([
-            "Fecha", "Equipo", "Descripción", "Monto", "Comentario"
-        ])
-        self.tabla.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.tabla.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
-
-        header = self.tabla.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
-        header.setStretchLastSection(True)
-        self.tabla.setColumnWidth(0, 90)    # Fecha
-        self.tabla.setColumnWidth(1, 150)   # Equipo
-        self.tabla.setColumnWidth(2, 250)   # Descripción
-        self.tabla.setColumnWidth(3, 100)   # Monto
         
-        self.tabla.verticalHeader().setDefaultSectionSize(26)
-
-        layout.addWidget(self.tabla)
-
-        # Resumen abajo
-        self.lbl_resumen = QLabel("Total Gastos: RD$ 0.00")
-        layout.addWidget(self.lbl_resumen)
-
-        # CONEXIONES DE BOTONES
-        self.btn_aniadir.clicked.connect(self._nuevo_gasto)
-        self.btn_editar.clicked.connect(self._editar_gasto)
-        self.btn_eliminar.clicked.connect(self._eliminar_gasto)
+    def _crear_botones_acciones(self, layout: QVBoxLayout):
+        """Crea los botones de acción en layout horizontal."""
+        acciones_layout = QHBoxLayout()
         
-        # Conexiones de filtros
-        self.equipo_cb.currentIndexChanged.connect(self._cargar_gastos)
-        self.fecha_desde.dateChanged.connect(self._cargar_gastos)
-        self.fecha_hasta.dateChanged.connect(self._cargar_gastos)
-        self.buscar_edit.textChanged.connect(self._cargar_gastos)
+        self.btn_buscar_gastos = QPushButton("Buscar Gastos")
+        acciones_layout.addWidget(self.btn_buscar_gastos)
+        
+        self.btn_nuevo_gasto = QPushButton("Registrar Nuevo Gasto")
+        acciones_layout.addWidget(self.btn_nuevo_gasto)
+        
+        self.btn_editar_gasto = QPushButton("Editar Seleccionado")
+        acciones_layout.addWidget(self.btn_editar_gasto)
+        
+        self.btn_eliminar_gasto = QPushButton("Eliminar Seleccionado")
+        acciones_layout.addWidget(self.btn_eliminar_gasto)
+        
+        acciones_layout.addStretch()
+        layout.addLayout(acciones_layout)
 
-        self.setLayout(layout)
+    def _crear_tabla_gastos(self):
+        """Crea la tabla de gastos (sin columna 'Acciones')."""
+        self.tabla_gastos = QTableWidget()
+        
+        self.tabla_gastos.setColumnCount(8)
+        
+        HEADERS = [
+            "Fecha", "Equipo", "Cuenta", "Categoría", "Subcategoría",
+            "Descripción", "Monto", "Comentario"
+        ]
+        self.tabla_gastos.setHorizontalHeaderLabels(HEADERS)
+        
+        self.tabla_gastos.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tabla_gastos.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabla_gastos.setAlternatingRowColors(True)
+        self.tabla_gastos.setSortingEnabled(True) # Habilitar orden
+        
+        header = self.tabla_gastos.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents) # Fecha
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)          # Equipo
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents) # Cuenta
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents) # Categoría
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents) # Subcategoría
+        header.setSectionResizeMode(5, QHeaderView.ResizeMode.Stretch)          # Descripción
+        header.setSectionResizeMode(6, QHeaderView.ResizeMode.ResizeToContents) # Monto
+        header.setSectionResizeMode(7, QHeaderView.ResizeMode.Stretch)          # Comentario
 
-    def _cargar_filtros(self):
-        """Carga los filtros iniciales"""
-        # Establecer fechas
-        self.fecha_desde.setDate(QDate.currentDate().addMonths(-1))
-        self.fecha_desde.setCalendarPopup(True)
-        self.fecha_hasta.setDate(QDate.currentDate())
-        self.fecha_hasta.setCalendarPopup(True)
+    def _crear_totales(self, layout: QHBoxLayout):
+        """Crea los labels de totales."""
+        self.lbl_total_gastos = QLabel("Total Gastos: 0")
+        self.lbl_monto_total_gastos = QLabel("Monto Total: 0.00")
+        
+        layout.addStretch()
+        layout.addWidget(self.lbl_total_gastos)
+        layout.addSpacing(20)
+        layout.addWidget(self.lbl_monto_total_gastos)
 
-        # Cargar equipos
-        self.equipo_cb.clear()
-        self.equipo_cb.addItem("Todos", None)
+    def actualizar_mapas(self, mapas: dict):
+        """Recibe los mapas desde la ventana principal y puebla los filtros."""
+        self.equipos_mapa = mapas.get("equipos", {})
+        self.cuentas_mapa = mapas.get("cuentas", {})
+        self.categorias_mapa = mapas.get("categorias", {})
+        self.subcategorias_mapa = mapas.get("subcategorias", {})
+        
+        logger.info("GastosEquipos: Mapas recibidos. Poblando filtros...")
+
         try:
-            equipos = self.fm.obtener_equipos() or []
-            for e in equipos:
-                self.equipo_cb.addItem(e.get("nombre", ""), e.get("id"))
+            # --- Poblar Equipos ---
+            self.combo_equipo_gastos.clear()
+            self.combo_equipo_gastos.addItem("Todos", None)
+            for eq_id, nombre in sorted(self.equipos_mapa.items(), key=lambda item: item[1]):
+                self.combo_equipo_gastos.addItem(nombre, eq_id)
+                
+            # --- Poblar Cuentas ---
+            self.combo_cuenta_gastos.clear()
+            self.combo_cuenta_gastos.addItem("Todas", None)
+            for ct_id, nombre in sorted(self.cuentas_mapa.items(), key=lambda item: item[1]):
+                self.combo_cuenta_gastos.addItem(nombre, ct_id)
+                
+            # --- Poblar Categorías ---
+            self.combo_categoria_gastos.clear()
+            self.combo_categoria_gastos.addItem("Todas", None)
+            for cat_id, nombre in sorted(self.categorias_mapa.items(), key=lambda item: item[1]):
+                self.combo_categoria_gastos.addItem(nombre, cat_id)
+
         except Exception as e:
-            print(f"Error cargando equipos: {e}")
+            logger.error(f"Error al poblar filtros de gastos: {e}", exc_info=True)
+            QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros de gastos: {e}")
 
     def _cargar_gastos(self):
-        """Carga los gastos según los filtros actuales"""
-        filtros = {
-            'tipo': 'Gasto',
-            'fecha_inicio': self.fecha_desde.date().toString("yyyy-MM-dd"),
-            'fecha_fin': self.fecha_hasta.date().toString("yyyy-MM-dd"),
-        }
+        """Carga los gastos desde Firebase usando los filtros seleccionados."""
+        # No cargar si los mapas no están listos
+        if not self.equipos_mapa:
+            logger.warning("GastosEquipos: Mapas no listos, saltando carga.")
+            return
+
+        filtros = {}
         
-        equipo_id = self.equipo_cb.currentData()
-        if equipo_id:
-            filtros['equipo_id'] = equipo_id
-        
-        texto_busqueda = self.buscar_edit.text().strip()
-        if texto_busqueda:
-            # Firebase no soporta búsqueda de texto, filtraremos en memoria
-            pass
-        
+        # Recolectar filtros de fecha
+        filtros['fecha_inicio'] = self.date_desde_gastos.date().toString("yyyy-MM-dd")
+        filtros['fecha_fin'] = self.date_hasta_gastos.date().toString("yyyy-MM-dd")
+
+        # Recolectar filtros de combos
+        if self.combo_equipo_gastos.currentData():
+            filtros['equipo_id'] = self.combo_equipo_gastos.currentData()
+        if self.combo_cuenta_gastos.currentData():
+            filtros['cuenta_id'] = self.combo_cuenta_gastos.currentData()
+        if self.combo_categoria_gastos.currentData():
+            filtros['categoria_id'] = self.combo_categoria_gastos.currentData()
+            
         try:
-            self._gastos_actuales = self.fm.obtener_transacciones(filtros) or []
+            logger.info(f"Cargando gastos con filtros: {filtros}")
+            self.gastos_cargados = self.fm.obtener_gastos(filtros)
             
-            # Filtro de texto en memoria
-            if texto_busqueda:
-                texto_lower = texto_busqueda.lower()
-                self._gastos_actuales = [
-                    g for g in self._gastos_actuales
-                    if texto_lower in g.get('descripcion', '').lower() or
-                       texto_lower in g.get('comentario', '').lower()
-                ]
+            self.tabla_gastos.setSortingEnabled(False) # Deshabilitar orden mientras se puebla
+            self.tabla_gastos.setRowCount(0) # Limpiar tabla
+            if not self.gastos_cargados:
+                logger.warning("No se encontraron gastos con esos filtros.")
+                self.lbl_total_gastos.setText("Total Gastos: 0")
+                self.lbl_monto_total_gastos.setText("Monto Total: 0.00")
+                return
+
+            self.tabla_gastos.setRowCount(len(self.gastos_cargados))
+            total_monto_gastos = 0.0
             
-            self.tabla.setRowCount(0)
-            total = 0.0
-            
-            for row in self._gastos_actuales:
-                idx = self.tabla.rowCount()
-                self.tabla.insertRow(idx)
+            for row, gasto in enumerate(self.gastos_cargados):
+                # --- ¡INICIO DE CORRECCIÓN (V7)! ---
+                # Forzar la conversión a int y luego a str para llaves de mapa
+                try:
+                    equipo_id = str(int(gasto.get('equipo_id', 0)))
+                except (ValueError, TypeError):
+                    equipo_id = "0"
                 
-                # Guardar ID en primera celda
-                item_fecha = QTableWidgetItem(str(row.get("fecha", "")))
-                item_fecha.setData(Qt.ItemDataRole.UserRole, row.get("id"))
-                self.tabla.setItem(idx, 0, item_fecha)
+                try:
+                    cuenta_id = str(int(gasto.get('cuenta_id', 0)))
+                except (ValueError, TypeError):
+                    cuenta_id = "0"
                 
-                # Equipo
-                equipo_nombre = self._get_nombre_equipo(row.get("equipo_id"))
-                self.tabla.setItem(idx, 1, QTableWidgetItem(equipo_nombre))
+                try:
+                    categoria_id = str(int(gasto.get('categoria_id', 0)))
+                except (ValueError, TypeError):
+                    categoria_id = "0"
+                    
+                try:
+                    subcategoria_id = str(int(gasto.get('subcategoria_id', 0)))
+                except (ValueError, TypeError):
+                    subcategoria_id = "0"
+                # --- FIN DE CORRECCIÓN (V7)! ---
+
                 
-                # Otros campos
-                self.tabla.setItem(idx, 2, QTableWidgetItem(str(row.get("descripcion", ""))))
-                self.tabla.setItem(idx, 3, QTableWidgetItem(f"RD$ {row.get('monto', 0):,.2f}"))
-                self.tabla.setItem(idx, 4, QTableWidgetItem(str(row.get("comentario", ""))))
+                equipo_nombre = self.equipos_mapa.get(equipo_id, f"ID: {equipo_id}")
+                cuenta_nombre = self.cuentas_mapa.get(cuenta_id, "")
+                categoria_nombre = self.categorias_mapa.get(categoria_id, "")
+                subcat_nombre = self.subcategorias_mapa.get(subcategoria_id, "")
                 
-                total += row.get("monto", 0)
-            
-            self.lbl_resumen.setText(f"Total Gastos: RD$ {total:,.2f}")
-            self.tabla.resizeRowsToContents()
-            
+                # --- Poblar la tabla ---
+                item_fecha = QTableWidgetItem(gasto.get('fecha', ''))
+                # Guardar el ID del documento en la fila (oculto)
+                item_fecha.setData(Qt.ItemDataRole.UserRole, gasto['id'])
+                self.tabla_gastos.setItem(row, 0, item_fecha)
+                
+                self.tabla_gastos.setItem(row, 1, QTableWidgetItem(equipo_nombre))
+                self.tabla_gastos.setItem(row, 2, QTableWidgetItem(cuenta_nombre))
+                self.tabla_gastos.setItem(row, 3, QTableWidgetItem(categoria_nombre))
+                self.tabla_gastos.setItem(row, 4, QTableWidgetItem(subcat_nombre))
+                
+                self.tabla_gastos.setItem(row, 5, QTableWidgetItem(gasto.get('descripcion', '')))
+                
+                monto = gasto.get('monto', 0)
+                total_monto_gastos += float(monto)
+                self.tabla_gastos.setItem(row, 6, QTableWidgetItem(f"{float(monto):,.2f}"))
+                
+                self.tabla_gastos.setItem(row, 7, QTableWidgetItem(gasto.get('comentario', '')))
+                
+
+            # Actualizar totales
+            self.lbl_total_gastos.setText(f"Total Gastos: {len(self.gastos_cargados)}")
+            self.lbl_monto_total_gastos.setText(f"Monto Total: {total_monto_gastos:,.2f}")
+            self.tabla_gastos.setSortingEnabled(True) # Habilitar orden
+
         except Exception as e:
-            QMessageBox.warning(self, "Error", f"Error cargando gastos: {e}")
+            logger.error(f"Error al cargar gastos: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"No se pudieron cargar los gastos (¿Falta un índice en Firebase?):\n\n{e}")
 
-    def _nuevo_gasto(self):
-        """Añade un nuevo gasto (simplificado)"""
-        QMessageBox.information(self, "Info", 
-                               "Función de registro completa pendiente de implementar.\n"
-                               "Use la consola de Firebase temporalmente.")
-
-    def _editar_gasto(self):
-        """Edita el gasto seleccionado"""
-        fila = self.tabla.currentRow()
-        if fila < 0 or fila >= len(self._gastos_actuales):
-            QMessageBox.warning(self, "Edición", "Selecciona un gasto para editar.")
-            return
+    def _obtener_id_seleccionado_gasto(self):
+        """Obtiene el ID de Firestore del item seleccionado en la tabla."""
+        selected_items = self.tabla_gastos.selectedItems()
+        if not selected_items:
+            QMessageBox.warning(self, "Sin Selección", "Por favor, seleccione un gasto de la tabla.")
+            return None
         
-        QMessageBox.information(self, "Info", 
-                               "Función de edición completa pendiente de implementar.\n"
-                               "Use la consola de Firebase temporalmente.")
+        selected_row = selected_items[0].row()
+        item_con_id = self.tabla_gastos.item(selected_row, 0) # El ID está en la primera columna
+        gasto_id = item_con_id.data(Qt.ItemDataRole.UserRole)
+        return gasto_id
 
-    def _eliminar_gasto(self):
-        """Elimina el gasto seleccionado"""
-        fila = self.tabla.currentRow()
-        if fila < 0 or fila >= len(self._gastos_actuales):
-            QMessageBox.warning(self, "Eliminación", "Selecciona un gasto para eliminar.")
-            return
+    def abrir_dialogo_gasto(self, gasto_id: str = None):
+        """Abre el diálogo para crear o editar un gasto."""
+        if gasto_id is False: # Señal de "Nuevo"
+            gasto_id = None
+            
+        QMessageBox.information(self, "En desarrollo", f"Aquí se abriría el diálogo para el ID: {gasto_id if gasto_id else 'Nuevo'}")
         
-        gasto = self._gastos_actuales[fila]
-        reply = QMessageBox.question(
-            self, "Eliminar Gasto",
-            f"¿Seguro que deseas eliminar el gasto?\n\n{gasto.get('descripcion', '')}\nMonto: RD$ {gasto.get('monto', 0):,.2f}",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
-        
-        if reply == QMessageBox.StandardButton.Yes:
-            try:
-                self.fm.eliminar_transaccion(gasto['id'])
-                self._cargar_gastos()
-                QMessageBox.information(self, "Eliminado", "Gasto eliminado correctamente.")
-            except Exception as e:
-                QMessageBox.warning(self, "Error", f"No se pudo eliminar el gasto: {e}")
+    def editar_gasto_seleccionado(self):
+        """Abre el diálogo de edición para el gasto seleccionado."""
+        gasto_id = self._obtener_id_seleccionado_gasto()
+        if gasto_id:
+            self.abrir_dialogo_gasto(gasto_id)
 
-    def _get_nombre_equipo(self, equipo_id):
-        """Obtiene el nombre de un equipo por ID"""
-        if not equipo_id:
-            return ""
-        try:
-            equipo = self.fm.obtener_equipo(equipo_id)
-            return equipo.get('nombre', '') if equipo else ''
-        except:
-            return ""
+    def eliminar_gasto_seleccionado(self):
+        """Elimina el gasto seleccionado tras confirmación."""
+        gasto_id = self._obtener_id_seleccionado_gasto()
+        if gasto_id:
+            reply = QMessageBox.question(self, "Confirmar Eliminación",
+                                         f"¿Está seguro de que desea eliminar este gasto (ID: {gasto_id})?",
+                                         QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                         QMessageBox.StandardButton.No)
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                try:
+                    if self.fm.eliminar_gasto(gasto_id):
+                        QMessageBox.information(self, "Éxito", "Gasto eliminado correctamente.")
+                        self._cargar_gastos()
+                        self.recargar_dashboard.emit()
+                    else:
+                        QMessageBox.warning(self, "Error", "No se pudo eliminar el gasto.")
+                except Exception as e:
+                    logger.error(f"Error al eliminar gasto {gasto_id}: {e}")
+                    QMessageBox.critical(self, "Error", f"Error al eliminar:\n{e}")

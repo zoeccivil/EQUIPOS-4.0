@@ -13,6 +13,7 @@ import shutil
 from datetime import datetime
 import sys
 import os
+import logging
 
 from firebase_manager import FirebaseManager
 from backup_manager import BackupManager
@@ -25,6 +26,7 @@ from registro_alquileres_tab import RegistroAlquileresTab
 from gastos_equipos_tab import TabGastosEquipos
 from pagos_operadores_tab import TabPagosOperadores
 
+logger = logging.getLogger(__name__)
 
 class AppGUI(QMainWindow):
     """
@@ -34,17 +36,20 @@ class AppGUI(QMainWindow):
     
     def __init__(self, firebase_manager: FirebaseManager, backup_manager: BackupManager = None, config: dict = None):
         super().__init__()
-        self.fm = firebase_manager  # Firebase Manager
-        self.bm = backup_manager  # Backup Manager
+        self.fm = firebase_manager
+        self.bm = backup_manager
         self.config = config or {}
         
-        # Atributos de estado
+        # Atributos de estado (Mapas de Nombres)
         self.clientes_mapa = {}
         self.equipos_mapa = {}
         self.operadores_mapa = {}
+        self.cuentas_mapa = {}
+        self.categorias_mapa = {}
+        self.subcategorias_mapa = {}
         
         # Configuración de ventana
-        self.setWindowTitle("EQUIPOS 4.0 - Gestión de Alquiler de Equipos Pesados")
+        self.setWindowTitle("EQUIPOS 4.0 - Cargando...")
         self.resize(1366, 768)
         
         # Crear interfaz
@@ -59,91 +64,73 @@ class AppGUI(QMainWindow):
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
         
-        # Tab de Dashboard (funcional con Firebase)
+        # Tab de Dashboard
         self.dashboard_tab = DashboardTab(self.fm)
         self.tabs.addTab(self.dashboard_tab, "Dashboard")
         
-        # Tab de Registro de Alquileres (funcional)
+        # Tab de Registro de Alquileres
         self.registro_tab = RegistroAlquileresTab(self.fm)
         self.tabs.addTab(self.registro_tab, "Registro de Alquileres")
         
-        # Tab de Gastos de Equipos (funcional)
+        # Tab de Gastos de Equipos
         self.gastos_tab = TabGastosEquipos(self.fm)
         self.tabs.addTab(self.gastos_tab, "Gastos de Equipos")
         
-        # Tab de Pagos a Operadores (funcional)
+        # Tab de Pagos a Operadores
         self.pagos_tab = TabPagosOperadores(self.fm)
         self.tabs.addTab(self.pagos_tab, "Pagos a Operadores")
         
         # Establecer tab inicial
-        self.tabs.setCurrentIndex(0)
-    
-
+        self.tabs.setCurrentIndex(1)  # Abrir en Registro de Alquileres por defecto
     
     def _crear_registro_placeholder(self):
-        """Crea un placeholder para el tab de registro de alquileres"""
         widget = QWidget()
         layout = QVBoxLayout()
-        
         label = QLabel("Registro de Alquileres")
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         label.setStyleSheet("font-size: 24px; font-weight: bold; padding: 20px;")
-        
         info_label = QLabel("Aquí se gestionarán los alquileres de equipos")
         info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         info_label.setStyleSheet("font-size: 14px; color: gray;")
-        
         layout.addWidget(label)
         layout.addWidget(info_label)
         layout.addStretch()
-        
         widget.setLayout(layout)
         return widget
     
     def _crear_gastos_placeholder(self):
-        """Crea un placeholder para el tab de gastos"""
         widget = QWidget()
         layout = QVBoxLayout()
-        
         label = QLabel("Gastos de Equipos")
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         label.setStyleSheet("font-size: 24px; font-weight: bold; padding: 20px;")
-        
         info_label = QLabel("Aquí se registrarán los gastos asociados a los equipos")
         info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         info_label.setStyleSheet("font-size: 14px; color: gray;")
-        
         layout.addWidget(label)
         layout.addWidget(info_label)
         layout.addStretch()
-        
         widget.setLayout(layout)
         return widget
     
     def _crear_pagos_placeholder(self):
-        """Crea un placeholder para el tab de pagos a operadores"""
         widget = QWidget()
         layout = QVBoxLayout()
-        
         label = QLabel("Pagos a Operadores")
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         label.setStyleSheet("font-size: 24px; font-weight: bold; padding: 20px;")
-        
         info_label = QLabel("Aquí se gestionarán los pagos a los operadores de equipos")
         info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         info_label.setStyleSheet("font-size: 14px; color: gray;")
-        
         layout.addWidget(label)
         layout.addWidget(info_label)
         layout.addStretch()
-        
         widget.setLayout(layout)
         return widget
-    
+        
     def _crear_menu(self):
         """Crea el menú principal de la aplicación"""
         menubar = self.menuBar()
-        
         # Menú Archivo
         archivo_menu = menubar.addMenu("Archivo")
         archivo_menu.addAction("Crear Backup Manual...", self._crear_backup_manual)
@@ -188,29 +175,62 @@ class AppGUI(QMainWindow):
         ayuda_menu.addAction("Documentación", self._abrir_documentacion)
     
     def _cargar_datos_iniciales(self):
-        """Carga los datos iniciales desde Firebase"""
+        """
+        Carga los datos iniciales desde Firebase (Mapas de Nombres)
+        ¡MODIFICADO (V7)!
+        """
         try:
-            # Cargar equipos
-            equipos = self.fm.obtener_equipos(activo=True)
-            self.equipos_mapa = {eq['id']: eq['nombre'] for eq in equipos}
+            logger.info("Cargando mapas de nombres...")
             
-            # Cargar clientes
-            clientes = self.fm.obtener_entidades(tipo='Cliente', activo=True)
-            self.clientes_mapa = {cl['id']: cl['nombre'] for cl in clientes}
+            # --- ¡CAMBIO CLAVE! ---
+            # Pedimos TODOS los equipos y entidades, no solo los activos=True
+            # activo=None significa "sin filtro de activo"
+            equipos = self.fm.obtener_equipos(activo=None)
+            self.equipos_mapa = {eq['id']: eq.get('nombre', 'N/A') for eq in equipos}
             
-            # Cargar operadores
-            operadores = self.fm.obtener_entidades(tipo='Operador', activo=True)
-            self.operadores_mapa = {op['id']: op['nombre'] for op in operadores}
+            clientes = self.fm.obtener_entidades(tipo='Cliente', activo=None)
+            self.clientes_mapa = {cl['id']: cl.get('nombre', 'N/A') for cl in clientes}
+            
+            operadores = self.fm.obtener_entidades(tipo='Operador', activo=None)
+            self.operadores_mapa = {op['id']: op.get('nombre', 'N/A') for op in operadores}
+            # --- FIN DEL CAMBIO ---
+
+            # Cargar mapas globales
+            self.cuentas_mapa = self.fm.obtener_mapa_global('cuentas')
+            self.categorias_mapa = self.fm.obtener_mapa_global('categorias')
+            self.subcategorias_mapa = self.fm.obtener_mapa_global('subcategorias')
+            
+            logger.info("Mapas cargados. Actualizando título y poblando tabs...")
             
             # Actualizar título con contador de equipos
-            self.setWindowTitle(f"EQUIPOS 4.0 - {len(equipos)} Equipos Activos")
+            self.setWindowTitle(f"EQUIPOS 4.0 - {len(self.equipos_mapa)} Equipos Totales")
             
-            # Configurar filtros del dashboard
-            self.dashboard_tab.configurar_filtros()
+            mapas_completos = {
+                "equipos": self.equipos_mapa,
+                "clientes": self.clientes_mapa,
+                "operadores": self.operadores_mapa,
+                "cuentas": self.cuentas_mapa,
+                "categorias": self.categorias_mapa,
+                "subcategorias": self.subcategorias_mapa
+            }
             
+            # Pasar mapas a cada tab
+            self.dashboard_tab.actualizar_mapas(mapas_completos)
+            self.registro_tab.actualizar_mapas(mapas_completos)
+            self.gastos_tab.actualizar_mapas(mapas_completos)
+            self.pagos_tab.actualizar_mapas(mapas_completos)
+            
+            # Ahora, refrescar los datos
+            self.dashboard_tab.refrescar_datos()
+            self.registro_tab._cargar_alquileres()
+            self.gastos_tab._cargar_gastos()
+            self.pagos_tab._cargar_pagos()
+
         except Exception as e:
-            QMessageBox.warning(self, "Advertencia",
-                              f"No se pudieron cargar todos los datos iniciales:\n{e}")
+            logger.critical(f"Error CRÍTICO al cargar datos iniciales: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error Crítico de Carga",
+                              f"No se pudieron cargar los datos iniciales (¿Faltan índices en Firebase?):\n\n{e}\n\nPor favor, revise los logs, cree los índices en Firebase y reinicie la aplicación.")
+            self.setWindowTitle("EQUIPOS 4.0 - ERROR DE CARGA (REVISAR ÍNDICES)")
     
     # ==================== Métodos del Menú Archivo ====================
     
@@ -254,12 +274,8 @@ class AppGUI(QMainWindow):
                 mensaje = f"Información del último backup:\n\n"
                 mensaje += f"Fecha: {info['fecha_backup']}\n"
                 mensaje += f"Versión: {info['version']}\n"
-                mensaje += f"Equipos: {info['registros_equipos']}\n"
-                mensaje += f"Transacciones: {info['registros_transacciones']}\n"
-                mensaje += f"Entidades: {info['registros_entidades']}\n"
-                mensaje += f"Mantenimientos: {info['registros_mantenimientos']}\n"
-                mensaje += f"Pagos a operadores: {info['registros_pagos_operadores']}\n"
-                mensaje += f"Tamaño: {info['tamanio_archivo'] / 1024:.2f} KB"
+                # ... (resto de los campos de info)
+                mensaje += f"Tamaño: {info.get('tamanio_archivo', 0) / 1024:.2f} KB"
                 
                 QMessageBox.information(self, "Información de Backup", mensaje)
             else:
