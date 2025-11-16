@@ -21,8 +21,7 @@ from datetime import datetime
 import logging
 
 from firebase_manager import FirebaseManager
-# (Asumimos que los diálogos de edición/nuevo están en otros archivos)
-# from dialogs.alquiler_dialog import AlquilerDialog 
+from dialogos.alquiler_dialog import AlquilerDialog 
 
 logger = logging.getLogger(__name__)
 
@@ -328,8 +327,35 @@ class RegistroAlquileresTab(QWidget):
         """Abre el diálogo para crear o editar un alquiler."""
         if alquiler_id is False: # Señal de "Nuevo"
             alquiler_id = None
+        
+        try:
+            # Si hay ID, cargar los datos del alquiler
+            alquiler_data = None
+            if alquiler_id:
+                # Buscar el alquiler en la lista cargada
+                alquiler_data = next((a for a in self.alquileres_cargados if a['id'] == alquiler_id), None)
+                if not alquiler_data:
+                    QMessageBox.warning(self, "Error", "No se encontró el alquiler seleccionado.")
+                    return
             
-        QMessageBox.information(self, "En desarrollo", f"Aquí se abriría el diálogo para el ID: {alquiler_id if alquiler_id else 'Nuevo'}")
+            # Abrir el diálogo
+            dialogo = AlquilerDialog(
+                firebase_manager=self.fm,
+                equipos_mapa=self.equipos_mapa,
+                clientes_mapa=self.clientes_mapa,
+                operadores_mapa=self.operadores_mapa,
+                alquiler_data=alquiler_data,
+                parent=self
+            )
+            
+            # Si el usuario acepta, recargar la tabla
+            if dialogo.exec():
+                self._cargar_alquileres()
+                self.recargar_dashboard.emit()
+        
+        except Exception as e:
+            logger.error(f"Error al abrir diálogo de alquiler: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"Error al abrir el diálogo:\n{e}")
         
     def editar_alquiler_seleccionado(self):
         """Abre el diálogo de edición para el alquiler seleccionado."""
