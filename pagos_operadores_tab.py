@@ -1,6 +1,7 @@
 """
 Tab de Pagos a Operadores para EQUIPOS 4.0
-¡MODIFICADO (V6)!
+¡MODIFICADO (V7)!
+- Corregida la conversión de tipo de ID (float a str)
 - Filtros por rango de fecha (QDateEdit)
 - Layout de filtros y botones horizontal
 - Sin columna de "Acciones"
@@ -219,10 +220,22 @@ class TabPagosOperadores(QWidget):
             total_monto_pagos = 0.0
             
             for row, pago in enumerate(self.pagos_cargados):
-                # --- Traducción de IDs a Nombres ---
-                equipo_id = str(pago.get('equipo_id', ''))
-                operador_id = str(pago.get('operador_id', ''))
-                cuenta_id = str(pago.get('cuenta_id', ''))
+                # --- ¡INICIO DE CORRECCIÓN (V7)! ---
+                try:
+                    equipo_id = str(int(pago.get('equipo_id', 0)))
+                except (ValueError, TypeError):
+                    equipo_id = "0"
+                
+                try:
+                    operador_id = str(int(pago.get('operador_id', 0)))
+                except (ValueError, TypeError):
+                    operador_id = "0"
+
+                try:
+                    cuenta_id = str(int(pago.get('cuenta_id', 0)))
+                except (ValueError, TypeError):
+                    cuenta_id = "0"
+                # --- FIN DE CORRECCIÓN (V7)! ---
                 
                 equipo_nombre = self.equipos_mapa.get(equipo_id, f"ID: {equipo_id}")
                 operador_nombre = self.operadores_mapa.get(operador_id, f"ID: {operador_id}")
