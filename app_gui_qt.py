@@ -21,9 +21,9 @@ from theme_manager import ThemeManager
 
 # Importar tabs
 from dashboard_tab import DashboardTab
-# from registro_alquileres_tab import RegistroAlquileresTab
-# from gastos_equipos_tab import TabGastosEquipos
-# from pagos_operadores_tab import TabPagosOperadores
+from registro_alquileres_tab import RegistroAlquileresTab
+from gastos_equipos_tab import TabGastosEquipos
+from pagos_operadores_tab import TabPagosOperadores
 
 
 class AppGUI(QMainWindow):
@@ -63,16 +63,16 @@ class AppGUI(QMainWindow):
         self.dashboard_tab = DashboardTab(self.fm)
         self.tabs.addTab(self.dashboard_tab, "Dashboard")
         
-        # Tab de Registro de Alquileres (placeholder por ahora)
-        self.registro_tab = self._crear_registro_placeholder()
+        # Tab de Registro de Alquileres (funcional)
+        self.registro_tab = RegistroAlquileresTab(self.fm)
         self.tabs.addTab(self.registro_tab, "Registro de Alquileres")
         
-        # Tab de Gastos de Equipos (placeholder)
-        self.gastos_tab = self._crear_gastos_placeholder()
+        # Tab de Gastos de Equipos (funcional)
+        self.gastos_tab = TabGastosEquipos(self.fm)
         self.tabs.addTab(self.gastos_tab, "Gastos de Equipos")
         
-        # Tab de Pagos a Operadores (placeholder)
-        self.pagos_tab = self._crear_pagos_placeholder()
+        # Tab de Pagos a Operadores (funcional)
+        self.pagos_tab = TabPagosOperadores(self.fm)
         self.tabs.addTab(self.pagos_tab, "Pagos a Operadores")
         
         # Establecer tab inicial
