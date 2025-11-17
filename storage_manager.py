@@ -178,8 +178,15 @@ class StorageManager:
             logger.info(f"Ruta de storage construida: {storage_path}")
             
             # Subir archivo
+            logger.info(f"Subiendo archivo a Storage: {archivo_a_subir} -> {storage_path}")
             blob = self.bucket.blob(storage_path)
-            blob.upload_from_filename(archivo_a_subir)
+            
+            try:
+                blob.upload_from_filename(archivo_a_subir)
+                logger.info(f"Archivo subido exitosamente a Storage")
+            except Exception as e_upload:
+                logger.error(f"Error al subir archivo a Storage: {e_upload}", exc_info=True)
+                raise Exception(f"Error al subir archivo: {e_upload}")
             
             # Intentar hacer el archivo público, si falla usar URL firmada
             try:
@@ -191,11 +198,18 @@ class StorageManager:
                 logger.warning(f"No se pudo hacer público el archivo: {e_public}")
                 logger.info("Generando URL firmada temporal...")
                 try:
-                    url_publica = blob.generate_signed_url(expiration=timedelta(days=7))
+                    # Generar URL firmada requiere credenciales con permisos adecuados
+                    from google.auth import credentials as google_credentials
+                    url_publica = blob.generate_signed_url(
+                        version="v4",
+                        expiration=timedelta(days=7),
+                        method="GET"
+                    )
                     logger.info(f"URL firmada generada (válida 7 días)")
                 except Exception as e_signed:
-                    logger.error(f"Error al generar URL firmada: {e_signed}")
+                    logger.error(f"Error al generar URL firmada: {e_signed}", exc_info=True)
                     # Como último recurso, usar la URL pública sin verificar
+                    logger.warning("Usando URL pública sin verificar como fallback")
                     url_publica = blob.public_url
             
             # Limpiar archivo temporal si se creó

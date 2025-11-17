@@ -403,16 +403,19 @@ class AlquilerDialog(QDialog):
                         logger.info(f"Conduce subido exitosamente: {storage_path} -> {url}")
                     else:
                         error_msg = "No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto."
-                        logger.warning(error_msg)
-                        logger.warning("Revise los logs para más detalles del error")
+                        logger.error(error_msg)
+                        logger.error("Detalles: La función guardar_conduce retornó éxito=False")
+                        logger.error("Revise los logs anteriores para el error específico de Storage")
                         QMessageBox.warning(
                             self,
                             "Advertencia",
-                            f"{error_msg}\n\nPosibles causas:\n"
-                            "- Permisos de Firebase Storage no configurados\n"
-                            "- Problema de conexión a Internet\n"
-                            "- Archivo demasiado grande\n\n"
-                            "Revise el archivo de logs (equipos.log) para más detalles."
+                            f"{error_msg}\n\n"
+                            "Posibles causas:\n"
+                            "• Permisos de Firebase Storage no configurados correctamente\n"
+                            "• Problema de conexión a Internet o firewall\n"
+                            "• Credenciales de servicio sin permisos suficientes\n"
+                            "• Bucket de Storage no existe o no es accesible\n\n"
+                            "Revise el archivo de logs (equipos.log) para el error específico."
                         )
             
             # Modo creación
