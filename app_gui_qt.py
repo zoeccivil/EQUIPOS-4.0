@@ -789,10 +789,12 @@ class AppGUI(QMainWindow):
     
     def _gestionar_abonos(self):
         """Abre ventana de gestión de abonos"""
-        QMessageBox.information(self, "En desarrollo",
-                              "Gestión de Abonos en desarrollo.\n\n"
-                              "Permitirá:\n"
-                              "- Ver abonos por cliente\n"
-                              "- Registrar nuevos abonos\n"
-                              "- Calcular deuda automáticamente\n"
-                              "- Marcar transacciones como pagadas")
+        try:
+            from dialogos.ventana_gestion_abonos import VentanaGestionAbonos
+            
+            dialogo = VentanaGestionAbonos(self.fm, self.mapas, parent=self)
+            dialogo.exec()
+            
+        except Exception as e:
+            logger.error(f"Error al abrir gestión de abonos: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"Error al abrir gestión de abonos:\n{str(e)}")
