@@ -6,7 +6,7 @@ Maneja la subida y descarga de archivos (conduces, facturas, etc.)
 import os
 import logging
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional, Tuple
 import tempfile
 from firebase_admin import storage
@@ -98,10 +98,18 @@ class StorageManager:
             - ruta_storage: Ruta interna del archivo en Firebase Storage
         """
         try:
+            logger.info(f"=== Iniciando subida de conduce ===")
+            logger.info(f"Archivo: {file_path}")
+            logger.info(f"Alquiler: {alquiler}")
+            logger.info(f"Procesar imagen: {procesar_imagen}")
+            
             # Validar archivo existe
             if not os.path.exists(file_path):
                 logger.error(f"Archivo no encontrado: {file_path}")
                 return False, None, None
+            
+            file_size = os.path.getsize(file_path)
+            logger.info(f"Tamaño del archivo: {file_size} bytes ({file_size / 1024 / 1024:.2f} MB)")
             
             # Determinar año/mes desde fecha del alquiler
             # Se usa la fecha del alquiler para organizar en carpetas por año y mes
@@ -144,9 +152,22 @@ class StorageManager:
             blob = self.bucket.blob(storage_path)
             blob.upload_from_filename(archivo_a_subir)
             
-            # Hacer el archivo público (opcional, puedes usar signed URLs si prefieres)
-            blob.make_public()
-            url_publica = blob.public_url
+            # Intentar hacer el archivo público, si falla usar URL firmada
+            try:
+                blob.make_public()
+                url_publica = blob.public_url
+                logger.info(f"Archivo hecho público: {url_publica}")
+            except Exception as e_public:
+                # Si no se puede hacer público, generar URL firmada (válida por 7 días)
+                logger.warning(f"No se pudo hacer público el archivo: {e_public}")
+                logger.info("Generando URL firmada temporal...")
+                try:
+                    url_publica = blob.generate_signed_url(expiration=timedelta(days=7))
+                    logger.info(f"URL firmada generada (válida 7 días)")
+                except Exception as e_signed:
+                    logger.error(f"Error al generar URL firmada: {e_signed}")
+                    # Como último recurso, usar la URL pública sin verificar
+                    url_publica = blob.public_url
             
             # Limpiar archivo temporal si se creó
             if archivo_temporal and os.path.exists(archivo_temporal):
