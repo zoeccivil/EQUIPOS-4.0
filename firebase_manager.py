@@ -10,8 +10,44 @@ import logging
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 import uuid
+import time
+from google.api_core import exceptions as google_exceptions
 
 logger = logging.getLogger(__name__)
+
+
+def retry_on_quota_exceeded(max_retries=3, initial_delay=1.0):
+    """
+    Decorador para reintentar operaciones cuando se excede la cuota de Firebase.
+    Usa exponential backoff: espera 1s, luego 2s, luego 4s, etc.
+    """
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            delay = initial_delay
+            last_exception = None
+            
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except google_exceptions.ResourceExhausted as e:
+                    last_exception = e
+                    if attempt < max_retries - 1:
+                        logger.warning(
+                            f"Cuota excedida en {func.__name__}, reintentando en {delay}s "
+                            f"(intento {attempt + 1}/{max_retries})"
+                        )
+                        time.sleep(delay)
+                        delay *= 2  # Exponential backoff
+                    else:
+                        logger.error(f"Cuota excedida después de {max_retries} intentos en {func.__name__}")
+                except Exception as e:
+                    # Para otros errores, no reintentar
+                    raise e
+            
+            # Si llegamos aquí, todos los reintentos fallaron
+            raise last_exception
+        return wrapper
+    return decorator
 
 
 class FirebaseManager:
@@ -61,6 +97,7 @@ class FirebaseManager:
 
     # ==================== MAPAS GLOBALES ====================
     
+    @retry_on_quota_exceeded(max_retries=3, initial_delay=1.0)
     def obtener_mapa_global(self, coleccion_nombre: str) -> Dict[str, str]:
         """
         Obtiene un mapa simple (ID -> nombre) de una colección global.
@@ -79,6 +116,7 @@ class FirebaseManager:
 
     # ==================== EQUIPOS ====================
     
+    @retry_on_quota_exceeded(max_retries=3, initial_delay=1.0)
     def obtener_equipos(self, activo: Optional[bool] = None) -> List[Dict[str, Any]]:
         """
         Obtiene la lista de equipos.
@@ -327,6 +365,7 @@ class FirebaseManager:
 
     # ==================== ENTIDADES (CLIENTES Y OPERADORES) ====================
     
+    @retry_on_quota_exceeded(max_retries=3, initial_delay=1.0)
     def obtener_entidades(self, tipo: Optional[str] = None, activo: Optional[bool] = None) -> List[Dict[str, Any]]: # MODIFICADO: activo=None
         """
         Obtiene entidades (clientes u operadores).

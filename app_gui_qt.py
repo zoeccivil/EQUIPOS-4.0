@@ -190,22 +190,34 @@ class AppGUI(QMainWindow):
     def _cargar_datos_iniciales(self):
         """
         Carga los datos iniciales desde Firebase (Mapas de Nombres)
+        Con pequeñas pausas entre consultas para evitar exceder cuotas de Firestore
         """
         try:
             logger.info("Cargando mapas de nombres...")
             
+            # Cargar con pequeñas pausas para evitar rate limiting
             equipos = self.fm.obtener_equipos(activo=None)
             self.equipos_mapa = {eq['id']: eq.get('nombre', 'N/A') for eq in equipos}
+            
+            # Pequeña pausa entre consultas
+            import time
+            time.sleep(0.3)
             
             clientes = self.fm.obtener_entidades(tipo='Cliente', activo=None)
             self.clientes_mapa = {cl['id']: cl.get('nombre', 'N/A') for cl in clientes}
             
+            time.sleep(0.3)
+            
             operadores = self.fm.obtener_entidades(tipo='Operador', activo=None)
             self.operadores_mapa = {op['id']: op.get('nombre', 'N/A') for op in operadores}
 
+            time.sleep(0.3)
+            
             # Cargar mapas globales
             self.cuentas_mapa = self.fm.obtener_mapa_global('cuentas')
+            time.sleep(0.3)
             self.categorias_mapa = self.fm.obtener_mapa_global('categorias')
+            time.sleep(0.3)
             self.subcategorias_mapa = self.fm.obtener_mapa_global('subcategorias')
             
             logger.info("Mapas cargados. Actualizando título y poblando tabs...")
@@ -249,9 +261,36 @@ class AppGUI(QMainWindow):
 
         except Exception as e:
             logger.critical(f"Error CRÍTICO al cargar datos iniciales: {e}", exc_info=True)
-            QMessageBox.critical(self, "Error Crítico de Carga",
-                              f"No se pudieron cargar los datos iniciales (¿Faltan índices en Firebase?):\n\n{e}\n\nPor favor, revise los logs, cree los índices en Firebase y reinicie la aplicación.")
-            self.setWindowTitle("EQUIPOS 4.0 - ERROR DE CARGA (REVISAR ÍNDICES)")
+            
+            # Mensaje específico para problemas de cuota
+            error_msg = str(e)
+            if "429" in error_msg or "Quota exceeded" in error_msg or "ResourceExhausted" in error_msg:
+                QMessageBox.critical(
+                    self, 
+                    "Error: Cuota de Firebase Excedida",
+                    "Se ha excedido la cuota de Firebase/Firestore.\n\n"
+                    "Posibles soluciones:\n"
+                    "1. Espere unos minutos e intente nuevamente\n"
+                    "2. Verifique su plan de Firebase (¿Free tier?)\n"
+                    "3. Revise el uso en Firebase Console\n"
+                    "4. Considere actualizar a un plan de pago\n\n"
+                    "La aplicación se cerrará. Por favor, espere e intente nuevamente."
+                )
+            else:
+                QMessageBox.critical(
+                    self, 
+                    "Error Crítico de Carga",
+                    f"No se pudieron cargar los datos iniciales.\n\n"
+                    f"Error: {e}\n\n"
+                    "Posibles causas:\n"
+                    "- Faltan índices en Firebase/Firestore\n"
+                    "- Problemas de conexión a Internet\n"
+                    "- Credenciales incorrectas\n\n"
+                    "Por favor, revise los logs y reinicie la aplicación."
+                )
+            self.setWindowTitle("EQUIPOS 4.0 - ERROR DE CARGA")
+            # Cerrar la aplicación después del error crítico
+            QTimer.singleShot(1000, self.close)
     
     # ==================== Métodos del Menú Archivo ====================
     
