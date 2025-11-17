@@ -2504,3 +2504,2975 @@ NoneType: None
 2025-11-17 00:11:38,025 INFO Obtenidos 4 gastos con filtros: {'fecha_inicio': '2025-11-01', 'fecha_fin': '2025-11-17'}
 2025-11-17 00:11:38,025 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-11-01', 'fecha_fin': '2025-11-17'}
 2025-11-17 00:11:38,126 INFO Obtenidos 2 pagos a operadores
+2025-11-17 01:10:07,100 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:10:07,119 INFO Tema aplicado: Oscuro
+2025-11-17 01:10:07,189 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:10:07,189 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:10:07,189 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:10:07,191 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:10:07,191 INFO Backup Manager inicializado correctamente
+2025-11-17 01:10:07,191 INFO Storage bucket no configurado - funcionalidad de conduces deshabilitada
+2025-11-17 01:10:07,996 INFO Ventana principal creada y mostrada
+2025-11-17 01:10:07,998 INFO Cargando mapas de nombres...
+2025-11-17 01:10:08,149 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:10:08,296 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:08,298 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:08,422 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:08,423 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:08,584 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:08,584 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:08,788 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:08,789 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:08,970 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:08,971 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:09,121 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:09,122 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:09,337 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:09,337 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:09,833 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:09,834 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:10,383 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:10,384 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:11,048 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:11,049 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:11,767 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:11,768 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:12,874 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:12,875 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:14,183 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:14,184 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:16,067 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:16,068 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:18,801 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:18,801 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:22,630 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:22,631 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:24,863 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:24,864 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:25,376 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:25,377 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:31,845 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:31,846 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:33,929 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:33,929 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:47,725 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:47,726 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:10:55,722 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 400 None
+2025-11-17 01:10:55,723 ERROR AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x000002B36AA1A7B0>" raised exception!
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        context, _AuthMetadataPluginCallback(callback_state, callback)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\transport\grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._request, context.method_name, context.service_url, headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\auth\credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\service_account.py", line 448, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ~~~~~~~~~~~~~~~~~^
+        request, self._token_uri, assertion
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+        request,
+    ...<5 lines>...
+        },
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 270, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\oauth2\_client.py", line 69, in _handle_error_response
+    raise exceptions.RefreshError(
+        error_details, response_data, retryable=retryable_error
+    )
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2025-11-17 01:12:18,737 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:12:18,754 INFO Tema aplicado: Oscuro
+2025-11-17 01:12:18,802 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:12:18,802 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:12:18,802 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:12:18,803 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:12:18,803 INFO Backup Manager inicializado correctamente
+2025-11-17 01:12:18,803 INFO Storage bucket no configurado - funcionalidad de conduces deshabilitada
+2025-11-17 01:12:19,239 INFO Ventana principal creada y mostrada
+2025-11-17 01:12:19,242 INFO Cargando mapas de nombres...
+2025-11-17 01:12:19,391 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:12:19,517 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:12:19,669 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 01:12:19,802 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 01:12:19,938 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 01:12:20,065 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 01:12:20,210 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 01:12:20,414 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 01:12:20,414 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 01:12:20,415 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 01:12:20,415 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 01:12:20,537 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:12:20,545 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 01:12:20,545 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 01:12:20,670 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 01:12:20,671 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 01:12:20,671 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 01:12:20,827 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 01:12:20,827 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 01:12:20,940 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:12:20,940 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 01:12:21,467 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:12:21,468 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:12:21,748 INFO Obtenidos 223 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:12:21,754 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:12:21,989 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:12:21,996 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:12:22,117 INFO Obtenidos 62 pagos a operadores
+2025-11-17 01:12:38,279 ERROR Error al obtener primera fecha de cliente 30: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 670, in obtener_fecha_primera_transaccion_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 01:12:38,326 INFO Fecha desde actualizada por cliente 30: None
+2025-11-17 01:12:38,326 WARNING No hay datos para el filtro seleccionado, usando fecha por defecto
+2025-11-17 01:17:43,362 INFO Aplicación finalizada con exit_code=0
+2025-11-17 01:36:46,565 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:36:46,582 INFO Tema aplicado: Oscuro
+2025-11-17 01:36:46,615 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:36:46,616 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:36:46,616 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:36:46,617 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:36:46,617 INFO Backup Manager inicializado correctamente
+2025-11-17 01:36:46,617 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:36:46,617 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:36:47,603 INFO Ventana principal creada y mostrada
+2025-11-17 01:36:47,605 INFO Cargando mapas de nombres...
+2025-11-17 01:36:47,955 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:36:48,279 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:36:48,432 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 01:36:48,571 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 01:36:48,728 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 01:36:48,865 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 01:36:49,009 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 01:36:49,215 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 01:36:49,216 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 01:36:49,216 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 01:36:49,216 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 01:36:49,348 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:36:49,349 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 01:36:49,349 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 01:36:49,464 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 01:36:49,464 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 01:36:49,464 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 01:36:49,639 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 01:36:49,639 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 01:36:49,762 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:36:49,762 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 01:36:50,360 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:36:50,360 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:36:50,540 INFO Obtenidos 223 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:36:50,546 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:36:50,727 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:36:50,731 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:36:50,869 INFO Obtenidos 62 pagos a operadores
+2025-11-17 01:38:02,846 INFO Abriendo editor de imagen para: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00318.jpeg
+2025-11-17 01:38:02,890 DEBUG Imagen cargada con PIL: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00318.jpeg (1200x1600)
+2025-11-17 01:38:41,333 INFO Archivo temporal creado: C:\Users\servi\AppData\Local\Temp\conduce_editado_njcflhy4.jpeg
+2025-11-17 01:38:41,337 INFO Imagen editada guardada correctamente en: C:\Users\servi\AppData\Local\Temp\conduce_editado_njcflhy4.jpeg
+2025-11-17 01:38:44,613 INFO Iniciando subida de conduce: C:\Users\servi\AppData\Local\Temp\conduce_editado_njcflhy4.jpeg
+2025-11-17 01:38:44,642 INFO Imagen procesada: C:\Users\servi\AppData\Local\Temp\conduce_editado_njcflhy4.jpeg -> C:\Users\servi\AppData\Local\Temp\tmpsixapk0_.jpeg
+2025-11-17 01:38:44,643 INFO Ruta de storage construida: conduces/2025/11/p021.jpeg
+2025-11-17 01:38:44,681 DEBUG Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-11-17 01:38:44,692 DEBUG Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-11-17 01:38:45,187 DEBUG https://storage.googleapis.com:443 "POST /upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart HTTP/1.1" 404 247
+2025-11-17 01:38:45,190 ERROR Error al guardar conduce: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 145, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 01:38:45,195 WARNING La subida del conduce falló
+2025-11-17 01:39:38,025 INFO Alquiler registrado con ID: 7546e1f7-b19c-4a82-8adb-2b9417a1d28f
+2025-11-17 01:39:39,755 INFO Alquiler creado con ID: 7546e1f7-b19c-4a82-8adb-2b9417a1d28f
+2025-11-17 01:39:39,773 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:39:39,966 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:40:13,206 INFO Aplicación finalizada con exit_code=0
+2025-11-17 01:40:41,187 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:40:41,204 INFO Tema aplicado: Oscuro
+2025-11-17 01:40:41,237 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:40:41,237 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:40:41,237 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:40:41,238 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:40:41,239 INFO Backup Manager inicializado correctamente
+2025-11-17 01:40:41,239 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:40:41,239 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:40:42,185 INFO Ventana principal creada y mostrada
+2025-11-17 01:40:42,187 INFO Cargando mapas de nombres...
+2025-11-17 01:40:42,333 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:40:42,457 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:40:42,607 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 01:40:42,736 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 01:40:42,862 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 01:40:42,979 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 01:40:43,121 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 01:40:43,293 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 01:40:43,293 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 01:40:43,293 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 01:40:43,294 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 01:40:43,407 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:40:43,409 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 01:40:43,409 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 01:40:43,516 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 01:40:43,517 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 01:40:43,517 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 01:40:43,614 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 01:40:43,615 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 01:40:43,750 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:40:43,750 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 01:40:44,227 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:40:44,227 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:40:44,424 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:40:44,430 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:40:44,631 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:40:44,635 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:40:44,761 INFO Obtenidos 62 pagos a operadores
+2025-11-17 01:40:56,863 ERROR Error al obtener primera fecha de cliente 38: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 670, in obtener_fecha_primera_transaccion_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 01:40:56,870 INFO Fecha desde actualizada por cliente 38: None
+2025-11-17 01:40:56,870 WARNING No hay datos para el filtro seleccionado, usando fecha por defecto
+2025-11-17 01:40:59,953 ERROR Error al obtener primera fecha de cliente 1: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 670, in obtener_fecha_primera_transaccion_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 01:40:59,957 INFO Fecha desde actualizada por cliente 1: None
+2025-11-17 01:40:59,957 WARNING No hay datos para el filtro seleccionado, usando fecha por defecto
+2025-11-17 01:41:01,766 ERROR Error al obtener primera fecha de cliente 21: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 670, in obtener_fecha_primera_transaccion_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 01:41:01,771 INFO Fecha desde actualizada por cliente 21: None
+2025-11-17 01:41:01,771 WARNING No hay datos para el filtro seleccionado, usando fecha por defecto
+2025-11-17 01:41:08,767 ERROR Error al obtener primera fecha de cliente 16: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 670, in obtener_fecha_primera_transaccion_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 01:41:08,771 INFO Fecha desde actualizada por cliente 16: None
+2025-11-17 01:41:08,771 WARNING No hay datos para el filtro seleccionado, usando fecha por defecto
+2025-11-17 01:41:21,357 ERROR Error al obtener primera fecha de cliente 6: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 670, in obtener_fecha_primera_transaccion_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 01:41:21,360 INFO Fecha desde actualizada por cliente 6: None
+2025-11-17 01:41:21,361 WARNING No hay datos para el filtro seleccionado, usando fecha por defecto
+2025-11-17 01:42:43,383 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:42:46,333 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:43:57,658 INFO Aplicación finalizada con exit_code=0
+2025-11-17 01:44:57,039 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:44:57,056 INFO Tema aplicado: Oscuro
+2025-11-17 01:44:57,089 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:44:57,089 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:44:57,089 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:44:57,090 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:44:57,090 INFO Backup Manager inicializado correctamente
+2025-11-17 01:44:57,090 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:44:57,090 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:44:57,605 INFO Ventana principal creada y mostrada
+2025-11-17 01:44:57,608 INFO Cargando mapas de nombres...
+2025-11-17 01:44:57,753 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:44:57,885 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:44:58,030 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 01:44:58,164 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 01:44:58,284 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 01:44:58,405 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 01:44:58,530 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 01:44:58,707 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 01:44:58,707 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 01:44:58,707 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 01:44:58,707 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 01:44:58,813 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:44:58,815 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 01:44:58,815 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 01:44:58,937 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 01:44:58,937 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 01:44:58,938 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 01:44:59,046 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 01:44:59,046 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 01:44:59,148 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:44:59,148 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 01:44:59,720 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:44:59,721 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:44:59,945 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:44:59,953 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:45:00,130 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:45:00,134 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:45:00,275 INFO Obtenidos 62 pagos a operadores
+2025-11-17 01:45:19,215 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 01:45:23,825 INFO Cargando mapas de nombres...
+2025-11-17 01:45:23,941 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 01:45:24,048 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 01:45:24,155 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 01:45:24,266 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 01:45:24,462 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 01:45:24,637 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 01:45:24,637 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 01:45:24,638 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 01:45:24,638 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 01:45:24,742 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 01:45:24,742 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 01:45:24,742 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 01:45:24,862 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 01:45:24,862 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 01:45:24,862 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 01:45:24,957 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 01:45:24,957 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 01:45:25,408 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 01:45:25,409 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:45:25,612 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:45:25,618 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 01:50:22,095 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:50:22,111 INFO Tema aplicado: Oscuro
+2025-11-17 01:50:22,145 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:50:22,146 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:50:22,146 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:50:22,147 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:50:22,147 INFO Backup Manager inicializado correctamente
+2025-11-17 01:50:22,147 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:50:22,147 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:50:22,544 INFO Ventana principal creada y mostrada
+2025-11-17 01:50:22,561 INFO Cargando mapas de nombres...
+2025-11-17 01:50:22,711 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:50:22,892 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:51:40,557 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:51:40,573 INFO Tema aplicado: Oscuro
+2025-11-17 01:51:40,607 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:51:40,607 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:51:40,607 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:51:40,608 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:51:40,608 INFO Backup Manager inicializado correctamente
+2025-11-17 01:51:40,608 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:51:40,608 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:51:41,143 INFO Ventana principal creada y mostrada
+2025-11-17 01:51:41,145 INFO Cargando mapas de nombres...
+2025-11-17 01:51:41,306 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:51:41,450 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:52:20,939 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:52:20,956 INFO Tema aplicado: Oscuro
+2025-11-17 01:52:20,990 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:52:20,991 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:52:20,991 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:52:20,992 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:52:20,992 INFO Backup Manager inicializado correctamente
+2025-11-17 01:52:20,992 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:52:20,992 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:52:21,510 INFO Ventana principal creada y mostrada
+2025-11-17 01:52:21,513 INFO Cargando mapas de nombres...
+2025-11-17 01:52:21,660 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:52:21,810 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 01:53:19,739 INFO Configuración cargada desde config_equipos.json
+2025-11-17 01:53:19,756 INFO Tema aplicado: Oscuro
+2025-11-17 01:53:19,789 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 01:53:19,789 INFO Cliente de Firestore creado correctamente
+2025-11-17 01:53:19,789 INFO Firebase Manager inicializado correctamente
+2025-11-17 01:53:19,790 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 01:53:19,790 INFO Backup Manager inicializado correctamente
+2025-11-17 01:53:19,790 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 01:53:19,790 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 01:53:20,371 INFO Ventana principal creada y mostrada
+2025-11-17 01:53:20,373 INFO Cargando mapas de nombres...
+2025-11-17 01:53:20,527 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 01:53:20,692 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:00:22,553 INFO Configuración cargada desde config_equipos.json
+2025-11-17 02:00:22,571 INFO Tema aplicado: Oscuro
+2025-11-17 02:00:22,604 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 02:00:22,604 INFO Cliente de Firestore creado correctamente
+2025-11-17 02:00:22,604 INFO Firebase Manager inicializado correctamente
+2025-11-17 02:00:22,605 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 02:00:22,605 INFO Backup Manager inicializado correctamente
+2025-11-17 02:00:22,605 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 02:00:22,605 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 02:00:22,936 INFO Ventana principal creada y mostrada
+2025-11-17 02:00:22,938 INFO Cargando mapas de nombres...
+2025-11-17 02:00:23,093 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 02:00:23,229 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:05:03,246 ERROR Error al obtener equipos (activo=None): Timeout of 300.0s exceeded, last exception: 429 Quota exceeded.
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 170, in error_remapped_callable
+    return _StreamingResponseIterator(
+        result, prefetch_first_result=prefetch_first
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 92, in __init__
+    self._stored_first_result = next(self._wrapped)
+                                ~~~~^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_channel.py", line 543, in __next__
+    return self._next()
+           ~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_channel.py", line 969, in _next
+    raise self
+grpc._channel._MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:
+	status = StatusCode.RESOURCE_EXHAUSTED
+	details = "Quota exceeded."
+	debug_error_string = "UNKNOWN:Error received from peer ipv4:108.177.122.95:443 {grpc_status:8, grpc_message:"Quota exceeded."}"
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 Quota exceeded.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 94, in obtener_equipos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 229, in _retry_error_helper
+    raise final_exc from source_exc
+google.api_core.exceptions.RetryError: Timeout of 300.0s exceeded, last exception: 429 Quota exceeded.
+2025-11-17 02:05:03,320 CRITICAL Error CRÍTICO al cargar datos iniciales: Timeout of 300.0s exceeded, last exception: 429 Quota exceeded.
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 170, in error_remapped_callable
+    return _StreamingResponseIterator(
+        result, prefetch_first_result=prefetch_first
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 92, in __init__
+    self._stored_first_result = next(self._wrapped)
+                                ~~~~^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_channel.py", line 543, in __next__
+    return self._next()
+           ~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\grpc\_channel.py", line 969, in _next
+    raise self
+grpc._channel._MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:
+	status = StatusCode.RESOURCE_EXHAUSTED
+	details = "Quota exceeded."
+	debug_error_string = "UNKNOWN:Error received from peer ipv4:108.177.122.95:443 {grpc_status:8, grpc_message:"Quota exceeded."}"
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 Quota exceeded.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\app_gui_qt.py", line 197, in _cargar_datos_iniciales
+    equipos = self.fm.obtener_equipos(activo=None)
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 102, in obtener_equipos
+    raise e # Propagar el error
+    ^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 94, in obtener_equipos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 229, in _retry_error_helper
+    raise final_exc from source_exc
+google.api_core.exceptions.RetryError: Timeout of 300.0s exceeded, last exception: 429 Quota exceeded.
+2025-11-17 02:13:21,899 INFO Aplicación finalizada con exit_code=0
+2025-11-17 02:13:42,399 INFO Configuración cargada desde config_equipos.json
+2025-11-17 02:13:42,416 INFO Tema aplicado: Oscuro
+2025-11-17 02:13:42,449 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 02:13:42,449 INFO Cliente de Firestore creado correctamente
+2025-11-17 02:13:42,449 INFO Firebase Manager inicializado correctamente
+2025-11-17 02:13:42,450 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 02:13:42,450 INFO Backup Manager inicializado correctamente
+2025-11-17 02:13:42,450 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 02:13:42,450 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 02:13:42,945 INFO Ventana principal creada y mostrada
+2025-11-17 02:13:42,949 INFO Cargando mapas de nombres...
+2025-11-17 02:13:43,113 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 02:13:43,264 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:13:43,697 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 02:13:44,166 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 02:13:45,408 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 02:13:47,008 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 02:13:47,143 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 02:13:47,397 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 02:13:47,397 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 02:13:47,397 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 02:13:47,397 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 02:13:47,764 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:13:47,765 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 02:13:47,765 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 02:13:48,219 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 02:13:48,219 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 02:13:48,219 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 02:27:33,015 INFO Configuración cargada desde config_equipos.json
+2025-11-17 02:27:33,032 INFO Tema aplicado: Oscuro
+2025-11-17 02:27:33,064 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 02:27:33,065 INFO Cliente de Firestore creado correctamente
+2025-11-17 02:27:33,065 INFO Firebase Manager inicializado correctamente
+2025-11-17 02:27:33,065 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 02:27:33,065 INFO Backup Manager inicializado correctamente
+2025-11-17 02:27:33,066 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 02:27:33,066 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 02:27:34,032 INFO Ventana principal creada y mostrada
+2025-11-17 02:27:34,033 INFO Cargando mapas de nombres...
+2025-11-17 02:27:34,191 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 02:27:34,329 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:27:34,458 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 02:27:34,881 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 02:27:35,298 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 02:27:35,716 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 02:27:36,164 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 02:27:36,658 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 02:27:36,658 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 02:27:36,659 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 02:27:36,659 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 02:27:36,756 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:27:36,758 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 02:27:36,758 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 02:27:36,897 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 02:27:36,897 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 02:27:36,897 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 02:27:37,010 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 02:27:37,011 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 02:27:37,124 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:27:37,125 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 02:27:37,614 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 02:27:37,615 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:27:37,794 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:27:37,800 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:27:37,991 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:27:37,998 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:27:38,132 INFO Obtenidos 62 pagos a operadores
+2025-11-17 02:27:58,753 INFO Abriendo editor de imagen para: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00318.jpeg
+2025-11-17 02:27:58,788 DEBUG Imagen cargada con PIL: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00318.jpeg (1200x1600)
+2025-11-17 02:28:06,092 INFO Archivo temporal creado: C:\Users\servi\AppData\Local\Temp\conduce_editado_rw60uxsi.jpeg
+2025-11-17 02:28:06,095 INFO Imagen editada guardada correctamente en: C:\Users\servi\AppData\Local\Temp\conduce_editado_rw60uxsi.jpeg
+2025-11-17 02:28:07,620 INFO Iniciando subida de conduce: C:\Users\servi\AppData\Local\Temp\conduce_editado_rw60uxsi.jpeg
+2025-11-17 02:28:07,620 INFO === Iniciando subida de conduce ===
+2025-11-17 02:28:07,620 INFO Archivo: C:\Users\servi\AppData\Local\Temp\conduce_editado_rw60uxsi.jpeg
+2025-11-17 02:28:07,620 INFO Alquiler: {'fecha': '2025-11-17', 'conduce': 'p021', 'id': '7546e1f7-b19c-4a82-8adb-2b9417a1d28f'}
+2025-11-17 02:28:07,620 INFO Procesar imagen: True
+2025-11-17 02:28:07,620 INFO Tamaño del archivo: 153148 bytes (0.15 MB)
+2025-11-17 02:28:07,651 INFO Imagen procesada: C:\Users\servi\AppData\Local\Temp\conduce_editado_rw60uxsi.jpeg -> C:\Users\servi\AppData\Local\Temp\tmp2h307fpy.jpeg
+2025-11-17 02:28:07,651 INFO Ruta de storage construida: conduces/2025/11/p021.jpeg
+2025-11-17 02:28:07,698 DEBUG Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-11-17 02:28:07,705 DEBUG Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-11-17 02:28:08,224 DEBUG https://storage.googleapis.com:443 "POST /upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart HTTP/1.1" 404 247
+2025-11-17 02:28:08,228 ERROR Error al guardar conduce: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 153, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 02:28:08,237 WARNING No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto.
+2025-11-17 02:28:08,237 WARNING Revise los logs para más detalles del error
+2025-11-17 02:28:22,751 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:28:24,228 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:28:24,234 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:28:24,440 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:30:48,760 INFO Aplicación finalizada con exit_code=0
+2025-11-17 02:37:13,848 INFO Configuración cargada desde config_equipos.json
+2025-11-17 02:37:13,865 INFO Tema aplicado: Oscuro
+2025-11-17 02:37:13,904 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 02:37:13,904 INFO Cliente de Firestore creado correctamente
+2025-11-17 02:37:13,904 INFO Firebase Manager inicializado correctamente
+2025-11-17 02:37:13,905 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 02:37:13,905 INFO Backup Manager inicializado correctamente
+2025-11-17 02:37:13,905 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 02:37:13,905 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 02:37:14,443 INFO Ventana principal creada y mostrada
+2025-11-17 02:37:14,446 INFO Cargando mapas de nombres...
+2025-11-17 02:37:14,592 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 02:37:14,723 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:37:14,854 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 02:37:15,276 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 02:37:15,705 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 02:37:16,114 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 02:37:16,552 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 02:37:17,041 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 02:37:17,041 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 02:37:17,041 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 02:37:17,042 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 02:37:17,141 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:37:17,142 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 02:37:17,142 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 02:37:17,242 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 02:37:17,243 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 02:37:17,243 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 02:37:17,346 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 02:37:17,346 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 02:37:17,446 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:37:17,446 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 02:37:17,926 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 02:37:17,926 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:37:18,120 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:37:18,126 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:37:18,316 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:37:18,320 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:37:18,450 INFO Obtenidos 62 pagos a operadores
+2025-11-17 02:37:34,709 INFO Abriendo editor de imagen para: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/0322.jpeg (0.24 MB)
+2025-11-17 02:37:34,746 DEBUG Imagen cargada con PIL: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/0322.jpeg (1200x1600)
+2025-11-17 02:38:00,645 INFO Imagen redimensionada de (1600, 1200) a (1067, 800)
+2025-11-17 02:38:00,647 INFO Archivo temporal creado: C:\Users\servi\AppData\Local\Temp\conduce_editado_hwdalb1w.jpeg
+2025-11-17 02:38:00,647 INFO Guardando imagen editada (1067x800) con calidad 85
+2025-11-17 02:38:00,654 INFO Imagen editada guardada correctamente en: C:\Users\servi\AppData\Local\Temp\conduce_editado_hwdalb1w.jpeg (0.15 MB)
+2025-11-17 02:38:02,526 INFO Iniciando subida de conduce: C:\Users\servi\AppData\Local\Temp\conduce_editado_hwdalb1w.jpeg
+2025-11-17 02:38:02,526 INFO === Iniciando subida de conduce ===
+2025-11-17 02:38:02,526 INFO Archivo: C:\Users\servi\AppData\Local\Temp\conduce_editado_hwdalb1w.jpeg
+2025-11-17 02:38:02,526 INFO Alquiler: {'fecha': '2025-11-17', 'conduce': 'p021', 'id': '7546e1f7-b19c-4a82-8adb-2b9417a1d28f'}
+2025-11-17 02:38:02,526 INFO Procesar imagen: True
+2025-11-17 02:38:02,527 INFO Tamaño del archivo: 158476 bytes (0.15 MB)
+2025-11-17 02:38:02,543 INFO Redimensionando imagen de (1067, 800) a (1067, 800)
+2025-11-17 02:38:02,550 INFO Imagen procesada y guardada: C:\Users\servi\AppData\Local\Temp\tmp8xh_1seg.jpeg (0.15 MB, calidad=85)
+2025-11-17 02:38:02,551 INFO Ruta de storage construida: conduces/2025/11/p021.jpeg
+2025-11-17 02:38:02,597 DEBUG Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-11-17 02:38:02,603 DEBUG Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-11-17 02:38:03,174 DEBUG https://storage.googleapis.com:443 "POST /upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart HTTP/1.1" 404 247
+2025-11-17 02:38:03,179 ERROR Error al guardar conduce: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 182, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 02:38:03,188 WARNING No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto.
+2025-11-17 02:38:03,188 WARNING Revise los logs para más detalles del error
+2025-11-17 02:38:41,883 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:38:43,211 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:38:43,216 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:38:43,401 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:38:45,755 INFO Aplicación finalizada con exit_code=0
+2025-11-17 02:49:39,169 INFO Configuración cargada desde config_equipos.json
+2025-11-17 02:49:39,187 INFO Tema aplicado: Oscuro
+2025-11-17 02:49:39,221 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 02:49:39,221 INFO Cliente de Firestore creado correctamente
+2025-11-17 02:49:39,222 INFO Firebase Manager inicializado correctamente
+2025-11-17 02:49:39,222 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 02:49:39,222 INFO Backup Manager inicializado correctamente
+2025-11-17 02:49:39,223 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 02:49:39,223 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 02:49:39,996 INFO Ventana principal creada y mostrada
+2025-11-17 02:49:39,998 INFO Cargando mapas de nombres...
+2025-11-17 02:49:40,168 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 02:49:40,307 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:49:40,434 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 02:49:40,869 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 02:49:41,299 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 02:49:41,733 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 02:49:42,193 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 02:49:42,775 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 02:49:42,775 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 02:49:42,775 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 02:49:42,775 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 02:49:42,881 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:49:42,883 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 02:49:42,883 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 02:49:42,998 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 02:49:42,998 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 02:49:42,999 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 02:49:43,104 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 02:49:43,105 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 02:49:43,227 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:49:43,227 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 02:49:43,745 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 02:49:43,745 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:49:43,919 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:49:43,925 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:49:44,099 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:49:44,103 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:49:44,226 INFO Obtenidos 62 pagos a operadores
+2025-11-17 02:49:53,490 INFO Abriendo editor de imagen para: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00317.jpeg (0.20 MB)
+2025-11-17 02:49:53,522 DEBUG Imagen cargada con PIL: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00317.jpeg (1200x1600)
+2025-11-17 02:50:01,727 INFO Imagen redimensionada de (1600, 1200) a (1067, 800)
+2025-11-17 02:50:01,728 INFO Archivo temporal creado: C:\Users\servi\AppData\Local\Temp\conduce_editado_sa0aq60z.jpeg
+2025-11-17 02:50:01,728 INFO Guardando imagen editada (1067x800) con calidad 85
+2025-11-17 02:50:01,735 INFO Imagen editada guardada correctamente en: C:\Users\servi\AppData\Local\Temp\conduce_editado_sa0aq60z.jpeg (0.13 MB)
+2025-11-17 02:50:03,173 INFO Iniciando subida de conduce: C:\Users\servi\AppData\Local\Temp\conduce_editado_sa0aq60z.jpeg
+2025-11-17 02:50:03,173 INFO === Iniciando subida de conduce ===
+2025-11-17 02:50:03,173 INFO Archivo: C:\Users\servi\AppData\Local\Temp\conduce_editado_sa0aq60z.jpeg
+2025-11-17 02:50:03,173 INFO Alquiler: {'fecha': '2025-11-17', 'conduce': 'p021', 'id': '7546e1f7-b19c-4a82-8adb-2b9417a1d28f'}
+2025-11-17 02:50:03,173 INFO Procesar imagen: True
+2025-11-17 02:50:03,173 INFO Tamaño del archivo: 138540 bytes (0.13 MB)
+2025-11-17 02:50:03,190 INFO Redimensionando imagen de (1067, 800) a (1067, 800)
+2025-11-17 02:50:03,199 INFO Imagen procesada y guardada: C:\Users\servi\AppData\Local\Temp\tmp84r_ubws.jpeg (0.13 MB, calidad=85)
+2025-11-17 02:50:03,199 INFO Ruta de storage construida: conduces/2025/11/p021.jpeg
+2025-11-17 02:50:03,199 INFO Subiendo archivo a Storage: C:\Users\servi\AppData\Local\Temp\tmp84r_ubws.jpeg -> conduces/2025/11/p021.jpeg
+2025-11-17 02:50:03,237 DEBUG Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-11-17 02:50:03,244 DEBUG Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-11-17 02:50:03,711 DEBUG https://storage.googleapis.com:443 "POST /upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart HTTP/1.1" 404 247
+2025-11-17 02:50:03,713 ERROR Error al subir archivo a Storage: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 185, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 02:50:03,717 ERROR Error al guardar conduce: Error al subir archivo: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 185, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 189, in guardar_conduce
+    raise Exception(f"Error al subir archivo: {e_upload}")
+Exception: Error al subir archivo: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 02:50:03,719 ERROR No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto.
+2025-11-17 02:50:03,719 ERROR Detalles: La función guardar_conduce retornó éxito=False
+2025-11-17 02:50:03,719 ERROR Revise los logs anteriores para el error específico de Storage
+2025-11-17 02:50:10,319 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:50:11,368 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:50:11,374 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:50:11,574 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:50:14,000 INFO Aplicación finalizada con exit_code=0
+2025-11-17 02:51:36,604 INFO Configuración cargada desde config_equipos.json
+2025-11-17 02:51:36,621 INFO Tema aplicado: Oscuro
+2025-11-17 02:51:36,655 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 02:51:36,655 INFO Cliente de Firestore creado correctamente
+2025-11-17 02:51:36,655 INFO Firebase Manager inicializado correctamente
+2025-11-17 02:51:36,656 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 02:51:36,657 INFO Backup Manager inicializado correctamente
+2025-11-17 02:51:36,657 INFO Storage inicializado con bucket: equipos-zoec.appspot.com
+2025-11-17 02:51:36,657 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.appspot.com
+2025-11-17 02:51:37,164 INFO Ventana principal creada y mostrada
+2025-11-17 02:51:37,166 INFO Cargando mapas de nombres...
+2025-11-17 02:51:37,307 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 02:51:37,450 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 02:51:37,575 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 02:51:38,010 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 02:51:38,458 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 02:51:38,899 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 02:51:39,320 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 02:51:39,795 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 02:51:39,795 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 02:51:39,796 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 02:51:39,796 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 02:51:39,895 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:51:39,896 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 02:51:39,897 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 02:51:40,009 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 02:51:40,009 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 02:51:40,010 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 02:51:40,117 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 02:51:40,117 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 02:51:40,225 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 02:51:40,226 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 02:51:40,902 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 02:51:40,902 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:51:41,113 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:51:41,121 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:51:41,311 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:51:41,315 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:51:41,437 INFO Obtenidos 62 pagos a operadores
+2025-11-17 02:51:53,311 INFO Abriendo editor de imagen para: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00333.jpeg (0.19 MB)
+2025-11-17 02:51:53,343 DEBUG Imagen cargada con PIL: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00333.jpeg (1600x1200)
+2025-11-17 02:51:57,804 INFO Imagen redimensionada de (1600, 1200) a (1067, 800)
+2025-11-17 02:51:57,806 INFO Archivo temporal creado: C:\Users\servi\AppData\Local\Temp\conduce_editado_v1w9q0rc.jpeg
+2025-11-17 02:51:57,806 INFO Guardando imagen editada (1067x800) con calidad 85
+2025-11-17 02:51:57,813 INFO Imagen editada guardada correctamente en: C:\Users\servi\AppData\Local\Temp\conduce_editado_v1w9q0rc.jpeg (0.13 MB)
+2025-11-17 02:51:59,510 INFO Iniciando subida de conduce: C:\Users\servi\AppData\Local\Temp\conduce_editado_v1w9q0rc.jpeg
+2025-11-17 02:51:59,510 INFO === Iniciando subida de conduce ===
+2025-11-17 02:51:59,510 INFO Archivo: C:\Users\servi\AppData\Local\Temp\conduce_editado_v1w9q0rc.jpeg
+2025-11-17 02:51:59,510 INFO Alquiler: {'fecha': '2025-11-17', 'conduce': 'p021', 'id': '7546e1f7-b19c-4a82-8adb-2b9417a1d28f'}
+2025-11-17 02:51:59,510 INFO Procesar imagen: True
+2025-11-17 02:51:59,510 INFO Tamaño del archivo: 135038 bytes (0.13 MB)
+2025-11-17 02:51:59,529 INFO Redimensionando imagen de (1067, 800) a (1067, 800)
+2025-11-17 02:51:59,537 INFO Imagen procesada y guardada: C:\Users\servi\AppData\Local\Temp\tmplarozltq.jpeg (0.13 MB, calidad=85)
+2025-11-17 02:51:59,537 INFO Ruta de storage construida: conduces/2025/11/p021.jpeg
+2025-11-17 02:51:59,537 INFO Subiendo archivo a Storage: C:\Users\servi\AppData\Local\Temp\tmplarozltq.jpeg -> conduces/2025/11/p021.jpeg
+2025-11-17 02:51:59,574 DEBUG Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-11-17 02:51:59,579 DEBUG Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-11-17 02:52:00,192 DEBUG https://storage.googleapis.com:443 "POST /upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart HTTP/1.1" 404 247
+2025-11-17 02:52:00,198 ERROR Error al subir archivo a Storage: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 185, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 02:52:00,203 ERROR Error al guardar conduce: Error al subir archivo: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+Traceback (most recent call last):
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2837, in _prep_and_do_upload
+    created_json = self._do_upload(
+        client,
+    ...<12 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2632, in _do_upload
+    response = self._do_multipart_upload(
+        client,
+    ...<11 lines>...
+        command=command,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2062, in _do_multipart_upload
+    response = upload.transmit(
+        transport, data, object_metadata, content_type, timeout=timeout
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 162, in transmit
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\_request_helpers.py", line 107, in wait_and_retry
+    return func()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\requests\upload.py", line 158, in retriable_request
+    self._process_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_upload.py", line 135, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\_media\_helpers.py", line 105, in require_status_code
+    raise InvalidResponse(
+    ...<5 lines>...
+    )
+google.cloud.storage.exceptions.InvalidResponse: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 185, in guardar_conduce
+    blob.upload_from_filename(archivo_a_subir)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3200, in upload_from_filename
+    self._handle_filename_and_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename,
+        ^^^^^^^^^
+    ...<10 lines>...
+        crc32c_checksum_value=crc32c_checksum_value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 3050, in _handle_filename_and_upload
+    self._prep_and_do_upload(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        file_obj,
+        ^^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 2855, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\storage\blob.py", line 5147, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.NotFound: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\storage_manager.py", line 189, in guardar_conduce
+    raise Exception(f"Error al subir archivo: {e_upload}")
+Exception: Error al subir archivo: 404 POST https://storage.googleapis.com/upload/storage/v1/b/equipos-zoec.appspot.com/o?uploadType=multipart: {
+  "error": {
+    "code": 404,
+    "message": "The specified bucket does not exist.",
+    "errors": [
+      {
+        "message": "The specified bucket does not exist.",
+        "domain": "global",
+        "reason": "notFound"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 404, 'Expected one of', <HTTPStatus.OK: 200>)
+2025-11-17 02:52:00,205 ERROR No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto.
+2025-11-17 02:52:00,205 ERROR Detalles: La función guardar_conduce retornó éxito=False
+2025-11-17 02:52:00,205 ERROR Revise los logs anteriores para el error específico de Storage
+2025-11-17 02:52:11,280 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:52:12,872 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 02:52:12,881 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:52:13,079 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 02:52:13,829 INFO Aplicación finalizada con exit_code=0
+2025-11-17 03:16:45,982 INFO Configuración cargada desde config_equipos.json
+2025-11-17 03:16:46,017 INFO Tema aplicado: Oscuro
+2025-11-17 03:16:46,067 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 03:16:46,067 INFO Cliente de Firestore creado correctamente
+2025-11-17 03:16:46,067 INFO Firebase Manager inicializado correctamente
+2025-11-17 03:16:46,068 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 03:16:46,068 INFO Backup Manager inicializado correctamente
+2025-11-17 03:16:46,069 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 03:16:46,069 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 03:16:47,950 INFO Ventana principal creada y mostrada
+2025-11-17 03:16:47,953 INFO Cargando mapas de nombres...
+2025-11-17 03:16:48,136 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 03:16:48,296 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 03:16:48,446 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 03:16:49,107 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 03:16:49,543 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 03:16:50,075 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 03:16:50,523 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 03:16:51,106 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 03:16:51,106 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 03:16:51,107 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 03:16:51,107 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 03:16:51,214 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 03:16:51,217 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 03:16:51,217 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 03:16:51,326 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 03:16:51,327 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 03:16:51,327 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 03:16:51,547 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 03:16:51,548 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 03:16:51,666 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 03:16:51,667 INFO Fecha desde actualizada con primera transacción general: 2025-01-06
+2025-11-17 03:16:52,230 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 03:16:52,230 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:16:52,504 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:16:52,520 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:16:52,825 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:16:52,840 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:16:52,999 INFO Obtenidos 62 pagos a operadores
+2025-11-17 03:17:10,428 INFO Abriendo editor de imagen para: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00609.jpeg (0.24 MB)
+2025-11-17 03:17:10,492 DEBUG tag: Orientation (274) - type: short (3) - value: b'\x00\x08'
+2025-11-17 03:17:10,500 DEBUG tag: Orientation (274) - type: short (3) - value: b'\x00\x08'
+2025-11-17 03:17:10,503 DEBUG Imagen cargada con PIL: D:/Dropbox/TRABAJOS/INGENIERIA/EQUIPOS PESADOS/CONDUCES/00609.jpeg (1600x1200)
+2025-11-17 03:17:14,729 INFO Imagen redimensionada de (1600, 1200) a (1067, 800)
+2025-11-17 03:17:14,735 INFO Archivo temporal creado: C:\Users\servi\AppData\Local\Temp\conduce_editado_r_jmd3a7.jpeg
+2025-11-17 03:17:14,735 INFO Guardando imagen editada (1067x800) con calidad 85
+2025-11-17 03:17:14,746 INFO Imagen editada guardada correctamente en: C:\Users\servi\AppData\Local\Temp\conduce_editado_r_jmd3a7.jpeg (0.15 MB)
+2025-11-17 03:17:15,954 INFO Iniciando subida de conduce: C:\Users\servi\AppData\Local\Temp\conduce_editado_r_jmd3a7.jpeg
+2025-11-17 03:17:15,954 INFO === Iniciando subida de conduce ===
+2025-11-17 03:17:15,954 INFO Archivo: C:\Users\servi\AppData\Local\Temp\conduce_editado_r_jmd3a7.jpeg
+2025-11-17 03:17:15,954 INFO Alquiler: {'fecha': '2025-11-17', 'conduce': 'p021', 'id': '7546e1f7-b19c-4a82-8adb-2b9417a1d28f'}
+2025-11-17 03:17:15,954 INFO Procesar imagen: True
+2025-11-17 03:17:15,954 INFO Tamaño del archivo: 160802 bytes (0.15 MB)
+2025-11-17 03:17:15,983 INFO Redimensionando imagen de (1067, 800) a (1067, 800)
+2025-11-17 03:17:16,000 INFO Imagen procesada y guardada: C:\Users\servi\AppData\Local\Temp\tmpp6fxpmlw.jpeg (0.15 MB, calidad=85)
+2025-11-17 03:17:16,001 INFO Ruta de storage construida: conduces/2025/11/p021.jpeg
+2025-11-17 03:17:16,001 INFO Subiendo archivo a Storage: C:\Users\servi\AppData\Local\Temp\tmpp6fxpmlw.jpeg -> conduces/2025/11/p021.jpeg
+2025-11-17 03:17:16,080 DEBUG Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-11-17 03:17:16,095 DEBUG Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-11-17 03:17:16,532 DEBUG https://storage.googleapis.com:443 "POST /upload/storage/v1/b/equipos-zoec.firebasestorage.app/o?uploadType=multipart HTTP/1.1" 200 936
+2025-11-17 03:17:16,534 INFO Archivo subido exitosamente a Storage
+2025-11-17 03:17:16,641 DEBUG https://storage.googleapis.com:443 "GET /storage/v1/b/equipos-zoec.firebasestorage.app/o/conduces%2F2025%2F11%2Fp021.jpeg/acl?prettyPrint=false HTTP/1.1" 400 416
+2025-11-17 03:17:16,646 WARNING No se pudo hacer público el archivo: 400 GET https://storage.googleapis.com/storage/v1/b/equipos-zoec.firebasestorage.app/o/conduces%2F2025%2F11%2Fp021.jpeg/acl?prettyPrint=false: Cannot get legacy ACL for an object when uniform bucket-level access is enabled. Read more at https://cloud.google.com/storage/docs/uniform-bucket-level-access
+2025-11-17 03:17:16,646 INFO Generando URL firmada temporal...
+2025-11-17 03:17:16,649 INFO URL firmada generada (válida 7 días)
+2025-11-17 03:17:16,650 INFO Conduce subido: conduces/2025/11/p021.jpeg -> https://storage.googleapis.com/equipos-zoec.firebasestorage.app/conduces/2025/11/p021.jpeg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=firebase-adminsdk-fbsvc%40equipos-zoec.iam.gserviceaccount.com%2F20251117%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251117T071716Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0040f7b30a743737ae0703a85c6599a1e3d3bc8e53e9779a1c6ffae5793c5ad7191236d4310d8558f93c3321d59543d5f80d26d61593b49391deb5c6450ef96f039eddcc4924930fb6ee1ab0079e3748048568e4ae07c7ac8364fcd3c16cd6ffe3ef2f9176b0deccf3b00d48eac1bc9971e2b58fac6271b30790d1081b7b2c8ce594f9b22d6381c23c1adb8c4deaffb23bfe1988445d1ef756c2e9c7c8a4d017d4e1c54d57af739a61a121457a808453ce0ada1287ee02dad0e88e5f63b6c8e3030ad0f515b0b3c5273c3f83f3b999a6e5f6a82f0b5f964dc568ed240c0b46cca360c04cb86d5b91fd078d48d8a507329c3987734c2d6cdb243a06bb9fd500de
+2025-11-17 03:17:16,650 INFO Conduce subido exitosamente: conduces/2025/11/p021.jpeg -> https://storage.googleapis.com/equipos-zoec.firebasestorage.app/conduces/2025/11/p021.jpeg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=firebase-adminsdk-fbsvc%40equipos-zoec.iam.gserviceaccount.com%2F20251117%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251117T071716Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0040f7b30a743737ae0703a85c6599a1e3d3bc8e53e9779a1c6ffae5793c5ad7191236d4310d8558f93c3321d59543d5f80d26d61593b49391deb5c6450ef96f039eddcc4924930fb6ee1ab0079e3748048568e4ae07c7ac8364fcd3c16cd6ffe3ef2f9176b0deccf3b00d48eac1bc9971e2b58fac6271b30790d1081b7b2c8ce594f9b22d6381c23c1adb8c4deaffb23bfe1988445d1ef756c2e9c7c8a4d017d4e1c54d57af739a61a121457a808453ce0ada1287ee02dad0e88e5f63b6c8e3030ad0f515b0b3c5273c3f83f3b999a6e5f6a82f0b5f964dc568ed240c0b46cca360c04cb86d5b91fd078d48d8a507329c3987734c2d6cdb243a06bb9fd500de
+2025-11-17 03:17:16,774 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 03:17:19,499 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 03:17:19,509 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:17:19,759 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:17:59,644 INFO Abriendo conduce: https://storage.googleapis.com/equipos-zoec.firebasestorage.app/conduces/2025/11/p021.jpeg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=firebase-adminsdk-fbsvc%40equipos-zoec.iam.gserviceaccount.com%2F20251117%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251117T071716Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0040f7b30a743737ae0703a85c6599a1e3d3bc8e53e9779a1c6ffae5793c5ad7191236d4310d8558f93c3321d59543d5f80d26d61593b49391deb5c6450ef96f039eddcc4924930fb6ee1ab0079e3748048568e4ae07c7ac8364fcd3c16cd6ffe3ef2f9176b0deccf3b00d48eac1bc9971e2b58fac6271b30790d1081b7b2c8ce594f9b22d6381c23c1adb8c4deaffb23bfe1988445d1ef756c2e9c7c8a4d017d4e1c54d57af739a61a121457a808453ce0ada1287ee02dad0e88e5f63b6c8e3030ad0f515b0b3c5273c3f83f3b999a6e5f6a82f0b5f964dc568ed240c0b46cca360c04cb86d5b91fd078d48d8a507329c3987734c2d6cdb243a06bb9fd500de
+2025-11-17 03:18:12,085 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 03:18:13,086 INFO Alquiler 7546e1f7-b19c-4a82-8adb-2b9417a1d28f actualizado
+2025-11-17 03:18:13,104 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:18:13,368 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 03:19:04,613 INFO Primera fecha de transacción para cliente 35: 2025-11-17
+2025-11-17 03:19:04,613 INFO Fecha desde actualizada por cliente 35: 2025-11-17
+2025-11-17 03:19:20,641 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-11-17', 'fecha_fin': '2025-11-17', 'cliente_id': 35}
+2025-11-17 03:19:36,649 INFO Obtenidos 2 alquileres con filtros: {'fecha_inicio': '2024-11-14', 'fecha_fin': '2025-11-17', 'cliente_id': 35}
+2025-11-17 03:19:42,604 INFO Generando PDF en C:/Users/servi/OneDrive/Documentos/Reporte_Detallado_20251117_031936.pdf
+2025-11-17 03:19:42,605 DEBUG Columnas del DataFrame: ['Fecha', 'Conduce', 'Equipo', 'Ubicación', 'Horas', 'Monto', 'CondStorage']
+2025-11-17 03:19:42,616 DEBUG Primeras filas:
+        Fecha Conduce          Equipo       Ubicación  Horas    Monto CondStorage
+0  2025-11-07   00621  RETROPALA 416E  SABANA PERDIDA    6.0  15000.0            
+1  2025-11-04   00620  RETROPALA 416E  SABANA PERDIDA    4.0  10000.0            
+2025-11-17 03:19:42,621 INFO No hay conduces para agregar a los anexos
+2025-11-17 03:19:42,626 INFO PDF generado exitosamente: C:/Users/servi/OneDrive/Documentos/Reporte_Detallado_20251117_031936.pdf
