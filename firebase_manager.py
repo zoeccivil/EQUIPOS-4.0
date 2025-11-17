@@ -583,6 +583,190 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al obtener estadísticas: {e}", exc_info=True)
             raise e # Propagar el error
+    
+    # ==================== FUNCIONES PARA FILTROS DE FECHA DINÁMICOS ====================
+    
+    def obtener_fecha_primera_transaccion_alquileres(self) -> Optional[str]:
+        """
+        Obtiene la fecha de la primera transacción de alquileres en Firestore.
+        
+        Returns:
+            Fecha en formato "YYYY-MM-DD" de la primera transacción, o None si no hay datos
+        """
+        try:
+            query = self.db.collection('alquileres').order_by('fecha').limit(1)
+            docs = list(query.stream())
+            
+            if docs:
+                primera_fecha = docs[0].to_dict().get('fecha')
+                logger.info(f"Primera fecha de alquileres: {primera_fecha}")
+                return primera_fecha
+            else:
+                logger.warning("No hay alquileres en la base de datos")
+                return None
+        except Exception as e:
+            logger.error(f"Error al obtener primera fecha de alquileres: {e}", exc_info=True)
+            return None
+    
+    def obtener_fecha_primera_transaccion_gastos(self) -> Optional[str]:
+        """
+        Obtiene la fecha de la primera transacción de gastos en Firestore.
+        
+        Returns:
+            Fecha en formato "YYYY-MM-DD" de la primera transacción, o None si no hay datos
+        """
+        try:
+            query = self.db.collection('gastos').order_by('fecha').limit(1)
+            docs = list(query.stream())
+            
+            if docs:
+                primera_fecha = docs[0].to_dict().get('fecha')
+                logger.info(f"Primera fecha de gastos: {primera_fecha}")
+                return primera_fecha
+            else:
+                logger.warning("No hay gastos en la base de datos")
+                return None
+        except Exception as e:
+            logger.error(f"Error al obtener primera fecha de gastos: {e}", exc_info=True)
+            return None
+    
+    def obtener_fecha_primera_transaccion_pagos_operadores(self) -> Optional[str]:
+        """
+        Obtiene la fecha de la primera transacción de pagos a operadores en Firestore.
+        
+        Returns:
+            Fecha en formato "YYYY-MM-DD" de la primera transacción, o None si no hay datos
+        """
+        try:
+            query = self.db.collection('pagos_operadores').order_by('fecha').limit(1)
+            docs = list(query.stream())
+            
+            if docs:
+                primera_fecha = docs[0].to_dict().get('fecha')
+                logger.info(f"Primera fecha de pagos a operadores: {primera_fecha}")
+                return primera_fecha
+            else:
+                logger.warning("No hay pagos a operadores en la base de datos")
+                return None
+        except Exception as e:
+            logger.error(f"Error al obtener primera fecha de pagos a operadores: {e}", exc_info=True)
+            return None
+    
+    def obtener_fecha_primera_transaccion_cliente(self, cliente_id: str) -> Optional[str]:
+        """
+        Obtiene la fecha de la primera transacción de un cliente específico.
+        
+        Args:
+            cliente_id: ID del cliente en Firestore
+        
+        Returns:
+            Fecha en formato "YYYY-MM-DD" de la primera transacción del cliente, o None si no hay datos
+        """
+        try:
+            query = (self.db.collection('alquileres')
+                    .where(filter=FieldFilter('cliente_id', '==', cliente_id))
+                    .order_by('fecha')
+                    .limit(1))
+            docs = list(query.stream())
+            
+            if docs:
+                primera_fecha = docs[0].to_dict().get('fecha')
+                logger.info(f"Primera fecha de transacción para cliente {cliente_id}: {primera_fecha}")
+                return primera_fecha
+            else:
+                logger.warning(f"No hay transacciones para el cliente {cliente_id}")
+                return None
+        except Exception as e:
+            logger.error(f"Error al obtener primera fecha de cliente {cliente_id}: {e}", exc_info=True)
+            return None
+    
+    def obtener_fecha_primera_transaccion_equipo(self, equipo_id: str) -> Optional[str]:
+        """
+        Obtiene la fecha de la primera transacción de un equipo específico.
+        Considera tanto alquileres como gastos del equipo.
+        
+        Args:
+            equipo_id: ID del equipo en Firestore
+        
+        Returns:
+            Fecha en formato "YYYY-MM-DD" de la primera transacción del equipo, o None si no hay datos
+        """
+        try:
+            # Buscar en alquileres
+            query_alquileres = (self.db.collection('alquileres')
+                               .where(filter=FieldFilter('equipo_id', '==', equipo_id))
+                               .order_by('fecha')
+                               .limit(1))
+            docs_alquileres = list(query_alquileres.stream())
+            
+            # Buscar en gastos
+            query_gastos = (self.db.collection('gastos')
+                           .where(filter=FieldFilter('equipo_id', '==', equipo_id))
+                           .order_by('fecha')
+                           .limit(1))
+            docs_gastos = list(query_gastos.stream())
+            
+            fechas = []
+            if docs_alquileres:
+                fechas.append(docs_alquileres[0].to_dict().get('fecha'))
+            if docs_gastos:
+                fechas.append(docs_gastos[0].to_dict().get('fecha'))
+            
+            if fechas:
+                # Retornar la fecha más antigua
+                primera_fecha = min(fechas)
+                logger.info(f"Primera fecha de transacción para equipo {equipo_id}: {primera_fecha}")
+                return primera_fecha
+            else:
+                logger.warning(f"No hay transacciones para el equipo {equipo_id}")
+                return None
+        except Exception as e:
+            logger.error(f"Error al obtener primera fecha de equipo {equipo_id}: {e}", exc_info=True)
+            return None
+    
+    def obtener_fecha_primera_transaccion_operador(self, operador_id: str) -> Optional[str]:
+        """
+        Obtiene la fecha de la primera transacción de un operador específico.
+        Considera tanto alquileres como pagos al operador.
+        
+        Args:
+            operador_id: ID del operador en Firestore
+        
+        Returns:
+            Fecha en formato "YYYY-MM-DD" de la primera transacción del operador, o None si no hay datos
+        """
+        try:
+            # Buscar en alquileres
+            query_alquileres = (self.db.collection('alquileres')
+                               .where(filter=FieldFilter('operador_id', '==', operador_id))
+                               .order_by('fecha')
+                               .limit(1))
+            docs_alquileres = list(query_alquileres.stream())
+            
+            # Buscar en pagos a operadores
+            query_pagos = (self.db.collection('pagos_operadores')
+                          .where(filter=FieldFilter('operador_id', '==', operador_id))
+                          .order_by('fecha')
+                          .limit(1))
+            docs_pagos = list(query_pagos.stream())
+            
+            fechas = []
+            if docs_alquileres:
+                fechas.append(docs_alquileres[0].to_dict().get('fecha'))
+            if docs_pagos:
+                fechas.append(docs_pagos[0].to_dict().get('fecha'))
+            
+            if fechas:
+                # Retornar la fecha más antigua
+                primera_fecha = min(fechas)
+                logger.info(f"Primera fecha de transacción para operador {operador_id}: {primera_fecha}")
+                return primera_fecha
+            else:
+                logger.warning(f"No hay transacciones para el operador {operador_id}")
+                return None
+        except Exception as e:
+            logger.error(f"Error al obtener primera fecha de operador {operador_id}: {e}", exc_info=True)
+            return None
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

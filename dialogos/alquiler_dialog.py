@@ -7,8 +7,10 @@ Integra MiniEditorImagen para editar conduces antes de subir
 import logging
 import os
 import uuid
+import tempfile
 from typing import Optional, Dict, Any
 from datetime import datetime
+from pathlib import Path
 
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
@@ -22,6 +24,33 @@ from storage_manager import StorageManager
 from mini_editor_imagen import MiniEditorImagen
 
 logger = logging.getLogger(__name__)
+
+
+def crear_archivo_temporal_conduce(prefijo: str = "conduce_editado", sufijo: str = ".jpeg") -> str:
+    """
+    Crea un archivo temporal multiplataforma para guardar un conduce editado.
+    
+    Args:
+        prefijo: Prefijo del nombre del archivo temporal
+        sufijo: Extensión del archivo (debe incluir el punto, ej: ".jpeg")
+    
+    Returns:
+        Ruta completa al archivo temporal creado
+        
+    Nota:
+        Esta función encapsula la lógica de creación de archivos temporales,
+        asegurando compatibilidad entre Windows, Linux y macOS.
+    """
+    try:
+        # Crear archivo temporal con nombre único
+        temp_fd, temp_path = tempfile.mkstemp(suffix=sufijo, prefix=f"{prefijo}_")
+        # Cerrar el descriptor de archivo (solo necesitamos la ruta)
+        os.close(temp_fd)
+        logger.info(f"Archivo temporal creado: {temp_path}")
+        return temp_path
+    except Exception as e:
+        logger.error(f"Error al crear archivo temporal: {e}", exc_info=True)
+        raise
 
 
 class AlquilerDialog(QDialog):
@@ -332,26 +361,42 @@ class AlquilerDialog(QDialog):
             
             # Subir conduce si hay uno seleccionado
             if self.conduce_archivo_seleccionado and self.sm:
-                # Preparar datos temporales para el storage
-                temp_alquiler = {
-                    'fecha': datos['fecha'],
-                    'conduce': datos['conduce'],
-                    'id': self.alquiler_id or 'temp'
-                }
+                logger.info(f"Iniciando subida de conduce: {self.conduce_archivo_seleccionado}")
                 
-                exito, url, storage_path = self.sm.guardar_conduce(
-                    self.conduce_archivo_seleccionado,
-                    temp_alquiler,
-                    procesar_imagen=True
-                )
-                
-                if exito:
-                    datos['conduce_url'] = url
-                    datos['conduce_storage_path'] = storage_path
-                    logger.info(f"Conduce subido: {storage_path}")
+                # Validar que el archivo existe antes de intentar subirlo
+                if not os.path.exists(self.conduce_archivo_seleccionado):
+                    logger.error(f"Archivo de conduce no existe: {self.conduce_archivo_seleccionado}")
+                    QMessageBox.warning(
+                        self,
+                        "Advertencia",
+                        "El archivo de conduce seleccionado no existe o no es accesible.\n"
+                        "El alquiler se guardará sin conduce adjunto."
+                    )
                 else:
-                    QMessageBox.warning(self, "Advertencia", 
-                                      "No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto.")
+                    # Preparar datos temporales para el storage
+                    temp_alquiler = {
+                        'fecha': datos['fecha'],
+                        'conduce': datos['conduce'],
+                        'id': self.alquiler_id or 'temp'
+                    }
+                    
+                    exito, url, storage_path = self.sm.guardar_conduce(
+                        self.conduce_archivo_seleccionado,
+                        temp_alquiler,
+                        procesar_imagen=True
+                    )
+                    
+                    if exito:
+                        datos['conduce_url'] = url
+                        datos['conduce_storage_path'] = storage_path
+                        logger.info(f"Conduce subido exitosamente: {storage_path} -> {url}")
+                    else:
+                        logger.warning("La subida del conduce falló")
+                        QMessageBox.warning(
+                            self,
+                            "Advertencia",
+                            "No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto."
+                        )
             
             # Modo creación
             if not self.alquiler_id:
@@ -407,13 +452,30 @@ class AlquilerDialog(QDialog):
                 # Obtener imagen editada
                 img_editada = editor.get_final_image()
                 
-                # Guardar imagen editada en archivo temporal
-                temp_path = f"/tmp/conduce_editado_{uuid.uuid4().hex}.jpeg"
-                img_editada.save(temp_path, "JPEG", quality=85)
+                if img_editada is None:
+                    logger.warning("El editor no retornó imagen válida, usando archivo original")
+                    self.conduce_archivo_seleccionado = archivo
+                    self.lbl_conduce_estado.setText(f"Seleccionado: {nombre_archivo}")
+                    return
                 
-                self.conduce_archivo_seleccionado = temp_path
-                self.lbl_conduce_estado.setText(f"Seleccionado y editado: {nombre_archivo}")
-                logger.info(f"Imagen editada y guardada en: {temp_path}")
+                # Crear archivo temporal multiplataforma
+                try:
+                    temp_path = crear_archivo_temporal_conduce(prefijo="conduce_editado", sufijo=".jpeg")
+                    img_editada.save(temp_path, "JPEG", quality=85)
+                    logger.info(f"Imagen editada guardada correctamente en: {temp_path}")
+                    
+                    self.conduce_archivo_seleccionado = temp_path
+                    self.lbl_conduce_estado.setText(f"Seleccionado y editado: {nombre_archivo}")
+                    
+                except Exception as save_error:
+                    logger.error(f"Error al guardar imagen editada: {save_error}", exc_info=True)
+                    QMessageBox.warning(
+                        self,
+                        "Error",
+                        f"No se pudo guardar la imagen editada: {save_error}\n\nSe usará el archivo original."
+                    )
+                    self.conduce_archivo_seleccionado = archivo
+                    self.lbl_conduce_estado.setText(f"Seleccionado: {nombre_archivo}")
                 
             except Exception as e:
                 logger.error(f"Error al editar imagen: {e}", exc_info=True)

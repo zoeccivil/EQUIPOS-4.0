@@ -77,13 +77,25 @@ class StorageManager:
         """
         Sube un archivo de conduce a Firebase Storage.
         
+        Estructura de carpetas en Storage:
+        - Ruta: conduces/AÑO/MES/<identificador>.ext
+        - AÑO: Año de la fecha del alquiler (o año actual si no hay fecha)
+        - MES: Mes de la fecha del alquiler en formato 02 dígitos (01-12)
+        - <identificador>: Número de conduce del alquiler, o ID del alquiler si no hay número
+        - .ext: Extensión del archivo original (.jpeg si se procesa imagen)
+        
+        Ejemplo: conduces/2025/11/00575.jpeg
+        
         Args:
             file_path: Ruta local al archivo seleccionado
             alquiler: Diccionario con datos del alquiler (debe tener 'fecha' y opcionalmente 'conduce')
-            procesar_imagen: Si True, procesa imágenes antes de subir
+            procesar_imagen: Si True, procesa imágenes antes de subir (redimensiona y optimiza)
         
         Returns:
             Tuple (éxito, url_publica, ruta_storage)
+            - éxito: True si se subió correctamente
+            - url_publica: URL pública para acceder al archivo
+            - ruta_storage: Ruta interna del archivo en Firebase Storage
         """
         try:
             # Validar archivo existe
@@ -92,18 +104,22 @@ class StorageManager:
                 return False, None, None
             
             # Determinar año/mes desde fecha del alquiler
+            # Se usa la fecha del alquiler para organizar en carpetas por año y mes
+            # Si no hay fecha válida, se usa la fecha actual como fallback
             fecha_str = alquiler.get('fecha', '')
             try:
                 fecha_dt = datetime.strptime(fecha_str, "%Y-%m-%d")
                 anio = str(fecha_dt.year)
                 mes = f"{fecha_dt.month:02d}"
             except Exception:
-                # Fallback a fecha actual
+                # Fallback a fecha actual si la fecha del alquiler no es válida
                 now = datetime.now()
                 anio = str(now.year)
                 mes = f"{now.month:02d}"
+                logger.warning(f"Fecha del alquiler no válida ({fecha_str}), usando fecha actual")
             
-            # Generar nombre de archivo
+            # Generar nombre de archivo basado en el número de conduce o ID del alquiler
+            # Prioridad: 1) número de conduce, 2) ID del alquiler, 3) 'temp'
             conduce_num = alquiler.get('conduce') or alquiler.get('id', 'temp')
             ext = Path(file_path).suffix.lower()
             
@@ -118,9 +134,11 @@ class StorageManager:
                     archivo_temporal = archivo_procesado
                     ext = '.jpeg'
             
-            # Construir ruta en Storage: conduces/YYYY/MM/conduce_XXX.ext
+            # Construir ruta en Storage siguiendo el esquema: conduces/YYYY/MM/<identificador>.ext
+            # Donde YYYY es el año, MM es el mes (01-12) y <identificador> es el número de conduce o ID
             nombre_archivo = f"{conduce_num}{ext}"
             storage_path = f"conduces/{anio}/{mes}/{nombre_archivo}"
+            logger.info(f"Ruta de storage construida: {storage_path}")
             
             # Subir archivo
             blob = self.bucket.blob(storage_path)

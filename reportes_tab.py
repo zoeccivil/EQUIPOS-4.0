@@ -73,13 +73,15 @@ class ReportesTab(QWidget):
         fila2.addWidget(QLabel("Desde:"))
         self.fecha_inicio = QDateEdit()
         self.fecha_inicio.setCalendarPopup(True)
-        self.fecha_inicio.setDate(QDate.currentDate().addMonths(-1))  # Mes anterior por defecto
+        # Fecha inicial se establecerá dinámicamente en _actualizar_fecha_desde()
+        self.fecha_inicio.setDate(QDate.currentDate().addMonths(-1))
         self.fecha_inicio.setDisplayFormat("yyyy-MM-dd")
         fila2.addWidget(self.fecha_inicio)
         
         fila2.addWidget(QLabel("Hasta:"))
         self.fecha_fin = QDateEdit()
         self.fecha_fin.setCalendarPopup(True)
+        # Fecha "Hasta" siempre es la fecha actual
         self.fecha_fin.setDate(QDate.currentDate())
         self.fecha_fin.setDisplayFormat("yyyy-MM-dd")
         fila2.addWidget(self.fecha_fin)
@@ -143,6 +145,68 @@ class ReportesTab(QWidget):
         self.combo_equipo.addItem("Todos", None)
         for id_equipo, nombre in sorted(self.equipos_mapa.items(), key=lambda x: x[1]):
             self.combo_equipo.addItem(nombre, id_equipo)
+        
+        # Conectar señales para actualizar fechas dinámicamente
+        self.combo_cliente.currentIndexChanged.connect(self._actualizar_fecha_desde)
+        self.combo_equipo.currentIndexChanged.connect(self._actualizar_fecha_desde)
+        self.combo_operador.currentIndexChanged.connect(self._actualizar_fecha_desde)
+        
+        # Inicializar fechas
+        self._actualizar_fecha_desde()
+    
+    def _actualizar_fecha_desde(self):
+        """
+        Actualiza la fecha "Desde" dinámicamente basándose en el filtro seleccionado.
+        
+        Prioridad:
+        1. Si hay un cliente seleccionado, usa la fecha de su primera transacción
+        2. Si hay un equipo seleccionado, usa la fecha de su primera transacción
+        3. Si hay un operador seleccionado, usa la fecha de su primera transacción
+        4. Si todos están en "Todos", usa la fecha de la primera transacción general de alquileres
+        """
+        try:
+            primera_fecha_str = None
+            
+            # Verificar cliente
+            cliente_id = self.combo_cliente.currentData()
+            if cliente_id:
+                primera_fecha_str = self.fm.obtener_fecha_primera_transaccion_cliente(str(cliente_id))
+                logger.info(f"Fecha desde actualizada por cliente {cliente_id}: {primera_fecha_str}")
+            
+            # Si no hay cliente específico, verificar equipo
+            elif self.combo_equipo.currentData():
+                equipo_id = self.combo_equipo.currentData()
+                primera_fecha_str = self.fm.obtener_fecha_primera_transaccion_equipo(str(equipo_id))
+                logger.info(f"Fecha desde actualizada por equipo {equipo_id}: {primera_fecha_str}")
+            
+            # Si no hay equipo específico, verificar operador
+            elif self.combo_operador.currentData():
+                operador_id = self.combo_operador.currentData()
+                primera_fecha_str = self.fm.obtener_fecha_primera_transaccion_operador(str(operador_id))
+                logger.info(f"Fecha desde actualizada por operador {operador_id}: {primera_fecha_str}")
+            
+            # Si todos están en "Todos", usar primera transacción general
+            else:
+                primera_fecha_str = self.fm.obtener_fecha_primera_transaccion_alquileres()
+                logger.info(f"Fecha desde actualizada con primera transacción general: {primera_fecha_str}")
+            
+            # Aplicar la fecha obtenida
+            if primera_fecha_str:
+                primera_fecha = QDate.fromString(primera_fecha_str, "yyyy-MM-dd")
+                self.fecha_inicio.setDate(primera_fecha)
+            else:
+                # Si no hay datos, usar un mes atrás como default
+                self.fecha_inicio.setDate(QDate.currentDate().addMonths(-1))
+                logger.warning("No hay datos para el filtro seleccionado, usando fecha por defecto")
+            
+            # La fecha "Hasta" siempre es la fecha actual
+            self.fecha_fin.setDate(QDate.currentDate())
+            
+        except Exception as e:
+            logger.error(f"Error al actualizar fecha desde: {e}", exc_info=True)
+            # En caso de error, usar fechas por defecto
+            self.fecha_inicio.setDate(QDate.currentDate().addMonths(-1))
+            self.fecha_fin.setDate(QDate.currentDate())
     
     def _get_current_filters(self):
         """

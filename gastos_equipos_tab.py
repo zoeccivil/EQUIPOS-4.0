@@ -76,13 +76,15 @@ class TabGastosEquipos(QWidget):
         filtros_layout.addWidget(QLabel("Desde:"))
         self.date_desde_gastos = QDateEdit(calendarPopup=True)
         self.date_desde_gastos.setDisplayFormat("yyyy-MM-dd")
-        self.date_desde_gastos.setDate(datetime.now().replace(day=1))
+        # Fecha inicial se establecerá dinámicamente en _inicializar_fechas_filtro()
+        self.date_desde_gastos.setDate(QDate.currentDate().addMonths(-1))
         filtros_layout.addWidget(self.date_desde_gastos)
         
         filtros_layout.addWidget(QLabel("Hasta:"))
         self.date_hasta_gastos = QDateEdit(calendarPopup=True)
         self.date_hasta_gastos.setDisplayFormat("yyyy-MM-dd")
-        self.date_hasta_gastos.setDate(datetime.now())
+        # Fecha "Hasta" siempre es la fecha actual
+        self.date_hasta_gastos.setDate(QDate.currentDate())
         filtros_layout.addWidget(self.date_hasta_gastos)
         
         filtros_layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
@@ -189,10 +191,42 @@ class TabGastosEquipos(QWidget):
             self.combo_categoria_gastos.addItem("Todas", None)
             for cat_id, nombre in sorted(self.categorias_mapa.items(), key=lambda item: item[1]):
                 self.combo_categoria_gastos.addItem(nombre, cat_id)
+            
+            # --- Inicializar fechas dinámicas ---
+            self._inicializar_fechas_filtro()
 
         except Exception as e:
             logger.error(f"Error al poblar filtros de gastos: {e}", exc_info=True)
             QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros de gastos: {e}")
+    
+    def _inicializar_fechas_filtro(self):
+        """
+        Inicializa los filtros de fecha de forma dinámica.
+        La fecha "Desde" se establece como la fecha de la primera transacción de gastos.
+        La fecha "Hasta" se establece como la fecha actual.
+        """
+        try:
+            # Obtener fecha de la primera transacción de gastos
+            primera_fecha_str = self.fm.obtener_fecha_primera_transaccion_gastos()
+            
+            if primera_fecha_str:
+                # Convertir string a QDate
+                primera_fecha = QDate.fromString(primera_fecha_str, "yyyy-MM-dd")
+                self.date_desde_gastos.setDate(primera_fecha)
+                logger.info(f"Fecha 'Desde' inicializada con primera transacción de gastos: {primera_fecha_str}")
+            else:
+                # Si no hay transacciones, usar primer día del mes actual
+                self.date_desde_gastos.setDate(QDate.currentDate().addMonths(-1))
+                logger.warning("No hay gastos, usando fecha por defecto (mes anterior)")
+            
+            # Fecha "Hasta" siempre es la fecha actual
+            self.date_hasta_gastos.setDate(QDate.currentDate())
+            
+        except Exception as e:
+            logger.error(f"Error al inicializar fechas de filtro: {e}", exc_info=True)
+            # En caso de error, usar fechas por defecto
+            self.date_desde_gastos.setDate(QDate.currentDate().addMonths(-1))
+            self.date_hasta_gastos.setDate(QDate.currentDate())
 
     def _cargar_gastos(self):
         """Carga los gastos desde Firebase usando los filtros seleccionados."""

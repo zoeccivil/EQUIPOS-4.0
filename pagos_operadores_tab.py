@@ -75,13 +75,15 @@ class TabPagosOperadores(QWidget):
         filtros_layout.addWidget(QLabel("Desde:"))
         self.date_desde_pagos = QDateEdit(calendarPopup=True)
         self.date_desde_pagos.setDisplayFormat("yyyy-MM-dd")
-        self.date_desde_pagos.setDate(datetime.now().replace(day=1))
+        # Fecha inicial se establecerá dinámicamente en _inicializar_fechas_filtro()
+        self.date_desde_pagos.setDate(QDate.currentDate().addMonths(-1))
         filtros_layout.addWidget(self.date_desde_pagos)
         
         filtros_layout.addWidget(QLabel("Hasta:"))
         self.date_hasta_pagos = QDateEdit(calendarPopup=True)
         self.date_hasta_pagos.setDisplayFormat("yyyy-MM-dd")
-        self.date_hasta_pagos.setDate(datetime.now())
+        # Fecha "Hasta" siempre es la fecha actual
+        self.date_hasta_pagos.setDate(QDate.currentDate())
         filtros_layout.addWidget(self.date_hasta_pagos)
         
         filtros_layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
@@ -176,10 +178,42 @@ class TabPagosOperadores(QWidget):
             self.combo_operador_pagos.addItem("Todos", None)
             for op_id, nombre in sorted(self.operadores_mapa.items(), key=lambda item: item[1]):
                 self.combo_operador_pagos.addItem(nombre, op_id)
+            
+            # --- Inicializar fechas dinámicas ---
+            self._inicializar_fechas_filtro()
 
         except Exception as e:
             logger.error(f"Error al poblar filtros de pagos: {e}", exc_info=True)
             QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros de pagos: {e}")
+    
+    def _inicializar_fechas_filtro(self):
+        """
+        Inicializa los filtros de fecha de forma dinámica.
+        La fecha "Desde" se establece como la fecha de la primera transacción de pagos a operadores.
+        La fecha "Hasta" se establece como la fecha actual.
+        """
+        try:
+            # Obtener fecha de la primera transacción de pagos a operadores
+            primera_fecha_str = self.fm.obtener_fecha_primera_transaccion_pagos_operadores()
+            
+            if primera_fecha_str:
+                # Convertir string a QDate
+                primera_fecha = QDate.fromString(primera_fecha_str, "yyyy-MM-dd")
+                self.date_desde_pagos.setDate(primera_fecha)
+                logger.info(f"Fecha 'Desde' inicializada con primera transacción de pagos: {primera_fecha_str}")
+            else:
+                # Si no hay transacciones, usar primer día del mes actual
+                self.date_desde_pagos.setDate(QDate.currentDate().addMonths(-1))
+                logger.warning("No hay pagos a operadores, usando fecha por defecto (mes anterior)")
+            
+            # Fecha "Hasta" siempre es la fecha actual
+            self.date_hasta_pagos.setDate(QDate.currentDate())
+            
+        except Exception as e:
+            logger.error(f"Error al inicializar fechas de filtro: {e}", exc_info=True)
+            # En caso de error, usar fechas por defecto
+            self.date_desde_pagos.setDate(QDate.currentDate().addMonths(-1))
+            self.date_hasta_pagos.setDate(QDate.currentDate())
 
     def _cargar_pagos(self):
         """Carga los pagos desde Firebase usando los filtros seleccionados."""
