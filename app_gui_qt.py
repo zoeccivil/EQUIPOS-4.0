@@ -310,18 +310,39 @@ class AppGUI(QMainWindow):
     
     def _gestionar_equipos(self):
         """Abre ventana de gestión de equipos"""
-        QMessageBox.information(self, "En desarrollo",
-                              "La ventana de gestión de equipos estará disponible próximamente.")
+        from dialogos.gestion_equipos_dialog import GestionEquiposDialog
+        try:
+            dialog = GestionEquiposDialog(self.fm, parent=self)
+            dialog.exec()
+            # Recargar mapas después de la gestión
+            self._cargar_datos_iniciales()
+        except Exception as e:
+            logger.error(f"Error al abrir gestión de equipos: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"Error al abrir gestión de equipos:\n{e}")
     
     def _gestionar_clientes(self):
         """Abre ventana de gestión de clientes"""
-        QMessageBox.information(self, "En desarrollo",
-                              "La ventana de gestión de clientes estará disponible próximamente.")
+        from dialogos.gestion_entidad_dialog import GestionEntidadDialog
+        try:
+            dialog = GestionEntidadDialog(self.fm, tipo_entidad='Cliente', parent=self)
+            dialog.exec()
+            # Recargar mapas después de la gestión
+            self._cargar_datos_iniciales()
+        except Exception as e:
+            logger.error(f"Error al abrir gestión de clientes: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"Error al abrir gestión de clientes:\n{e}")
     
     def _gestionar_operadores(self):
         """Abre ventana de gestión de operadores"""
-        QMessageBox.information(self, "En desarrollo",
-                              "La ventana de gestión de operadores estará disponible próximamente.")
+        from dialogos.gestion_entidad_dialog import GestionEntidadDialog
+        try:
+            dialog = GestionEntidadDialog(self.fm, tipo_entidad='Operador', parent=self)
+            dialog.exec()
+            # Recargar mapas después de la gestión
+            self._cargar_datos_iniciales()
+        except Exception as e:
+            logger.error(f"Error al abrir gestión de operadores: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"Error al abrir gestión de operadores:\n{e}")
     
     def _gestionar_mantenimientos(self):
         """Abre ventana de gestión de mantenimientos"""
