@@ -64,8 +64,6 @@ class FirebaseManager:
     def obtener_mapa_global(self, coleccion_nombre: str) -> Dict[str, str]:
         """
         Obtiene un mapa simple (ID -> nombre) de una colección global.
-        Usado para Cuentas, Categorías, Subcategorías.
-        ¡MODIFICADO! Ahora propaga errores de índice.
         """
         try:
             mapa = {}
@@ -81,10 +79,9 @@ class FirebaseManager:
 
     # ==================== EQUIPOS ====================
     
-    def obtener_equipos(self, activo: Optional[bool] = True) -> List[Dict[str, Any]]:
+    def obtener_equipos(self, activo: Optional[bool] = None) -> List[Dict[str, Any]]:
         """
         Obtiene la lista de equipos.
-        ¡MODIFICADO! Ahora propaga errores de índice.
         """
         try:
             equipos_ref = self.db.collection('equipos')
@@ -92,16 +89,16 @@ class FirebaseManager:
                 query = equipos_ref.where(filter=FieldFilter('activo', '==', activo))
             else:
                 query = equipos_ref
-            docs = query.order_by('nombre').stream() # Requiere índice (activo Asc, nombre Asc)
+            docs = query.order_by('nombre').stream() # Requiere índice
             equipos = []
             for doc in docs:
                 equipo = doc.to_dict()
                 equipo['id'] = doc.id
                 equipos.append(equipo)
-            logger.info(f"Obtenidos {len(equipos)} equipos")
+            logger.info(f"Obtenidos {len(equipos)} equipos (activo={activo})")
             return equipos
         except Exception as e:
-            logger.error(f"Error al obtener equipos: {e}", exc_info=True)
+            logger.error(f"Error al obtener equipos (activo={activo}): {e}", exc_info=True)
             raise e # Propagar el error
     
     def obtener_equipo_por_id(self, equipo_id: str) -> Optional[Dict[str, Any]]:
@@ -158,7 +155,6 @@ class FirebaseManager:
     def obtener_alquileres(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """
         Obtiene alquileres con filtros opcionales.
-        ¡MODIFICADO! Filtra por fecha_inicio/fin, no ano/mes. Propaga errores.
         """
         try:
             query = self.db.collection('alquileres')
@@ -192,6 +188,21 @@ class FirebaseManager:
         except Exception as e:
             logger.error(f"Error al obtener alquileres: {e}", exc_info=True)
             raise e # Propagar el error
+
+    # --- ¡INICIO DE CORRECCIÓN (V10)! ---
+    def obtener_alquiler_por_id(self, alquiler_id: str) -> Optional[Dict[str, Any]]:
+        """Obtiene un único alquiler por su ID de documento."""
+        try:
+            doc = self.db.collection('alquileres').document(alquiler_id).get()
+            if doc.exists:
+                alquiler = doc.to_dict()
+                alquiler['id'] = doc.id
+                return alquiler
+            return None
+        except Exception as e:
+            logger.error(f"Error al obtener alquiler {alquiler_id}: {e}")
+            return None
+    # --- FIN DE CORRECCIÓN (V10)! ---
 
     def registrar_alquiler(self, datos: Dict[str, Any]) -> Optional[str]:
         """Registra un nuevo alquiler."""
@@ -241,7 +252,6 @@ class FirebaseManager:
     def obtener_gastos(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """
         Obtiene gastos con filtros opcionales.
-        ¡MODIFICADO! Filtra por fecha_inicio/fin, no ano/mes. Propaga errores.
         """
         try:
             query = self.db.collection('gastos')
@@ -317,10 +327,9 @@ class FirebaseManager:
 
     # ==================== ENTIDADES (CLIENTES Y OPERADORES) ====================
     
-    def obtener_entidades(self, tipo: Optional[str] = None, activo: Optional[bool] = True) -> List[Dict[str, Any]]:
+    def obtener_entidades(self, tipo: Optional[str] = None, activo: Optional[bool] = None) -> List[Dict[str, Any]]: # MODIFICADO: activo=None
         """
         Obtiene entidades (clientes u operadores).
-        ¡MODIFICADO! Ahora propaga errores de índice.
         """
         try:
             query = self.db.collection('entidades')
@@ -328,16 +337,17 @@ class FirebaseManager:
                 query = query.where(filter=FieldFilter('tipo', '==', tipo))
             if activo is not None:
                 query = query.where(filter=FieldFilter('activo', '==', activo))
-            docs = query.order_by('nombre').stream() # Requiere índice (activo Asc, tipo Asc, nombre Asc)
+            
+            docs = query.order_by('nombre').stream() 
             entidades = []
             for doc in docs:
                 entidad = doc.to_dict()
                 entidad['id'] = doc.id
                 entidades.append(entidad)
-            logger.info(f"Obtenidas {len(entidades)} entidades (tipo={tipo})")
+            logger.info(f"Obtenidas {len(entidades)} entidades (tipo={tipo}, activo={activo})")
             return entidades
         except Exception as e:
-            logger.error(f"Error al obtener entidades: {e}", exc_info=True)
+            logger.error(f"Error al obtener entidades (tipo={tipo}, activo={activo}): {e}", exc_info=True)
             raise e # Propagar el error
     
     def obtener_entidad_por_id(self, entidad_id: str) -> Optional[Dict[str, Any]]:
@@ -394,7 +404,6 @@ class FirebaseManager:
     def obtener_mantenimientos(self, equipo_id: Optional[str] = None) -> List[Dict[str, Any]]:
         """
         Obtiene mantenimientos, opcionalmente filtrados por equipo.
-        ¡MODIFICADO! Propaga errores.
         """
         try:
             query = self.db.collection('mantenimientos')
@@ -461,7 +470,6 @@ class FirebaseManager:
     def obtener_pagos_operadores(self, filtros: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """
         Obtiene pagos a operadores con filtros opcionales.
-        ¡MODIFICADO! Filtra por fecha_inicio/fin, no ano/mes. Propaga errores.
         """
         try:
             query = self.db.collection('pagos_operadores')
@@ -528,24 +536,18 @@ class FirebaseManager:
     def obtener_estadisticas_dashboard(self, filtros: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Obtiene estadísticas para el dashboard.
-        ¡MODIFICADO! Lee de 'alquileres' y 'gastos'.
         """
         try:
             query_ingresos = self.db.collection('alquileres')
             query_gastos = self.db.collection('gastos')
             
-            # Filtros para Ingresos/Gastos del periodo
-            filtros_periodo = {}
-            
             if filtros:
                 if 'ano' in filtros:
                     query_ingresos = query_ingresos.where(filter=FieldFilter('ano', '==', filtros['ano']))
                     query_gastos = query_gastos.where(filter=FieldFilter('ano', '==', filtros['ano']))
-                    filtros_periodo['ano'] = filtros['ano']
                 if 'mes' in filtros:
                     query_ingresos = query_ingresos.where(filter=FieldFilter('mes', '==', filtros['mes']))
                     query_gastos = query_gastos.where(filter=FieldFilter('mes', '==', filtros['mes']))
-                    filtros_periodo['mes'] = filtros['mes']
                 if 'equipo_id' in filtros:
                     query_ingresos = query_ingresos.where(filter=FieldFilter('equipo_id', '==', filtros['equipo_id']))
                     query_gastos = query_gastos.where(filter=FieldFilter('equipo_id', '==', filtros['equipo_id']))
@@ -563,7 +565,12 @@ class FirebaseManager:
             saldo_pendiente = sum(doc.to_dict().get('monto', 0) for doc in pendientes)
 
             # Contar equipos activos
-            equipos_activos = len(self.obtener_equipos(activo=True))
+            try:
+                equipos_activos = len(self.obtener_equipos(activo=True))
+            except Exception:
+                logger.warning("Falta índice para 'equipos activos' en Dashboard, contando todos.")
+                equipos_activos = len(self.obtener_equipos(activo=None))
+
             
             return {
                 'ingresos_mes': total_ingresos,

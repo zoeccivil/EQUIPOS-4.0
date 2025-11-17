@@ -12,6 +12,8 @@ from datetime import datetime
 import logging
 
 from report_generator import ReportGenerator
+from firebase_manager import FirebaseManager # Asegúrate de importar FirebaseManager
+from storage_manager import StorageManager # Asegúrate de importar StorageManager
 
 logger = logging.getLogger(__name__)
 
@@ -21,18 +23,10 @@ class ReportesTab(QWidget):
     Tab para generación de reportes PDF.
     """
     
-    def __init__(self, firebase_manager, storage_manager=None, 
+    def __init__(self, firebase_manager: FirebaseManager, storage_manager: StorageManager = None, 
                  clientes_mapa=None, operadores_mapa=None, equipos_mapa=None, parent=None):
         """
         Inicializa el tab de reportes.
-        
-        Args:
-            firebase_manager: Instancia de FirebaseManager
-            storage_manager: Instancia de StorageManager (opcional)
-            clientes_mapa: Diccionario {id: nombre} de clientes
-            operadores_mapa: Diccionario {id: nombre} de operadores
-            equipos_mapa: Diccionario {id: nombre} de equipos
-            parent: Widget padre
         """
         super().__init__(parent)
         self.fm = firebase_manager
@@ -153,6 +147,7 @@ class ReportesTab(QWidget):
     def _get_current_filters(self):
         """
         Obtiene los filtros actuales seleccionados.
+        ¡CORREGIDO (V8)! Convierte IDs a int.
         
         Returns:
             dict: Filtros para consultar Firebase
@@ -162,20 +157,22 @@ class ReportesTab(QWidget):
             'fecha_fin': self.fecha_fin.date().toString("yyyy-MM-dd")
         }
         
+        # --- ¡INICIO DE CORRECCIÓN (V8)! ---
         # Cliente
-        cliente_id = self.combo_cliente.currentData()
-        if cliente_id:
-            filtros['cliente_id'] = cliente_id
+        cliente_id_str = self.combo_cliente.currentData()
+        if cliente_id_str:
+            filtros['cliente_id'] = int(cliente_id_str)
         
         # Operador
-        operador_id = self.combo_operador.currentData()
-        if operador_id:
-            filtros['operador_id'] = operador_id
+        operador_id_str = self.combo_operador.currentData()
+        if operador_id_str:
+            filtros['operador_id'] = int(operador_id_str)
         
         # Equipo
-        equipo_id = self.combo_equipo.currentData()
-        if equipo_id:
-            filtros['equipo_id'] = equipo_id
+        equipo_id_str = self.combo_equipo.currentData()
+        if equipo_id_str:
+            filtros['equipo_id'] = int(equipo_id_str)
+        # --- FIN DE CORRECCIÓN (V8)! ---
         
         return filtros
     
@@ -199,9 +196,20 @@ class ReportesTab(QWidget):
             data_reporte = []
             for alq in alquileres:
                 # Convertir IDs a nombres
-                equipo_id = str(int(float(alq.get('equipo_id', 0)))) if alq.get('equipo_id') else None
-                cliente_id = str(int(float(alq.get('cliente_id', 0)))) if alq.get('cliente_id') else None
-                operador_id = str(int(float(alq.get('operador_id', 0)))) if alq.get('operador_id') else None
+                try:
+                    equipo_id = str(int(alq.get('equipo_id', 0)))
+                except (ValueError, TypeError):
+                    equipo_id = "0"
+                
+                try:
+                    cliente_id = str(int(alq.get('cliente_id', 0)))
+                except (ValueError, TypeError):
+                    cliente_id = "0"
+                
+                try:
+                    operador_id = str(int(alq.get('operador_id', 0)))
+                except (ValueError, TypeError):
+                    operador_id = "0"
                 
                 data_reporte.append({
                     'Fecha': alq.get('fecha', ''),
@@ -287,8 +295,12 @@ class ReportesTab(QWidget):
             # Agrupar por operador
             operadores_horas = {}
             for alq in alquileres:
-                operador_id = str(int(float(alq.get('operador_id', 0)))) if alq.get('operador_id') else None
-                if operador_id:
+                try:
+                    operador_id = str(int(alq.get('operador_id', 0)))
+                except (ValueError, TypeError):
+                    operador_id = "0"
+
+                if operador_id != "0":
                     nombre_op = self.operadores_mapa.get(operador_id, f'ID: {operador_id}')
                     horas = float(alq.get('horas', 0))
                     

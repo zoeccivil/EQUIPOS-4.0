@@ -1,27 +1,21 @@
 """
 Tab de Registro de Alquileres para EQUIPOS 4.0
-¡MODIFICADO (V7.1)!
-- Corregido typo en import (PyQt6t)
-- Corregida la conversión de tipo de ID (float a str)
-- Filtros por rango de fecha (QDateEdit)
-- Layout de filtros y botones horizontal
-- Sin columna de "Acciones"
-- Lógica de carga de mapas actualizada
+¡MODIFICADO (V10)!
+- Corregida la llamada al constructor de AlquilerDialog (pasando alquiler_data)
 """
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QComboBox, QLineEdit,
     QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
     QMessageBox, QLabel, QDateEdit, QSpacerItem, QSizePolicy
 )
-# --- ¡LÍNEA CORREGIDA! ---
 from PyQt6.QtCore import Qt, pyqtSignal, QDate
-# --- ---
 from PyQt6.QtGui import QIcon, QColor
 from datetime import datetime
 import logging
 
 from firebase_manager import FirebaseManager
 from dialogos.alquiler_dialog import AlquilerDialog 
+from storage_manager import StorageManager 
 
 logger = logging.getLogger(__name__)
 
@@ -32,11 +26,11 @@ class RegistroAlquileresTab(QWidget):
     
     recargar_dashboard = pyqtSignal()
     
-    def __init__(self, firebase_manager: FirebaseManager, storage_manager=None):
+    def __init__(self, firebase_manager: FirebaseManager, storage_manager: StorageManager = None):
         super().__init__()
         
         self.fm = firebase_manager
-        self.sm = storage_manager
+        self.sm = storage_manager # Guardar el storage_manager
         self.alquileres_cargados = [] # Caché de los alquileres
         
         # Mapas de nombres (se llenarán desde app_gui)
@@ -208,46 +202,10 @@ class RegistroAlquileresTab(QWidget):
             self.combo_pagado.addItem("Todos", None)
             self.combo_pagado.addItem("Pendientes", False)
             self.combo_pagado.addItem("Pagados", True)
-            
-            # Establecer rango de fechas inicial y cargar datos
-            self._establecer_rango_fechas_inicial()
 
         except Exception as e:
             logger.error(f"Error al poblar filtros de alquileres: {e}", exc_info=True)
             QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros: {e}")
-    
-    def _establecer_rango_fechas_inicial(self):
-        """Establece el rango de fechas desde la primera transacción hasta hoy."""
-        try:
-            # Intentar obtener la fecha más antigua
-            query = self.fm.db.collection('alquileres').order_by('fecha').limit(1)
-            docs = list(query.stream())
-            
-            if docs:
-                primera_fecha_str = docs[0].to_dict().get('fecha')
-                if primera_fecha_str:
-                    self.date_desde.setDate(QDate.fromString(primera_fecha_str, "yyyy-MM-dd"))
-                    logger.info(f"Fecha inicial establecida a primera transacción: {primera_fecha_str}")
-                else:
-                    # Sin fecha válida: hace 1 año
-                    self.date_desde.setDate(QDate.currentDate().addYears(-1))
-            else:
-                # Sin datos: hace 1 año
-                logger.info("No hay alquileres, estableciendo fecha hace 1 año")
-                self.date_desde.setDate(QDate.currentDate().addYears(-1))
-            
-            # Fecha fin: hoy
-            self.date_hasta.setDate(QDate.currentDate())
-            
-            # Cargar datos automáticamente
-            logger.info("Cargando alquileres automáticamente con rango inicial")
-            self._cargar_alquileres()
-            
-        except Exception as e:
-            logger.warning(f"Error estableciendo rango de fechas inicial: {e}")
-            # Fallback: último mes
-            self.date_desde.setDate(QDate.currentDate().addMonths(-1))
-            self.date_hasta.setDate(QDate.currentDate())
 
     def _cargar_alquileres(self):
         """Carga los alquileres desde Firebase usando los filtros seleccionados."""
@@ -262,19 +220,19 @@ class RegistroAlquileresTab(QWidget):
         filtros['fecha_inicio'] = self.date_desde.date().toString("yyyy-MM-dd")
         filtros['fecha_fin'] = self.date_hasta.date().toString("yyyy-MM-dd")
         
-        # Recolectar filtros de combos - CONVERTIR A STRING
-        equipo_id = self.combo_equipo.currentData()
-        if equipo_id:
-            filtros['equipo_id'] = str(equipo_id)
-        
-        cliente_id = self.combo_cliente.currentData()
-        if cliente_id:
-            filtros['cliente_id'] = str(cliente_id)
-        
-        operador_id = self.combo_operador.currentData()
-        if operador_id:
-            filtros['operador_id'] = str(operador_id)
-        
+        # Convertir IDs de string (del combo) a int (para Firestore)
+        equipo_id_str = self.combo_equipo.currentData()
+        if equipo_id_str:
+            filtros['equipo_id'] = int(equipo_id_str)
+            
+        cliente_id_str = self.combo_cliente.currentData()
+        if cliente_id_str:
+            filtros['cliente_id'] = int(cliente_id_str)
+            
+        operador_id_str = self.combo_operador.currentData()
+        if operador_id_str:
+            filtros['operador_id'] = int(operador_id_str)
+            
         if self.combo_pagado.currentData() is not None:
             filtros['pagado'] = self.combo_pagado.currentData()
             
@@ -294,8 +252,7 @@ class RegistroAlquileresTab(QWidget):
             total_monto = 0.0
             
             for row, alquiler in enumerate(self.alquileres_cargados):
-                # --- ¡INICIO DE CORRECCIÓN (V7)! ---
-                # Forzar la conversión a int y luego a str para llaves de mapa
+                # --- Traducción de IDs a Nombres ---
                 try:
                     equipo_id = str(int(alquiler.get('equipo_id', 0)))
                 except (ValueError, TypeError):
@@ -310,7 +267,6 @@ class RegistroAlquileresTab(QWidget):
                     operador_id = str(int(alquiler.get('operador_id', 0)))
                 except (ValueError, TypeError):
                     operador_id = "0"
-                # --- FIN DE CORRECCIÓN (V7)! ---
 
                 equipo_nombre = self.equipos_mapa.get(equipo_id, f"ID: {equipo_id}")
                 cliente_nombre = self.clientes_mapa.get(cliente_id, f"ID: {cliente_id}")
@@ -318,7 +274,6 @@ class RegistroAlquileresTab(QWidget):
                 
                 # --- Poblar la tabla ---
                 item_fecha = QTableWidgetItem(alquiler.get('fecha', ''))
-                # Guardar el ID del documento en la fila (oculto en el item 0)
                 item_fecha.setData(Qt.ItemDataRole.UserRole, alquiler['id']) 
                 self.tabla_alquileres.setItem(row, 0, item_fecha)
 
@@ -368,38 +323,36 @@ class RegistroAlquileresTab(QWidget):
 
     def abrir_dialogo_alquiler(self, alquiler_id: str = None):
         """Abre el diálogo para crear o editar un alquiler."""
+        alquiler_data_para_dialogo = None
         if alquiler_id is False: # Señal de "Nuevo"
             alquiler_id = None
         
-        try:
-            # Si hay ID, cargar los datos del alquiler
-            alquiler_data = None
-            if alquiler_id:
-                # Buscar el alquiler en la lista cargada
-                alquiler_data = next((a for a in self.alquileres_cargados if a['id'] == alquiler_id), None)
-                if not alquiler_data:
-                    QMessageBox.warning(self, "Error", "No se encontró el alquiler seleccionado.")
+        # --- ¡INICIO DE CORRECCIÓN (V10)! ---
+        if alquiler_id:
+            # Si es una edición, buscar los datos completos del alquiler
+            try:
+                alquiler_data_para_dialogo = self.fm.obtener_alquiler_por_id(alquiler_id)
+                if not alquiler_data_para_dialogo:
+                    QMessageBox.critical(self, "Error", f"No se pudieron cargar los datos para el alquiler ID: {alquiler_id}")
                     return
-            
-            # Abrir el diálogo
-            dialogo = AlquilerDialog(
-                firebase_manager=self.fm,
-                equipos_mapa=self.equipos_mapa,
-                clientes_mapa=self.clientes_mapa,
-                operadores_mapa=self.operadores_mapa,
-                storage_manager=self.sm,
-                alquiler_data=alquiler_data,
-                parent=self
-            )
-            
-            # Si el usuario acepta, recargar la tabla
-            if dialogo.exec():
-                self._cargar_alquileres()
-                self.recargar_dashboard.emit()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Error al cargar datos de alquiler: {e}")
+                return
         
-        except Exception as e:
-            logger.error(f"Error al abrir diálogo de alquiler: {e}", exc_info=True)
-            QMessageBox.critical(self, "Error", f"Error al abrir el diálogo:\n{e}")
+        dialog = AlquilerDialog(
+            firebase_manager=self.fm, 
+            storage_manager=self.sm, 
+            equipos_mapa=self.equipos_mapa, 
+            clientes_mapa=self.clientes_mapa, 
+            operadores_mapa=self.operadores_mapa, 
+            alquiler_data=alquiler_data_para_dialogo,  # <-- ¡CORREGIDO! Pasar el dict o None
+            parent=self
+        )
+        # --- FIN DE CORRECCIÓN (V10)! ---
+        
+        if dialog.exec():
+            self._cargar_alquileres()
+            self.recargar_dashboard.emit()
         
     def editar_alquiler_seleccionado(self):
         """Abre el diálogo de edición para el alquiler seleccionado."""

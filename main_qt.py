@@ -79,19 +79,19 @@ def main():
     except Exception as e:
         logger.exception("No se pudo cargar la configuración: %s", e)
         QMessageBox.critical(None, "Error de Configuración",
-                           f"No se pudo cargar la configuración:\n{e}\n\n"
-                           "Asegúrese de que existe el archivo config_equipos.json")
+                             f"No se pudo cargar la configuración:\n{e}\n\n"
+                             "Asegúrese de que existe el archivo config_equipos.json")
         sys.exit(1)
 
     # Verificar que existe el archivo de credenciales de Firebase
     firebase_creds = config.get('firebase', {}).get('credentials_path', 'firebase_credentials.json')
     if not os.path.exists(firebase_creds):
         QMessageBox.critical(None, "Credenciales de Firebase no encontradas",
-                           f"No se encontró el archivo de credenciales de Firebase:\n{firebase_creds}\n\n"
-                           "Por favor:\n"
-                           "1. Descargue las credenciales desde Firebase Console\n"
-                           "2. Guárdelas como 'firebase_credentials.json' en el directorio raíz\n"
-                           "3. Reinicie la aplicación")
+                             f"No se encontró el archivo de credenciales de Firebase:\n{firebase_creds}\n\n"
+                             "Por favor:\n"
+                             "1. Descargue las credenciales desde Firebase Console\n"
+                             "2. Guárdelas como 'firebase_credentials.json' en el directorio raíz\n"
+                             "3. Reinicie la aplicación")
         logger.error("No se encontraron credenciales de Firebase")
         sys.exit(1)
 
@@ -114,11 +114,11 @@ def main():
     except Exception as e:
         logger.exception("No se pudo inicializar Firebase Manager: %s", e)
         QMessageBox.critical(None, "Error de Firebase",
-                           f"No se pudo conectar con Firebase:\n{e}\n\n"
-                           "Verifique:\n"
-                           "1. Las credenciales son correctas\n"
-                           "2. Tiene conexión a Internet\n"
-                           "3. El proyecto de Firebase está activo")
+                             f"No se pudo conectar con Firebase:\n{e}\n\n"
+                             "Verifique:\n"
+                             "1. Las credenciales son correctas\n"
+                             "2. Tiene conexión a Internet\n"
+                             "3. El proyecto de Firebase está activo")
         sys.exit(1)
 
     # Inicializar Backup Manager
@@ -137,11 +137,7 @@ def main():
     storage_bucket = config.get('firebase', {}).get('storage_bucket')
     if storage_bucket:
         try:
-            storage_manager = StorageManager(
-                credentials_path=config['firebase']['credentials_path'],
-                project_id=config['firebase']['project_id'],
-                bucket_name=storage_bucket
-            )
+            storage_manager = StorageManager(bucket_name=storage_bucket) # Corregido: StorageManager solo necesita bucket_name
             logger.info(f"Storage Manager inicializado correctamente con bucket: {storage_bucket}")
         except Exception as e:
             logger.warning(f"No se pudo inicializar Storage Manager: {e}")
@@ -151,13 +147,21 @@ def main():
 
     # Iniciar la ventana principal
     try:
-        window = AppGUI(firebase_manager, backup_manager, storage_manager, config)
+        # --- ¡LÍNEA CORREGIDA! ---
+        # Se pasa el 'storage_manager' que se inicializó (en lugar de None)
+        window = AppGUI(
+            firebase_manager=firebase_manager, 
+            backup_manager=backup_manager, 
+            storage_manager=storage_manager, 
+            config=config
+        )
+        # --- FIN DE LA CORRECCIÓN ---
         window.show()
         logger.info("Ventana principal creada y mostrada")
     except Exception as e:
         logger.exception("Error creando ventana principal AppGUI: %s", e)
         QMessageBox.critical(None, "Error al iniciar",
-                           f"No se pudo iniciar la interfaz gráfica:\n{e}")
+                             f"No se pudo iniciar la interfaz gráfica:\n{e}")
         sys.exit(1)
 
     # Configurar verificación de backups automáticos

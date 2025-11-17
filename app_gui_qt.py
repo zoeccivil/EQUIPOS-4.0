@@ -17,7 +17,7 @@ import logging
 
 from firebase_manager import FirebaseManager
 from backup_manager import BackupManager
-from storage_manager import StorageManager
+from storage_manager import StorageManager # Importar StorageManager
 from config_manager import cargar_configuracion, guardar_configuracion
 from theme_manager import ThemeManager
 
@@ -26,7 +26,7 @@ from dashboard_tab import DashboardTab
 from registro_alquileres_tab import RegistroAlquileresTab
 from gastos_equipos_tab import TabGastosEquipos
 from pagos_operadores_tab import TabPagosOperadores
-from reportes_tab import ReportesTab
+from reportes_tab import ReportesTab # Importar ReportesTab
 
 logger = logging.getLogger(__name__)
 
@@ -36,13 +36,15 @@ class AppGUI(QMainWindow):
     Gestiona tabs, menús y configuración general.
     """
     
+    # --- ¡INICIO DE CORRECCIÓN (V10)! ---
     def __init__(self, firebase_manager: FirebaseManager, backup_manager: BackupManager = None, 
                  storage_manager: StorageManager = None, config: dict = None):
         super().__init__()
         self.fm = firebase_manager
         self.bm = backup_manager
-        self.sm = storage_manager
+        self.sm = storage_manager # Guardar el storage_manager
         self.config = config or {}
+    # --- FIN DE CORRECCIÓN (V10)! ---
         
         # Atributos de estado (Mapas de Nombres)
         self.clientes_mapa = {}
@@ -72,8 +74,11 @@ class AppGUI(QMainWindow):
         self.dashboard_tab = DashboardTab(self.fm)
         self.tabs.addTab(self.dashboard_tab, "Dashboard")
         
+        # --- ¡INICIO DE CORRECCIÓN (V10)! ---
         # Tab de Registro de Alquileres
+        # Pasar el storage_manager al tab
         self.registro_tab = RegistroAlquileresTab(self.fm, storage_manager=self.sm)
+        # --- FIN DE CORRECCIÓN (V10)! ---
         self.tabs.addTab(self.registro_tab, "Registro de Alquileres")
         
         # Tab de Gastos de Equipos
@@ -184,14 +189,10 @@ class AppGUI(QMainWindow):
     def _cargar_datos_iniciales(self):
         """
         Carga los datos iniciales desde Firebase (Mapas de Nombres)
-        ¡MODIFICADO (V7)!
         """
         try:
             logger.info("Cargando mapas de nombres...")
             
-            # --- ¡CAMBIO CLAVE! ---
-            # Pedimos TODOS los equipos y entidades, no solo los activos=True
-            # activo=None significa "sin filtro de activo"
             equipos = self.fm.obtener_equipos(activo=None)
             self.equipos_mapa = {eq['id']: eq.get('nombre', 'N/A') for eq in equipos}
             
@@ -200,7 +201,6 @@ class AppGUI(QMainWindow):
             
             operadores = self.fm.obtener_entidades(tipo='Operador', activo=None)
             self.operadores_mapa = {op['id']: op.get('nombre', 'N/A') for op in operadores}
-            # --- FIN DEL CAMBIO ---
 
             # Cargar mapas globales
             self.cuentas_mapa = self.fm.obtener_mapa_global('cuentas')
@@ -226,17 +226,19 @@ class AppGUI(QMainWindow):
             self.registro_tab.actualizar_mapas(mapas_completos)
             self.gastos_tab.actualizar_mapas(mapas_completos)
             self.pagos_tab.actualizar_mapas(mapas_completos)
-            
+
+            # --- ¡INICIO DE CORRECCIÓN (V10)! ---
             # Crear tab de reportes ahora que tenemos los mapas
             if not self.reportes_tab:
                 self.reportes_tab = ReportesTab(
                     self.fm,
-                    storage_manager=self.sm,
+                    storage_manager=self.sm, # Pasa el storage manager
                     clientes_mapa=self.clientes_mapa,
                     operadores_mapa=self.operadores_mapa,
                     equipos_mapa=self.equipos_mapa
                 )
                 self.tabs.addTab(self.reportes_tab, "Reportes")
+            # --- FIN DE CORRECCIÓN (V10)! ---
             
             # Ahora, refrescar los datos
             self.dashboard_tab.refrescar_datos()

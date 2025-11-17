@@ -1,11 +1,7 @@
 """
 Tab de Gastos de Equipos para EQUIPOS 4.0
-¡MODIFICADO (V7)!
-- Corregida la conversión de tipo de ID (float a str)
-- Filtros por rango de fecha (QDateEdit)
-- Layout de filtros y botones horizontal
-- Sin columna de "Acciones"
-- Lógica de carga de mapas actualizada
+¡MODIFICADO (V8)!
+- Corregida la conversión de tipo de ID (str a int) en los filtros.
 """
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QComboBox, QLineEdit,
@@ -193,43 +189,10 @@ class TabGastosEquipos(QWidget):
             self.combo_categoria_gastos.addItem("Todas", None)
             for cat_id, nombre in sorted(self.categorias_mapa.items(), key=lambda item: item[1]):
                 self.combo_categoria_gastos.addItem(nombre, cat_id)
-            
-            # Establecer rango de fechas inicial y cargar datos
-            self._establecer_rango_fechas_inicial()
 
         except Exception as e:
             logger.error(f"Error al poblar filtros de gastos: {e}", exc_info=True)
             QMessageBox.warning(self, "Error", f"No se pudieron cargar los filtros de gastos: {e}")
-    
-    def _establecer_rango_fechas_inicial(self):
-        """Establece el rango de fechas desde la primera transacción hasta hoy."""
-        try:
-            # Intentar obtener la fecha más antigua
-            query = self.fm.db.collection('gastos').order_by('fecha').limit(1)
-            docs = list(query.stream())
-            
-            if docs:
-                primera_fecha_str = docs[0].to_dict().get('fecha')
-                if primera_fecha_str:
-                    self.date_desde_gastos.setDate(QDate.fromString(primera_fecha_str, "yyyy-MM-dd"))
-                    logger.info(f"Fecha inicial de gastos establecida a: {primera_fecha_str}")
-                else:
-                    self.date_desde_gastos.setDate(QDate.currentDate().addYears(-1))
-            else:
-                logger.info("No hay gastos, estableciendo fecha hace 1 año")
-                self.date_desde_gastos.setDate(QDate.currentDate().addYears(-1))
-            
-            # Fecha fin: hoy
-            self.date_hasta_gastos.setDate(QDate.currentDate())
-            
-            # Cargar datos automáticamente
-            logger.info("Cargando gastos automáticamente con rango inicial")
-            self._cargar_gastos()
-            
-        except Exception as e:
-            logger.warning(f"Error estableciendo rango de fechas inicial para gastos: {e}")
-            self.date_desde_gastos.setDate(QDate.currentDate().addMonths(-1))
-            self.date_hasta_gastos.setDate(QDate.currentDate())
 
     def _cargar_gastos(self):
         """Carga los gastos desde Firebase usando los filtros seleccionados."""
@@ -244,18 +207,20 @@ class TabGastosEquipos(QWidget):
         filtros['fecha_inicio'] = self.date_desde_gastos.date().toString("yyyy-MM-dd")
         filtros['fecha_fin'] = self.date_hasta_gastos.date().toString("yyyy-MM-dd")
 
-        # Recolectar filtros de combos - CONVERTIR A STRING
-        equipo_id = self.combo_equipo_gastos.currentData()
-        if equipo_id:
-            filtros['equipo_id'] = str(equipo_id)
-        
-        cuenta_id = self.combo_cuenta_gastos.currentData()
-        if cuenta_id:
-            filtros['cuenta_id'] = str(cuenta_id)
-        
-        categoria_id = self.combo_categoria_gastos.currentData()
-        if categoria_id:
-            filtros['categoria_id'] = str(categoria_id)
+        # --- ¡INICIO DE CORRECCIÓN (V8)! ---
+        # Convertir IDs de string (del combo) a int (para Firestore)
+        equipo_id_str = self.combo_equipo_gastos.currentData()
+        if equipo_id_str:
+            filtros['equipo_id'] = int(equipo_id_str)
+            
+        cuenta_id_str = self.combo_cuenta_gastos.currentData()
+        if cuenta_id_str:
+            filtros['cuenta_id'] = int(cuenta_id_str)
+            
+        categoria_id_str = self.combo_categoria_gastos.currentData()
+        if categoria_id_str:
+            filtros['categoria_id'] = int(categoria_id_str)
+        # --- FIN DE CORRECCIÓN (V8)! ---
             
         try:
             logger.info(f"Cargando gastos con filtros: {filtros}")
@@ -273,28 +238,23 @@ class TabGastosEquipos(QWidget):
             total_monto_gastos = 0.0
             
             for row, gasto in enumerate(self.gastos_cargados):
-                # --- ¡INICIO DE CORRECCIÓN (V7)! ---
-                # Forzar la conversión a int y luego a str para llaves de mapa
+                # --- Traducción de IDs a Nombres ---
                 try:
                     equipo_id = str(int(gasto.get('equipo_id', 0)))
                 except (ValueError, TypeError):
                     equipo_id = "0"
-                
                 try:
                     cuenta_id = str(int(gasto.get('cuenta_id', 0)))
                 except (ValueError, TypeError):
                     cuenta_id = "0"
-                
                 try:
                     categoria_id = str(int(gasto.get('categoria_id', 0)))
                 except (ValueError, TypeError):
                     categoria_id = "0"
-                    
                 try:
                     subcategoria_id = str(int(gasto.get('subcategoria_id', 0)))
                 except (ValueError, TypeError):
                     subcategoria_id = "0"
-                # --- FIN DE CORRECCIÓN (V7)! ---
 
                 
                 equipo_nombre = self.equipos_mapa.get(equipo_id, f"ID: {equipo_id}")
@@ -304,7 +264,6 @@ class TabGastosEquipos(QWidget):
                 
                 # --- Poblar la tabla ---
                 item_fecha = QTableWidgetItem(gasto.get('fecha', ''))
-                # Guardar el ID del documento en la fila (oculto)
                 item_fecha.setData(Qt.ItemDataRole.UserRole, gasto['id'])
                 self.tabla_gastos.setItem(row, 0, item_fecha)
                 
