@@ -624,16 +624,166 @@ class AppGUI(QMainWindow):
                               "Reporte de Operadores en desarrollo.")
     
     def _generar_estado_cuenta_cliente_pdf(self):
-        """Genera estado de cuenta de un cliente individual"""
-        QMessageBox.information(self, "En desarrollo",
-                              "Estado de Cuenta de Cliente en desarrollo.\n\n"
-                              "Incluirá conduces desde Firebase Storage.")
+        """Genera estado de cuenta de un cliente individual o general"""
+        try:
+            # Importar diálogo y generador de reportes
+            from dialogos.estado_cuenta_dialog import EstadoCuentaDialog
+            from report_generator import ReportGenerator
+            
+            # Abrir diálogo para seleccionar cliente y fechas
+            dialog = EstadoCuentaDialog(
+                self.fm,
+                {
+                    'clientes_mapa': self.clientes_mapa,
+                    'equipos_mapa': self.equipos_mapa,
+                    'operadores_mapa': self.operadores_mapa
+                },
+                self
+            )
+            
+            if not dialog.exec():
+                return  # Usuario canceló
+            
+            filtros = dialog.get_filtros()
+            logger.info(f"Generando estado de cuenta con filtros: {filtros}")
+            
+            # Obtener datos de alquileres (facturas)
+            facturas = self.fm.obtener_alquileres_para_reporte(
+                cliente_id=filtros['cliente_id'],
+                fecha_inicio=filtros['fecha_inicio'],
+                fecha_fin=filtros['fecha_fin']
+            )
+            
+            # Obtener abonos
+            abonos = self.fm.obtener_abonos(
+                cliente_id=filtros['cliente_id'],
+                fecha_inicio=filtros['fecha_inicio'],
+                fecha_fin=filtros['fecha_fin']
+            )
+            
+            if not facturas:
+                QMessageBox.information(
+                    self, "Sin datos",
+                    "No hay alquileres para el período o filtros seleccionados."
+                )
+                return
+            
+            # Enriquecer datos con nombres (cliente, equipo, operador)
+            for row in facturas:
+                # Agregar nombres desde mapas
+                if 'cliente_id' in row:
+                    row['cliente_nombre'] = next(
+                        (nombre for nombre, id_val in self.clientes_mapa.items() if id_val == row['cliente_id']),
+                        'Desconocido'
+                    )
+                if 'equipo_id' in row:
+                    row['equipo_nombre'] = next(
+                        (nombre for nombre, id_val in self.equipos_mapa.items() if id_val == row['equipo_id']),
+                        'Desconocido'
+                    )
+                if 'operador_id' in row:
+                    row['operador_nombre'] = next(
+                        (nombre for nombre, id_val in self.operadores_mapa.items() if id_val == row['operador_id']),
+                        'Desconocido'
+                    )
+                
+                # Asegurar que conduce y ubicación existan
+                if 'conduce' not in row or row['conduce'] is None:
+                    row['conduce'] = ''
+                if 'ubicacion' not in row or row['ubicacion'] is None:
+                    row['ubicacion'] = ''
+                
+                # Agregar columna para ruta de Storage (si existe)
+                if 'conduce_storage_path' in row and row['conduce_storage_path']:
+                    row['CondStorage'] = row['conduce_storage_path']
+                else:
+                    row['CondStorage'] = ''
+            
+            # Calcular totales
+            total_facturado = sum(float(row.get('monto', 0)) for row in facturas)
+            total_abonado = sum(float(row.get('monto', 0)) for row in abonos)
+            saldo = total_facturado - total_abonado
+            
+            # Definir título y nombre de cliente
+            if filtros['cliente_id'] is None:
+                title = "ESTADO DE CUENTA GENERAL"
+                cliente_nombre = "GENERAL"
+            else:
+                title = f"ESTADO DE CUENTA - {filtros['cliente_nombre']}"
+                cliente_nombre = filtros['cliente_nombre']
+            
+            # Mapeo de columnas para el PDF
+            column_map = {
+                'fecha': 'Fecha',
+                'conduce': 'Conduce',
+                'ubicacion': 'Ubicación',
+                'equipo_nombre': 'Equipo',
+                'horas': 'Horas',
+                'monto': 'Monto',
+                'CondStorage': 'CondStorage'  # Columna para rutas de Firebase Storage
+            }
+            
+            # Si es reporte general, incluir cliente
+            if filtros['cliente_id'] is None:
+                column_map['cliente_nombre'] = 'Cliente'
+            
+            date_range = f"{filtros['fecha_inicio']} a {filtros['fecha_fin']}"
+            
+            # Pedir ubicación para guardar PDF
+            nombre_archivo = f"Estado_Cuenta_{cliente_nombre}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+            nombre_archivo = nombre_archivo.replace(" ", "_")
+            
+            file_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "Guardar Estado de Cuenta",
+                nombre_archivo,
+                "PDF (*.pdf)"
+            )
+            
+            if not file_path:
+                return
+            
+            # Generar PDF
+            rg = ReportGenerator(
+                data=facturas,
+                title=title,
+                cliente=cliente_nombre,
+                date_range=date_range,
+                currency_symbol="RD$",
+                storage_manager=self.sm,
+                column_map=column_map
+            )
+            
+            # Agregar información de abonos y totales
+            rg.abonos = abonos
+            rg.total_facturado = total_facturado
+            rg.total_abonado = total_abonado
+            rg.saldo = saldo
+            
+            ok, error = rg.to_pdf(file_path)
+            
+            if ok:
+                QMessageBox.information(
+                    self, "Éxito",
+                    f"Estado de cuenta generado exitosamente:\n{file_path}"
+                )
+            else:
+                QMessageBox.critical(
+                    self, "Error",
+                    f"No se pudo generar el estado de cuenta:\n{error}"
+                )
+        
+        except Exception as e:
+            logger.error(f"Error al generar estado de cuenta: {e}", exc_info=True)
+            QMessageBox.critical(
+                self, "Error",
+                f"Error al generar estado de cuenta:\n{str(e)}"
+            )
     
     def _generar_estado_cuenta_general_pdf(self):
         """Genera estado de cuenta general de todos los clientes"""
-        QMessageBox.information(self, "En desarrollo",
-                              "Estado de Cuenta General en desarrollo.\n\n"
-                              "Incluirá conduces desde Firebase Storage.")
+        # Reutilizar la misma función - el diálogo permite seleccionar "Todos"
+        self._generar_estado_cuenta_cliente_pdf()
     
     # ==================== Métodos del Menú Gestión ====================
     

@@ -52,6 +52,12 @@ class ReportGenerator:
         self.fecha_generacion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.storage_manager = storage_manager
         
+        # Datos de abonos y totales (para estado de cuenta)
+        self.abonos = []
+        self.total_facturado = 0
+        self.total_abonado = 0
+        self.saldo = 0
+        
         # Convertir datos a DataFrame
         if data is not None:
             raw_df = pd.DataFrame([dict(row) for row in data])
