@@ -26,7 +26,7 @@ from dashboard_tab import DashboardTab
 from registro_alquileres_tab import RegistroAlquileresTab
 from gastos_equipos_tab import TabGastosEquipos
 from pagos_operadores_tab import TabPagosOperadores
-from reportes_tab import ReportesTab # Importar ReportesTab
+# from reportes_tab import ReportesTab # ELIMINADO: Reportes ahora en menú superior
 
 logger = logging.getLogger(__name__)
 
@@ -89,8 +89,8 @@ class AppGUI(QMainWindow):
         self.pagos_tab = TabPagosOperadores(self.fm)
         self.tabs.addTab(self.pagos_tab, "Pagos a Operadores")
         
-        # Tab de Reportes (se creará después de cargar datos)
-        self.reportes_tab = None
+        # ELIMINADO: Tab de Reportes - ahora en menú superior
+        # self.reportes_tab = None
         
         # Establecer tab inicial
         self.tabs.setCurrentIndex(1)  # Abrir en Registro de Alquileres por defecto
@@ -152,19 +152,19 @@ class AppGUI(QMainWindow):
         
         # Menú Gestión
         gestion_menu = menubar.addMenu("Gestión")
-        gestion_menu.addAction("Equipos", self._gestionar_equipos)
-        gestion_menu.addAction("Clientes", self._gestionar_clientes)
-        gestion_menu.addAction("Operadores", self._gestionar_operadores)
+        gestion_menu.addAction("🏗️ Equipos", self._gestionar_equipos)
+        gestion_menu.addAction("👥 Clientes", self._gestionar_clientes)
+        gestion_menu.addAction("👷 Operadores", self._gestionar_operadores)
         gestion_menu.addSeparator()
-        gestion_menu.addAction("Mantenimientos", self._gestionar_mantenimientos)
+        gestion_menu.addAction("🔧 Mantenimientos", self._gestionar_mantenimientos)
+        gestion_menu.addAction("💵 Gestionar Abonos", self._gestionar_abonos)
         
         # Menú Reportes
         reportes_menu = menubar.addMenu("Reportes")
-        reportes_menu.addAction("Reporte de Alquileres", self._reporte_alquileres)
-        reportes_menu.addAction("Reporte de Gastos", self._reporte_gastos)
-        reportes_menu.addAction("Reporte de Mantenimientos", self._reporte_mantenimientos)
-        reportes_menu.addSeparator()
-        reportes_menu.addAction("Estado de Cuenta", self._estado_cuenta)
+        reportes_menu.addAction("📄 Exportar Detallado Equipos", self._generar_reporte_detallado_pdf)
+        reportes_menu.addAction("👷 Reporte Operadores", self._generar_reporte_operadores)
+        reportes_menu.addAction("💰 Estado de Cuenta Cliente", self._generar_estado_cuenta_cliente_pdf)
+        reportes_menu.addAction("📊 Estado de Cuenta General", self._generar_estado_cuenta_general_pdf)
         
         # Menú Configuración
         config_menu = menubar.addMenu("Configuración")
@@ -240,18 +240,18 @@ class AppGUI(QMainWindow):
             self.gastos_tab.actualizar_mapas(mapas_completos)
             self.pagos_tab.actualizar_mapas(mapas_completos)
 
-            # --- ¡INICIO DE CORRECCIÓN (V10)! ---
-            # Crear tab de reportes ahora que tenemos los mapas
-            if not self.reportes_tab:
-                self.reportes_tab = ReportesTab(
-                    self.fm,
-                    storage_manager=self.sm, # Pasa el storage manager
-                    clientes_mapa=self.clientes_mapa,
-                    operadores_mapa=self.operadores_mapa,
-                    equipos_mapa=self.equipos_mapa
-                )
-                self.tabs.addTab(self.reportes_tab, "Reportes")
-            # --- FIN DE CORRECCIÓN (V10)! ---
+            # --- ELIMINADO: Tab de reportes movido al menú superior ---
+            # Los reportes ahora se generan desde el menú "Reportes"
+            # if not self.reportes_tab:
+            #     self.reportes_tab = ReportesTab(
+            #         self.fm,
+            #         storage_manager=self.sm,
+            #         clientes_mapa=self.clientes_mapa,
+            #         operadores_mapa=self.operadores_mapa,
+            #         equipos_mapa=self.equipos_mapa
+            #     )
+            #     self.tabs.addTab(self.reportes_tab, "Reportes")
+            # --- FIN DE CÓDIGO ELIMINADO ---
             
             # Ahora, refrescar los datos
             self.dashboard_tab.refrescar_datos()
@@ -387,28 +387,6 @@ class AppGUI(QMainWindow):
         """Abre ventana de gestión de mantenimientos"""
         QMessageBox.information(self, "En desarrollo",
                               "La ventana de gestión de mantenimientos estará disponible próximamente.")
-    
-    # ==================== Métodos del Menú Reportes ====================
-    
-    def _reporte_alquileres(self):
-        """Genera reporte de alquileres"""
-        QMessageBox.information(self, "En desarrollo",
-                              "El reporte de alquileres estará disponible próximamente.")
-    
-    def _reporte_gastos(self):
-        """Genera reporte de gastos"""
-        QMessageBox.information(self, "En desarrollo",
-                              "El reporte de gastos estará disponible próximamente.")
-    
-    def _reporte_mantenimientos(self):
-        """Genera reporte de mantenimientos"""
-        QMessageBox.information(self, "En desarrollo",
-                              "El reporte de mantenimientos estará disponible próximamente.")
-    
-    def _estado_cuenta(self):
-        """Genera estado de cuenta"""
-        QMessageBox.information(self, "En desarrollo",
-                              "El estado de cuenta estará disponible próximamente.")
     
     # ==================== Métodos del Menú Configuración ====================
     
@@ -631,3 +609,40 @@ class AppGUI(QMainWindow):
                               "- migracion_desde_progain.md\n"
                               "- backups_sqlite.md\n\n"
                               "También puede consultar el archivo README.md")
+    
+    # ==================== Métodos del Menú Reportes ====================
+    
+    def _generar_reporte_detallado_pdf(self):
+        """Genera reporte detallado de equipos con conduces desde Firebase Storage"""
+        QMessageBox.information(self, "En desarrollo",
+                              "Reporte Detallado de Equipos en desarrollo.\n\n"
+                              "Incluirá conduces desde Firebase Storage.")
+    
+    def _generar_reporte_operadores(self):
+        """Genera reporte de operadores"""
+        QMessageBox.information(self, "En desarrollo",
+                              "Reporte de Operadores en desarrollo.")
+    
+    def _generar_estado_cuenta_cliente_pdf(self):
+        """Genera estado de cuenta de un cliente individual"""
+        QMessageBox.information(self, "En desarrollo",
+                              "Estado de Cuenta de Cliente en desarrollo.\n\n"
+                              "Incluirá conduces desde Firebase Storage.")
+    
+    def _generar_estado_cuenta_general_pdf(self):
+        """Genera estado de cuenta general de todos los clientes"""
+        QMessageBox.information(self, "En desarrollo",
+                              "Estado de Cuenta General en desarrollo.\n\n"
+                              "Incluirá conduces desde Firebase Storage.")
+    
+    # ==================== Métodos del Menú Gestión ====================
+    
+    def _gestionar_abonos(self):
+        """Abre ventana de gestión de abonos"""
+        QMessageBox.information(self, "En desarrollo",
+                              "Gestión de Abonos en desarrollo.\n\n"
+                              "Permitirá:\n"
+                              "- Ver abonos por cliente\n"
+                              "- Registrar nuevos abonos\n"
+                              "- Calcular deuda automáticamente\n"
+                              "- Marcar transacciones como pagadas")
