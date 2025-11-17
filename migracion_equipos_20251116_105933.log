@@ -1,0 +1,461 @@
+2025-11-16 11:00:35,154 [INFO] Configuración cargada desde config_equipos.json
+2025-11-16 11:00:35,202 [INFO] Firebase inicializado con proyecto: equipos-zoec
+2025-11-16 11:00:35,202 [INFO] Cliente de Firestore creado correctamente
+2025-11-16 11:00:47,239 [INFO] ================================================================================
+2025-11-16 11:00:47,239 [INFO] INICIANDO MIGRACIÓN DE EQUIPOS DESDE PROGAIN A FIREBASE
+2025-11-16 11:00:47,240 [INFO] ================================================================================
+2025-11-16 11:00:47,240 [INFO] Proyecto ID: 8
+2025-11-16 11:00:47,240 [INFO] Base de datos origen: D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\antiguo_equipo\progain_database.db
+2025-11-16 11:00:47,241 [INFO] Timestamp: 2025-11-16T11:00:47.241654
+2025-11-16 11:00:47,241 [INFO] 
+2025-11-16 11:00:47,242 [INFO] Conectado a BD de PROGAIN: D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\antiguo_equipo\progain_database.db
+2025-11-16 11:00:47,242 [INFO] Paso 1: Migrando equipos...
+2025-11-16 11:00:47,243 [INFO] Encontrados 12 equipos en PROGAIN
+2025-11-16 11:00:48,463 [INFO] Equipo creado con ID: qtjhLi3blPrc2iXlQiU5
+2025-11-16 11:00:48,463 [INFO]   ✓ Equipo migrado: RETROPALA 420D (SQLite ID: 1 → Firebase ID: qtjhLi3blPrc2iXlQiU5)
+2025-11-16 11:00:48,770 [INFO] Equipo creado con ID: gTVT9ksqnBi3a7nfStu6
+2025-11-16 11:00:48,770 [INFO]   ✓ Equipo migrado: RETROPALA 420IT (SQLite ID: 2 → Firebase ID: gTVT9ksqnBi3a7nfStu6)
+2025-11-16 11:00:49,172 [INFO] Equipo creado con ID: ZzfqXLIKBcdgJIeguzQ2
+2025-11-16 11:00:49,173 [INFO]   ✓ Equipo migrado: RETROPALA 416E (SQLite ID: 3 → Firebase ID: ZzfqXLIKBcdgJIeguzQ2)
+2025-11-16 11:00:49,459 [INFO] Equipo creado con ID: d3yhLrd33O2fz3PcjGb0
+2025-11-16 11:00:49,460 [INFO]   ✓ Equipo migrado: EXCAVADORA 325BL (SQLite ID: 4 → Firebase ID: d3yhLrd33O2fz3PcjGb0)
+2025-11-16 11:00:49,629 [INFO] Equipo creado con ID: WtL2zudTZKhdt3aMbWSY
+2025-11-16 11:00:49,630 [INFO]   ✓ Equipo migrado: EXCAVADORA VOLVO 330 EL (SQLite ID: 5 → Firebase ID: WtL2zudTZKhdt3aMbWSY)
+2025-11-16 11:00:50,286 [INFO] Equipo creado con ID: P59v1Ske2IEE87dpxElX
+2025-11-16 11:00:50,287 [INFO]   ✓ Equipo migrado: MINICARGADOR BOBCAT (SQLite ID: 6 → Firebase ID: P59v1Ske2IEE87dpxElX)
+2025-11-16 11:00:50,428 [INFO] Equipo creado con ID: V8Gt2Jt2LIUMBTp8MfqJ
+2025-11-16 11:00:50,428 [INFO]   ✓ Equipo migrado: RODILLO WACKER 3 TON (SQLite ID: 7 → Firebase ID: V8Gt2Jt2LIUMBTp8MfqJ)
+2025-11-16 11:00:50,584 [INFO] Equipo creado con ID: 88X0XltcOiVYfkEoTTJf
+2025-11-16 11:00:50,585 [INFO]   ✓ Equipo migrado: CAMION GRUA ISUZU (SQLite ID: 8 → Firebase ID: 88X0XltcOiVYfkEoTTJf)
+2025-11-16 11:00:51,094 [INFO] Equipo creado con ID: aL8UTPV3a5YAMXkIP7JV
+2025-11-16 11:00:51,095 [INFO]   ✓ Equipo migrado: TIJERILLA JLG (SQLite ID: 9 → Firebase ID: aL8UTPV3a5YAMXkIP7JV)
+2025-11-16 11:00:51,272 [INFO] Equipo creado con ID: L04U1z7JoUckcmZUHsM9
+2025-11-16 11:00:51,272 [INFO]   ✓ Equipo migrado: CAMION KIA 2700 (SQLite ID: 10 → Firebase ID: L04U1z7JoUckcmZUHsM9)
+2025-11-16 11:00:51,474 [INFO] Equipo creado con ID: 3qUrwheFncE4SSxvIb33
+2025-11-16 11:00:51,474 [INFO]   ✓ Equipo migrado: CAMION JAC (SQLite ID: 11 → Firebase ID: 3qUrwheFncE4SSxvIb33)
+2025-11-16 11:00:51,619 [INFO] Equipo creado con ID: KJ9VDDnvCjsZ6npYNx1S
+2025-11-16 11:00:51,619 [INFO]   ✓ Equipo migrado: CAMION VOLTEO HINO (SQLite ID: 12 → Firebase ID: KJ9VDDnvCjsZ6npYNx1S)
+2025-11-16 11:00:51,620 [INFO] Equipos migrados: 12/12
+2025-11-16 11:00:51,620 [INFO] 
+Paso 2: Migrando entidades (clientes y operadores)...
+2025-11-16 11:00:51,621 [INFO] Encontradas 36 entidades en PROGAIN
+2025-11-16 11:00:51,812 [INFO] Entidad creada con ID: NA5lP4jz32XoVl8yYEw3
+2025-11-16 11:00:51,813 [INFO]   ✓ Entidad migrada: AMADO (Cliente) (SQLite ID: 35 → Firebase ID: NA5lP4jz32XoVl8yYEw3)
+2025-11-16 11:00:52,003 [INFO] Entidad creada con ID: nRFG3gk38bxoOgx6vfDs
+2025-11-16 11:00:52,004 [INFO]   ✓ Entidad migrada: AMED HERRERA (Cliente) (SQLite ID: 38 → Firebase ID: nRFG3gk38bxoOgx6vfDs)
+2025-11-16 11:00:52,163 [INFO] Entidad creada con ID: oO4SiG75ek3OqC9wraqz
+2025-11-16 11:00:52,164 [INFO]   ✓ Entidad migrada: ARBAJE ISA (Cliente) (SQLite ID: 30 → Firebase ID: oO4SiG75ek3OqC9wraqz)
+2025-11-16 11:00:52,295 [INFO] Entidad creada con ID: fvP6yRK8M2pkI4FrZQpL
+2025-11-16 11:00:52,295 [INFO]   ✓ Entidad migrada: BALBINO (Cliente) (SQLite ID: 1 → Firebase ID: fvP6yRK8M2pkI4FrZQpL)
+2025-11-16 11:00:52,622 [INFO] Entidad creada con ID: WWxCRFufnTD6pmkF5bDV
+2025-11-16 11:00:52,622 [INFO]   ✓ Entidad migrada: CHRISTIAN (Operador) (SQLite ID: 2 → Firebase ID: WWxCRFufnTD6pmkF5bDV)
+2025-11-16 11:00:52,827 [INFO] Entidad creada con ID: ECKIwnw0AvqQWgQv57bR
+2025-11-16 11:00:52,828 [INFO]   ✓ Entidad migrada: CLINTON (Cliente) (SQLite ID: 22 → Firebase ID: ECKIwnw0AvqQWgQv57bR)
+2025-11-16 11:00:53,233 [INFO] Entidad creada con ID: biTiJknMFHXctXqQRgje
+2025-11-16 11:00:53,233 [INFO]   ✓ Entidad migrada: COCO (Cliente) (SQLite ID: 24 → Firebase ID: biTiJknMFHXctXqQRgje)
+2025-11-16 11:00:53,438 [INFO] Entidad creada con ID: gBd54FRX6XJOTpSBbIDX
+2025-11-16 11:00:53,439 [INFO]   ✓ Entidad migrada: DE LOS SANTOS (Cliente) (SQLite ID: 20 → Firebase ID: gBd54FRX6XJOTpSBbIDX)
+2025-11-16 11:00:53,644 [INFO] Entidad creada con ID: 8GkJgoeJHu16p7MVyUMZ
+2025-11-16 11:00:53,645 [INFO]   ✓ Entidad migrada: EL BARON (Operador) (SQLite ID: 7 → Firebase ID: 8GkJgoeJHu16p7MVyUMZ)
+2025-11-16 11:00:53,847 [INFO] Entidad creada con ID: CvkSytaKI5C46qvD5PNV
+2025-11-16 11:00:53,847 [INFO]   ✓ Entidad migrada: FERNANDO ALBA (Cliente) (SQLite ID: 6 → Firebase ID: CvkSytaKI5C46qvD5PNV)
+2025-11-16 11:00:54,054 [INFO] Entidad creada con ID: C4vsySIEgnpFPnAgmfFy
+2025-11-16 11:00:54,054 [INFO]   ✓ Entidad migrada: FRANCISCO DAVID (Cliente) (SQLite ID: 16 → Firebase ID: C4vsySIEgnpFPnAgmfFy)
+2025-11-16 11:00:54,281 [INFO] Entidad creada con ID: dTw7MHqgxjlTbmJmxws1
+2025-11-16 11:00:54,281 [INFO]   ✓ Entidad migrada: GENESIS DE LA CRUZ (Operador) (SQLite ID: 29 → Firebase ID: dTw7MHqgxjlTbmJmxws1)
+2025-11-16 11:00:54,446 [INFO] Entidad creada con ID: jr806QqRT4uJjmOsrlfL
+2025-11-16 11:00:54,447 [INFO]   ✓ Entidad migrada: GREISELL CARPIO (Operador) (SQLite ID: 4 → Firebase ID: jr806QqRT4uJjmOsrlfL)
+2025-11-16 11:00:54,599 [INFO] Entidad creada con ID: vFFRsUvTVx0d0cLkx3t7
+2025-11-16 11:00:54,600 [INFO]   ✓ Entidad migrada: GRUPO GILCALVO (Cliente) (SQLite ID: 18 → Firebase ID: vFFRsUvTVx0d0cLkx3t7)
+2025-11-16 11:00:54,837 [INFO] Entidad creada con ID: V6yg5ccbm5TCotWEN9Rd
+2025-11-16 11:00:54,837 [INFO]   ✓ Entidad migrada: HECTOR LUIS (Operador) (SQLite ID: 14 → Firebase ID: V6yg5ccbm5TCotWEN9Rd)
+2025-11-16 11:00:54,986 [INFO] Entidad creada con ID: v6gpM4YukpKDZGc04U7t
+2025-11-16 11:00:54,987 [INFO]   ✓ Entidad migrada: HIGUERO (Cliente) (SQLite ID: 3 → Firebase ID: v6gpM4YukpKDZGc04U7t)
+2025-11-16 11:00:55,109 [INFO] Entidad creada con ID: IEFfQ5hcV9w0dZxEPeeX
+2025-11-16 11:00:55,110 [INFO]   ✓ Entidad migrada: JHONATTAN ROJAS NIVAR (Operador) (SQLite ID: 31 → Firebase ID: IEFfQ5hcV9w0dZxEPeeX)
+2025-11-16 11:00:55,258 [INFO] Entidad creada con ID: HZUhEhg8rPJGiNQP7L9M
+2025-11-16 11:00:55,259 [INFO]   ✓ Entidad migrada: JUNIOR (Operador) (SQLite ID: 5 → Firebase ID: HZUhEhg8rPJGiNQP7L9M)
+2025-11-16 11:00:55,396 [INFO] Entidad creada con ID: wfKuNvAq4zPFvByffLgv
+2025-11-16 11:00:55,397 [INFO]   ✓ Entidad migrada: KYRASH (Operador) (SQLite ID: 28 → Firebase ID: wfKuNvAq4zPFvByffLgv)
+2025-11-16 11:00:55,545 [INFO] Entidad creada con ID: t4nZAUDLVIaG4YrfQrQ8
+2025-11-16 11:00:55,546 [INFO]   ✓ Entidad migrada: LUIS CARABALLO (Cliente) (SQLite ID: 37 → Firebase ID: t4nZAUDLVIaG4YrfQrQ8)
+2025-11-16 11:00:55,740 [INFO] Entidad creada con ID: mgUsFlW8r3Ji49NlHZ7X
+2025-11-16 11:00:55,741 [INFO]   ✓ Entidad migrada: MARGARITA (Cliente) (SQLite ID: 21 → Firebase ID: mgUsFlW8r3Ji49NlHZ7X)
+2025-11-16 11:00:55,877 [INFO] Entidad creada con ID: 2UgASD4Z8HyGlHjRQG6k
+2025-11-16 11:00:55,878 [INFO]   ✓ Entidad migrada: MERCEDES (Cliente) (SQLite ID: 8 → Firebase ID: 2UgASD4Z8HyGlHjRQG6k)
+2025-11-16 11:00:56,007 [INFO] Entidad creada con ID: aVCQLU258Ae74LnJWZQt
+2025-11-16 11:00:56,007 [INFO]   ✓ Entidad migrada: MIGUEL (Cliente) (SQLite ID: 9 → Firebase ID: aVCQLU258Ae74LnJWZQt)
+2025-11-16 11:00:56,336 [INFO] Entidad creada con ID: qPfxVQv52oGnZbDV6cR1
+2025-11-16 11:00:56,336 [INFO]   ✓ Entidad migrada: MOISE (Cliente) (SQLite ID: 25 → Firebase ID: qPfxVQv52oGnZbDV6cR1)
+2025-11-16 11:00:56,447 [INFO] Entidad creada con ID: vlCbqqrbD8kd1oa3acDl
+2025-11-16 11:00:56,447 [INFO]   ✓ Entidad migrada: MUESE (Cliente) (SQLite ID: 23 → Firebase ID: vlCbqqrbD8kd1oa3acDl)
+2025-11-16 11:00:56,618 [INFO] Entidad creada con ID: pMNrSJZCcZeiuKCr5Q3k
+2025-11-16 11:00:56,619 [INFO]   ✓ Entidad migrada: NAVE BROCA (Cliente) (SQLite ID: 15 → Firebase ID: pMNrSJZCcZeiuKCr5Q3k)
+2025-11-16 11:00:56,747 [INFO] Entidad creada con ID: BLLHFjEgKALDM8iMwNHG
+2025-11-16 11:00:56,747 [INFO]   ✓ Entidad migrada: PACHI (Cliente) (SQLite ID: 10 → Firebase ID: BLLHFjEgKALDM8iMwNHG)
+2025-11-16 11:00:56,947 [INFO] Entidad creada con ID: M666wv6nGTpjCsXWO3E5
+2025-11-16 11:00:56,949 [INFO]   ✓ Entidad migrada: PROCEDES DE LOS SANTOS (MIKI) (Operador) (SQLite ID: 17 → Firebase ID: M666wv6nGTpjCsXWO3E5)
+2025-11-16 11:00:57,064 [INFO] Entidad creada con ID: phMmUmJpsWxLjsvdg0pZ
+2025-11-16 11:00:57,065 [INFO]   ✓ Entidad migrada: RAMON CAP (Cliente) (SQLite ID: 36 → Firebase ID: phMmUmJpsWxLjsvdg0pZ)
+2025-11-16 11:00:57,187 [INFO] Entidad creada con ID: 4vfFWCxiCHsGRRcWyhDR
+2025-11-16 11:00:57,187 [INFO]   ✓ Entidad migrada: RICHARD (Operador) (SQLite ID: 13 → Firebase ID: 4vfFWCxiCHsGRRcWyhDR)
+2025-11-16 11:00:57,318 [INFO] Entidad creada con ID: 39otJQxFsxyG7DSCiEL7
+2025-11-16 11:00:57,319 [INFO]   ✓ Entidad migrada: SANDY (Operador) (SQLite ID: 33 → Firebase ID: 39otJQxFsxyG7DSCiEL7)
+2025-11-16 11:00:57,439 [INFO] Entidad creada con ID: mXAx0Cmwrh0ruiBEau9y
+2025-11-16 11:00:57,440 [INFO]   ✓ Entidad migrada: Sandy (Operador) (SQLite ID: 32 → Firebase ID: mXAx0Cmwrh0ruiBEau9y)
+2025-11-16 11:00:57,560 [INFO] Entidad creada con ID: IBo3rHGUsNs0MyWUHE30
+2025-11-16 11:00:57,561 [INFO]   ✓ Entidad migrada: TORRE TIFFANY (Cliente) (SQLite ID: 12 → Firebase ID: IBo3rHGUsNs0MyWUHE30)
+2025-11-16 11:00:57,689 [INFO] Entidad creada con ID: EIuiOsoHGXRAYQux29Kx
+2025-11-16 11:00:57,690 [INFO]   ✓ Entidad migrada: WELINTONG DE LOS SANTOS (Operador) (SQLite ID: 19 → Firebase ID: EIuiOsoHGXRAYQux29Kx)
+2025-11-16 11:00:57,825 [INFO] Entidad creada con ID: ZhK7uzO1nybDqaywhyqb
+2025-11-16 11:00:57,826 [INFO]   ✓ Entidad migrada: WINTON (Operador) (SQLite ID: 11 → Firebase ID: ZhK7uzO1nybDqaywhyqb)
+2025-11-16 11:00:57,955 [INFO] Entidad creada con ID: yI63pLM5enm8DGNxsaJU
+2025-11-16 11:00:57,955 [INFO]   ✓ Entidad migrada: cliente prueba (Cliente) (SQLite ID: 34 → Firebase ID: yI63pLM5enm8DGNxsaJU)
+2025-11-16 11:00:57,955 [INFO] Entidades migradas: 36/36
+2025-11-16 11:00:57,956 [INFO] 
+Paso 3: Migrando transacciones (alquileres)...
+2025-11-16 11:00:57,958 [INFO] Encontradas 222 transacciones de alquiler en PROGAIN
+2025-11-16 11:00:58,086 [INFO] Alquiler registrado con ID: r0Fjq4uC22eNEEVXW1oy
+2025-11-16 11:00:58,213 [INFO] Alquiler registrado con ID: rN4AuiphtX8hS16AhuzP
+2025-11-16 11:00:58,347 [INFO] Alquiler registrado con ID: JxTEX3jlU9JOdnMVokEu
+2025-11-16 11:00:58,477 [INFO] Alquiler registrado con ID: BwjM7sOxagMfEZutk9GR
+2025-11-16 11:00:58,610 [INFO] Alquiler registrado con ID: 0tZdhAlLWNKPqVdc3RFE
+2025-11-16 11:00:58,804 [INFO] Alquiler registrado con ID: NGbbDxArWm1T8vStpWd4
+2025-11-16 11:00:58,936 [INFO] Alquiler registrado con ID: imTKdSTgI2e5f5rxA7so
+2025-11-16 11:00:59,057 [INFO] Alquiler registrado con ID: s1HNlUj8bRT7ckkTJOWb
+2025-11-16 11:00:59,219 [INFO] Alquiler registrado con ID: kgy7zrfRnARXxkd13zkR
+2025-11-16 11:00:59,320 [INFO] Alquiler registrado con ID: BBnjKHzv2kloUVJneVue
+2025-11-16 11:00:59,480 [INFO] Alquiler registrado con ID: ARspmJ5ygdhg1sj6lLG8
+2025-11-16 11:00:59,726 [INFO] Alquiler registrado con ID: nk4xhcG4N59fMvPx7fqX
+2025-11-16 11:00:59,884 [INFO] Alquiler registrado con ID: u55EAMe0633GuW0oeGJa
+2025-11-16 11:01:00,003 [INFO] Alquiler registrado con ID: 1dCCI4UY88kiTq1T3PUD
+2025-11-16 11:01:00,120 [INFO] Alquiler registrado con ID: Sj337JqkUPVd2r4MwnEo
+2025-11-16 11:01:00,231 [INFO] Alquiler registrado con ID: JAHni2XouUQkjP2HyWPX
+2025-11-16 11:01:00,354 [INFO] Alquiler registrado con ID: CEbErwgPHa99BRCO3lOs
+2025-11-16 11:01:00,483 [INFO] Alquiler registrado con ID: FwKVqLFGu4exn6GPKkzW
+2025-11-16 11:01:00,617 [INFO] Alquiler registrado con ID: qWnn0ZmhlrPAiKw0K7ML
+2025-11-16 11:01:00,759 [INFO] Alquiler registrado con ID: LFmenIznuyUlJJT7uNxN
+2025-11-16 11:01:00,904 [INFO] Alquiler registrado con ID: it7UshdrszSVJ4DY46Xu
+2025-11-16 11:01:01,047 [INFO] Alquiler registrado con ID: 25qHABzgecPxKeGFPqNw
+2025-11-16 11:01:01,171 [INFO] Alquiler registrado con ID: npCPBPPVrQkqaoYKcHuZ
+2025-11-16 11:01:01,295 [INFO] Alquiler registrado con ID: DPiSpcfLyXyTCrrf7sjK
+2025-11-16 11:01:01,407 [INFO] Alquiler registrado con ID: mIZTaH4bVHyW3Lvb4bOb
+2025-11-16 11:01:01,713 [INFO] Alquiler registrado con ID: Muqs5ZfyQ3xlwIy9JsWi
+2025-11-16 11:01:01,821 [INFO] Alquiler registrado con ID: YFjqitwXrOSmezTPoH4N
+2025-11-16 11:01:01,976 [INFO] Alquiler registrado con ID: sNtsbWxnpq1OniKkgtOr
+2025-11-16 11:01:02,098 [INFO] Alquiler registrado con ID: eigDqqLmqaF3D68rILZD
+2025-11-16 11:01:02,235 [INFO] Alquiler registrado con ID: q7l4mFKQIkloWqekxzzm
+2025-11-16 11:01:02,370 [INFO] Alquiler registrado con ID: n3mhksx3M3HTljq9VTsT
+2025-11-16 11:01:02,593 [INFO] Alquiler registrado con ID: 1CFwCTvea1xSsewrIUK6
+2025-11-16 11:01:02,924 [INFO] Alquiler registrado con ID: yTidEhuNylW3VXL49c3Q
+2025-11-16 11:01:03,081 [INFO] Alquiler registrado con ID: Q7o1QRvYKReAWn11aPXs
+2025-11-16 11:01:03,235 [INFO] Alquiler registrado con ID: DoV027gKPl2HWZCjR0ck
+2025-11-16 11:01:03,380 [INFO] Alquiler registrado con ID: 1Hls9rOuC4EM1XTW1lOB
+2025-11-16 11:01:03,521 [INFO] Alquiler registrado con ID: NmysyDYmhuqpHQ7n7958
+2025-11-16 11:01:03,642 [INFO] Alquiler registrado con ID: 9exwIixTvEVf96odak4O
+2025-11-16 11:01:03,775 [INFO] Alquiler registrado con ID: qi7R2MAM7wMICfbscttg
+2025-11-16 11:01:03,880 [INFO] Alquiler registrado con ID: sLBURaN0Dk0Vyni7h655
+2025-11-16 11:01:03,996 [INFO] Alquiler registrado con ID: nx3fj5gFV7v6qwnNMWxk
+2025-11-16 11:01:04,114 [INFO] Alquiler registrado con ID: XIW7ElHEereDj5G38hbx
+2025-11-16 11:01:04,231 [INFO] Alquiler registrado con ID: ePsmwkQcJGrYFANTY1vs
+2025-11-16 11:01:04,343 [INFO] Alquiler registrado con ID: iAI9VX0wKKApG9yb1Uoa
+2025-11-16 11:01:04,473 [INFO] Alquiler registrado con ID: unkphJuaPjCGMgDkp3Ma
+2025-11-16 11:01:04,618 [INFO] Alquiler registrado con ID: PofKASjuYZ4QG2w8dapD
+2025-11-16 11:01:04,734 [INFO] Alquiler registrado con ID: 74uzWNs5tZGSVXqU6yYK
+2025-11-16 11:01:04,883 [INFO] Alquiler registrado con ID: s6hC7VMVnkdRuCJVI1U2
+2025-11-16 11:01:05,077 [INFO] Alquiler registrado con ID: 4nYKkswxnYQgQv61ff8F
+2025-11-16 11:01:05,213 [INFO] Alquiler registrado con ID: 9pNzSh2zSYX4fQoyewvi
+2025-11-16 11:01:05,214 [INFO]   → 50 transacciones migradas...
+2025-11-16 11:01:05,354 [INFO] Alquiler registrado con ID: ZYFjyvIVM8huv4dd8G7v
+2025-11-16 11:01:05,500 [INFO] Alquiler registrado con ID: cUuM4GuKzK9jDwyIKu55
+2025-11-16 11:01:05,653 [INFO] Alquiler registrado con ID: sisI6PrDOGGeUbF9G1rf
+2025-11-16 11:01:05,779 [INFO] Alquiler registrado con ID: f8H7rgdpjg8ia2sntwrI
+2025-11-16 11:01:05,908 [INFO] Alquiler registrado con ID: TqHAGFKn1cHjDTZYjHYt
+2025-11-16 11:01:06,024 [INFO] Alquiler registrado con ID: fmQ6D09kKV63hCHhhGjt
+2025-11-16 11:01:06,144 [INFO] Alquiler registrado con ID: ZkoHCeA1p3j8DxYPnhUS
+2025-11-16 11:01:06,275 [INFO] Alquiler registrado con ID: OX1W1NuLmxzDdS8y3RcC
+2025-11-16 11:01:06,398 [INFO] Alquiler registrado con ID: aYog1O9qzlHb0cgSBoXZ
+2025-11-16 11:01:06,565 [INFO] Alquiler registrado con ID: v8utSRXG9YXEhcLSpbNe
+2025-11-16 11:01:06,695 [INFO] Alquiler registrado con ID: oXzYiQhR6PBm7d6XMFLD
+2025-11-16 11:01:06,811 [INFO] Alquiler registrado con ID: PK4FPjaLRmP3mIMq91y7
+2025-11-16 11:01:06,930 [INFO] Alquiler registrado con ID: HGRjwsSQFyrGhN4annXB
+2025-11-16 11:01:07,049 [INFO] Alquiler registrado con ID: gOTZ68BuVW9MAhcNhGei
+2025-11-16 11:01:07,162 [INFO] Alquiler registrado con ID: 1xNNx777bMgsfC5HzdS8
+2025-11-16 11:01:07,293 [INFO] Alquiler registrado con ID: 37WsOcGg67LuxDC8GEGQ
+2025-11-16 11:01:07,398 [INFO] Alquiler registrado con ID: zGlXbedtLqV14Jflrxn5
+2025-11-16 11:01:07,529 [INFO] Alquiler registrado con ID: MFHYop8RJORe1LVppIBN
+2025-11-16 11:01:07,637 [INFO] Alquiler registrado con ID: sYkb7WdPO9u3iZu0tQ3L
+2025-11-16 11:01:07,819 [INFO] Alquiler registrado con ID: D10Q1oYsaj3peGa0ew38
+2025-11-16 11:01:08,003 [INFO] Alquiler registrado con ID: 17aelHmcGsxnOg5XAKZP
+2025-11-16 11:01:08,143 [INFO] Alquiler registrado con ID: lrkP1lRH4g6ODnVC0gKa
+2025-11-16 11:01:08,291 [INFO] Alquiler registrado con ID: s1mxjwzb6JW2r9A8lLiP
+2025-11-16 11:01:08,422 [INFO] Alquiler registrado con ID: d3BfYL9REQ1Jm1CAZe8s
+2025-11-16 11:01:08,555 [INFO] Alquiler registrado con ID: 8j1VDVfVfMiCX9BwdWls
+2025-11-16 11:01:08,676 [INFO] Alquiler registrado con ID: PGrL9mqVKZ1Ogel7lXRv
+2025-11-16 11:01:08,783 [INFO] Alquiler registrado con ID: tctkLvCNTypdOH1FmBQt
+2025-11-16 11:01:08,904 [INFO] Alquiler registrado con ID: mvTVgRlD6eWx5zlHYNJ8
+2025-11-16 11:01:09,039 [INFO] Alquiler registrado con ID: j460dqkKSj2omc3JkHLH
+2025-11-16 11:01:09,174 [INFO] Alquiler registrado con ID: h4mMrFf66XevIgmCZMyA
+2025-11-16 11:01:09,303 [INFO] Alquiler registrado con ID: AkQmGGMksMSbMsV3eHOo
+2025-11-16 11:01:09,416 [INFO] Alquiler registrado con ID: kfdUhJWZI4sZlf40vvJI
+2025-11-16 11:01:09,560 [INFO] Alquiler registrado con ID: 9ebVWc21w2HPAlAGByoc
+2025-11-16 11:01:09,662 [INFO] Alquiler registrado con ID: 8fTNhsoqBRWPl40KhSkL
+2025-11-16 11:01:09,783 [INFO] Alquiler registrado con ID: PBY2EnywPXwguJJBZTdS
+2025-11-16 11:01:09,918 [INFO] Alquiler registrado con ID: jj5C0Z3fjobOYx1KK3XG
+2025-11-16 11:01:10,042 [INFO] Alquiler registrado con ID: ur3kye5wWqu9OnSXXq1d
+2025-11-16 11:01:10,169 [INFO] Alquiler registrado con ID: RytgeajXQieB5DpsvO31
+2025-11-16 11:01:10,284 [INFO] Alquiler registrado con ID: LzqXxhaPWXNNdLMVENCP
+2025-11-16 11:01:10,414 [INFO] Alquiler registrado con ID: 7Ny8JAWBmT3Pxvp6gS9U
+2025-11-16 11:01:10,519 [INFO] Alquiler registrado con ID: lJDr2XTWEHWKWMLHIjFf
+2025-11-16 11:01:10,653 [INFO] Alquiler registrado con ID: KuunuepiuWqoL2O4XmDV
+2025-11-16 11:01:10,759 [INFO] Alquiler registrado con ID: jo9HrY6mqiyzSvFyFeTR
+2025-11-16 11:01:10,881 [INFO] Alquiler registrado con ID: YxTDfFIgDSDcjpQxSFDy
+2025-11-16 11:01:11,000 [INFO] Alquiler registrado con ID: jmK2evNTq3XL9gNMxBtV
+2025-11-16 11:01:11,120 [INFO] Alquiler registrado con ID: 0PVQAFqrbfZwZ2dyVH1k
+2025-11-16 11:01:11,219 [INFO] Alquiler registrado con ID: n7x4VCuGEK7YnqjSuCYL
+2025-11-16 11:01:11,348 [INFO] Alquiler registrado con ID: HDm0UbEWnwdONyl8lkgF
+2025-11-16 11:01:11,470 [INFO] Alquiler registrado con ID: EHcozkndQ4epReGJRlRz
+2025-11-16 11:01:11,590 [INFO] Alquiler registrado con ID: DTAt6GWuONS5H11mPPuo
+2025-11-16 11:01:11,591 [INFO]   → 100 transacciones migradas...
+2025-11-16 11:01:11,755 [INFO] Alquiler registrado con ID: rOmtfYFXqB1iESOnMMzk
+2025-11-16 11:01:11,877 [INFO] Alquiler registrado con ID: wNh5UQqqWaNKyjrcGOCJ
+2025-11-16 11:01:11,994 [INFO] Alquiler registrado con ID: Fo5d4GOe1caDydngYvnr
+2025-11-16 11:01:12,118 [INFO] Alquiler registrado con ID: K5pkuCZuyve0Ln5CKuYT
+2025-11-16 11:01:12,311 [INFO] Alquiler registrado con ID: siWkmvM3QXpUi8DmxSWi
+2025-11-16 11:01:12,477 [INFO] Alquiler registrado con ID: 4TcXDxwJaEQ6owJRNOct
+2025-11-16 11:01:12,600 [INFO] Alquiler registrado con ID: hjzbwxosmnzBAlrXc1Uk
+2025-11-16 11:01:12,704 [INFO] Alquiler registrado con ID: MI8dp8M0Z0cnJEzQoVl5
+2025-11-16 11:01:12,914 [INFO] Alquiler registrado con ID: OzuAY7Ma6vq4QBryVFr0
+2025-11-16 11:01:13,021 [INFO] Alquiler registrado con ID: SlhnfVVFxdf2INOqp7wP
+2025-11-16 11:01:13,158 [INFO] Alquiler registrado con ID: bQCYxM04leDt9jTJV9wZ
+2025-11-16 11:01:13,311 [INFO] Alquiler registrado con ID: 83n2BQqX3v74QLI7EuJ4
+2025-11-16 11:01:13,410 [INFO] Alquiler registrado con ID: txsH12GPjIgCMxy9fRO4
+2025-11-16 11:01:13,539 [INFO] Alquiler registrado con ID: i04SC6J7GhxCBzFLJBkB
+2025-11-16 11:01:13,655 [INFO] Alquiler registrado con ID: O60JWlXjib143UhcPJ9m
+2025-11-16 11:01:13,770 [INFO] Alquiler registrado con ID: wYU3is72jB1xAlceh2wF
+2025-11-16 11:01:13,875 [INFO] Alquiler registrado con ID: y11z2tBvbpNsacOCZ9ob
+2025-11-16 11:01:14,009 [INFO] Alquiler registrado con ID: 7KULsVj3vbCuY2HX8Dfj
+2025-11-16 11:01:14,126 [INFO] Alquiler registrado con ID: jYv2wa250Ws8j6hvw0XZ
+2025-11-16 11:01:14,241 [INFO] Alquiler registrado con ID: ZsJXhbWo7zC4AKYjSqXh
+2025-11-16 11:01:14,353 [INFO] Alquiler registrado con ID: ELmjD6lVS0Z9PbUdydMp
+2025-11-16 11:01:14,457 [INFO] Alquiler registrado con ID: LUUA7kjLYSNtrtGHbfNo
+2025-11-16 11:01:14,599 [INFO] Alquiler registrado con ID: tZu9XbOMLPHR0ENaUo67
+2025-11-16 11:01:14,712 [INFO] Alquiler registrado con ID: vxRadUIuWeyzZ8Wrf8SD
+2025-11-16 11:01:14,807 [INFO] Alquiler registrado con ID: A1Lx8MSB7MBYkFUml6le
+2025-11-16 11:01:14,935 [INFO] Alquiler registrado con ID: Nfz1ISzNDhQyAnOBIkYl
+2025-11-16 11:01:15,068 [INFO] Alquiler registrado con ID: MEzObGcud9ZvAwRxfEU1
+2025-11-16 11:01:15,178 [INFO] Alquiler registrado con ID: xDD66GOJXkFETBdeU43l
+2025-11-16 11:01:15,295 [INFO] Alquiler registrado con ID: usObdqAAjd7n7I4z59Ba
+2025-11-16 11:01:15,409 [INFO] Alquiler registrado con ID: ZiAHv9wMAulKiCcvSl3m
+2025-11-16 11:01:15,535 [INFO] Alquiler registrado con ID: MqMeYEVscGeVLKvpFu0v
+2025-11-16 11:01:15,661 [INFO] Alquiler registrado con ID: mBiA9669ggREyTT29jjs
+2025-11-16 11:01:15,786 [INFO] Alquiler registrado con ID: aTN7vokzUnRMEi67oj9a
+2025-11-16 11:01:15,901 [INFO] Alquiler registrado con ID: hvV1PsSjWJwCMJ5S02lM
+2025-11-16 11:01:16,035 [INFO] Alquiler registrado con ID: 32aEc24yF2ddzuJcNWwh
+2025-11-16 11:01:16,148 [INFO] Alquiler registrado con ID: p6TSONCQ1t7kt8TqOkhq
+2025-11-16 11:01:16,258 [INFO] Alquiler registrado con ID: k4k1M92OVPqVNRsfFFIm
+2025-11-16 11:01:16,396 [INFO] Alquiler registrado con ID: d5lVdgV9DCyS3Ru86vyV
+2025-11-16 11:01:16,523 [INFO] Alquiler registrado con ID: 0BASFbc5dTkoPEW7wL9i
+2025-11-16 11:01:16,638 [INFO] Alquiler registrado con ID: zdADQPVhf6GPQTdlWRV9
+2025-11-16 11:01:16,739 [INFO] Alquiler registrado con ID: UaWe8R4Q3kTwUYGIhYTK
+2025-11-16 11:01:16,847 [INFO] Alquiler registrado con ID: nvV31o70YfrT9sGCTyCl
+2025-11-16 11:01:16,959 [INFO] Alquiler registrado con ID: 9tMsDCc8IdLXFNKmf96u
+2025-11-16 11:01:17,064 [INFO] Alquiler registrado con ID: MtRDpeRu53ixhN20AQXY
+2025-11-16 11:01:17,184 [INFO] Alquiler registrado con ID: Lw2YaKpz4fFSy8NBzRxB
+2025-11-16 11:01:17,313 [INFO] Alquiler registrado con ID: HAPN3cbKM62w3HbEC4Kr
+2025-11-16 11:01:17,417 [INFO] Alquiler registrado con ID: 9vZ1CI55Oe1RDFucfCjO
+2025-11-16 11:01:17,537 [INFO] Alquiler registrado con ID: HHHx3njEBbxNaXzSmfuT
+2025-11-16 11:01:17,733 [INFO] Alquiler registrado con ID: 6ntX0tFVNMqPO3apxr8G
+2025-11-16 11:01:17,877 [INFO] Alquiler registrado con ID: 3qDA4YhoEzJgugMCjFeY
+2025-11-16 11:01:17,877 [INFO]   → 150 transacciones migradas...
+2025-11-16 11:01:17,998 [INFO] Alquiler registrado con ID: VCobsas7YzRkZmgCMyiA
+2025-11-16 11:01:18,144 [INFO] Alquiler registrado con ID: vOP5u9BnDzXormgC3QHM
+2025-11-16 11:01:18,265 [INFO] Alquiler registrado con ID: xd9rdo89351cGaoAKSsk
+2025-11-16 11:01:18,395 [INFO] Alquiler registrado con ID: 5nlpFHQmLPleDnBhcqWb
+2025-11-16 11:01:18,507 [INFO] Alquiler registrado con ID: 0pqol1shi4x9gFXQwU9P
+2025-11-16 11:01:18,641 [INFO] Alquiler registrado con ID: AfzNkCBFTQABEpZiW045
+2025-11-16 11:01:18,766 [INFO] Alquiler registrado con ID: ys8a2tEnXuvuA1hHMH3y
+2025-11-16 11:01:18,891 [INFO] Alquiler registrado con ID: dbBDu3ewOF9zzFmLaHuW
+2025-11-16 11:01:18,999 [INFO] Alquiler registrado con ID: gcUv6NGap4GU2G7qBkm3
+2025-11-16 11:01:19,099 [INFO] Alquiler registrado con ID: 6FE0bvDz4Ib8ska1djLV
+2025-11-16 11:01:19,221 [INFO] Alquiler registrado con ID: SR0xNklHXp5XwWyXRSnV
+2025-11-16 11:01:19,321 [INFO] Alquiler registrado con ID: Xdaw3ZPyJTr8TBNaGUDQ
+2025-11-16 11:01:19,427 [INFO] Alquiler registrado con ID: 5rHZCHaL4f1TLD571TmY
+2025-11-16 11:01:19,546 [INFO] Alquiler registrado con ID: jLNJRtdf8srnZoHogrik
+2025-11-16 11:01:19,646 [INFO] Alquiler registrado con ID: h30mtH8nBcEgsVeIBK6k
+2025-11-16 11:01:19,861 [INFO] Alquiler registrado con ID: w53TIwxiuh1s8thDSkE4
+2025-11-16 11:01:19,982 [INFO] Alquiler registrado con ID: gDdzWp4a7BukLE9A3BY8
+2025-11-16 11:01:20,078 [INFO] Alquiler registrado con ID: Ra7mmRYuoTzfM0sj2fe2
+2025-11-16 11:01:20,190 [INFO] Alquiler registrado con ID: y2qGTBGvYrudiUL8AmUv
+2025-11-16 11:01:20,293 [INFO] Alquiler registrado con ID: CqCTm6Q9fRCHW1jOPqr4
+2025-11-16 11:01:20,410 [INFO] Alquiler registrado con ID: 74l4BPeYk5hwI59nqIVe
+2025-11-16 11:01:20,518 [INFO] Alquiler registrado con ID: OcNKJLbIuQd95TVaAf8K
+2025-11-16 11:01:20,623 [INFO] Alquiler registrado con ID: Vn0G8C97SbwlHinmBEKL
+2025-11-16 11:01:20,739 [INFO] Alquiler registrado con ID: OiELNa0vDYSfibNp0CHO
+2025-11-16 11:01:20,832 [INFO] Alquiler registrado con ID: dM4woI0cmKcZhUdu47cM
+2025-11-16 11:01:20,954 [INFO] Alquiler registrado con ID: E8KywpPZVeQ4HuqPi7nG
+2025-11-16 11:01:21,072 [INFO] Alquiler registrado con ID: JAIxqARusNAJwtgZag1Q
+2025-11-16 11:01:21,185 [INFO] Alquiler registrado con ID: t7VcU9XaMm6mw3jVoTGK
+2025-11-16 11:01:21,296 [INFO] Alquiler registrado con ID: NCeJ33plUkAaUtPCoC7k
+2025-11-16 11:01:21,405 [INFO] Alquiler registrado con ID: 1Bz3AvIkME8s2URPjUKf
+2025-11-16 11:01:21,504 [INFO] Alquiler registrado con ID: qYIKR1VDpOCRHNhUvLPR
+2025-11-16 11:01:21,602 [INFO] Alquiler registrado con ID: nlbw4MKvFmokbhawcoC9
+2025-11-16 11:01:21,712 [INFO] Alquiler registrado con ID: sKbwSLG549vSOaWHZECN
+2025-11-16 11:01:21,830 [INFO] Alquiler registrado con ID: f9ZKANywAz9S23EOtNVh
+2025-11-16 11:01:21,944 [INFO] Alquiler registrado con ID: DHcnbDmOVlkrcv0TTCaw
+2025-11-16 11:01:22,040 [INFO] Alquiler registrado con ID: LzLlOCLmAvxFzwiRmXma
+2025-11-16 11:01:22,138 [INFO] Alquiler registrado con ID: 8R1bwGlW480FWTJa9k3i
+2025-11-16 11:01:22,247 [INFO] Alquiler registrado con ID: EouMSzapRofZHqnnQqUB
+2025-11-16 11:01:22,361 [INFO] Alquiler registrado con ID: n2MkespfLfpuTSCuIMsO
+2025-11-16 11:01:22,471 [INFO] Alquiler registrado con ID: qx2n5o1X3Gog3ZyQJZbz
+2025-11-16 11:01:22,579 [INFO] Alquiler registrado con ID: nL5pvLT9H6xpddCEJ6Vj
+2025-11-16 11:01:22,690 [INFO] Alquiler registrado con ID: g74KVlHCAyysdvWNukUc
+2025-11-16 11:01:22,825 [INFO] Alquiler registrado con ID: Cyy6fzdp2mIovMv4ztEK
+2025-11-16 11:01:22,936 [INFO] Alquiler registrado con ID: yJwrrNp38usjIHLg0DK9
+2025-11-16 11:01:23,041 [INFO] Alquiler registrado con ID: AKUp1OJgLTtRrVAkdsYA
+2025-11-16 11:01:23,152 [INFO] Alquiler registrado con ID: lY1pC6GhJ1nhAXxvCMzx
+2025-11-16 11:01:23,265 [INFO] Alquiler registrado con ID: 2UC2d9FKzddQyt9Adg3s
+2025-11-16 11:01:23,385 [INFO] Alquiler registrado con ID: ji5UPAix8cIZ4gSNxETb
+2025-11-16 11:01:23,494 [INFO] Alquiler registrado con ID: cIDwu8yI0kRW95tUiE0T
+2025-11-16 11:01:23,591 [INFO] Alquiler registrado con ID: uRuN8BsiSy2LW78aqiaQ
+2025-11-16 11:01:23,591 [INFO]   → 200 transacciones migradas...
+2025-11-16 11:01:23,703 [INFO] Alquiler registrado con ID: I305nSN33EpDcho5u46A
+2025-11-16 11:01:23,807 [INFO] Alquiler registrado con ID: d7Itsq4USs26qGoDD8yH
+2025-11-16 11:01:23,916 [INFO] Alquiler registrado con ID: Ic0xEYW99qJu5CEgM0WA
+2025-11-16 11:01:24,012 [INFO] Alquiler registrado con ID: qi4VUNYsxADm1QexZ1pL
+2025-11-16 11:01:24,108 [INFO] Alquiler registrado con ID: DVnCWLz1FijaCGGlJUUV
+2025-11-16 11:01:24,226 [INFO] Alquiler registrado con ID: ZaxAmy62M1JFRmKbV7v8
+2025-11-16 11:01:24,351 [INFO] Alquiler registrado con ID: NxCfjUNsc4mzjct7pcYh
+2025-11-16 11:01:24,452 [INFO] Alquiler registrado con ID: ws8OPzd5mJGaURxpz7xp
+2025-11-16 11:01:24,559 [INFO] Alquiler registrado con ID: YrXb1Xq4boga4bINdWZs
+2025-11-16 11:01:24,654 [INFO] Alquiler registrado con ID: 4Sa98yhZecv5X9lqDpUR
+2025-11-16 11:01:24,754 [INFO] Alquiler registrado con ID: muYhPFsKN9NMNAwcY1pd
+2025-11-16 11:01:24,858 [INFO] Alquiler registrado con ID: LnCeFpEQ1FwwbCd5Quyi
+2025-11-16 11:01:24,956 [INFO] Alquiler registrado con ID: U3mOvfMgf5QhYiVNdRWg
+2025-11-16 11:01:25,069 [INFO] Alquiler registrado con ID: AKyc83X8MrA37d52qrv7
+2025-11-16 11:01:25,163 [INFO] Alquiler registrado con ID: 7uycipqcwJ91K0ZZPgJE
+2025-11-16 11:01:25,273 [INFO] Alquiler registrado con ID: 2JEAT4rYa1blxbwaC7EZ
+2025-11-16 11:01:25,370 [INFO] Alquiler registrado con ID: 4DFYvEMuWMvjRq9KSCSL
+2025-11-16 11:01:25,499 [INFO] Alquiler registrado con ID: KLDeUAAbCbxnPnxv7336
+2025-11-16 11:01:25,592 [INFO] Alquiler registrado con ID: 8xldEbzyf5d3Q9KIzmBL
+2025-11-16 11:01:25,714 [INFO] Alquiler registrado con ID: 6zHr3vYDsh5ug7UQ5uYp
+2025-11-16 11:01:25,822 [INFO] Alquiler registrado con ID: Cpg5TKziQdVsUtqAja1x
+2025-11-16 11:01:25,928 [INFO] Alquiler registrado con ID: dEdOV2ag5NDsjSfc4EUZ
+2025-11-16 11:01:25,928 [INFO] Transacciones migradas: 222/222
+2025-11-16 11:01:25,929 [INFO] 
+Paso 4: Migrando mantenimientos...
+2025-11-16 11:01:25,930 [INFO] Encontrados 12 mantenimientos en PROGAIN
+2025-11-16 11:01:26,047 [INFO] Mantenimiento registrado con ID: rQ9BsOgVxQyAf4KMNGxD
+2025-11-16 11:01:26,159 [INFO] Mantenimiento registrado con ID: ZjA3vhDwai6pztu5x2w6
+2025-11-16 11:01:26,271 [INFO] Mantenimiento registrado con ID: EcMGdnoOfUUZNUO7qwoO
+2025-11-16 11:01:26,384 [INFO] Mantenimiento registrado con ID: blppIDhG5GgE7wBZ0Yb1
+2025-11-16 11:01:26,504 [INFO] Mantenimiento registrado con ID: xLPxYgmRTpcWbTeE5CKb
+2025-11-16 11:01:26,619 [INFO] Mantenimiento registrado con ID: 7UMKQNFvAxolbQrk4UiC
+2025-11-16 11:01:26,732 [INFO] Mantenimiento registrado con ID: 1vGOq20Slhr9w6rcew1g
+2025-11-16 11:01:26,837 [INFO] Mantenimiento registrado con ID: ZDFBAoKWoWOWavpTwyNb
+2025-11-16 11:01:26,948 [INFO] Mantenimiento registrado con ID: r26g1IpGjEPXlD5KosZG
+2025-11-16 11:01:27,053 [INFO] Mantenimiento registrado con ID: BzXCYxm8z5J2u3ECzJ89
+2025-11-16 11:01:27,146 [INFO] Mantenimiento registrado con ID: bCM5Pa9xcvTce0yctCv5
+2025-11-16 11:01:27,254 [INFO] Mantenimiento registrado con ID: TYCy7CRhnLeVKHmrGstw
+2025-11-16 11:01:27,254 [INFO] Mantenimientos migrados: 12/12
+2025-11-16 11:01:27,255 [INFO] 
+Paso 5: Migrando pagos a operadores...
+2025-11-16 11:01:27,256 [INFO] Encontrados 62 pagos a operadores en PROGAIN
+2025-11-16 11:01:27,358 [INFO] Pago a operador registrado con ID: 9hSTMCAEaR6krBvLFwSc
+2025-11-16 11:01:27,464 [INFO] Pago a operador registrado con ID: z675eV4kbsTDJ5sVNoxy
+2025-11-16 11:01:27,561 [INFO] Pago a operador registrado con ID: hRs9q8NbomBW7ni1gzp9
+2025-11-16 11:01:27,684 [INFO] Pago a operador registrado con ID: JbiCaRhzSrlpHAqFvdpS
+2025-11-16 11:01:27,780 [INFO] Pago a operador registrado con ID: A0H7F6IMBQMzZ0wMQsVA
+2025-11-16 11:01:27,894 [INFO] Pago a operador registrado con ID: joj2igUIjr1bvnIedLgo
+2025-11-16 11:01:27,998 [INFO] Pago a operador registrado con ID: 7E5WNBvAIEMcaNZXLiqP
+2025-11-16 11:01:28,086 [INFO] Pago a operador registrado con ID: jbVkNneBeqbVtOztAeOw
+2025-11-16 11:01:28,230 [INFO] Pago a operador registrado con ID: 0BnnUMMYaA53Et6CJ8Pl
+2025-11-16 11:01:28,341 [INFO] Pago a operador registrado con ID: rvlZqWJa2KgLRtsYXxgl
+2025-11-16 11:01:28,449 [INFO] Pago a operador registrado con ID: 4rQxF0fCGLjzCKyEOcgA
+2025-11-16 11:01:28,556 [INFO] Pago a operador registrado con ID: zPuxhEp6PFwntvIz96IM
+2025-11-16 11:01:28,652 [INFO] Pago a operador registrado con ID: CtP3QKc9LKFgvQ9qfHx0
+2025-11-16 11:01:28,755 [INFO] Pago a operador registrado con ID: RpYFepG8hWo38RQFz5TG
+2025-11-16 11:01:28,862 [INFO] Pago a operador registrado con ID: 7YmuWkhJBb4U9k2kf4od
+2025-11-16 11:01:28,965 [INFO] Pago a operador registrado con ID: S5gUAcRDs3WJVPTW929d
+2025-11-16 11:01:29,071 [INFO] Pago a operador registrado con ID: 6i2mGREhFUrxV6nGS1zv
+2025-11-16 11:01:29,179 [INFO] Pago a operador registrado con ID: 6aZeZHRaTOzyqRiJdxyO
+2025-11-16 11:01:29,295 [INFO] Pago a operador registrado con ID: ocDEsjW4l2QO2d1FndTV
+2025-11-16 11:01:29,406 [INFO] Pago a operador registrado con ID: hpNfuXpwW1FMnNhdgvUb
+2025-11-16 11:01:29,407 [INFO]   → 20 pagos migrados...
+2025-11-16 11:01:29,505 [INFO] Pago a operador registrado con ID: UfPj8TUfeCYQBnOtOxoX
+2025-11-16 11:01:29,638 [INFO] Pago a operador registrado con ID: oX1Um9NCHUgWRCSZa8Cu
+2025-11-16 11:01:29,832 [INFO] Pago a operador registrado con ID: s8lYbGOKhXUye2O1OyPj
+2025-11-16 11:01:29,929 [INFO] Pago a operador registrado con ID: s6ejr3xzDLw1SYm5nEKi
+2025-11-16 11:01:30,024 [INFO] Pago a operador registrado con ID: yFUgbygoE2lDfTywDGl4
+2025-11-16 11:01:30,131 [INFO] Pago a operador registrado con ID: pGJwCaEnz5emSW3jxxvd
+2025-11-16 11:01:30,227 [INFO] Pago a operador registrado con ID: tv3hqgNhVxks0HSQY5JZ
+2025-11-16 11:01:30,340 [INFO] Pago a operador registrado con ID: GbU4bhOxV9lNn8JIXVZD
+2025-11-16 11:01:30,458 [INFO] Pago a operador registrado con ID: dCMLeBPBK27EwqtFNrFs
+2025-11-16 11:01:30,556 [INFO] Pago a operador registrado con ID: e90TBEta2BeJtDVKspbc
+2025-11-16 11:01:30,658 [INFO] Pago a operador registrado con ID: B4HwkNJ4efFpwXkRDVM1
+2025-11-16 11:01:30,772 [INFO] Pago a operador registrado con ID: IjsoKFTfcP4LYNNozdWK
+2025-11-16 11:01:30,870 [INFO] Pago a operador registrado con ID: 4YW6Uktfl56KuFZglUzL
+2025-11-16 11:01:30,980 [INFO] Pago a operador registrado con ID: uPC9pyaWZ2qV4M6MGkaT
+2025-11-16 11:01:31,099 [INFO] Pago a operador registrado con ID: NJ7n8v5K89qHsAOVTBCs
+2025-11-16 11:01:31,202 [INFO] Pago a operador registrado con ID: ELqFEjL36tkwqKo1cmZp
+2025-11-16 11:01:31,302 [INFO] Pago a operador registrado con ID: vCcGxIhdXLcR85CWSewm
+2025-11-16 11:01:31,393 [INFO] Pago a operador registrado con ID: jXF9PQrKC5AjDiR7l9sa
+2025-11-16 11:01:31,486 [INFO] Pago a operador registrado con ID: 8wKWPxLnzVY06AqinvWw
+2025-11-16 11:01:31,581 [INFO] Pago a operador registrado con ID: Xq28320bG9WBQpD7M3pY
+2025-11-16 11:01:31,581 [INFO]   → 40 pagos migrados...
+2025-11-16 11:01:31,690 [INFO] Pago a operador registrado con ID: yUJjPZann5Wd7ciL0Aeb
+2025-11-16 11:01:31,793 [INFO] Pago a operador registrado con ID: e3uOdRUpXVZEXHehR4yC
+2025-11-16 11:01:31,890 [INFO] Pago a operador registrado con ID: tPCKmAccbueHn93UbijH
+2025-11-16 11:01:32,023 [INFO] Pago a operador registrado con ID: 5p6NVvks2fyf77rxwCqr
+2025-11-16 11:01:32,113 [INFO] Pago a operador registrado con ID: beb63jxWSSXYgDcmKdmA
+2025-11-16 11:01:32,219 [INFO] Pago a operador registrado con ID: xpwm6jAehCL0v29TITpB
+2025-11-16 11:01:32,326 [INFO] Pago a operador registrado con ID: Hm6gJYiIW6tVqkoCwOYR
+2025-11-16 11:01:32,431 [INFO] Pago a operador registrado con ID: qIBPHtqMtuUcqlfEwmuM
+2025-11-16 11:01:32,526 [INFO] Pago a operador registrado con ID: wzsjH9KBoOVUE53xV4zj
+2025-11-16 11:01:32,626 [INFO] Pago a operador registrado con ID: k6lD9rSU71rBcHKtPjD7
+2025-11-16 11:01:32,753 [INFO] Pago a operador registrado con ID: 81tMzDKEvcxeuu9voLd8
+2025-11-16 11:01:32,859 [INFO] Pago a operador registrado con ID: DGEVFuP1fCkONWYig054
+2025-11-16 11:01:32,956 [INFO] Pago a operador registrado con ID: JcutviAq7hgQOJYua0qW
+2025-11-16 11:01:33,047 [INFO] Pago a operador registrado con ID: YuOvEvudG9vn2ErF8TwE
+2025-11-16 11:01:33,155 [INFO] Pago a operador registrado con ID: uB0zf7xQrkzi8mMZGe7f
+2025-11-16 11:01:33,250 [INFO] Pago a operador registrado con ID: E0uNAr6NB7XVhzxs34kd
+2025-11-16 11:01:33,350 [INFO] Pago a operador registrado con ID: ZTDquJQzb5prtT19HeF5
+2025-11-16 11:01:33,458 [INFO] Pago a operador registrado con ID: xztJE8tYaH2IRDZet68M
+2025-11-16 11:01:33,565 [INFO] Pago a operador registrado con ID: JFKg6B6g6kradk2HTQOc
+2025-11-16 11:01:33,664 [INFO] Pago a operador registrado con ID: KVfjXANQQqyYSA1ReRSC
+2025-11-16 11:01:33,665 [INFO]   → 60 pagos migrados...
+2025-11-16 11:01:33,760 [INFO] Pago a operador registrado con ID: SVQ9ZFsjIWq7z7calQOz
+2025-11-16 11:01:33,864 [INFO] Pago a operador registrado con ID: xCjv9pZ4HWAswW8yk5qL
+2025-11-16 11:01:33,864 [INFO] Pagos a operadores migrados: 62/62
+2025-11-16 11:01:33,865 [INFO] 
+================================================================================
+2025-11-16 11:01:33,865 [INFO] RESUMEN DE LA MIGRACIÓN
+2025-11-16 11:01:33,865 [INFO] ================================================================================
+2025-11-16 11:01:33,865 [INFO] ✓ Equipos migrados:              12
+2025-11-16 11:01:33,865 [INFO] ✓ Entidades migradas:            36
+2025-11-16 11:01:33,865 [INFO] ✓ Transacciones migradas:        222
+2025-11-16 11:01:33,867 [INFO] ✓ Mantenimientos migrados:       12
+2025-11-16 11:01:33,867 [INFO] ✓ Pagos a operadores migrados:   62
+2025-11-16 11:01:33,867 [INFO] 
+2025-11-16 11:01:33,867 [INFO] Total de registros migrados:     344
+2025-11-16 11:01:33,868 [INFO] 
+2025-11-16 11:01:33,868 [INFO] Errores encontrados:             0
+2025-11-16 11:01:33,868 [INFO] 
+================================================================================
+2025-11-16 11:01:33,868 [INFO] MIGRACIÓN COMPLETADA
+2025-11-16 11:01:33,868 [INFO] ================================================================================
+2025-11-16 11:01:33,869 [INFO] Directorio de backup creado: ./backups
+2025-11-16 11:01:33,922 [INFO] Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-16 11:01:33,922 [INFO] Iniciando proceso de backup...
+2025-11-16 11:01:34,057 [INFO] Obtenidos 12 equipos
+2025-11-16 11:01:34,057 [INFO] Backup de 12 equipos completado
+2025-11-16 11:01:34,231 [INFO] Obtenidas 222 transacciones
+2025-11-16 11:01:34,232 [INFO] Backup de 222 transacciones completado
+2025-11-16 11:01:34,360 [INFO] Obtenidas 36 entidades (tipo=None)
+2025-11-16 11:01:34,361 [INFO] Backup de 36 entidades completado
+2025-11-16 11:01:34,450 [INFO] Obtenidos 12 mantenimientos
+2025-11-16 11:01:34,451 [INFO] Backup de 12 mantenimientos completado
+2025-11-16 11:01:34,557 [INFO] Obtenidos 62 pagos a operadores
+2025-11-16 11:01:34,558 [INFO] Backup de 62 pagos a operadores completado
+2025-11-16 11:01:34,564 [INFO] Backup completado exitosamente en: ./backups/equipos_backup.db
+2025-11-16 11:01:34,564 [INFO] Total de registros: 344
