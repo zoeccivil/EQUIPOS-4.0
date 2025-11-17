@@ -97,7 +97,7 @@ class StorageManager:
     def guardar_conduce(self, 
                        file_path: str,
                        alquiler: dict,
-                       procesar_imagen: bool = True) -> Tuple[bool, Optional[str], Optional[str]]:
+                       procesar_imagen: bool = True) -> Tuple[bool, Optional[str], Optional[str], Optional[str]]:
         """
         Sube un archivo de conduce a Firebase Storage.
         
@@ -116,10 +116,11 @@ class StorageManager:
             procesar_imagen: Si True, procesa imágenes antes de subir (redimensiona y optimiza)
         
         Returns:
-            Tuple (éxito, url_publica, ruta_storage)
+            Tuple (éxito, url_publica, ruta_storage, mensaje_error)
             - éxito: True si se subió correctamente
             - url_publica: URL pública para acceder al archivo
             - ruta_storage: Ruta interna del archivo en Firebase Storage
+            - mensaje_error: Descripción del error si falló, None si fue exitoso
         """
         try:
             logger.info(f"=== Iniciando subida de conduce ===")
@@ -129,8 +130,9 @@ class StorageManager:
             
             # Validar archivo existe
             if not os.path.exists(file_path):
-                logger.error(f"Archivo no encontrado: {file_path}")
-                return False, None, None
+                error_msg = f"Archivo no encontrado: {file_path}"
+                logger.error(error_msg)
+                return False, None, None, error_msg
             
             file_size = os.path.getsize(file_path)
             file_size_mb = file_size / 1024 / 1024
@@ -185,8 +187,15 @@ class StorageManager:
                 blob.upload_from_filename(archivo_a_subir)
                 logger.info(f"Archivo subido exitosamente a Storage")
             except Exception as e_upload:
-                logger.error(f"Error al subir archivo a Storage: {e_upload}", exc_info=True)
-                raise Exception(f"Error al subir archivo: {e_upload}")
+                error_msg = f"Error al subir archivo a Storage: {str(e_upload)}"
+                logger.error(error_msg, exc_info=True)
+                # Limpiar archivo temporal si se creó
+                if archivo_temporal and os.path.exists(archivo_temporal):
+                    try:
+                        os.unlink(archivo_temporal)
+                    except Exception:
+                        pass
+                return False, None, None, error_msg
             
             # Intentar hacer el archivo público, si falla usar URL firmada
             try:
@@ -220,11 +229,12 @@ class StorageManager:
                     pass
             
             logger.info(f"Conduce subido: {storage_path} -> {url_publica}")
-            return True, url_publica, storage_path
+            return True, url_publica, storage_path, None
             
         except Exception as e:
-            logger.error(f"Error al guardar conduce: {e}", exc_info=True)
-            return False, None, None
+            error_msg = f"Error al guardar conduce: {str(e)}"
+            logger.error(error_msg, exc_info=True)
+            return False, None, None, error_msg
     
     def descargar_conduce(self, storage_path: str, destino_local: Optional[str] = None) -> Optional[str]:
         """

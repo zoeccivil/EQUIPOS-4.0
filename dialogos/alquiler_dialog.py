@@ -391,7 +391,7 @@ class AlquilerDialog(QDialog):
                         'id': self.alquiler_id or 'temp'
                     }
                     
-                    exito, url, storage_path = self.sm.guardar_conduce(
+                    exito, url, storage_path, error_msg = self.sm.guardar_conduce(
                         self.conduce_archivo_seleccionado,
                         temp_alquiler,
                         procesar_imagen=True
@@ -402,20 +402,29 @@ class AlquilerDialog(QDialog):
                         datos['conduce_storage_path'] = storage_path
                         logger.info(f"Conduce subido exitosamente: {storage_path} -> {url}")
                     else:
-                        error_msg = "No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto."
-                        logger.error(error_msg)
-                        logger.error("Detalles: La función guardar_conduce retornó éxito=False")
-                        logger.error("Revise los logs anteriores para el error específico de Storage")
+                        base_msg = "No se pudo subir el conduce. El alquiler se guardará sin conduce adjunto."
+                        logger.error(base_msg)
+                        logger.error(f"Detalles del error: {error_msg}")
+                        
+                        # Mostrar el error específico al usuario
+                        detailed_msg = f"{base_msg}\n\n"
+                        
+                        if error_msg:
+                            detailed_msg += f"Error específico:\n{error_msg}\n\n"
+                        
+                        detailed_msg += (
+                            "Posibles causas:\n"
+                            "• Permisos de Firebase Storage no configurados (error 403)\n"
+                            "• Credenciales sin permisos suficientes\n"
+                            "• Bucket no existe o nombre incorrecto (error 404)\n"
+                            "• Problema de conexión a Internet\n\n"
+                            "Ver docs/solucion_error_subida_conduce.md para más ayuda."
+                        )
+                        
                         QMessageBox.warning(
                             self,
                             "Advertencia",
-                            f"{error_msg}\n\n"
-                            "Posibles causas:\n"
-                            "• Permisos de Firebase Storage no configurados correctamente\n"
-                            "• Problema de conexión a Internet o firewall\n"
-                            "• Credenciales de servicio sin permisos suficientes\n"
-                            "• Bucket de Storage no existe o no es accesible\n\n"
-                            "Revise el archivo de logs (equipos.log) para el error específico."
+                            detailed_msg
                         )
             
             # Modo creación
