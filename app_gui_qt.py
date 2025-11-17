@@ -178,8 +178,9 @@ class AppGUI(QMainWindow):
         config_menu.addMenu(temas_menu)
         
         config_menu.addSeparator()
-        config_menu.addAction("Configurar Backups", self._configurar_backups)
-        config_menu.addAction("Ver Configuración", self._ver_configuracion)
+        config_menu.addAction("🔑 Configurar Credenciales Firebase", self._configurar_firebase)
+        config_menu.addAction("📋 Configurar Backups", self._configurar_backups)
+        config_menu.addAction("⚙️ Ver Configuración", self._ver_configuracion)
         
         # Menú Ayuda
         ayuda_menu = menubar.addMenu("Ayuda")
@@ -369,6 +370,161 @@ class AppGUI(QMainWindow):
         except Exception as e:
             QMessageBox.warning(self, "Error",
                               f"No se pudo cambiar el tema:\n{e}")
+    
+    def _configurar_firebase(self):
+        """
+        Permite configurar las credenciales de Firebase desde la interfaz.
+        El usuario puede seleccionar un archivo de credenciales y configurar el bucket de Storage.
+        """
+        from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QLineEdit, QFormLayout
+        
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Configurar Firebase")
+        dialog.setMinimumWidth(500)
+        
+        layout = QVBoxLayout(dialog)
+        
+        # Información actual
+        info_label = QLabel("<b>Configuración Actual de Firebase:</b>")
+        layout.addWidget(info_label)
+        
+        form_layout = QFormLayout()
+        
+        # Credenciales actuales
+        creds_actual = self.config.get('firebase', {}).get('credentials_path', 'No configurado')
+        lbl_creds = QLabel(creds_actual)
+        form_layout.addRow("Credenciales:", lbl_creds)
+        
+        # Project ID actual
+        project_actual = self.config.get('firebase', {}).get('project_id', 'No configurado')
+        lbl_project = QLabel(project_actual)
+        form_layout.addRow("Project ID:", lbl_project)
+        
+        # Storage Bucket actual
+        bucket_actual = self.config.get('firebase', {}).get('storage_bucket', 'No configurado')
+        lbl_bucket = QLabel(bucket_actual)
+        form_layout.addRow("Storage Bucket:", lbl_bucket)
+        
+        layout.addLayout(form_layout)
+        
+        # Sección para nueva configuración
+        layout.addWidget(QLabel("\n<b>Nueva Configuración:</b>"))
+        
+        new_form = QFormLayout()
+        
+        # Campo para archivo de credenciales
+        creds_layout = QHBoxLayout()
+        self.txt_creds_path = QLineEdit()
+        self.txt_creds_path.setPlaceholderText("Ruta al archivo de credenciales...")
+        self.txt_creds_path.setText(creds_actual if creds_actual != 'No configurado' else '')
+        creds_layout.addWidget(self.txt_creds_path)
+        
+        btn_browse_creds = QPushButton("📁 Buscar")
+        btn_browse_creds.clicked.connect(lambda: self._browse_credentials_file(self.txt_creds_path))
+        creds_layout.addWidget(btn_browse_creds)
+        new_form.addRow("Credenciales:", creds_layout)
+        
+        # Campo para Project ID
+        self.txt_project_id = QLineEdit()
+        self.txt_project_id.setPlaceholderText("ID del proyecto Firebase...")
+        self.txt_project_id.setText(project_actual if project_actual != 'No configurado' else '')
+        new_form.addRow("Project ID:", self.txt_project_id)
+        
+        # Campo para Storage Bucket
+        self.txt_storage_bucket = QLineEdit()
+        self.txt_storage_bucket.setPlaceholderText("nombre-proyecto.appspot.com")
+        self.txt_storage_bucket.setText(bucket_actual if bucket_actual != 'No configurado' else '')
+        new_form.addRow("Storage Bucket:", self.txt_storage_bucket)
+        
+        layout.addLayout(new_form)
+        
+        # Nota informativa
+        note_label = QLabel(
+            "\n<i>Nota: Después de guardar los cambios, la aplicación se reiniciará "
+            "automáticamente para aplicar la nueva configuración de Firebase.</i>"
+        )
+        note_label.setWordWrap(True)
+        layout.addWidget(note_label)
+        
+        # Botones
+        buttons_layout = QHBoxLayout()
+        
+        btn_save = QPushButton("💾 Guardar y Reiniciar")
+        btn_save.clicked.connect(lambda: self._save_firebase_config(dialog))
+        buttons_layout.addWidget(btn_save)
+        
+        btn_cancel = QPushButton("✖️ Cancelar")
+        btn_cancel.clicked.connect(dialog.reject)
+        buttons_layout.addWidget(btn_cancel)
+        
+        layout.addLayout(buttons_layout)
+        
+        dialog.exec()
+    
+    def _browse_credentials_file(self, line_edit):
+        """Abre un diálogo para seleccionar el archivo de credenciales."""
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Seleccionar Archivo de Credenciales Firebase",
+            "",
+            "JSON Files (*.json);;All Files (*)"
+        )
+        if file_path:
+            line_edit.setText(file_path)
+    
+    def _save_firebase_config(self, dialog):
+        """Guarda la nueva configuración de Firebase y reinicia la aplicación."""
+        try:
+            # Validar que se ingresaron los datos requeridos
+            creds_path = self.txt_creds_path.text().strip()
+            project_id = self.txt_project_id.text().strip()
+            storage_bucket = self.txt_storage_bucket.text().strip()
+            
+            if not creds_path or not project_id:
+                QMessageBox.warning(self, "Datos Incompletos",
+                                  "Debe proporcionar al menos la ruta de credenciales y el Project ID.")
+                return
+            
+            # Verificar que el archivo de credenciales existe
+            if not os.path.exists(creds_path):
+                QMessageBox.warning(self, "Archivo No Encontrado",
+                                  f"No se encontró el archivo de credenciales:\n{creds_path}")
+                return
+            
+            # Actualizar configuración
+            if 'firebase' not in self.config:
+                self.config['firebase'] = {}
+            
+            self.config['firebase']['credentials_path'] = creds_path
+            self.config['firebase']['project_id'] = project_id
+            
+            if storage_bucket:
+                self.config['firebase']['storage_bucket'] = storage_bucket
+            
+            # Guardar configuración
+            guardar_configuracion(self.config)
+            
+            # Informar al usuario
+            respuesta = QMessageBox.question(
+                self,
+                "Configuración Guardada",
+                "La configuración de Firebase se guardó correctamente.\n\n"
+                "¿Desea reiniciar la aplicación ahora para aplicar los cambios?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+            
+            dialog.accept()
+            
+            if respuesta == QMessageBox.StandardButton.Yes:
+                # Reiniciar la aplicación
+                logger.info("Reiniciando aplicación para aplicar nueva configuración Firebase...")
+                QApplication.quit()
+                os.execl(sys.executable, sys.executable, *sys.argv)
+            
+        except Exception as e:
+            logger.error(f"Error al guardar configuración Firebase: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error",
+                               f"Error al guardar la configuración:\n{e}")
     
     def _configurar_backups(self):
         """Abre ventana de configuración de backups"""

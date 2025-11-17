@@ -6,7 +6,7 @@ Tab de Registro de Alquileres para EQUIPOS 4.0
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QComboBox, QLineEdit,
     QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
-    QMessageBox, QLabel, QDateEdit, QSpacerItem, QSizePolicy
+    QMessageBox, QLabel, QDateEdit, QSpacerItem, QSizePolicy, QStyle
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QDate
 from PyQt6.QtGui import QIcon, QColor
@@ -118,16 +118,24 @@ class RegistroAlquileresTab(QWidget):
         """Crea los botones de acción en layout horizontal."""
         acciones_layout = QHBoxLayout()
         
-        self.btn_buscar = QPushButton("Buscar")
+        self.btn_buscar = QPushButton("🔍 Buscar")
+        icon_search = self.style().standardIcon(QStyle.StandardPixmap.SP_FileDialogContentsView)
+        self.btn_buscar.setIcon(icon_search)
         acciones_layout.addWidget(self.btn_buscar)
         
-        self.btn_nuevo = QPushButton("Registrar Nuevo Alquiler")
+        self.btn_nuevo = QPushButton("➕ Registrar Nuevo Alquiler")
+        icon_new = self.style().standardIcon(QStyle.StandardPixmap.SP_FileDialogNewFolder)
+        self.btn_nuevo.setIcon(icon_new)
         acciones_layout.addWidget(self.btn_nuevo)
         
-        self.btn_editar = QPushButton("Editar Seleccionado")
+        self.btn_editar = QPushButton("✏️ Editar Seleccionado")
+        icon_edit = self.style().standardIcon(QStyle.StandardPixmap.SP_FileDialogDetailedView)
+        self.btn_editar.setIcon(icon_edit)
         acciones_layout.addWidget(self.btn_editar)
         
-        self.btn_eliminar = QPushButton("Eliminar Seleccionado")
+        self.btn_eliminar = QPushButton("🗑️ Eliminar Seleccionado")
+        icon_delete = self.style().standardIcon(QStyle.StandardPixmap.SP_TrashIcon)
+        self.btn_eliminar.setIcon(icon_delete)
         acciones_layout.addWidget(self.btn_eliminar)
         
         acciones_layout.addStretch()

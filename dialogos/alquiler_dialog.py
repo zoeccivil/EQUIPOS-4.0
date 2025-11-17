@@ -15,9 +15,10 @@ from pathlib import Path
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
     QComboBox, QMessageBox, QDateEdit, QDoubleSpinBox, QCheckBox, QFormLayout,
-    QFileDialog, QGroupBox
+    QFileDialog, QGroupBox, QStyle
 )
 from PyQt6.QtCore import QDate
+from PyQt6.QtGui import QIcon
 
 from firebase_manager import FirebaseManager
 from storage_manager import StorageManager
@@ -168,16 +169,22 @@ class AlquilerDialog(QDialog):
             # Botones
             btns_conduce_layout = QHBoxLayout()
             
-            self.btn_seleccionar_conduce = QPushButton("Seleccionar Archivo")
+            self.btn_seleccionar_conduce = QPushButton("📎 Adjuntar Conduce")
+            icon_open = self.style().standardIcon(QStyle.StandardPixmap.SP_DialogOpenButton)
+            self.btn_seleccionar_conduce.setIcon(icon_open)
             self.btn_seleccionar_conduce.clicked.connect(self._seleccionar_conduce)
             btns_conduce_layout.addWidget(self.btn_seleccionar_conduce)
             
-            self.btn_ver_conduce = QPushButton("Ver Conduce")
+            self.btn_ver_conduce = QPushButton("👁️ Ver Conduce")
+            icon_view = self.style().standardIcon(QStyle.StandardPixmap.SP_FileDialogDetailedView)
+            self.btn_ver_conduce.setIcon(icon_view)
             self.btn_ver_conduce.clicked.connect(self._ver_conduce)
             self.btn_ver_conduce.setEnabled(False)
             btns_conduce_layout.addWidget(self.btn_ver_conduce)
             
-            self.btn_eliminar_conduce = QPushButton("Eliminar")
+            self.btn_eliminar_conduce = QPushButton("🗑️ Eliminar")
+            icon_delete = self.style().standardIcon(QStyle.StandardPixmap.SP_TrashIcon)
+            self.btn_eliminar_conduce.setIcon(icon_delete)
             self.btn_eliminar_conduce.clicked.connect(self._eliminar_conduce)
             self.btn_eliminar_conduce.setEnabled(False)
             btns_conduce_layout.addWidget(self.btn_eliminar_conduce)
@@ -191,11 +198,15 @@ class AlquilerDialog(QDialog):
         # Botones principales
         botones_layout = QHBoxLayout()
         
-        self.btn_guardar = QPushButton("Guardar")
+        self.btn_guardar = QPushButton("💾 Guardar")
+        icon_save = self.style().standardIcon(QStyle.StandardPixmap.SP_DialogSaveButton)
+        self.btn_guardar.setIcon(icon_save)
         self.btn_guardar.clicked.connect(self._guardar)
         botones_layout.addWidget(self.btn_guardar)
         
-        btn_cancelar = QPushButton("Cancelar")
+        btn_cancelar = QPushButton("✖️ Cancelar")
+        icon_cancel = self.style().standardIcon(QStyle.StandardPixmap.SP_DialogCancelButton)
+        btn_cancelar.setIcon(icon_cancel)
         btn_cancelar.clicked.connect(self.reject)
         botones_layout.addWidget(btn_cancelar)
         
