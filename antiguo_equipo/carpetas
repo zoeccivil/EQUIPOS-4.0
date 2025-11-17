@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Este script lista de forma recursiva el contenido de una carpeta específica,
+mostrando una estructura de árbol con directorios y archivos.
+El resultado se imprime directamente en la terminal, facilitando copiarlo como un log.
+"""
+
+import os
+
+def listar_contenido_carpeta(ruta_carpeta):
+    """
+    Verifica si una ruta existe y, si es así, imprime su contenido
+    en formato de árbol en la consola.
+
+    Args:
+        ruta_carpeta (str): La ruta absoluta a la carpeta que se desea listar.
+    """
+    print("=" * 60)
+    print(f"Análisis de la carpeta: {ruta_carpeta}")
+    print("=" * 60)
+
+    # Verificar si la ruta especificada realmente existe
+    if not os.path.exists(ruta_carpeta):
+        print(f"\n[ERROR] La ruta especificada no existe o no es accesible.")
+        print("Por favor, verifica que la ruta sea correcta e inténtalo de nuevo.")
+        print("=" * 60)
+        return
+
+    try:
+        # os.walk() es ideal para recorrer un árbol de directorios de manera eficiente
+        for raiz, directorios, archivos in os.walk(ruta_carpeta):
+            # Calculamos el nivel de profundidad para la indentación
+            nivel = raiz.replace(ruta_carpeta, '').count(os.sep)
+            indentacion = ' ' * 4 * nivel
+
+            # Imprimimos el directorio actual
+            print(f"{indentacion}[D] {os.path.basename(raiz)}/")
+
+            # Imprimimos los subdirectorios de este nivel
+            sub_indentacion = ' ' * 4 * (nivel + 1)
+            for d in sorted(directorios):
+                print(f"{sub_indentacion}[D] {d}/")
+            
+            # Imprimimos los archivos de este nivel
+            for f in sorted(archivos):
+                print(f"{sub_indentacion}[F] {f}")
+
+    except PermissionError:
+        print(f"\n[ERROR] Permiso denegado para acceder a la carpeta '{ruta_carpeta}' o a uno de sus subdirectorios.")
+    except Exception as e:
+        print(f"\n[ERROR] Ocurrió un error inesperado: {e}")
+
+    print("=" * 60)
+    print("Análisis completado.")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    # --- IMPORTANTE ---
+    # Coloca la ruta exacta de la carpeta que quieres analizar aquí.
+    # El prefijo r'...' es para que Python interprete la cadena de texto de forma literal,
+    # evitando problemas con las barras invertidas '\' en Windows.
+    carpeta_a_listar = r'E:\Dropbox\PROGAIN\EQUIPOS PyQT6'
+    
+    listar_contenido_carpeta(carpeta_a_listar)
