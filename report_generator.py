@@ -251,6 +251,12 @@ class ReportGenerator:
             if self.storage_manager and 'CondStorage' in self.df.columns:
                 self._agregar_anexos_conduces(elementos, estilos)
             
+            # Sección de Abonos y Totales (si están disponibles)
+            if hasattr(self, 'abonos') and self.abonos:
+                self._agregar_seccion_abonos(elementos, estilos)
+            elif hasattr(self, 'saldo'):  # Mostrar totales aunque no haya abonos
+                self._agregar_totales(elementos, estilos)
+            
             # Construir PDF
             doc.build(elementos)
             
@@ -370,6 +376,100 @@ class ReportGenerator:
                 logger.warning(f"No se pudo eliminar archivo temporal {temp_file}: {e}")
         
         self.temp_files = []
+    
+    def _agregar_seccion_abonos(self, elementos, estilos):
+        """
+        Agrega sección de abonos y totales al PDF.
+        """
+        try:
+            elementos.append(PageBreak())
+            elementos.append(Paragraph("<b>ABONOS REGISTRADOS</b>", estilos['Heading2']))
+            elementos.append(Spacer(1, 3*mm))
+            
+            # Tabla de abonos
+            if self.abonos:
+                abonos_cols = ['Fecha', 'Concepto', 'Monto']
+                abonos_data = [abonos_cols]
+                
+                for abono in self.abonos:
+                    fecha = abono.get('fecha', '')
+                    concepto = abono.get('concepto', '') or abono.get('descripcion', 'Abono')
+                    monto = float(abono.get('monto', 0))
+                    
+                    abonos_data.append([
+                        str(fecha),
+                        str(concepto),
+                        f"{self.currency} {monto:,.2f}"
+                    ])
+                
+                abonos_tabla = Table(abonos_data, colWidths=[40*mm, 90*mm, 50*mm])
+                abonos_tabla.setStyle(TableStyle([
+                    ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#1F6321")),
+                    ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+                    
+                    ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+                    ('ALIGN', (2, 1), (2, -1), 'RIGHT'),
+                    ('ALIGN', (0, 1), (1, -1), 'LEFT'),
+                    
+                    ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                    ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor("#F9F9F9")])
+                ]))
+                
+                elementos.append(abonos_tabla)
+                elementos.append(Spacer(1, 5*mm))
+            else:
+                elementos.append(Paragraph("No se registraron abonos en este período.", estilos['Normal']))
+                elementos.append(Spacer(1, 5*mm))
+            
+            # Agregar totales
+            self._agregar_totales(elementos, estilos)
+            
+        except Exception as e:
+            logger.error(f"Error al agregar sección de abonos: {e}", exc_info=True)
+    
+    def _agregar_totales(self, elementos, estilos):
+        """
+        Agrega tabla de totales (Facturado, Abonado, Saldo).
+        """
+        try:
+            elementos.append(Paragraph("<b>RESUMEN DE CUENTA</b>", estilos['Heading3']))
+            elementos.append(Spacer(1, 3*mm))
+            
+            # Tabla de totales
+            totales_data = [
+                ['Total Facturado:', f"{self.currency} {self.total_facturado:,.2f}"],
+                ['Total Abonado:', f"{self.currency} {self.total_abonado:,.2f}"],
+                ['Saldo Pendiente:', f"{self.currency} {self.saldo:,.2f}"]
+            ]
+            
+            totales_tabla = Table(totales_data, colWidths=[70*mm, 70*mm])
+            totales_tabla.setStyle(TableStyle([
+                ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
+                ('FONTNAME', (1, 0), (1, -1), 'Helvetica-Bold'),
+                ('ALIGN', (1, 0), (1, -1), 'RIGHT'),
+                ('ALIGN', (0, 0), (0, -1), 'LEFT'),
+                ('FONTSIZE', (0, 0), (-1, -1), 12),
+                
+                # Destacar el saldo
+                ('BACKGROUND', (0, 2), (-1, 2), colors.HexColor("#FFF4CC") if self.saldo > 0 else colors.HexColor("#E8F5E9")),
+                ('TEXTCOLOR', (0, 2), (-1, 2), colors.HexColor("#D32F2F") if self.saldo > 0 else colors.HexColor("#2E7D32")),
+                
+                ('LINEABOVE', (0, 0), (-1, 0), 1, colors.black),
+                ('LINEABOVE', (0, 2), (-1, 2), 2, colors.black),
+                ('LINEBELOW', (0, 2), (-1, 2), 2, colors.black),
+                ('LEFTPADDING', (0, 0), (-1, -1), 12),
+                ('RIGHTPADDING', (0, 0), (-1, -1), 12),
+                ('TOPPADDING', (0, 0), (-1, -1), 8),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ]))
+            
+            elementos.append(totales_tabla)
+            elementos.append(Spacer(1, 10*mm))
+            
+        except Exception as e:
+            logger.error(f"Error al agregar totales: {e}", exc_info=True)
     
     def to_excel(self, filepath):
         """
