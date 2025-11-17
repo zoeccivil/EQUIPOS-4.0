@@ -529,10 +529,21 @@ class MiniEditorImagen(QDialog):
             pass
 
     def get_final_image(self):
+        """
+        Retorna la imagen final procesada y optimizada.
+        Aplica thumbnail para reducir tamaño si es necesario.
+        """
         try:
             if _HAS_PIL and self._current_image is not None:
                 img = self._current_image.copy()
+                
+                # Reducir tamaño si excede los límites
+                original_size = img.size
                 img.thumbnail((self._max_width, self._max_height), Image.Resampling.LANCZOS)
+                
+                if img.size != original_size:
+                    logger.info(f"Imagen redimensionada de {original_size} a {img.size}")
+                
                 return img
             elif self._qimage_cache is not None:
                 return self._qimage_cache

@@ -43,8 +43,10 @@ class StorageManager:
     
     def _process_image(self, origen_path: str, width: int = 1200, height: int = 800) -> Optional[str]:
         """
-        Procesa una imagen: redimensiona manteniendo aspecto y convierte a JPEG.
+        Procesa una imagen: redimensiona manteniendo aspecto y convierte a JPEG con compresión optimizada.
         Retorna la ruta del archivo temporal procesado o None si falla.
+        
+        Para archivos muy grandes, usa compresión más agresiva.
         """
         if not _HAS_PIL:
             logger.warning("PIL no disponible, no se procesará la imagen")
@@ -52,22 +54,44 @@ class StorageManager:
         
         try:
             with Image.open(origen_path) as img:
+                # Obtener tamaño original
+                original_size = img.size
+                original_pixels = original_size[0] * original_size[1]
+                
                 # Convertir a RGB
                 img = img.convert("RGB")
+                
                 # Redimensionar manteniendo aspecto
                 img.thumbnail((width, height), Image.Resampling.LANCZOS)
+                new_size = img.size
+                
+                logger.info(f"Redimensionando imagen de {original_size} a {new_size}")
+                
+                # Determinar calidad de JPEG basada en el tamaño
+                # Más píxeles en la imagen original = más compresión
+                if original_pixels > 3000000:  # >3 megapixels
+                    quality = 70
+                elif original_pixels > 1500000:  # >1.5 megapixels
+                    quality = 80
+                else:
+                    quality = 85
                 
                 # Guardar en archivo temporal
                 temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.jpeg')
                 temp_path = temp_file.name
                 temp_file.close()
                 
-                img.save(temp_path, format="JPEG", quality=85, optimize=True)
-                logger.info(f"Imagen procesada: {origen_path} -> {temp_path}")
+                img.save(temp_path, format="JPEG", quality=quality, optimize=True)
+                
+                # Verificar tamaño final
+                final_size = os.path.getsize(temp_path)
+                final_size_mb = final_size / 1024 / 1024
+                logger.info(f"Imagen procesada y guardada: {temp_path} ({final_size_mb:.2f} MB, calidad={quality})")
+                
                 return temp_path
                 
         except Exception as e:
-            logger.error(f"Error al procesar imagen {origen_path}: {e}")
+            logger.error(f"Error al procesar imagen {origen_path}: {e}", exc_info=True)
             return None
     
     def guardar_conduce(self, 
@@ -109,7 +133,12 @@ class StorageManager:
                 return False, None, None
             
             file_size = os.path.getsize(file_path)
-            logger.info(f"Tamaño del archivo: {file_size} bytes ({file_size / 1024 / 1024:.2f} MB)")
+            file_size_mb = file_size / 1024 / 1024
+            logger.info(f"Tamaño del archivo: {file_size} bytes ({file_size_mb:.2f} MB)")
+            
+            # Advertir si el archivo es muy grande (>10MB para Storage)
+            if file_size_mb > 10:
+                logger.warning(f"Archivo muy grande ({file_size_mb:.2f} MB). Firebase Storage puede tener límites.")
             
             # Determinar año/mes desde fecha del alquiler
             # Se usa la fecha del alquiler para organizar en carpetas por año y mes

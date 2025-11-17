@@ -456,10 +456,27 @@ class AlquilerDialog(QDialog):
         
         nombre_archivo = os.path.basename(archivo)
         
-        # Si es imagen, abrir editor
+        # Si es imagen, verificar tamaño y abrir editor
         if archivo.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp', '.gif')):
             try:
-                logger.info(f"Abriendo editor de imagen para: {archivo}")
+                # Verificar tamaño del archivo
+                file_size_mb = os.path.getsize(archivo) / (1024 * 1024)
+                logger.info(f"Abriendo editor de imagen para: {archivo} ({file_size_mb:.2f} MB)")
+                
+                # Si el archivo es muy grande (>5MB), mostrar advertencia
+                if file_size_mb > 5:
+                    reply = QMessageBox.question(
+                        self,
+                        "Archivo Grande",
+                        f"El archivo seleccionado es grande ({file_size_mb:.1f} MB).\n\n"
+                        "El editor lo optimizará automáticamente para reducir el tamaño.\n"
+                        "Esto puede tardar unos segundos.\n\n"
+                        "¿Desea continuar?",
+                        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+                    )
+                    if reply == QMessageBox.StandardButton.No:
+                        return
+                
                 editor = MiniEditorImagen(archivo, width=1200, height=800, parent=self)
                 
                 if editor.exec() != QDialog.DialogCode.Accepted:
@@ -478,11 +495,31 @@ class AlquilerDialog(QDialog):
                 # Crear archivo temporal multiplataforma
                 try:
                     temp_path = crear_archivo_temporal_conduce(prefijo="conduce_editado", sufijo=".jpeg")
-                    img_editada.save(temp_path, "JPEG", quality=85)
-                    logger.info(f"Imagen editada guardada correctamente en: {temp_path}")
+                    
+                    # Determinar calidad basada en el tamaño de la imagen
+                    # Para imágenes grandes, usar calidad más baja para reducir tamaño
+                    if hasattr(img_editada, 'size'):
+                        width, height = img_editada.size
+                        pixels = width * height
+                        # Más de 1 megapixel -> calidad 75, más de 2 -> calidad 70, etc.
+                        if pixels > 2000000:
+                            quality = 65
+                        elif pixels > 1000000:
+                            quality = 75
+                        else:
+                            quality = 85
+                        logger.info(f"Guardando imagen editada ({width}x{height}) con calidad {quality}")
+                    else:
+                        quality = 85
+                    
+                    img_editada.save(temp_path, "JPEG", quality=quality, optimize=True)
+                    
+                    # Verificar tamaño final
+                    final_size_mb = os.path.getsize(temp_path) / (1024 * 1024)
+                    logger.info(f"Imagen editada guardada correctamente en: {temp_path} ({final_size_mb:.2f} MB)")
                     
                     self.conduce_archivo_seleccionado = temp_path
-                    self.lbl_conduce_estado.setText(f"Seleccionado y editado: {nombre_archivo}")
+                    self.lbl_conduce_estado.setText(f"Seleccionado y editado: {nombre_archivo} ({final_size_mb:.1f}MB)")
                     
                 except Exception as save_error:
                     logger.error(f"Error al guardar imagen editada: {save_error}", exc_info=True)
