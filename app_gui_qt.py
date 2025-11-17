@@ -792,7 +792,7 @@ class AppGUI(QMainWindow):
         try:
             from dialogos.ventana_gestion_abonos import VentanaGestionAbonos
             
-            dialogo = VentanaGestionAbonos(self.fm, self.mapas, parent=self)
+            dialogo = VentanaGestionAbonos(self.fm, self.mapa_nombres, parent=self)
             dialogo.exec()
             
         except Exception as e:
