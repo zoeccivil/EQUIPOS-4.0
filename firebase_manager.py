@@ -807,6 +807,197 @@ class FirebaseManager:
             logger.error(f"Error al obtener primera fecha de operador {operador_id}: {e}", exc_info=True)
             return None
 
+    # ==================== REPORTES Y ESTADO DE CUENTA ====================
+    
+    def obtener_alquileres_para_reporte(
+        self,
+        cliente_id: Optional[str] = None,
+        equipo_id: Optional[str] = None,
+        operador_id: Optional[str] = None,
+        fecha_inicio: Optional[str] = None,
+        fecha_fin: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Obtiene alquileres para reportes con filtros opcionales.
+        Incluye información relacionada (cliente, equipo, operador).
+        """
+        try:
+            query = self.db.collection('alquileres')
+            
+            if cliente_id:
+                query = query.where(filter=FieldFilter('cliente_id', '==', cliente_id))
+            if equipo_id:
+                query = query.where(filter=FieldFilter('equipo_id', '==', equipo_id))
+            if operador_id:
+                query = query.where(filter=FieldFilter('operador_id', '==', operador_id))
+            if fecha_inicio:
+                query = query.where(filter=FieldFilter('fecha', '>=', fecha_inicio))
+            if fecha_fin:
+                query = query.where(filter=FieldFilter('fecha', '<=', fecha_fin))
+            
+            query = query.order_by('fecha')
+            docs = query.stream()
+            
+            alquileres = []
+            for doc in docs:
+                alquiler = doc.to_dict()
+                alquiler['id'] = doc.id
+                alquileres.append(alquiler)
+            
+            logger.info(f"Obtenidos {len(alquileres)} alquileres para reporte")
+            return alquileres
+        except Exception as e:
+            logger.error(f"Error al obtener alquileres para reporte: {e}", exc_info=True)
+            return []
+    
+    # ==================== GESTIÓN DE ABONOS ====================
+    
+    def obtener_abonos(
+        self,
+        cliente_id: Optional[str] = None,
+        fecha_inicio: Optional[str] = None,
+        fecha_fin: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Obtiene abonos de clientes con filtros opcionales.
+        """
+        try:
+            query = self.db.collection('abonos')
+            
+            if cliente_id:
+                query = query.where(filter=FieldFilter('cliente_id', '==', cliente_id))
+            if fecha_inicio:
+                query = query.where(filter=FieldFilter('fecha', '>=', fecha_inicio))
+            if fecha_fin:
+                query = query.where(filter=FieldFilter('fecha', '<=', fecha_fin))
+            
+            query = query.order_by('fecha', direction=firestore.Query.DESCENDING)
+            docs = query.stream()
+            
+            abonos = []
+            for doc in docs:
+                abono = doc.to_dict()
+                abono['id'] = doc.id
+                abonos.append(abono)
+            
+            logger.info(f"Obtenidos {len(abonos)} abonos")
+            return abonos
+        except Exception as e:
+            logger.error(f"Error al obtener abonos: {e}", exc_info=True)
+            return []
+    
+    def crear_abono(self, datos: Dict[str, Any]) -> Optional[str]:
+        """
+        Crea un nuevo abono en Firestore.
+        """
+        try:
+            datos['fecha_creacion'] = datetime.now()
+            datos['fecha_modificacion'] = datetime.now()
+            datos = self._agregar_fecha_ano_mes(datos)
+            
+            if 'id' not in datos:
+                datos['id'] = str(uuid.uuid4())
+            
+            doc_id = datos['id']
+            self.db.collection('abonos').document(doc_id).set(datos)
+            logger.info(f"Abono creado con ID: {doc_id}")
+            return doc_id
+        except Exception as e:
+            logger.error(f"Error al crear abono: {e}", exc_info=True)
+            return None
+    
+    def editar_abono(self, abono_id: str, datos: Dict[str, Any]) -> bool:
+        """
+        Edita un abono existente.
+        """
+        try:
+            datos['fecha_modificacion'] = datetime.now()
+            datos = self._agregar_fecha_ano_mes(datos)
+            self.db.collection('abonos').document(abono_id).update(datos)
+            logger.info(f"Abono {abono_id} actualizado")
+            return True
+        except Exception as e:
+            logger.error(f"Error al editar abono {abono_id}: {e}", exc_info=True)
+            return False
+    
+    def eliminar_abono(self, abono_id: str) -> bool:
+        """
+        Elimina un abono.
+        """
+        try:
+            self.db.collection('abonos').document(abono_id).delete()
+            logger.info(f"Abono {abono_id} eliminado")
+            return True
+        except Exception as e:
+            logger.error(f"Error al eliminar abono {abono_id}: {e}", exc_info=True)
+            return False
+    
+    def calcular_deuda_cliente(
+        self,
+        cliente_id: str,
+        fecha_inicio: Optional[str] = None,
+        fecha_fin: Optional[str] = None
+    ) -> Dict[str, float]:
+        """
+        Calcula la deuda de un cliente (facturado - abonado).
+        
+        Returns:
+            dict con 'total_facturado', 'total_abonado' y 'saldo'
+        """
+        try:
+            # Obtener total facturado (alquileres)
+            query_alquileres = self.db.collection('alquileres').where(
+                filter=FieldFilter('cliente_id', '==', cliente_id)
+            )
+            if fecha_inicio:
+                query_alquileres = query_alquileres.where(
+                    filter=FieldFilter('fecha', '>=', fecha_inicio)
+                )
+            if fecha_fin:
+                query_alquileres = query_alquileres.where(
+                    filter=FieldFilter('fecha', '<=', fecha_fin)
+                )
+            
+            alquileres = list(query_alquileres.stream())
+            total_facturado = sum(doc.to_dict().get('monto', 0) for doc in alquileres)
+            
+            # Obtener total abonado
+            query_abonos = self.db.collection('abonos').where(
+                filter=FieldFilter('cliente_id', '==', cliente_id)
+            )
+            if fecha_inicio:
+                query_abonos = query_abonos.where(
+                    filter=FieldFilter('fecha', '>=', fecha_inicio)
+                )
+            if fecha_fin:
+                query_abonos = query_abonos.where(
+                    filter=FieldFilter('fecha', '<=', fecha_fin)
+                )
+            
+            abonos = list(query_abonos.stream())
+            total_abonado = sum(doc.to_dict().get('monto', 0) for doc in abonos)
+            
+            saldo = total_facturado - total_abonado
+            
+            logger.info(
+                f"Deuda cliente {cliente_id}: "
+                f"Facturado={total_facturado}, Abonado={total_abonado}, Saldo={saldo}"
+            )
+            
+            return {
+                'total_facturado': total_facturado,
+                'total_abonado': total_abonado,
+                'saldo': saldo
+            }
+        except Exception as e:
+            logger.error(f"Error al calcular deuda del cliente {cliente_id}: {e}", exc_info=True)
+            return {
+                'total_facturado': 0,
+                'total_abonado': 0,
+                'saldo': 0
+            }
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     print("FirebaseManager - Módulo de gestión de Firestore para EQUIPOS 4.0")
