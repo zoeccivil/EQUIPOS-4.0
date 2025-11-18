@@ -218,4 +218,4 @@ if __name__ == "__main__":
             QMessageBox.critical(None, "Error crítico", f"Fallo crítico: {e}")
         except Exception:
             pass
-        sys.exit(1)
+        sys.exit(1) 

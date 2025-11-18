@@ -17,7 +17,7 @@ import logging
 
 from firebase_manager import FirebaseManager
 from backup_manager import BackupManager
-from storage_manager import StorageManager # Importar StorageManager
+from storage_manager import StorageManager  # Importar StorageManager
 from config_manager import cargar_configuracion, guardar_configuracion
 from theme_manager import ThemeManager
 
@@ -26,9 +26,11 @@ from dashboard_tab import DashboardTab
 from registro_alquileres_tab import RegistroAlquileresTab
 from gastos_equipos_tab import TabGastosEquipos
 from pagos_operadores_tab import TabPagosOperadores
-# from reportes_tab import ReportesTab # ELIMINADO: Reportes ahora en menú superior
+from dialogos.ventana_gestion_abono import VentanaGestionAbonos
+from dialogos.estado_cuenta_dialog import EstadoCuentaDialog
 
 logger = logging.getLogger(__name__)
+
 
 class AppGUI(QMainWindow):
     """
@@ -42,7 +44,7 @@ class AppGUI(QMainWindow):
         super().__init__()
         self.fm = firebase_manager
         self.bm = backup_manager
-        self.sm = storage_manager # Guardar el storage_manager
+        self.sm = storage_manager  # Guardar el storage_manager
         self.config = config or {}
     # --- FIN DE CORRECCIÓN (V10)! ---
         
@@ -388,6 +390,24 @@ class AppGUI(QMainWindow):
         QMessageBox.information(self, "En desarrollo",
                               "La ventana de gestión de mantenimientos estará disponible próximamente.")
     
+    def _gestionar_abonos(self):
+        """Abre ventana de gestión de abonos (Firebase)"""
+        try:
+            from dialogos.ventana_gestion_abono import VentanaGestionAbonos
+
+            moneda = self.config.get('app', {}).get('moneda', 'RD$')
+
+            dialogo = VentanaGestionAbonos(
+                self.fm,
+                moneda=moneda,
+                clientes_mapa=self.clientes_mapa,  # {id_str: nombre}
+                parent=self
+            )
+            dialogo.exec()
+
+        except Exception as e:
+            logger.error(f"Error al abrir gestión de abonos: {e}", exc_info=True)
+            QMessageBox.critical(self, "Error", f"Error al abrir gestión de abonos:\n{str(e)}")
     # ==================== Métodos del Menú Configuración ====================
     
     def _cambiar_tema(self, tema: str):
@@ -630,16 +650,8 @@ class AppGUI(QMainWindow):
             from dialogos.estado_cuenta_dialog import EstadoCuentaDialog
             from report_generator import ReportGenerator
             
-            # Abrir diálogo para seleccionar cliente y fechas
-            dialog = EstadoCuentaDialog(
-                self.fm,
-                {
-                    'clientes_mapa': self.clientes_mapa,
-                    'equipos_mapa': self.equipos_mapa,
-                    'operadores_mapa': self.operadores_mapa
-                },
-                self
-            )
+            # Abrir diálogo para seleccionar cliente y fechas (versión Firebase)
+            dialog = EstadoCuentaDialog(self.fm, parent=self)
             
             if not dialog.exec():
                 return  # Usuario canceló
@@ -743,13 +755,16 @@ class AppGUI(QMainWindow):
             if not file_path:
                 return
             
+            # Obtener moneda desde config
+            moneda = self.config.get('app', {}).get('moneda', 'RD$')
+            
             # Generar PDF
             rg = ReportGenerator(
                 data=facturas,
                 title=title,
                 cliente=cliente_nombre,
                 date_range=date_range,
-                currency_symbol="RD$",
+                currency_symbol=moneda,
                 storage_manager=self.sm,
                 column_map=column_map
             )
@@ -784,17 +799,3 @@ class AppGUI(QMainWindow):
         """Genera estado de cuenta general de todos los clientes"""
         # Reutilizar la misma función - el diálogo permite seleccionar "Todos"
         self._generar_estado_cuenta_cliente_pdf()
-    
-    # ==================== Métodos del Menú Gestión ====================
-    
-    def _gestionar_abonos(self):
-        """Abre ventana de gestión de abonos"""
-        try:
-            from dialogos.ventana_gestion_abonos import VentanaGestionAbonos
-            
-            dialogo = VentanaGestionAbonos(self.fm, self.mapa_nombres, parent=self)
-            dialogo.exec()
-            
-        except Exception as e:
-            logger.error(f"Error al abrir gestión de abonos: {e}", exc_info=True)
-            QMessageBox.critical(self, "Error", f"Error al abrir gestión de abonos:\n{str(e)}")

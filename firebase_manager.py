@@ -998,6 +998,188 @@ class FirebaseManager:
             }
 
 
+
+    # ==================== CUENTAS ====================
+
+    def obtener_cuentas(self) -> List[Dict[str, Any]]:
+        """
+        Obtiene la lista de cuentas desde la colección 'cuentas'.
+        Equivalente a listar_cuentas() en SQLite.
+        """
+        try:
+            docs = self.db.collection("cuentas").order_by("nombre").stream()
+            cuentas = []
+            for doc in docs:
+                data = doc.to_dict()
+                data["id"] = doc.id
+                cuentas.append(data)
+            logger.info(f"Obtenidas {len(cuentas)} cuentas")
+            return cuentas
+        except Exception as e:
+            logger.error(f"Error al obtener cuentas: {e}", exc_info=True)
+            return []
+
+    # ==================== FACTURAS PENDIENTES (ABONOS) ====================
+
+    def obtener_facturas_pendientes_cliente(self, cliente_id: str) -> List[Dict[str, Any]]:
+        """
+        Obtiene una lista de facturas (alquileres) pendientes de pago de un cliente,
+        ordenadas por fecha ascendente (igual a obtener_transacciones_pendientes_cliente).
+        """
+        try:
+            query = (
+                self.db.collection("alquileres")
+                .where(filter=FieldFilter("cliente_id", "==", cliente_id))
+                .where(filter=FieldFilter("pagado", "==", False))
+                .order_by("fecha")
+            )
+            docs = list(query.stream())
+            facturas = []
+            for doc in docs:
+                data = doc.to_dict()
+                data["id"] = doc.id
+                facturas.append(data)
+            logger.info(f"Obtenidas {len(facturas)} facturas pendientes para cliente {cliente_id}")
+            return facturas
+        except Exception as e:
+            logger.error(f"Error al obtener facturas pendientes para cliente {cliente_id}: {e}", exc_info=True)
+            return []
+
+    def _recalcular_estado_pago_alquiler(self, alquiler_id: str):
+        """
+        Equivalente a _actualizar_estado_pago_transaccion del SQLite.
+        Recalcula el campo 'pagado' de un alquiler sumando los pagos de su subcolección 'pagos'.
+        """
+        try:
+            doc_alquiler = self.db.collection("alquileres").document(alquiler_id).get()
+            if not doc_alquiler.exists:
+                logger.warning(f"Alquiler {alquiler_id} no existe al recalcular pagos.")
+                return
+
+            alquiler_data = doc_alquiler.to_dict()
+            monto_total = float(alquiler_data.get("monto", 0) or 0)
+
+            pagos_docs = self.db.collection("alquileres").document(alquiler_id).collection("pagos").stream()
+            total_pagado = 0.0
+            for pdoc in pagos_docs:
+                pdata = pdoc.to_dict()
+                total_pagado += float(pdata.get("monto", 0) or 0)
+
+            pagado_flag = total_pagado >= monto_total and monto_total > 0
+
+            self.db.collection("alquileres").document(alquiler_id).update(
+                {"pagado": pagado_flag}
+            )
+            logger.info(
+                f"Recalculado estado de pago para alquiler {alquiler_id}: "
+                f"monto_total={monto_total}, total_pagado={total_pagado}, pagado={pagado_flag}"
+            )
+        except Exception as e:
+            logger.error(f"Error al recalcular estado de pago para alquiler {alquiler_id}: {e}", exc_info=True)
+
+    def registrar_abono_general_cliente(self, datos_pago: Dict[str, Any]):
+        """
+        Registra un abono general de un cliente y lo aplica a las facturas pendientes,
+        de la más antigua a la más reciente. Equivalente a registrar_abono_general_cliente en SQLite.
+
+        datos_pago espera:
+          - cliente_id (str)     : ID Firestore de la entidad cliente
+          - fecha (str)          : 'YYYY-MM-DD'
+          - monto (float)        : monto total del abono
+          - cuenta_id (str)      : ID de cuenta en colección 'cuentas' (opcional pero recomendable)
+          - comentario (str)     : texto libre
+        """
+        try:
+            cliente_id = datos_pago["cliente_id"]
+            monto_abonar = float(datos_pago["monto"])
+            fecha_abono = datos_pago["fecha"]
+            cuenta_id = datos_pago.get("cuenta_id")
+            comentario = datos_pago.get("comentario", "")
+
+            if monto_abonar <= 0:
+                raise ValueError("El monto del abono debe ser mayor que cero.")
+
+            # 1) Obtener facturas pendientes del cliente
+            pendientes = self.obtener_facturas_pendientes_cliente(cliente_id)
+            if not pendientes:
+                # Igual que en SQLite: devolver mensaje para mostrarlo en la GUI
+                return "Este cliente no tiene facturas pendientes de pago."
+
+            monto_restante_abono = monto_abonar
+
+            # 2) Aplicar abono a cada factura pendiente
+            for factura in pendientes:
+                if monto_restante_abono <= 0:
+                    break
+
+                alquiler_id = factura["id"]
+                monto_factura = float(factura.get("monto", 0) or 0)
+
+                # Total previo pagado (sumar subcolección 'pagos')
+                pagos_docs = (
+                    self.db.collection("alquileres")
+                    .document(alquiler_id)
+                    .collection("pagos")
+                    .stream()
+                )
+                total_previo_pagado = 0.0
+                for pdoc in pagos_docs:
+                    pdata = pdoc.to_dict()
+                    total_previo_pagado += float(pdata.get("monto", 0) or 0)
+
+                monto_pendiente_factura = monto_factura - total_previo_pagado
+                if monto_pendiente_factura <= 0:
+                    continue
+
+                monto_a_aplicar = min(monto_restante_abono, monto_pendiente_factura)
+
+                # Crear registro de pago en subcolección
+                pago_data = {
+                    "fecha": fecha_abono,
+                    "monto": monto_a_aplicar,
+                    "comentario": comentario,
+                    "cliente_id": cliente_id,
+                }
+                if cuenta_id:
+                    pago_data["cuenta_id"] = cuenta_id
+
+                pago_data = self._agregar_fecha_ano_mes(pago_data)
+                pago_id = str(uuid.uuid4())
+
+                self.db.collection("alquileres").document(alquiler_id).collection("pagos").document(pago_id).set(
+                    pago_data
+                )
+
+                # Recalcular estado de pago de la factura
+                self._recalcular_estado_pago_alquiler(alquiler_id)
+
+                monto_restante_abono -= monto_a_aplicar
+
+            # 3) Registrar abono resumen en colección 'abonos'
+            abono_resumen = {
+                "cliente_id": cliente_id,
+                "fecha": fecha_abono,
+                "monto": monto_abonar,
+                "comentario": comentario,
+            }
+            if cuenta_id:
+                abono_resumen["cuenta_id"] = cuenta_id
+
+            self.crear_abono(abono_resumen)
+
+            logger.info(
+                f"Abono general registrado para cliente {cliente_id} por monto {monto_abonar}. "
+                f"Restante sin aplicar: {monto_restante_abono}"
+            )
+            return True
+
+        except ValueError as ve:
+            logger.warning(f"Validación al registrar abono general: {ve}")
+            return str(ve)
+        except Exception as e:
+            logger.error(f"Error al registrar abono general de cliente: {e}", exc_info=True)
+            return False
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     print("FirebaseManager - Módulo de gestión de Firestore para EQUIPOS 4.0")

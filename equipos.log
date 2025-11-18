@@ -5476,3 +5476,2511 @@ Exception: Error al subir archivo: 404 POST https://storage.googleapis.com/uploa
 1  2025-11-04   00620  RETROPALA 416E  SABANA PERDIDA    4.0  10000.0            
 2025-11-17 03:19:42,621 INFO No hay conduces para agregar a los anexos
 2025-11-17 03:19:42,626 INFO PDF generado exitosamente: C:/Users/servi/OneDrive/Documentos/Reporte_Detallado_20251117_031936.pdf
+2025-11-17 18:42:23,282 INFO Configuración cargada desde config_equipos.json
+2025-11-17 18:42:23,302 INFO Tema aplicado: Oscuro
+2025-11-17 18:42:23,332 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 18:42:23,332 INFO Cliente de Firestore creado correctamente
+2025-11-17 18:42:23,333 INFO Firebase Manager inicializado correctamente
+2025-11-17 18:42:23,334 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 18:42:23,334 INFO Backup Manager inicializado correctamente
+2025-11-17 18:42:23,334 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 18:42:23,334 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 18:42:23,725 INFO Ventana principal creada y mostrada
+2025-11-17 18:42:23,727 INFO Cargando mapas de nombres...
+2025-11-17 18:42:23,915 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 18:42:24,395 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 18:42:24,697 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 18:42:25,149 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 18:42:25,612 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 18:42:26,045 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 18:42:26,489 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 18:42:26,998 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 18:42:26,998 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 18:42:26,998 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 18:42:26,998 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 18:42:27,152 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 18:42:27,153 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 18:42:27,153 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 18:42:27,255 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 18:42:27,255 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 18:42:27,255 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 18:42:27,402 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 18:42:27,403 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 18:42:27,936 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 18:42:27,936 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:42:28,127 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:42:28,134 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:42:28,318 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:42:28,324 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:42:28,485 INFO Obtenidos 62 pagos a operadores
+2025-11-17 18:46:19,418 ERROR Error al abrir gestión de abonos: 'AppGUI' object has no attribute 'mapas'
+Traceback (most recent call last):
+  File "E:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\app_gui_qt.py", line 795, in _gestionar_abonos
+    dialogo = VentanaGestionAbonos(self.fm, self.mapas, parent=self)
+                                            ^^^^^^^^^^
+AttributeError: 'AppGUI' object has no attribute 'mapas'. Did you mean: 'mapTo'?
+2025-11-17 18:46:37,162 INFO Aplicación finalizada con exit_code=0
+2025-11-17 18:49:53,534 INFO Configuración cargada desde config_equipos.json
+2025-11-17 18:49:53,554 INFO Tema aplicado: Oscuro
+2025-11-17 18:49:53,584 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 18:49:53,584 INFO Cliente de Firestore creado correctamente
+2025-11-17 18:49:53,584 INFO Firebase Manager inicializado correctamente
+2025-11-17 18:49:53,586 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 18:49:53,586 INFO Backup Manager inicializado correctamente
+2025-11-17 18:49:53,586 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 18:49:53,586 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 18:49:54,070 INFO Ventana principal creada y mostrada
+2025-11-17 18:49:54,071 INFO Cargando mapas de nombres...
+2025-11-17 18:49:54,244 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 18:49:54,703 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 18:49:54,836 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 18:49:55,250 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 18:49:55,651 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 18:49:56,085 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 18:49:56,506 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 18:49:56,984 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 18:49:56,984 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 18:49:56,985 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 18:49:56,985 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 18:49:57,105 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 18:49:57,107 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 18:49:57,107 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 18:49:57,211 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 18:49:57,211 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 18:49:57,211 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 18:49:57,325 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 18:49:57,325 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 18:49:57,791 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 18:49:57,791 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:49:57,941 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:49:57,948 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:49:58,146 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:49:58,153 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:49:58,324 INFO Obtenidos 62 pagos a operadores
+2025-11-17 18:50:01,344 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 18:50:03,240 INFO Cargando mapas de nombres...
+2025-11-17 18:50:03,345 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 18:50:03,756 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 18:50:04,163 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 18:50:04,565 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 18:50:04,985 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 18:50:05,437 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 18:50:05,437 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 18:50:05,437 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:05,437 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:05,558 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 18:50:05,558 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 18:50:05,558 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:05,693 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 18:50:05,693 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 18:50:05,693 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:05,785 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 18:50:05,785 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 18:50:06,255 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 18:50:06,255 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:06,456 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:06,464 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:06,643 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:06,649 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:06,767 INFO Obtenidos 62 pagos a operadores
+2025-11-17 18:50:08,297 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 18:50:10,853 INFO Cargando mapas de nombres...
+2025-11-17 18:50:10,970 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 18:50:11,375 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 18:50:11,778 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 18:50:12,187 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 18:50:12,598 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 18:50:13,049 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 18:50:13,049 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 18:50:13,049 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:13,049 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:13,147 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 18:50:13,147 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 18:50:13,147 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:13,265 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 18:50:13,266 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 18:50:13,266 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:13,376 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 18:50:13,377 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 18:50:13,835 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 18:50:13,836 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:14,016 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:14,024 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:14,193 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:14,200 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:14,336 INFO Obtenidos 62 pagos a operadores
+2025-11-17 18:50:15,861 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 18:50:17,450 INFO Cargando mapas de nombres...
+2025-11-17 18:50:17,543 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 18:50:17,944 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 18:50:18,349 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 18:50:18,761 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 18:50:19,181 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 18:50:19,650 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 18:50:19,650 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 18:50:19,651 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:19,651 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:19,749 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 18:50:19,749 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 18:50:19,749 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:19,900 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 18:50:19,900 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 18:50:19,900 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 18:50:19,997 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 18:50:19,997 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 18:50:20,438 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 18:50:20,438 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:20,608 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:20,615 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:20,777 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:20,783 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 18:50:20,899 INFO Obtenidos 62 pagos a operadores
+2025-11-17 18:53:56,970 INFO Aplicación finalizada con exit_code=0
+2025-11-17 21:11:04,102 INFO Configuración cargada desde config_equipos.json
+2025-11-17 21:11:04,123 INFO Tema aplicado: Oscuro
+2025-11-17 21:11:04,161 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 21:11:04,161 INFO Cliente de Firestore creado correctamente
+2025-11-17 21:11:04,161 INFO Firebase Manager inicializado correctamente
+2025-11-17 21:11:04,169 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 21:11:04,170 INFO Backup Manager inicializado correctamente
+2025-11-17 21:11:04,170 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 21:11:04,170 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 21:11:07,807 INFO Ventana principal creada y mostrada
+2025-11-17 21:11:07,809 INFO Cargando mapas de nombres...
+2025-11-17 21:11:08,012 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 21:11:08,171 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 21:11:08,369 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 21:11:08,826 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 21:11:09,282 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 21:11:09,729 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 21:11:10,185 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 21:11:10,724 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 21:11:10,724 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 21:11:10,724 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 21:11:10,738 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 21:11:10,917 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 21:11:10,922 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 21:11:10,922 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 21:11:11,068 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 21:11:11,068 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 21:11:11,068 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 21:11:11,239 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 21:11:11,239 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 21:11:12,174 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 21:11:12,189 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:11:12,649 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:11:12,659 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:11:13,153 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:11:13,157 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:11:13,409 INFO Obtenidos 62 pagos a operadores
+2025-11-17 21:11:26,772 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 21:11:57,056 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 21:12:05,508 ERROR Error al abrir gestión de abonos: 'AppGUI' object has no attribute 'mapa_nombres'
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\app_gui_qt.py", line 795, in _gestionar_abonos
+    dialogo = VentanaGestionAbonos(self.fm, self.mapa_nombres, parent=self)
+                                            ^^^^^^^^^^^^^^^^^
+AttributeError: 'AppGUI' object has no attribute 'mapa_nombres'
+2025-11-17 21:12:12,465 INFO Aplicación finalizada con exit_code=0
+2025-11-17 21:20:05,860 INFO Configuración cargada desde config_equipos.json
+2025-11-17 21:20:05,878 INFO Tema aplicado: Oscuro
+2025-11-17 21:20:05,911 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 21:20:05,911 INFO Cliente de Firestore creado correctamente
+2025-11-17 21:20:05,912 INFO Firebase Manager inicializado correctamente
+2025-11-17 21:20:05,912 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 21:20:05,912 INFO Backup Manager inicializado correctamente
+2025-11-17 21:20:05,913 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 21:20:05,913 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 21:20:07,125 INFO Ventana principal creada y mostrada
+2025-11-17 21:20:07,127 INFO Cargando mapas de nombres...
+2025-11-17 21:20:07,287 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 21:20:07,430 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 21:20:07,574 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 21:20:08,010 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 21:20:08,439 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 21:20:08,887 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 21:20:09,330 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 21:20:09,870 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 21:20:09,870 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 21:20:09,870 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 21:20:09,871 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 21:20:09,985 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 21:20:09,986 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 21:20:09,986 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 21:20:10,120 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 21:20:10,120 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 21:20:10,120 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 21:20:10,253 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 21:20:10,253 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 21:20:10,786 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 21:20:10,786 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:20:10,981 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:20:10,987 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:20:11,205 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:20:11,210 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:20:11,356 INFO Obtenidos 62 pagos a operadores
+2025-11-17 21:20:14,849 ERROR Error al abrir gestión de abonos: 'AppGUI' object has no attribute 'mapa_nombres'
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\app_gui_qt.py", line 795, in _gestionar_abonos
+    dialogo = VentanaGestionAbonos(self.fm, self.mapa_nombres, parent=self)
+                                            ^^^^^^^^^^^^^^^^^
+AttributeError: 'AppGUI' object has no attribute 'mapa_nombres'
+2025-11-17 21:20:18,534 INFO Aplicación finalizada con exit_code=0
+2025-11-17 21:31:01,819 INFO Configuración cargada desde config_equipos.json
+2025-11-17 21:31:01,837 INFO Tema aplicado: Oscuro
+2025-11-17 21:31:01,870 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 21:31:01,870 INFO Cliente de Firestore creado correctamente
+2025-11-17 21:31:01,870 INFO Firebase Manager inicializado correctamente
+2025-11-17 21:31:01,871 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 21:31:01,871 INFO Backup Manager inicializado correctamente
+2025-11-17 21:31:01,872 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 21:31:01,872 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 21:31:02,420 INFO Ventana principal creada y mostrada
+2025-11-17 21:31:02,421 INFO Cargando mapas de nombres...
+2025-11-17 21:31:02,588 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 21:31:02,741 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 21:31:02,881 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 21:31:03,465 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 21:31:03,875 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 21:31:04,326 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 21:31:04,764 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 21:31:05,370 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 21:31:05,370 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 21:31:05,370 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 21:31:05,371 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 21:31:05,592 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 21:31:05,593 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 21:31:05,593 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 21:31:05,697 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 21:31:05,697 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 21:31:05,697 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 21:31:05,928 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 21:31:05,929 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 21:31:06,753 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 21:31:06,753 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:31:07,244 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:31:07,250 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:31:07,691 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:31:07,696 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 21:31:08,015 INFO Obtenidos 62 pagos a operadores
+2025-11-17 21:31:20,681 ERROR Error al abrir gestión de abonos: 'AppGUI' object has no attribute 'mapa_nombres'
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\app_gui_qt.py", line 795, in _gestionar_abonos
+    dialogo = VentanaGestionAbonos(self.fm, self.mapa_nombres, parent=self)
+                                            ^^^^^^^^^^^^^^^^^
+AttributeError: 'AppGUI' object has no attribute 'mapa_nombres'
+2025-11-17 22:28:16,650 INFO Aplicación finalizada con exit_code=0
+2025-11-17 22:30:27,535 INFO Configuración cargada desde config_equipos.json
+2025-11-17 22:30:27,554 INFO Tema aplicado: Oscuro
+2025-11-17 22:30:27,591 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 22:30:27,591 INFO Cliente de Firestore creado correctamente
+2025-11-17 22:30:27,591 INFO Firebase Manager inicializado correctamente
+2025-11-17 22:30:27,592 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 22:30:27,592 INFO Backup Manager inicializado correctamente
+2025-11-17 22:30:27,592 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 22:30:27,592 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 22:30:27,966 INFO Ventana principal creada y mostrada
+2025-11-17 22:30:27,999 INFO Cargando mapas de nombres...
+2025-11-17 22:30:28,169 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 22:30:28,331 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 22:30:28,575 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 22:30:29,030 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 22:30:29,490 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 22:30:29,935 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 22:30:30,487 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 22:30:31,012 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 22:30:31,013 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 22:30:31,013 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 22:30:31,013 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 22:30:31,160 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 22:30:31,161 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 22:30:31,162 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 22:30:31,320 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 22:30:31,321 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 22:30:31,321 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 22:30:31,438 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 22:30:31,439 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 22:30:31,976 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 22:30:31,977 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:30:32,180 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:30:32,187 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:30:32,483 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:30:32,487 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:30:32,650 INFO Obtenidos 62 pagos a operadores
+2025-11-17 22:33:18,698 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 22:33:21,753 INFO Cargando mapas de nombres...
+2025-11-17 22:33:21,897 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 22:33:22,347 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 22:33:22,799 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 22:33:23,234 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 22:33:23,716 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 22:33:24,359 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 22:33:24,360 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 22:33:24,360 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 22:33:24,360 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 22:33:24,478 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 22:33:24,478 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 22:33:24,478 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 22:33:24,599 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 22:33:24,599 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 22:33:24,599 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 22:33:24,739 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 22:33:24,740 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 22:33:25,366 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 22:33:25,366 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:33:25,574 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:33:25,580 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:33:25,815 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:33:25,820 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 22:33:25,951 INFO Obtenidos 62 pagos a operadores
+2025-11-17 22:33:31,149 ERROR Error al abrir gestión de abonos: 'AppGUI' object has no attribute 'mapa_nombres'
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\app_gui_qt.py", line 795, in _gestionar_abonos
+    dialogo = VentanaGestionAbonos(self.fm, self.mapa_nombres, parent=self)
+                                            ^^^^^^^^^^^^^^^^^
+AttributeError: 'AppGUI' object has no attribute 'mapa_nombres'
+2025-11-17 22:33:38,877 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 22:40:14,844 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 11}
+2025-11-17 22:40:15,159 ERROR Error al obtener gastos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 313, in obtener_gastos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+2025-11-17 22:40:15,277 ERROR Error al cargar gastos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\gastos_equipos_tab.py", line 261, in _cargar_gastos
+    self.gastos_cargados = self.fm.obtener_gastos(filtros)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 323, in obtener_gastos
+    raise e # Propagar el error
+    ^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 313, in obtener_gastos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+2025-11-17 22:43:06,542 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 12}
+2025-11-17 22:43:06,655 INFO Obtenidos 0 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 12}
+2025-11-17 22:43:06,657 WARNING No se encontraron gastos con esos filtros.
+2025-11-17 22:43:09,725 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 5}
+2025-11-17 22:43:09,846 INFO Obtenidos 18 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 5}
+2025-11-17 22:43:23,381 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 5, 'categoria_id': 31}
+2025-11-17 22:43:23,489 ERROR Error al obtener gastos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 313, in obtener_gastos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+2025-11-17 22:43:23,508 ERROR Error al cargar gastos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\gastos_equipos_tab.py", line 261, in _cargar_gastos
+    self.gastos_cargados = self.fm.obtener_gastos(filtros)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 323, in obtener_gastos
+    raise e # Propagar el error
+    ^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 313, in obtener_gastos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+2025-11-17 22:46:34,403 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17', 'equipo_id': 5, 'cuenta_id': 35, 'categoria_id': 31}
+2025-11-17 22:46:34,519 ERROR Error al obtener gastos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgljdWVudGFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 313, in obtener_gastos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgljdWVudGFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+2025-11-17 22:46:34,523 ERROR Error al cargar gastos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgljdWVudGFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\gastos_equipos_tab.py", line 261, in _cargar_gastos
+    self.gastos_cargados = self.fm.obtener_gastos(filtros)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 323, in obtener_gastos
+    raise e # Propagar el error
+    ^^^^^^^
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 313, in obtener_gastos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2dhc3Rvcy9pbmRleGVzL18QARoQCgxjYXRlZ29yaWFfaWQQARoNCgljdWVudGFfaWQQARoNCgllcXVpcG9faWQQARoJCgVmZWNoYRACGgwKCF9fbmFtZV9fEAI
+2025-11-17 22:48:21,769 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17', 'operador_id': 2}
+2025-11-17 22:48:21,891 INFO Obtenidos 1 pagos a operadores
+2025-11-17 22:48:25,646 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17', 'equipo_id': 12, 'operador_id': 2}
+2025-11-17 22:48:25,747 INFO Obtenidos 0 pagos a operadores
+2025-11-17 22:48:25,747 WARNING No se encontraron pagos con esos filtros.
+2025-11-17 23:33:32,210 INFO Configuración cargada desde config_equipos.json
+2025-11-17 23:33:32,229 INFO Tema aplicado: Oscuro
+2025-11-17 23:33:32,263 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-17 23:33:32,263 INFO Cliente de Firestore creado correctamente
+2025-11-17 23:33:32,263 INFO Firebase Manager inicializado correctamente
+2025-11-17 23:33:32,264 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-17 23:33:32,264 INFO Backup Manager inicializado correctamente
+2025-11-17 23:33:32,264 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 23:33:32,264 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-17 23:33:32,962 INFO Ventana principal creada y mostrada
+2025-11-17 23:33:33,010 INFO Cargando mapas de nombres...
+2025-11-17 23:33:33,208 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-17 23:33:33,346 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-17 23:33:33,496 INFO Obtenidos 12 equipos (activo=None)
+2025-11-17 23:33:33,925 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-17 23:33:34,349 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-17 23:33:34,774 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-17 23:33:35,231 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-17 23:33:35,756 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-17 23:33:35,756 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-17 23:33:35,756 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-17 23:33:35,756 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-17 23:33:35,866 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-17 23:33:35,867 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-17 23:33:35,867 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-17 23:33:35,976 INFO Primera fecha de gastos: 2025-01-06
+2025-11-17 23:33:35,976 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-17 23:33:35,976 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-17 23:33:36,075 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-17 23:33:36,076 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-17 23:33:36,598 INFO Obtenidos 0 equipos (activo=True)
+2025-11-17 23:33:36,598 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 23:33:36,781 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 23:33:36,787 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 23:33:37,012 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-17'}
+2025-11-17 23:33:37,018 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-17'}
+2025-11-17 23:33:37,161 INFO Obtenidos 62 pagos a operadores
+2025-11-17 23:33:46,822 ERROR Error al obtener entidades (tipo=Cliente, activo=True): 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 382, in obtener_entidades
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 23:33:46,943 INFO Obtenidos 0 abonos
+2025-11-17 23:35:24,441 ERROR Error al obtener entidades (tipo=Cliente, activo=True): 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 382, in obtener_entidades
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 23:35:45,789 ERROR Error al obtener entidades (tipo=Cliente, activo=True): 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 382, in obtener_entidades
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 23:35:55,984 ERROR Error al obtener entidades (tipo=Cliente, activo=True): 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 382, in obtener_entidades
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+2025-11-17 23:35:56,114 INFO Obtenidos 0 abonos
+2025-11-18 00:06:26,845 INFO Configuración cargada desde config_equipos.json
+2025-11-18 00:06:26,864 INFO Tema aplicado: Oscuro
+2025-11-18 00:06:26,894 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 00:06:26,895 INFO Cliente de Firestore creado correctamente
+2025-11-18 00:06:26,895 INFO Firebase Manager inicializado correctamente
+2025-11-18 00:06:26,896 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 00:06:26,896 INFO Backup Manager inicializado correctamente
+2025-11-18 00:06:26,896 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 00:06:26,896 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 00:06:27,280 INFO Ventana principal creada y mostrada
+2025-11-18 00:06:27,309 INFO Cargando mapas de nombres...
+2025-11-18 00:06:27,452 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 00:06:27,601 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 00:06:27,755 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 00:06:28,181 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 00:06:28,601 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 00:06:29,030 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 00:06:29,478 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 00:06:29,935 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 00:06:29,935 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 00:06:29,935 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 00:06:29,935 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 00:06:30,033 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 00:06:30,034 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 00:06:30,035 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 00:06:30,153 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 00:06:30,153 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 00:06:30,153 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 00:06:30,269 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 00:06:30,269 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 00:06:30,784 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 00:06:30,784 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 00:06:30,969 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 00:06:30,974 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 00:06:31,152 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 00:06:31,156 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 00:06:31,283 INFO Obtenidos 62 pagos a operadores
+2025-11-18 00:06:35,077 ERROR Error al obtener entidades (tipo=Cliente, activo=True): 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 382, in obtener_entidades
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+2025-11-18 00:06:35,188 INFO Obtenidos 12 abonos
+2025-11-18 01:06:27,298 INFO Iniciando backup automático...
+2025-11-18 01:06:27,299 INFO Iniciando proceso de backup...
+2025-11-18 01:06:27,437 DEBUG Resetting dropped connection: oauth2.googleapis.com
+2025-11-18 01:06:27,592 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 01:06:27,725 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:06:27,725 INFO Backup de 12 equipos completado
+2025-11-18 01:06:27,725 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 01:06:27,725 ERROR Error al crear backup automático
+2025-11-18 01:45:35,123 INFO Aplicación finalizada con exit_code=0
+2025-11-18 01:46:02,976 INFO Configuración cargada desde config_equipos.json
+2025-11-18 01:46:02,994 INFO Tema aplicado: Oscuro
+2025-11-18 01:46:03,029 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 01:46:03,029 INFO Cliente de Firestore creado correctamente
+2025-11-18 01:46:03,029 INFO Firebase Manager inicializado correctamente
+2025-11-18 01:46:03,030 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 01:46:03,030 INFO Backup Manager inicializado correctamente
+2025-11-18 01:46:03,030 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 01:46:03,030 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 01:46:03,871 INFO Ventana principal creada y mostrada
+2025-11-18 01:46:03,874 INFO Cargando mapas de nombres...
+2025-11-18 01:46:04,057 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 01:46:04,195 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 01:46:04,337 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:46:04,764 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 01:46:05,198 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 01:46:05,649 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 01:46:06,075 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 01:46:06,651 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 01:46:06,651 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 01:46:06,651 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 01:46:06,652 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 01:46:06,771 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 01:46:06,772 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 01:46:06,772 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 01:46:06,892 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 01:46:06,892 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 01:46:06,892 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 01:46:07,001 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 01:46:07,002 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 01:46:07,513 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 01:46:07,514 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:46:07,723 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:46:07,729 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:46:07,945 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:46:07,950 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:46:08,092 INFO Obtenidos 62 pagos a operadores
+2025-11-18 01:46:08,870 INFO Iniciando backup automático...
+2025-11-18 01:46:08,870 INFO Iniciando proceso de backup...
+2025-11-18 01:46:08,979 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:46:08,979 INFO Backup de 12 equipos completado
+2025-11-18 01:46:08,979 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 01:46:08,979 ERROR Error al crear backup automático
+2025-11-18 01:46:23,438 ERROR Error al obtener entidades (tipo=Cliente, activo=True): 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 382, in obtener_entidades
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2VudGlkYWRlcy9pbmRleGVzL18QARoKCgZhY3Rpdm8QARoICgR0aXBvEAEaCgoGbm9tYnJlEAEaDAoIX19uYW1lX18QAQ
+2025-11-18 01:46:28,594 INFO Obtenidos 74 abonos
+2025-11-18 01:46:35,148 INFO Aplicación finalizada con exit_code=0
+2025-11-18 01:49:29,990 INFO Configuración cargada desde config_equipos.json
+2025-11-18 01:49:30,008 INFO Tema aplicado: Oscuro
+2025-11-18 01:49:30,042 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 01:49:30,042 INFO Cliente de Firestore creado correctamente
+2025-11-18 01:49:30,042 INFO Firebase Manager inicializado correctamente
+2025-11-18 01:49:30,043 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 01:49:30,044 INFO Backup Manager inicializado correctamente
+2025-11-18 01:49:30,044 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 01:49:30,044 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 01:49:30,683 INFO Ventana principal creada y mostrada
+2025-11-18 01:49:30,718 INFO Cargando mapas de nombres...
+2025-11-18 01:49:30,864 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 01:49:31,019 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 01:49:31,149 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:49:31,573 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 01:49:31,993 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 01:49:32,421 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 01:49:32,851 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 01:49:33,320 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 01:49:33,320 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 01:49:33,320 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 01:49:33,320 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 01:49:33,424 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 01:49:33,426 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 01:49:33,426 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 01:49:33,526 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 01:49:33,526 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 01:49:33,526 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 01:49:33,625 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 01:49:33,625 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 01:49:34,120 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 01:49:34,120 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:49:34,303 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:49:34,309 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:49:34,534 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:49:34,540 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:49:34,664 INFO Obtenidos 62 pagos a operadores
+2025-11-18 01:49:35,688 INFO Iniciando backup automático...
+2025-11-18 01:49:35,688 INFO Iniciando proceso de backup...
+2025-11-18 01:49:35,791 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:49:35,792 INFO Backup de 12 equipos completado
+2025-11-18 01:49:35,792 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 01:49:35,792 ERROR Error al crear backup automático
+2025-11-18 01:49:41,576 INFO Obtenidas 0 entidades (tipo=Cliente, activo=True)
+2025-11-18 01:49:41,838 INFO Obtenidos 74 abonos
+2025-11-18 01:57:12,882 INFO Aplicación finalizada con exit_code=0
+2025-11-18 01:58:19,875 INFO Configuración cargada desde config_equipos.json
+2025-11-18 01:58:19,895 INFO Tema aplicado: Oscuro
+2025-11-18 01:58:19,930 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 01:58:19,931 INFO Cliente de Firestore creado correctamente
+2025-11-18 01:58:19,931 INFO Firebase Manager inicializado correctamente
+2025-11-18 01:58:19,932 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 01:58:19,932 INFO Backup Manager inicializado correctamente
+2025-11-18 01:58:19,932 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 01:58:19,932 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 01:58:20,511 INFO Ventana principal creada y mostrada
+2025-11-18 01:58:20,546 INFO Cargando mapas de nombres...
+2025-11-18 01:58:20,689 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 01:58:20,842 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 01:58:20,977 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:58:21,403 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 01:58:21,812 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 01:58:22,237 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 01:58:22,655 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 01:58:23,142 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 01:58:23,142 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 01:58:23,142 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 01:58:23,143 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 01:58:23,242 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 01:58:23,245 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 01:58:23,245 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 01:58:23,380 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 01:58:23,380 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 01:58:23,380 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 01:58:23,493 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 01:58:23,493 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 01:58:23,967 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 01:58:23,968 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:58:24,158 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:58:24,163 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:58:24,387 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:58:24,392 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 01:58:24,543 INFO Obtenidos 62 pagos a operadores
+2025-11-18 01:58:25,518 INFO Iniciando backup automático...
+2025-11-18 01:58:25,518 INFO Iniciando proceso de backup...
+2025-11-18 01:58:25,625 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 01:58:25,626 INFO Backup de 12 equipos completado
+2025-11-18 01:58:25,626 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 01:58:25,626 ERROR Error al crear backup automático
+2025-11-18 01:58:27,480 INFO Obtenidas 0 entidades (tipo=Cliente, activo=True)
+2025-11-18 01:58:27,739 INFO Obtenidos 74 abonos
+2025-11-18 02:04:44,159 INFO Configuración cargada desde config_equipos.json
+2025-11-18 02:04:44,178 INFO Tema aplicado: Oscuro
+2025-11-18 02:04:44,213 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 02:04:44,213 INFO Cliente de Firestore creado correctamente
+2025-11-18 02:04:44,213 INFO Firebase Manager inicializado correctamente
+2025-11-18 02:04:44,214 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 02:04:44,214 INFO Backup Manager inicializado correctamente
+2025-11-18 02:04:44,214 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:04:44,214 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:04:44,879 INFO Ventana principal creada y mostrada
+2025-11-18 02:04:44,906 INFO Cargando mapas de nombres...
+2025-11-18 02:04:45,058 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 02:04:45,194 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 02:04:45,330 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:04:45,750 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 02:04:46,166 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 02:04:46,577 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 02:04:46,995 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 02:04:47,470 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 02:04:47,470 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 02:04:47,471 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 02:04:47,471 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 02:04:47,571 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 02:04:47,572 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 02:04:47,572 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 02:04:47,675 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 02:04:47,675 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 02:04:47,675 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 02:04:47,810 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 02:04:47,810 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 02:04:48,282 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 02:04:48,283 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:04:48,488 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:04:48,493 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:04:48,684 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:04:48,689 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:04:48,810 INFO Obtenidos 62 pagos a operadores
+2025-11-18 02:04:49,871 INFO Iniciando backup automático...
+2025-11-18 02:04:49,871 INFO Iniciando proceso de backup...
+2025-11-18 02:04:49,984 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:04:49,984 INFO Backup de 12 equipos completado
+2025-11-18 02:04:49,984 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 02:04:49,984 ERROR Error al crear backup automático
+2025-11-18 02:05:18,697 INFO Aplicación finalizada con exit_code=0
+2025-11-18 02:09:03,636 INFO Configuración cargada desde config_equipos.json
+2025-11-18 02:09:03,655 INFO Tema aplicado: Oscuro
+2025-11-18 02:09:03,688 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 02:09:03,688 INFO Cliente de Firestore creado correctamente
+2025-11-18 02:09:03,689 INFO Firebase Manager inicializado correctamente
+2025-11-18 02:09:03,689 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 02:09:03,689 INFO Backup Manager inicializado correctamente
+2025-11-18 02:09:03,690 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:09:03,690 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:09:04,148 INFO Ventana principal creada y mostrada
+2025-11-18 02:09:04,184 INFO Cargando mapas de nombres...
+2025-11-18 02:09:04,335 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 02:09:04,501 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 02:09:04,636 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:09:05,080 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 02:09:05,497 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 02:09:05,927 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 02:09:06,351 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 02:09:06,825 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 02:09:06,825 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 02:09:06,826 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 02:09:06,826 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 02:09:06,939 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 02:09:06,940 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 02:09:06,941 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 02:09:07,061 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 02:09:07,061 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 02:09:07,061 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 02:09:07,159 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 02:09:07,159 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 02:09:07,690 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 02:09:07,690 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:09:07,892 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:09:07,899 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:09:08,125 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:09:08,130 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:09:08,267 INFO Obtenidos 62 pagos a operadores
+2025-11-18 02:09:09,153 INFO Iniciando backup automático...
+2025-11-18 02:09:09,153 INFO Iniciando proceso de backup...
+2025-11-18 02:09:09,282 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:09:09,282 INFO Backup de 12 equipos completado
+2025-11-18 02:09:09,282 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 02:09:09,282 ERROR Error al crear backup automático
+2025-11-18 02:09:19,489 INFO Aplicación finalizada con exit_code=0
+2025-11-18 02:18:37,694 INFO Configuración cargada desde config_equipos.json
+2025-11-18 02:18:37,713 INFO Tema aplicado: Oscuro
+2025-11-18 02:18:37,747 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 02:18:37,747 INFO Cliente de Firestore creado correctamente
+2025-11-18 02:18:37,747 INFO Firebase Manager inicializado correctamente
+2025-11-18 02:18:37,748 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 02:18:37,748 INFO Backup Manager inicializado correctamente
+2025-11-18 02:18:37,748 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:18:37,748 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:18:38,154 INFO Ventana principal creada y mostrada
+2025-11-18 02:18:38,193 INFO Cargando mapas de nombres...
+2025-11-18 02:18:38,340 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 02:18:38,477 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 02:18:38,612 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:18:39,039 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 02:18:39,464 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 02:18:39,887 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 02:18:40,517 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 02:18:40,997 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 02:18:40,997 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 02:18:40,997 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 02:18:40,997 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 02:18:41,104 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 02:18:41,106 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 02:18:41,106 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 02:18:41,219 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 02:18:41,220 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 02:18:41,220 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 02:18:41,313 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 02:18:41,313 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 02:18:41,832 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 02:18:41,832 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:18:42,037 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:18:42,045 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:18:42,211 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:18:42,216 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:18:42,345 INFO Obtenidos 62 pagos a operadores
+2025-11-18 02:18:43,149 INFO Iniciando backup automático...
+2025-11-18 02:18:43,150 INFO Iniciando proceso de backup...
+2025-11-18 02:18:43,262 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:18:43,262 INFO Backup de 12 equipos completado
+2025-11-18 02:18:43,263 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 02:18:43,263 ERROR Error al crear backup automático
+2025-11-18 02:18:44,519 INFO Obtenidos 74 abonos
+2025-11-18 02:19:06,016 INFO Aplicación finalizada con exit_code=0
+2025-11-18 02:19:28,023 INFO Configuración cargada desde config_equipos.json
+2025-11-18 02:19:28,042 INFO Tema aplicado: Oscuro
+2025-11-18 02:19:28,078 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 02:19:28,078 INFO Cliente de Firestore creado correctamente
+2025-11-18 02:19:28,078 INFO Firebase Manager inicializado correctamente
+2025-11-18 02:19:28,079 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 02:19:28,079 INFO Backup Manager inicializado correctamente
+2025-11-18 02:19:28,079 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:19:28,079 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:19:28,491 INFO Ventana principal creada y mostrada
+2025-11-18 02:19:28,529 INFO Cargando mapas de nombres...
+2025-11-18 02:19:28,665 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 02:19:28,798 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 02:19:28,925 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:19:29,347 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 02:19:29,776 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 02:19:30,207 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 02:19:30,645 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 02:19:31,129 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 02:19:31,129 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 02:19:31,129 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 02:19:31,129 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 02:19:31,227 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 02:19:31,228 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 02:19:31,228 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 02:19:31,401 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 02:19:31,401 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 02:19:31,401 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 02:19:31,502 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 02:19:31,503 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 02:19:32,006 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 02:19:32,007 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:19:32,246 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:19:32,254 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:19:32,452 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:19:32,456 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:19:32,582 INFO Obtenidos 62 pagos a operadores
+2025-11-18 02:19:33,498 INFO Iniciando backup automático...
+2025-11-18 02:19:33,499 INFO Iniciando proceso de backup...
+2025-11-18 02:19:33,599 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:19:33,599 INFO Backup de 12 equipos completado
+2025-11-18 02:19:33,599 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 02:19:33,599 ERROR Error al crear backup automático
+2025-11-18 02:19:34,631 INFO Obtenidos 74 abonos
+2025-11-18 02:19:48,564 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:19:51,392 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:19:58,167 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:04,232 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:11,000 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:17,176 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:28,966 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:34,880 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:38,874 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:47,006 INFO Obtenidos 74 abonos
+2025-11-18 02:20:51,057 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:20:53,161 ERROR Error al obtener abonos: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 878, in obtener_abonos
+    for doc in docs:
+               ^^^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Cktwcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2Fib25vcy9pbmRleGVzL18QARoOCgpjbGllbnRlX2lkEAEaCQoFZmVjaGEQAhoMCghfX25hbWVfXxAC
+2025-11-18 02:23:40,570 INFO Obtenidos 74 abonos
+2025-11-18 02:23:44,380 INFO Obtenidos 0 abonos
+2025-11-18 02:23:47,038 INFO Obtenidos 13 abonos
+2025-11-18 02:23:54,046 INFO Obtenidos 1 abonos
+2025-11-18 02:33:11,115 INFO Aplicación finalizada con exit_code=0
+2025-11-18 02:37:29,084 INFO Configuración cargada desde config_equipos.json
+2025-11-18 02:37:29,102 INFO Tema aplicado: Oscuro
+2025-11-18 02:37:29,135 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 02:37:29,136 INFO Cliente de Firestore creado correctamente
+2025-11-18 02:37:29,136 INFO Firebase Manager inicializado correctamente
+2025-11-18 02:37:29,137 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 02:37:29,137 INFO Backup Manager inicializado correctamente
+2025-11-18 02:37:29,137 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:37:29,137 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:37:29,587 INFO Ventana principal creada y mostrada
+2025-11-18 02:37:29,618 INFO Cargando mapas de nombres...
+2025-11-18 02:37:29,770 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 02:37:29,924 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 02:37:30,056 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:37:30,485 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 02:37:30,896 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 02:37:31,319 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 02:37:31,724 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 02:37:32,210 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 02:37:32,211 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 02:37:32,211 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 02:37:32,211 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 02:37:32,319 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 02:37:32,320 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 02:37:32,321 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 02:37:32,508 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 02:37:32,508 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 02:37:32,508 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 02:37:32,616 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 02:37:32,616 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 02:37:33,131 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 02:37:33,132 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:37:33,334 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:37:33,340 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:37:33,541 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:37:33,545 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:37:33,673 INFO Obtenidos 62 pagos a operadores
+2025-11-18 02:37:34,601 INFO Iniciando backup automático...
+2025-11-18 02:37:34,601 INFO Iniciando proceso de backup...
+2025-11-18 02:37:34,720 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:37:34,721 INFO Backup de 12 equipos completado
+2025-11-18 02:37:34,721 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 02:37:34,721 ERROR Error al crear backup automático
+2025-11-18 02:37:35,248 INFO Obtenidos 74 abonos
+2025-11-18 02:37:37,931 INFO Obtenidas 35 cuentas
+2025-11-18 02:37:38,030 ERROR Error al obtener facturas pendientes para cliente 35: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 1036, in obtener_facturas_pendientes_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-18 02:37:40,712 ERROR Error al obtener facturas pendientes para cliente 6: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 1036, in obtener_facturas_pendientes_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-18 02:37:48,938 ERROR Error al obtener facturas pendientes para cliente 18: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 1036, in obtener_facturas_pendientes_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-18 02:38:10,358 ERROR Error al obtener facturas pendientes para cliente 30: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+Traceback (most recent call last):
+  File "D:\Dropbox\PROGAIN\EQUIPOS PyQT6_4.0\EQUIPOS-4.0\firebase_manager.py", line 1036, in obtener_facturas_pendientes_cliente
+    docs = list(query.stream())
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\stream_generator.py", line 58, in __next__
+    return self._generator.__next__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 410, in _make_stream
+    response_iterator, expected_prefix = self._get_stream_iterator(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        transaction,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        explain_options,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\query.py", line 260, in _get_stream_iterator
+    response_iterator = self._client._firestore_api.run_query(
+        request=request,
+        metadata=self._client._rpc_metadata,
+        **kwargs,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py", line 1624, in run_query
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "c:\Users\servi\AppData\Local\Programs\Python\Python313\Lib\site-packages\google\api_core\grpc_helpers.py", line 174, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.FailedPrecondition: 400 The query requires an index. You can create it here: https://console.firebase.google.com/v1/r/project/equipos-zoec/firestore/indexes?create_composite=Ck9wcm9qZWN0cy9lcXVpcG9zLXpvZWMvZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL2FscXVpbGVyZXMvaW5kZXhlcy9fEAEaDgoKY2xpZW50ZV9pZBABGgoKBnBhZ2FkbxABGgkKBWZlY2hhEAEaDAoIX19uYW1lX18QAQ
+2025-11-18 02:42:33,682 INFO Obtenidas 35 cuentas
+2025-11-18 02:42:33,795 INFO Obtenidas 2 facturas pendientes para cliente 35
+2025-11-18 02:42:37,588 INFO Obtenidas 0 facturas pendientes para cliente 6
+2025-11-18 02:42:42,228 INFO Obtenidas 0 facturas pendientes para cliente 16
+2025-11-18 02:42:51,121 INFO Obtenidos 74 abonos
+2025-11-18 02:42:53,089 INFO Obtenidas 35 cuentas
+2025-11-18 02:42:53,194 INFO Obtenidas 2 facturas pendientes para cliente 35
+2025-11-18 02:42:59,292 INFO Obtenidas 0 facturas pendientes para cliente 6
+2025-11-18 02:43:06,128 INFO Obtenidas 0 facturas pendientes para cliente 24
+2025-11-18 02:43:08,544 INFO Obtenidas 0 facturas pendientes para cliente 16
+2025-11-18 02:43:17,938 INFO Aplicación finalizada con exit_code=0
+2025-11-18 02:57:54,802 INFO Configuración cargada desde config_equipos.json
+2025-11-18 02:57:54,820 INFO Tema aplicado: Oscuro
+2025-11-18 02:57:54,854 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 02:57:54,855 INFO Cliente de Firestore creado correctamente
+2025-11-18 02:57:54,855 INFO Firebase Manager inicializado correctamente
+2025-11-18 02:57:54,857 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 02:57:54,857 INFO Backup Manager inicializado correctamente
+2025-11-18 02:57:54,857 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:57:54,857 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 02:57:55,234 INFO Ventana principal creada y mostrada
+2025-11-18 02:57:55,275 INFO Cargando mapas de nombres...
+2025-11-18 02:57:55,431 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 02:57:55,573 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 02:57:55,714 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:57:56,147 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 02:57:56,568 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 02:57:56,989 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 02:57:57,422 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 02:57:58,020 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 02:57:58,020 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 02:57:58,020 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 02:57:58,021 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 02:57:58,127 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 02:57:58,128 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 02:57:58,128 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 02:57:58,229 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 02:57:58,229 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 02:57:58,229 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 02:57:58,362 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 02:57:58,362 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 02:57:58,844 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 02:57:58,844 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:57:59,084 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:57:59,090 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:57:59,261 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:57:59,266 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 02:57:59,387 INFO Obtenidos 62 pagos a operadores
+2025-11-18 02:58:00,234 INFO Iniciando backup automático...
+2025-11-18 02:58:00,234 INFO Iniciando proceso de backup...
+2025-11-18 02:58:00,381 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 02:58:00,382 INFO Backup de 12 equipos completado
+2025-11-18 02:58:00,382 ERROR Error al crear backup: 'FirebaseManager' object has no attribute 'obtener_transacciones'
+2025-11-18 02:58:00,382 ERROR Error al crear backup automático
+2025-11-18 02:58:01,330 INFO Obtenidos 74 abonos
+2025-11-18 02:58:03,065 INFO Obtenidas 35 cuentas
+2025-11-18 02:58:03,174 INFO Obtenidas 4 facturas pendientes para cliente 35
+2025-11-18 02:58:11,063 INFO Obtenidas 18 facturas pendientes para cliente 16
+2025-11-18 02:58:26,322 INFO Obtenidos 52 abonos
+2025-11-18 02:59:44,285 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 38}
+2025-11-18 02:59:44,390 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 38}
+2025-11-18 02:59:44,392 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:00:02,042 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 16}
+2025-11-18 03:00:02,225 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 16}
+2025-11-18 03:00:02,226 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:00:05,386 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 16}
+2025-11-18 03:00:05,495 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 16}
+2025-11-18 03:00:05,496 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:00:14,268 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 1}
+2025-11-18 03:00:14,368 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 1}
+2025-11-18 03:00:14,368 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:00:32,329 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:00:32,526 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:00:37,883 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 16}
+2025-11-18 03:00:37,997 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': 16}
+2025-11-18 03:00:37,998 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:01:10,280 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:01:10,482 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:01:14,052 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': 3}
+2025-11-18 03:01:14,224 INFO Obtenidos 78 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': 3}
+2025-11-18 03:01:26,305 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 17}
+2025-11-18 03:01:26,464 INFO Obtenidos 80 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 17}
+2025-11-18 03:01:29,171 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 17}
+2025-11-18 03:01:29,311 INFO Obtenidos 80 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 17}
+2025-11-18 03:01:33,246 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 19}
+2025-11-18 03:01:33,361 INFO Obtenidos 5 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 19}
+2025-11-18 03:01:43,087 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 31}
+2025-11-18 03:01:43,346 INFO Obtenidos 32 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'operador_id': 31}
+2025-11-18 03:01:47,648 INFO Aplicación finalizada con exit_code=0
+2025-11-18 03:07:39,372 INFO Configuración cargada desde config_equipos.json
+2025-11-18 03:07:39,390 INFO Tema aplicado: Oscuro
+2025-11-18 03:07:39,424 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 03:07:39,424 INFO Cliente de Firestore creado correctamente
+2025-11-18 03:07:39,424 INFO Firebase Manager inicializado correctamente
+2025-11-18 03:07:39,425 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 03:07:39,426 INFO Backup Manager inicializado correctamente
+2025-11-18 03:07:39,426 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 03:07:39,426 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 03:07:39,918 INFO Ventana principal creada y mostrada
+2025-11-18 03:07:39,920 INFO Cargando mapas de nombres...
+2025-11-18 03:07:40,073 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 03:07:40,203 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 03:07:40,514 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 03:07:40,933 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 03:07:41,358 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 03:07:41,769 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 03:07:42,239 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 03:07:42,713 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 03:07:42,713 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 03:07:42,713 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 03:07:42,713 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 03:07:42,831 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 03:07:42,832 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:43,031 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:43,036 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 03:07:43,037 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 03:07:43,140 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 03:07:43,141 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 03:07:43,141 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 03:07:43,257 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 03:07:43,258 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 03:07:43,731 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 03:07:43,731 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:43,915 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:43,921 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:44,136 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:44,141 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:07:44,271 INFO Obtenidos 62 pagos a operadores
+2025-11-18 03:07:51,785 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '5'}
+2025-11-18 03:07:51,890 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '5'}
+2025-11-18 03:07:51,892 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:07:58,139 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '4'}
+2025-11-18 03:07:58,254 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '4'}
+2025-11-18 03:07:58,255 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:08:01,177 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:08:01,473 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:08:03,162 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': '30'}
+2025-11-18 03:08:03,295 INFO Obtenidos 37 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': '30'}
+2025-11-18 03:08:14,260 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '5', 'cliente_id': '30'}
+2025-11-18 03:08:14,360 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '5', 'cliente_id': '30'}
+2025-11-18 03:08:14,361 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:09:07,365 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': 5}
+2025-11-18 03:09:07,477 INFO Obtenidos 18 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': 5}
+2025-11-18 03:09:19,461 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': '30'}
+2025-11-18 03:09:19,587 INFO Obtenidos 37 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': '30'}
+2025-11-18 03:09:43,516 INFO Alquiler ab98d99cfebe41ac8795e9c2482dd740 actualizado
+2025-11-18 03:09:44,785 INFO Alquiler ab98d99cfebe41ac8795e9c2482dd740 actualizado
+2025-11-18 03:09:44,796 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': '30'}
+2025-11-18 03:09:44,932 INFO Obtenidos 37 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'cliente_id': '30'}
+2025-11-18 03:12:20,071 INFO Configuración cargada desde config_equipos.json
+2025-11-18 03:12:20,091 INFO Tema aplicado: Oscuro
+2025-11-18 03:12:20,130 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 03:12:20,130 INFO Cliente de Firestore creado correctamente
+2025-11-18 03:12:20,130 INFO Firebase Manager inicializado correctamente
+2025-11-18 03:12:20,131 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 03:12:20,131 INFO Backup Manager inicializado correctamente
+2025-11-18 03:12:20,132 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 03:12:20,132 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 03:12:20,566 INFO Ventana principal creada y mostrada
+2025-11-18 03:12:20,628 INFO Cargando mapas de nombres...
+2025-11-18 03:12:20,779 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 03:12:20,914 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 03:12:21,089 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 03:12:21,510 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 03:12:21,925 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 03:12:22,351 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 03:12:22,768 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 03:12:23,240 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 03:12:23,240 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 03:12:23,240 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 03:12:23,240 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 03:12:23,346 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 03:12:23,347 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:23,561 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:23,567 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 03:12:23,567 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 03:12:23,668 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 03:12:23,668 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 03:12:23,668 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 03:12:23,774 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 03:12:23,775 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 03:12:24,273 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 03:12:24,273 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:24,470 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:24,476 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:24,713 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:24,717 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:12:24,853 INFO Obtenidos 62 pagos a operadores
+2025-11-18 03:12:28,304 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '5'}
+2025-11-18 03:12:28,389 INFO Obtenidos 1 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '5'}
+2025-11-18 03:12:36,670 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '4'}
+2025-11-18 03:12:36,773 INFO Obtenidos 0 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '4'}
+2025-11-18 03:12:36,773 WARNING No se encontraron alquileres con esos filtros.
+2025-11-18 03:15:29,180 INFO Aplicación finalizada con exit_code=0
+2025-11-18 03:15:50,424 INFO Configuración cargada desde config_equipos.json
+2025-11-18 03:15:50,442 INFO Tema aplicado: Oscuro
+2025-11-18 03:15:50,477 INFO Firebase inicializado con proyecto: equipos-zoec
+2025-11-18 03:15:50,478 INFO Cliente de Firestore creado correctamente
+2025-11-18 03:15:50,478 INFO Firebase Manager inicializado correctamente
+2025-11-18 03:15:50,478 INFO Estructura de BD de backup creada en: ./backups/equipos_backup.db
+2025-11-18 03:15:50,478 INFO Backup Manager inicializado correctamente
+2025-11-18 03:15:50,479 INFO Storage inicializado con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 03:15:50,479 INFO Storage Manager inicializado correctamente con bucket: equipos-zoec.firebasestorage.app
+2025-11-18 03:15:50,923 INFO Ventana principal creada y mostrada
+2025-11-18 03:15:50,963 INFO Cargando mapas de nombres...
+2025-11-18 03:15:51,106 DEBUG Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-18 03:15:51,234 DEBUG https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-11-18 03:15:51,354 INFO Obtenidos 12 equipos (activo=None)
+2025-11-18 03:15:51,775 INFO Obtenidas 22 entidades (tipo=Cliente, activo=None)
+2025-11-18 03:15:52,187 INFO Obtenidas 14 entidades (tipo=Operador, activo=None)
+2025-11-18 03:15:52,599 INFO Obtenido mapa para [cuentas]. Total: 35 entradas.
+2025-11-18 03:15:53,026 INFO Obtenido mapa para [categorias]. Total: 55 entradas.
+2025-11-18 03:15:53,500 INFO Obtenido mapa para [subcategorias]. Total: 245 entradas.
+2025-11-18 03:15:53,500 INFO Mapas cargados. Actualizando título y poblando tabs...
+2025-11-18 03:15:53,500 INFO Dashboard: Mapas recibidos. Poblando filtros...
+2025-11-18 03:15:53,500 INFO RegistroAlquileres: Mapas recibidos. Poblando filtros...
+2025-11-18 03:15:53,618 INFO Primera fecha de alquileres: 2025-01-06
+2025-11-18 03:15:53,620 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:53,826 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:53,831 INFO Fecha 'Desde' inicializada con primera transacción: 2025-01-06
+2025-11-18 03:15:53,831 INFO GastosEquipos: Mapas recibidos. Poblando filtros...
+2025-11-18 03:15:53,941 INFO Primera fecha de gastos: 2025-01-06
+2025-11-18 03:15:53,941 INFO Fecha 'Desde' inicializada con primera transacción de gastos: 2025-01-06
+2025-11-18 03:15:53,942 INFO PagosOperadores: Mapas recibidos. Poblando filtros...
+2025-11-18 03:15:54,042 INFO Primera fecha de pagos a operadores: 2025-01-18
+2025-11-18 03:15:54,042 INFO Fecha 'Desde' inicializada con primera transacción de pagos: 2025-01-18
+2025-11-18 03:15:54,503 INFO Obtenidos 0 equipos (activo=True)
+2025-11-18 03:15:54,504 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:54,732 INFO Obtenidos 224 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:54,739 INFO Cargando gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:54,944 INFO Obtenidos 297 gastos con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:54,949 INFO Cargando pagos a operadores con filtros: {'fecha_inicio': '2025-01-18', 'fecha_fin': '2025-11-18'}
+2025-11-18 03:15:55,088 INFO Obtenidos 62 pagos a operadores
+2025-11-18 03:15:59,001 INFO Cargando alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '3'}
+2025-11-18 03:15:59,142 INFO Obtenidos 78 alquileres con filtros: {'fecha_inicio': '2025-01-06', 'fecha_fin': '2025-11-18', 'equipo_id': '3'}
+2025-11-18 03:19:27,254 INFO Aplicación finalizada con exit_code=0
