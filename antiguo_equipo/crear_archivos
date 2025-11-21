@@ -1,0 +1,68 @@
+from PIL import Image
+import csv
+from docx import Document
+
+def crear_txt():
+    with open("prueba.txt", "w", encoding="utf-8") as f:
+        f.write("Este es un archivo de texto de prueba.\nLínea 2 del archivo.")
+
+def crear_html():
+    with open("prueba.html", "w", encoding="utf-8") as f:
+        f.write("<html><body><h1>Archivo HTML de Prueba</h1><p>Este es un párrafo.</p></body></html>")
+
+def crear_docx():
+    doc = Document()
+    doc.add_heading("Archivo DOCX de Prueba", level=1)
+    doc.add_paragraph("Primera línea DOCX.")
+    doc.add_paragraph("Segunda línea DOCX.")
+    doc.save("prueba.docx")
+
+def crear_imagen():
+    img = Image.new("RGB", (200, 100), color="red")
+    img.save("imagen.jpg")
+
+def crear_csv():
+    datos = [
+        {"nombre": "Juan", "edad": 22},
+        {"nombre": "Maria", "edad": 28}
+    ]
+    with open("prueba.csv", "w", encoding="utf-8", newline='') as f:
+        escritor = csv.DictWriter(f, fieldnames=["nombre", "edad"])
+        escritor.writeheader()
+        escritor.writerows(datos)
+
+def crear_zip():
+    import zipfile
+    with zipfile.ZipFile("prueba.zip", 'w') as zipf:
+        zipf.write("prueba.txt")
+        zipf.write("prueba.html")
+
+def crear_tar():
+    import tarfile
+    with tarfile.open("prueba.tar.gz", "w:gz") as tarf:
+        tarf.add("prueba.txt")
+        tarf.add("prueba.html")
+
+def crear_rar():
+    # Se requiere WinRAR/rar.exe instalado y en el PATH del sistema
+    import subprocess
+    try:
+        subprocess.run(["rar", "a", "prueba.rar", "prueba.txt", "prueba.html"], check=True)
+        print("Archivo RAR creado correctamente.")
+    except Exception as e:
+        print("No se pudo crear el archivo RAR automáticamente. Crea 'prueba.rar' manualmente con WinRAR o similar.")
+
+def main():
+    print("Creando archivos de prueba...")
+    crear_txt()
+    crear_html()
+    crear_docx()
+    crear_imagen()
+    crear_csv()
+    crear_zip()
+    crear_tar()
+    crear_rar()
+    print("¡Listo! Archivos creados en el directorio actual.")
+
+if __name__ == "__main__":
+    main()
