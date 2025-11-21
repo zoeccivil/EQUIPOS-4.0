@@ -22,24 +22,47 @@ except ImportError:
 
 
 class StorageManager:
-    """
-    Gestor de archivos en Firebase Cloud Storage.
-    Sube conduces y otros archivos organizados por año/mes.
-    """
-    
-    def __init__(self, bucket_name: str):
+    def __init__(self, bucket_name: str | None = None, service_account_json: str | None = None):
         """
-        Inicializa el gestor de storage.
-        
-        Args:
-            bucket_name: Nombre del bucket de Firebase Storage (ej: 'mi-proyecto.appspot.com')
+        Constructor tolerante: intenta usar firebase_admin si ya está inicializado,
+        o inicializarlo si se le pasa service_account_json. Si falla, deja self.bucket = None.
         """
+        from firebase_admin import storage as fb_storage, credentials as fb_credentials, initialize_app as fb_initialize_app, _apps as fb_apps
+        import logging
+
+        self.logger = logging.getLogger(__name__)
+        self.bucket = None
+
         try:
-            self.bucket = storage.bucket(bucket_name)
-            logger.info(f"Storage inicializado con bucket: {bucket_name}")
+            # Si no hay app y nos dieron credenciales, intentamos inicializar
+            if not fb_apps:
+                if service_account_json:
+                    try:
+                        cred = fb_credentials.Certificate(service_account_json)
+                        fb_initialize_app(cred, {'storageBucket': bucket_name} if bucket_name else None)
+                        self.logger.info("firebase_admin inicializado desde StorageManager.")
+                    except Exception as init_err:
+                        self.logger.warning(f"No se pudo inicializar firebase_admin desde StorageManager: {init_err}")
+                else:
+                    self.logger.debug("firebase_admin no inicializado y no se proporcionaron credenciales a StorageManager.")
+
+            # Si ahora hay apps, intentar obtener bucket
+            if fb_apps:
+                try:
+                    self.bucket = fb_storage.bucket()
+                    self.logger.info(f"StorageManager: bucket inicializado: {getattr(self.bucket, 'name', None)}")
+                except Exception as e:
+                    self.logger.warning(f"No se pudo obtener bucket desde firebase_admin: {e}")
+                    self.bucket = None
+            else:
+                self.bucket = None
+
         except Exception as e:
-            logger.error(f"Error al inicializar Storage: {e}")
-            raise
+            self.logger.error(f"Error inicializando StorageManager: {e}", exc_info=True)
+            self.bucket = None
+
+    def is_available(self) -> bool:
+        return self.bucket is not None
     
     def _process_image(self, origen_path: str, width: int = 1200, height: int = 800) -> Optional[str]:
         """
@@ -323,3 +346,52 @@ class StorageManager:
         except Exception as e:
             logger.error(f"Error al generar URL firmada de {storage_path}: {e}")
             return None
+
+
+    # --- NUEVO: método de conveniencia para el PDF / UI ---
+    def get_download_url(self, storage_path: str, prefer_firmada: bool = True, expiracion_minutos: int = 120) -> Optional[str]:
+        """
+        Devuelve una URL de descarga usable para un objeto en Storage.
+        - Si storage_path ya es una URL http(s), se retorna tal cual.
+        - Si prefer_firmada=True (por defecto), intenta generar URL firmada;
+          si falla, intenta pública.
+        - Si prefer_firmada=False, intenta hacer público; si falla, genera firmada.
+        """
+        if not storage_path:
+            return None
+        if isinstance(storage_path, str) and storage_path.startswith(("http://", "https://")):
+            return storage_path
+        try:
+            if prefer_firmada:
+                url = self.obtener_url_firmada(storage_path, expiracion_minutos=expiracion_minutos)
+                if url:
+                    return url
+                return self.obtener_url_publica(storage_path)
+            else:
+                url = self.obtener_url_publica(storage_path)
+                if url:
+                    return url
+                return self.obtener_url_firmada(storage_path, expiracion_minutos=expiracion_minutos)
+        except Exception as e:
+            logger.warning(f"get_download_url: error con {storage_path}: {e}")
+            return None
+        
+    # Añadir este método a tu clase StorageManager existente (solo el método):
+    def generate_signed_url(self, blob_path: str, expiration_days: int = 7) -> str:
+        """
+        Genera una URL firmada (V4) para un objeto en el bucket, válida 'expiration_days' días.
+        Requiere que StorageManager esté inicializado con credenciales de servicio válidas.
+        """
+        from datetime import timedelta
+        from google.cloud.storage import Blob
+
+        if not getattr(self, "bucket", None):
+            raise RuntimeError("StorageManager no tiene bucket inicializado")
+
+        blob: Blob = self.bucket.blob(blob_path)
+        url = blob.generate_signed_url(
+            version="v4",
+            expiration=timedelta(days=int(expiration_days)),
+            method="GET",
+        )
+        return str(url)

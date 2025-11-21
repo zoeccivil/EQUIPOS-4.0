@@ -17,14 +17,11 @@ CONFIG_EXAMPLE_FILE = "config_equipos.example.json"
 def cargar_configuracion() -> Dict[str, Any]:
     """
     Carga la configuración desde el archivo JSON.
-    Si no existe, crea uno basado en el ejemplo.
-    
-    Returns:
-        Diccionario con la configuración cargada
-        
-    Raises:
-        FileNotFoundError: Si no existe el archivo de configuración ni el ejemplo
-        json.JSONDecodeError: Si el archivo JSON está mal formado
+    Si no existe, crea uno basado en el ejemplo o en valores por defecto.
+
+    Además, se asegura de que siempre existan las claves mínimas
+    (incluyendo firebase.storage_bucket) incluso si el archivo viene de
+    una versión anterior sin ese campo.
     """
     if not os.path.exists(CONFIG_FILE):
         logger.warning(f"No se encontró {CONFIG_FILE}, creando desde ejemplo...")
@@ -32,18 +29,25 @@ def cargar_configuracion() -> Dict[str, Any]:
             # Copiar el archivo de ejemplo
             with open(CONFIG_EXAMPLE_FILE, 'r', encoding='utf-8') as f:
                 config = json.load(f)
+            # Completar con valores por defecto si faltan claves nuevas
+            config = _completar_config_con_defecto(config)
             guardar_configuracion(config)
             logger.info(f"Configuración creada desde {CONFIG_EXAMPLE_FILE}")
         else:
-            # Crear configuración por defecto
+            # Crear configuración por defecto (incluye storage_bucket)
             config = crear_configuracion_defecto()
             guardar_configuracion(config)
             logger.info("Configuración creada con valores por defecto")
         return config
-    
+
     try:
         with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
             config = json.load(f)
+
+        # Rellenar claves nuevas (como firebase.storage_bucket) si el archivo
+        # fue creado con una versión anterior
+        config = _completar_config_con_defecto(config)
+
         logger.info(f"Configuración cargada desde {CONFIG_FILE}")
         return config
     except json.JSONDecodeError as e:
@@ -75,16 +79,11 @@ def guardar_configuracion(config: Dict[str, Any]) -> bool:
 
 
 def crear_configuracion_defecto() -> Dict[str, Any]:
-    """
-    Crea una configuración por defecto.
-    
-    Returns:
-        Diccionario con la configuración por defecto
-    """
     return {
         "firebase": {
             "credentials_path": "firebase_credentials.json",
-            "project_id": "equipos-zoec"
+            "project_id": "equipos-zoec",
+            "storage_bucket": "equipos-zoec.firebasestorage.app",  # <--- TU BUCKET REAL
         },
         "backup": {
             "ruta_backup_sqlite": "./backups/equipos_backup.db",
@@ -100,6 +99,39 @@ def crear_configuracion_defecto() -> Dict[str, Any]:
     }
 
 
+def _completar_config_con_defecto(config: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Toma una configuración existente (posiblemente creada con una versión
+    anterior) y completa cualquier clave faltante usando la configuración
+    por defecto (incluyendo firebase.storage_bucket).
+
+    Esto permite que:
+      - Un config viejo sin storage_bucket se actualice automáticamente.
+      - El exe genere un config completo desde cero si no existía.
+    """
+    defecto = crear_configuracion_defecto()
+
+    # firebase
+    if "firebase" not in config or not isinstance(config["firebase"], dict):
+        config["firebase"] = {}
+    for k, v in defecto["firebase"].items():
+        config["firebase"].setdefault(k, v)
+
+    # backup
+    if "backup" not in config or not isinstance(config["backup"], dict):
+        config["backup"] = {}
+    for k, v in defecto["backup"].items():
+        config["backup"].setdefault(k, v)
+
+    # app
+    if "app" not in config or not isinstance(config["app"], dict):
+        config["app"] = {}
+    for k, v in defecto["app"].items():
+        config["app"].setdefault(k, v)
+
+    return config
+
+
 def obtener_valor_config(config: Dict[str, Any], clave: str, defecto: Any = None) -> Any:
     """
     Obtiene un valor de la configuración usando notación de punto.
@@ -111,11 +143,6 @@ def obtener_valor_config(config: Dict[str, Any], clave: str, defecto: Any = None
         
     Returns:
         El valor encontrado o el valor por defecto
-        
-    Example:
-        >>> config = {"firebase": {"project_id": "mi-proyecto"}}
-        >>> obtener_valor_config(config, "firebase.project_id")
-        'mi-proyecto'
     """
     partes = clave.split('.')
     valor = config
@@ -140,18 +167,13 @@ def establecer_valor_config(config: Dict[str, Any], clave: str, valor: Any) -> D
         
     Returns:
         El diccionario de configuración actualizado
-        
-    Example:
-        >>> config = {}
-        >>> establecer_valor_config(config, "firebase.project_id", "nuevo-proyecto")
-        {'firebase': {'project_id': 'nuevo-proyecto'}}
     """
     partes = clave.split('.')
     actual = config
     
     # Navegar hasta el penúltimo nivel
     for parte in partes[:-1]:
-        if parte not in actual:
+        if parte not in actual or not isinstance(actual[parte], dict):
             actual[parte] = {}
         actual = actual[parte]
     
@@ -176,6 +198,8 @@ def validar_configuracion(config: Dict[str, Any]) -> tuple[bool, Optional[str]]:
     campos_requeridos = [
         "firebase.credentials_path",
         "firebase.project_id",
+        # Opcional pero recomendado: si quieres exigir el bucket, descomenta:
+        # "firebase.storage_bucket",
         "backup.ruta_backup_sqlite",
         "backup.frecuencia",
         "backup.hora_ejecucion"
